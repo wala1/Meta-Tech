@@ -1,0 +1,16 @@
+HTTrack3.49-2+htsswf+htsjava launched on Tue, 01 Feb 2022 23:47:04 at https://themesbrand.com/minia/layouts/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://themesbrand.com/minia/layouts/index.html -O1 "C:\Users\Abdelaziz\Desktop\PIDEV\templateBack\back" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+23:49:16	Warning: 	File not parsed, looks like binary: https://themesbrand.com/minia/layouts/assets/fonts/materialdesignicons-webfont.woff2?v=6.5.95
+23:49:16	Warning: 	File not parsed, looks like binary: https://themesbrand.com/minia/layouts/assets/fonts/boxicons.woff2
+23:49:18	Warning: 	File not parsed, looks like binary: https://themesbrand.com/minia/layouts/assets/fonts/fa-brands-400.woff2
+23:49:18	Warning: 	File not parsed, looks like binary: https://themesbrand.com/minia/layouts/assets/fonts/fa-regular-400.woff2
+23:49:18	Warning: 	File not parsed, looks like binary: https://themesbrand.com/minia/layouts/assets/fonts/fa-solid-900.woff2
+
+HTTrack Website Copier/3.49-2 mirror complete in 2 minutes 17 seconds : 270 links scanned, 269 files written (26061689 bytes overall) [15531803 bytes received at 113370 bytes/sec], 13840982 bytes transferred using HTTP compression in 198 files, ratio 23%, 10.3 requests per connection
+(No errors, 5 warnings, 0 messages)
