@@ -1,0 +1,457 @@
+{% include 'base.html.twig' %}
+
+
+<!-- =========================== PRODUIT ================================-->
+<body>
+{% block body %}
+
+
+
+{% for produit in produits %}
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <img alt="main product photo" class="gallery-placeholder__image" src="{{produit.imageProd}}"/>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": {"fullscreenzoom":"20","top":"","left":"","width":"","height":"","eventType":"hover","enabled":false,"mode":"outside"},
+                "data": [{"thumb":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/e804cf75cbdba2f6278fdcc13bb8ca64\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","img":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/0fbc86faa12d44b416a5a8862d2c9463\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","full":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/ae75e54f4ec477b191a1ba5e8e5b0aa3\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","caption":"Anzo \u2013 LED Headlights Gauge Kit","position":"1","isMain":true,"type":"image","videoUrl":null},{"thumb":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/e804cf75cbdba2f6278fdcc13bb8ca64\/a\/n\/anzo_led_headlights_gauge_kit_2_1.jpg","img":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/0fbc86faa12d44b416a5a8862d2c9463\/a\/n\/anzo_led_headlights_gauge_kit_2_1.jpg","full":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/ae75e54f4ec477b191a1ba5e8e5b0aa3\/a\/n\/anzo_led_headlights_gauge_kit_2_1.jpg","caption":"Anzo \u2013 LED Headlights Gauge Kit","position":"2","isMain":false,"type":"image","videoUrl":null},{"thumb":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/e804cf75cbdba2f6278fdcc13bb8ca64\/b\/o\/bosal_catalytic_converter_gauge_kit_1.jpg","img":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/0fbc86faa12d44b416a5a8862d2c9463\/b\/o\/bosal_catalytic_converter_gauge_kit_1.jpg","full":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/ae75e54f4ec477b191a1ba5e8e5b0aa3\/b\/o\/bosal_catalytic_converter_gauge_kit_1.jpg","caption":"Anzo \u2013 LED Headlights Gauge Kit","position":"3","isMain":false,"type":"image","videoUrl":null},{"thumb":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/e804cf75cbdba2f6278fdcc13bb8ca64\/b\/o\/bosal_catalytic_converter_gauge_kit_2.jpg","img":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/0fbc86faa12d44b416a5a8862d2c9463\/b\/o\/bosal_catalytic_converter_gauge_kit_2.jpg","full":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/ae75e54f4ec477b191a1ba5e8e5b0aa3\/b\/o\/bosal_catalytic_converter_gauge_kit_2.jpg","caption":"Anzo \u2013 LED Headlights Gauge Kit","position":"4","isMain":false,"type":"image","videoUrl":null}],
+                "options": {"nav":"thumbs","loop":true,"keyboard":true,"arrows":true,"allowfullscreen":true,"showCaption":false,"width":600,"thumbwidth":90,"thumbheight":90,"height":600,"transitionduration":500,"transition":"slide","navarrows":true,"navtype":"slides","navdir":"vertical"},
+                "fullscreen": {"nav":"thumbs","loop":true,"navdir":"vertical","navarrows":false,"navtype":"slides","arrows":false,"showCaption":false,"transitionduration":500,"transition":"dissolve"},
+                 "breakpoints": {"mobile":{"conditions":{"max-width":"767px"},"options":{"options":{"nav":"dots"}}}}            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "Magento_ProductVideo/js/fotorama-add-video-events": {
+                "videoData": [{"mediaType":"image","videoUrl":null,"isBase":true},{"mediaType":"image","videoUrl":null,"isBase":false},{"mediaType":"image","videoUrl":null,"isBase":false},{"mediaType":"image","videoUrl":null,"isBase":false}],
+                "videoSettings": [{"playIfBase":"0","showRelated":"0","videoAutoRestart":"0"}],
+                "optionsVideoData": []            }
+        }
+    }
+</script>
+<div class="action-skip-wrapper"><a class="action skip gallery-prev-area" href="#gallery-prev-area">
+    <span>
+        Skip to the beginning of the images gallery    </span>
+</a>
+</div><a id="gallery-next-area" tabindex="-1"></a>
+</div><div class="product-info-main"><div class="breadcrumbs"></div>
+<script type="text/x-magento-init">
+    {
+        ".breadcrumbs": {
+            "breadcrumbs": {"categoryUrlSuffix":".html","useCategoryPathInUrl":0,"product":"Anzo \u2013 LED Headlights Gauge Kit"}        }
+    }
+</script>
+
+
+
+
+
+<div class="page-title-wrapper&#x20;product">
+
+    <h1 class="page-title">
+        <span class="base" data-ui-id="page-title-wrapper" itemprop="name">
+         
+            {{ produit.nomProd }}
+        
+        </span>    
+    </h1>
+
+    </div>
+        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
+            <div class="rating-summary">
+                <span class="label"><span>Rating:</span></span>
+                <div class="rating-result" title="100%">
+                    <span style="width:100%">
+                    </span>
+                </div>
+            </div>
+            
+            <div class="reviews-actions">
+                <a class="action view" href="anzo-led-headlights-gauge-kit.html#reviews">
+                    <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
+                    <span>Review</span>
+                </a>
+                <a class="action add" href="anzo-led-headlights-gauge-kit.html#review-form">Add Your Review</a>
+             </div>
+        </div>
+        
+        <div class="product-info-price">
+            <div class="price-box price-final_price" data-role="priceBox" data-product-id="92" data-price-box="product-id-92">
+                <span class="special-price"> 
+                    <span class="price-container price-final_price&#x20;tax&#x20;weee">
+                        <span class="price-label">Special Price</span>
+                            <span id="product-price-92" data-price-amount="100" data-price-type="finalPrice" class="price-wrapper ">
+                                <span class="price">
+                                    {% if produit.promoProd != 0 %}
+                                        {{produit.promoProd}} DT
+                                    {% else %}
+                                        {{produit.prixProd}} DT
+                                    {% endif %}
+                                    </span></span>
+
+                            </span>
+                        </span>
+                        <span class="old-price">
+                            <span class="price-container price-final_price&#x20;tax&#x20;weee">
+                                <span class="price-label">Regular Price</span>
+                            <span id="old-price-92" data-price-amount="300" data-price-type="oldPrice" class="price-wrapper ">
+                                <span class="price">
+                                    {% if produit.promoProd != 0 %}
+                                            {{produit.prixProd}} DT
+                                    {% endif %} 
+                                </span></span>
+                            </span>
+                        </span>
+
+            </div>
+            </div>            
+                <div class="stock available" title="Availability">
+                    <span>In stock</span>
+                </div>
+            <div class="product-info-stock-sku">
+                <div class="product attribute sku">
+                    <strong class="type">Catégorie</strong>
+                    <div class="value" itemprop="sku">{{ produit.categorieProd.nomCategorie }}</div>
+                </div>
+            </div>
+
+
+
+            <div class="product attribute overview">
+                <div class="value" itemprop="description"><p>{{ produit.descProd }}</p></div>
+            </div>
+
+
+
+<div class="product-add-form">
+    <form data-product-sku="CP03" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s/product/92/" method="post" id="product_addtocart_form">
+        <input type="hidden" name="product" value="92"/>
+        <input type="hidden" name="selected_configurable_option" value=""/>
+        <input type="hidden" name="related_product" id="related-products-field" value=""/>
+        <input type="hidden" name="item" value="92"/>
+        <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>                            <div class="box-tocart">
+    <div class="fieldset">
+                  <div class="field qty up-down flex-layout no-wrap">
+				<div class="control">
+					<input type="number" name="qty" id="qty" maxlength="12" value="1" title="Quantity" class="input-text qty" data-validate="{&quot;required-number&quot;:true,&quot;validate-item-quantity&quot;:{&quot;minAllowed&quot;:1,&quot;maxAllowed&quot;:10000}}"/>
+				</div>
+				<div class="click-up-down flex-layout no-wrap column">
+					<a class="qty-up-fixed-onclick qty-up" href="#"><span class="icon-chevron-up"></span></a> 
+					<a class="qty-down-fixed-onclick qty-down" href="#"><span class="icon-chevron-down"></span></a> 
+				</div>
+			</div>
+                <div class="actions">
+            <button type="submit" title="Add&#x20;to&#x20;Cart" class="action primary tocart" id="product-addtocart-button">
+                <span>Add to Cart</span>
+            </button>
+            
+<div id="instant-purchase" data-bind="scope:'instant-purchase'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "#instant-purchase": {
+            "Magento_Ui/js/core/app": {"components":{"instant-purchase":{"component":"Magento_InstantPurchase\/js\/view\/instant-purchase","config":{"template":"Magento_InstantPurchase\/instant-purchase","buttonText":"Instant Purchase","purchaseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/instantpurchase\/button\/placeOrder\/"}}}}        }
+    }
+</script>
+        </div>
+    </div>
+</div>
+	<script>require(['jquery','mage/mage','Magento_Catalog/product/view/validation','Magento_Catalog/js/catalog-add-to-cart'],function($){'use strict';$('#product_addtocart_form').mage('validation',{radioCheckboxClosest:'.nested',submitHandler:function(form){var widget=$(form).catalogAddToCart({bindSubmit:false});widget.catalogAddToCart('submitForm',$(form));return false;}});});</script>
+
+<script>require(['jquery'],function($){'use strict';var number_click=1;$(".qty-down-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('#qty').val();val_input=parseInt(val_input);if(val_input<=number_click){val_input=number_click;}else{val_input=val_input-number_click;}$('div.field div.control #qty').val(val_input);return false;});$(".qty-up-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('#qty').val();val_input=parseInt(val_input);val_input=val_input+number_click;$('div.field div.control #qty').val(val_input);return false;});});</script>
+        
+                    </form>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-92]": {
+            "priceBox": {
+                "priceConfig":  {"productId":"92","priceFormat":{"pattern":"$%s","precision":2,"requiredPrecision":2,"decimalSymbol":".","groupSymbol":",","groupLength":3,"integerRequired":false},"tierPrices":[]}            }
+        }
+    }
+</script>
+<div class="product-social-links"><div class="product-addto-links" data-role="add-to-links">
+        <a href="#" class="action towishlist" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":92,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s"}}' data-action="add-to-wishlist"><span>Add to Wish List</span></a>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": {"productType":"simple"}        }
+    }
+</script>
+
+<a href="#" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"92","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s"}}' data-role="add-to-links" class="action tocompare"><span>Add to Compare</span></a>
+
+</div>
+<div class="product-share-links">
+	<div class="share-links"><a href="#" class="share-links-click">share</a></div>
+	<div class="share-dialog" style="display:none;">
+		<a href="#" onclick=" window.open( 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-facebook-f"><span class="text">Facebook</span></span></a>
+		<a href="#" onclick=" window.open( 'http://twitter.com/home/?status='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-twitter"><span class="text">Twitter</span></span></a>
+		<a href="#" onclick=" window.open( 'http://pinterest.com/pin/create/button/?url='+encodeURIComponent(location.href), 'pinterest-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-pinterest"><span class="text">Pinterest</span></span></a>
+		<a href="#" onclick=" window.open( 'https://plus.google.com/share?url='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-google"><span class="text">Google</span></span></a>
+	</div>
+</div>
+</div><div class="product-category"><label>Categories: </label><a href="catalog/category/view/s/carparts/id/127/index.html">Carparts</a>, <a href="shop.html">Shop</a>, <a href="top-100-bestseller.html">Engine Systems</a></div>	<div class="product-page-brand-common-view">
+	<span class="brand-label">Brands:  </span>	<ul class="product-brands">			<li class="brand-item">
+												<a href="brand/brand-3.html" title="Brand-3">Brand-3</a>
+							</li>
+			</ul>	</div>
+</div></div>    
+
+{% endfor %}
+<!--========================= END PRODUIT ========================================== -->
+
+<div class="product info detailed">
+                <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                                            <div class="data item title" data-role="collapsible" id="tab-label-description">
+                    <a class="data switch" tabindex="-1" data-toggle="trigger" href="#description" id="tab-label-description-title">
+                        Details                    </a>
+                </div>
+                <div class="data item content" aria-labelledby="tab-label-description-title" id="description" data-role="content">
+                    
+<div class="product attribute description">
+        <div class="value"><p>Design inspiration lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci.</p>
+<p>Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer.</p></div>
+</div>
+                </div>
+                                                            <div class="data item title" data-role="collapsible" id="tab-label-reviews">
+                    <a class="data switch" tabindex="-1" data-toggle="trigger" href="#reviews" id="tab-label-reviews-title">
+                        Reviews <span class="counter">1</span>                    </a>
+                </div>
+                <div class="data item content" aria-labelledby="tab-label-reviews-title" id="reviews" data-role="content">
+                    <div id="product-review-container" data-role="product-review"></div>
+<div class="block review-add">
+    <div class="block-title"><strong>Write Your Own Review</strong></div>
+<div class="block-content">
+<form action="https://blueskytechmage.com/ohey/en11/review/product/post/id/92/" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
+    <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>        <fieldset class="fieldset review-fieldset" data-hasrequired="&#x2A;&#x20;Required&#x20;Fields">
+        <legend class="legend review-legend"><span>You&#039;re reviewing:</span><strong>Anzo – LED Headlights Gauge Kit</strong></legend><br/>
+                <span id="input-message-box"></span>
+        <fieldset class="field required review-field-ratings">
+            <legend class="label"><span>Your Rating</span></legend><br/>
+            <div class="control">
+                <div class="nested" id="product-review-table">
+                                            <div class="field choice review-field-rating">
+                            <label class="label" id="Price_rating_label"><span>Price</span></label>
+                            <div class="control review-control-vote">
+                                                                                        <input type="radio" name="ratings[3]" id="Price_1" value="11" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_1_label"/>
+                                <label class="rating-1" for="Price_1" title="1&#x20;star" id="Price_1_label">
+                                    <span>1 star</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[3]" id="Price_2" value="12" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_2_label"/>
+                                <label class="rating-2" for="Price_2" title="2&#x20;stars" id="Price_2_label">
+                                    <span>2 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[3]" id="Price_3" value="13" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_3_label"/>
+                                <label class="rating-3" for="Price_3" title="3&#x20;stars" id="Price_3_label">
+                                    <span>3 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[3]" id="Price_4" value="14" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_4_label"/>
+                                <label class="rating-4" for="Price_4" title="4&#x20;stars" id="Price_4_label">
+                                    <span>4 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[3]" id="Price_5" value="15" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_5_label"/>
+                                <label class="rating-5" for="Price_5" title="5&#x20;stars" id="Price_5_label">
+                                    <span>5 stars</span>
+                                </label>
+                                                                                        </div>
+                        </div>
+                                            <div class="field choice review-field-rating">
+                            <label class="label" id="Value_rating_label"><span>Value</span></label>
+                            <div class="control review-control-vote">
+                                                                                        <input type="radio" name="ratings[2]" id="Value_1" value="6" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_1_label"/>
+                                <label class="rating-1" for="Value_1" title="1&#x20;star" id="Value_1_label">
+                                    <span>1 star</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[2]" id="Value_2" value="7" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_2_label"/>
+                                <label class="rating-2" for="Value_2" title="2&#x20;stars" id="Value_2_label">
+                                    <span>2 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[2]" id="Value_3" value="8" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_3_label"/>
+                                <label class="rating-3" for="Value_3" title="3&#x20;stars" id="Value_3_label">
+                                    <span>3 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[2]" id="Value_4" value="9" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_4_label"/>
+                                <label class="rating-4" for="Value_4" title="4&#x20;stars" id="Value_4_label">
+                                    <span>4 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[2]" id="Value_5" value="10" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_5_label"/>
+                                <label class="rating-5" for="Value_5" title="5&#x20;stars" id="Value_5_label">
+                                    <span>5 stars</span>
+                                </label>
+                                                                                        </div>
+                        </div>
+                                            <div class="field choice review-field-rating">
+                            <label class="label" id="Quality_rating_label"><span>Quality</span></label>
+                            <div class="control review-control-vote">
+                                                                                        <input type="radio" name="ratings[1]" id="Quality_1" value="1" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_1_label"/>
+                                <label class="rating-1" for="Quality_1" title="1&#x20;star" id="Quality_1_label">
+                                    <span>1 star</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[1]" id="Quality_2" value="2" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_2_label"/>
+                                <label class="rating-2" for="Quality_2" title="2&#x20;stars" id="Quality_2_label">
+                                    <span>2 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[1]" id="Quality_3" value="3" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_3_label"/>
+                                <label class="rating-3" for="Quality_3" title="3&#x20;stars" id="Quality_3_label">
+                                    <span>3 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[1]" id="Quality_4" value="4" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_4_label"/>
+                                <label class="rating-4" for="Quality_4" title="4&#x20;stars" id="Quality_4_label">
+                                    <span>4 stars</span>
+                                </label>
+                                                                                            <input type="radio" name="ratings[1]" id="Quality_5" value="5" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_5_label"/>
+                                <label class="rating-5" for="Quality_5" title="5&#x20;stars" id="Quality_5_label">
+                                    <span>5 stars</span>
+                                </label>
+                                                                                        </div>
+                        </div>
+                                    </div>
+                <input type="hidden" name="validate_rating" class="validate-rating" value=""/>
+            </div>
+        </fieldset>
+            <div class="field review-field-nickname required">
+            <label for="nickname_field" class="label"><span>Nickname</span></label>
+            <div class="control">
+                <input type="text" name="nickname" id="nickname_field" class="input-text" data-validate="{required:true}" data-bind="value: nickname()"/>
+            </div>
+        </div>
+        <div class="field review-field-summary required">
+            <label for="summary_field" class="label"><span>Summary</span></label>
+            <div class="control">
+                <input type="text" name="title" id="summary_field" class="input-text" data-validate="{required:true}" data-bind="value: review().title"/>
+            </div>
+        </div>
+        <div class="field review-field-text required">
+            <label for="review_field" class="label"><span>Review</span></label>
+            <div class="control">
+                <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar review-form-actions">
+        <div class="primary actions-primary">
+            <button type="submit" class="action submit primary"><span>Submit Review</span></button>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+{
+    "[data-role=product-review-form]": {
+        "Magento_Ui/js/core/app": {"components":{"review-form":{"component":"Magento_Review\/js\/view\/review"}}}    },
+    "#review-form": {
+        "Magento_Review/js/error-placement": {},
+        "Magento_Review/js/validate-review": {},
+        "Magento_Review/js/submit-review": {}
+    }
+}
+</script>
+</div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Review/js/process-reviews": {
+                "productReviewUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Freview\u002Fproduct\u002FlistAjax\u002Fid\u002F92\u002F",
+                "reviewsTabSelector": "#tab-label-reviews"
+            }
+        }
+    }
+</script>
+                </div>
+                                    </div>
+    </div>
+<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
+        <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#authenticationPopup": {
+                "Magento_Ui/js/core/app": {"components":{"authenticationPopup":{"component":"Magento_Customer\/js\/view\/authentication-popup","children":{"messages":{"component":"Magento_Ui\/js\/view\/messages","displayArea":"messages"},"captcha":{"component":"Magento_Captcha\/js\/view\/checkout\/loginCaptcha","displayArea":"additional-login-form-fields","formId":"user_login","configSource":"checkout"},"amazon-button":{"component":"Amazon_Login\/js\/view\/login-button-wrapper","sortOrder":"0","displayArea":"additional-login-form-fields","config":{"tooltip":"Securely login to our website using your existing Amazon details.","componentDisabled":true}}}}}}            },
+            "*": {
+                "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
+            }
+        }
+    </script>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/section-config": {
+                "sections": {"stores\/store\/switch":["*"],"stores\/store\/switchrequest":["*"],"directory\/currency\/switch":["*"],"*":["messages"],"customer\/account\/logout":["*","recently_viewed_product","recently_compared_product","persistent"],"customer\/account\/loginpost":["*"],"customer\/account\/createpost":["*"],"customer\/account\/editpost":["*"],"customer\/ajax\/login":["checkout-data","cart","captcha"],"catalog\/product_compare\/add":["compare-products"],"catalog\/product_compare\/remove":["compare-products"],"catalog\/product_compare\/clear":["compare-products"],"sales\/guest\/reorder":["cart"],"sales\/order\/reorder":["cart"],"checkout\/cart\/add":["cart","directory-data"],"checkout\/cart\/delete":["cart"],"checkout\/cart\/updatepost":["cart"],"checkout\/cart\/updateitemoptions":["cart"],"checkout\/cart\/couponpost":["cart"],"checkout\/cart\/estimatepost":["cart"],"checkout\/cart\/estimateupdatepost":["cart"],"checkout\/onepage\/saveorder":["cart","checkout-data","last-ordered-items"],"checkout\/sidebar\/removeitem":["cart"],"checkout\/sidebar\/updateitemqty":["cart"],"rest\/*\/v1\/carts\/*\/payment-information":["cart","last-ordered-items","captcha","instant-purchase"],"rest\/*\/v1\/guest-carts\/*\/payment-information":["cart","captcha"],"rest\/*\/v1\/guest-carts\/*\/selected-payment-method":["cart","checkout-data"],"rest\/*\/v1\/carts\/*\/selected-payment-method":["cart","checkout-data","instant-purchase"],"customer\/address\/*":["instant-purchase"],"customer\/account\/*":["instant-purchase"],"vault\/cards\/deleteaction":["instant-purchase"],"multishipping\/checkout\/overviewpost":["cart"],"paypal\/express\/placeorder":["cart","checkout-data"],"paypal\/payflowexpress\/placeorder":["cart","checkout-data"],"paypal\/express\/onauthorization":["cart","checkout-data"],"persistent\/index\/unsetcookie":["persistent"],"review\/product\/post":["review"],"wishlist\/index\/add":["wishlist"],"wishlist\/index\/remove":["wishlist"],"wishlist\/index\/updateitemoptions":["wishlist"],"wishlist\/index\/update":["wishlist"],"wishlist\/index\/cart":["wishlist","cart"],"wishlist\/index\/fromcart":["wishlist","cart"],"wishlist\/index\/allcart":["wishlist","cart"],"wishlist\/shared\/allcart":["wishlist","cart"],"wishlist\/shared\/cart":["cart"],"braintree\/paypal\/placeorder":["cart","checkout-data"],"braintree\/googlepay\/placeorder":["cart","checkout-data"]},
+                "clientSideSections": ["checkout-data","cart-data","chatData"],
+                "baseUrls": ["https:\/\/blueskytechmage.com\/ohey\/en11\/"],
+                "sectionNames": ["messages","customer","compare-products","last-ordered-items","cart","directory-data","captcha","instant-purchase","loggedAsCustomer","persistent","review","wishlist","chatData","recently_viewed_product","recently_compared_product","product_data_storage","paypal-billing-agreement"]            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/customer-data": {
+                "sectionLoadUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Fsection\u002Fload\u002F",
+                "expirableSectionLifetime": 60,
+                "expirableSectionNames": ["cart","persistent"],
+                "cookieLifeTime": "3600",
+                "updateSessionUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Faccount\u002FupdateSession\u002F"
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/invalidation-processor": {
+                "invalidationRules": {
+                    "website-rule": {
+                        "Magento_Customer/js/invalidation-rules/website-rule": {
+                            "scopeConfig": {
+                                "websiteId": "5"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/id\/92\/","handles":["default","catalog_product_view","catalog_product_view_type_simple","catalog_product_view_id_92","catalog_product_view_sku_CP03"],"originalRequest":{"route":"catalog","controller":"product","action":"view","uri":"\/ohey\/en11\/anzo-led-headlights-gauge-kit.html"},"versionCookieName":"private_content_version"}        }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "requireCookie": {"noCookieUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/cookie\/index\/noCookies\/","triggers":[".action.towishlist"],"isRedirectCmsPage":true}        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+                "Magento_Catalog/js/product/view/provider": {
+                    "data": {"items":{"92":{"add_to_cart_button":{"post_data":"{\"action\":\"https:\\\/\\\/blueskytechmage.com\\\/ohey\\\/en11\\\/checkout\\\/cart\\\/add\\\/uenc\\\/%25uenc%25\\\/product\\\/92\\\/\",\"data\":{\"product\":\"92\",\"uenc\":\"%uenc%\"}}","url":"https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/cart\/add\/uenc\/%25uenc%25\/product\/92\/","required_options":false},"add_to_compare_button":{"post_data":null,"url":"{\"action\":\"https:\\\/\\\/blueskytechmage.com\\\/ohey\\\/en11\\\/catalog\\\/product_compare\\\/add\\\/\",\"data\":{\"product\":\"92\",\"uenc\":\"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s\"}}","required_options":null},"price_info":{"final_price":100,"max_price":100,"max_regular_price":100,"minimal_regular_price":100,"special_price":null,"minimal_price":100,"regular_price":300,"formatted_prices":{"final_price":"<span class=\"price\">$100.00<\/span>","max_price":"<span class=\"price\">$100.00<\/span>","minimal_price":"<span class=\"price\">$100.00<\/span>","max_regular_price":"<span class=\"price\">$100.00<\/span>","minimal_regular_price":null,"special_price":null,"regular_price":"<span class=\"price\">$300.00<\/span>"},"extension_attributes":{"msrp":{"msrp_price":"<span class=\"price\">$0.00<\/span>","is_applicable":"","is_shown_price_on_gesture":"","msrp_message":"","explanation_message":"Our price is lower than the manufacturer&#039;s &quot;minimum advertised price.&quot; As a result, we cannot show you the price in catalog or the product page. <br><br> You have no obligation to purchase the product once you know the price. You can simply remove the item from your cart."},"tax_adjustments":{"final_price":100,"max_price":100,"max_regular_price":100,"minimal_regular_price":100,"special_price":100,"minimal_price":100,"regular_price":300,"formatted_prices":{"final_price":"<span class=\"price\">$100.00<\/span>","max_price":"<span class=\"price\">$100.00<\/span>","minimal_price":"<span class=\"price\">$100.00<\/span>","max_regular_price":"<span class=\"price\">$100.00<\/span>","minimal_regular_price":null,"special_price":"<span class=\"price\">$100.00<\/span>","regular_price":"<span class=\"price\">$300.00<\/span>"}},"weee_attributes":[],"weee_adjustment":"<span class=\"price\">$100.00<\/span>"}},"images":[{"url":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/ae535b032f49014d8ee43958fce1e512\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","code":"recently_viewed_products_grid_content_widget","height":500,"width":500,"label":"Anzo \u2013 LED Headlights Gauge Kit","resized_width":500,"resized_height":500},{"url":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/d7522062023ca9a7dca6125334b2906b\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","code":"recently_viewed_products_list_content_widget","height":270,"width":270,"label":"Anzo \u2013 LED Headlights Gauge Kit","resized_width":270,"resized_height":270},{"url":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/b970b1288179dfa51907461b707e2120\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","code":"recently_viewed_products_images_names_widget","height":150,"width":150,"label":"Anzo \u2013 LED Headlights Gauge Kit","resized_width":150,"resized_height":150},{"url":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/ae535b032f49014d8ee43958fce1e512\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","code":"recently_compared_products_grid_content_widget","height":500,"width":500,"label":"Anzo \u2013 LED Headlights Gauge Kit","resized_width":500,"resized_height":500},{"url":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/3652e6e2ce98fa8168ff8952e0f0a581\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","code":"recently_compared_products_list_content_widget","height":207,"width":270,"label":"Anzo \u2013 LED Headlights Gauge Kit","resized_width":270,"resized_height":207},{"url":"https:\/\/blueskytechmage.com\/ohey\/media\/catalog\/product\/cache\/b970b1288179dfa51907461b707e2120\/a\/n\/anzo_led_headlights_gauge_kit_1_1.jpg","code":"recently_compared_products_images_names_widget","height":150,"width":150,"label":"Anzo \u2013 LED Headlights Gauge Kit","resized_width":150,"resized_height":150}],"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/anzo-led-headlights-gauge-kit.html","id":92,"name":"Anzo \u2013 LED Headlights Gauge Kit","type":"simple","is_salable":"1","store_id":15,"currency_code":"USD","extension_attributes":{"review_html":"        <div class=\"product-reviews-summary short\">\r\n                <div class=\"rating-summary\">\r\n            <span class=\"label\"><span>Rating:<\/span><\/span>\r\n            <div class=\"rating-result\" title=\"100%\">\r\n                <span style=\"width:100%\"><span>100%<\/span><\/span>\r\n            <\/div>\r\n        <\/div>\r\n                <div class=\"reviews-actions\">\r\n            <a class=\"action view\" href=\"https:\/\/blueskytechmage.com\/ohey\/en11\/anzo-led-headlights-gauge-kit.html#reviews\">\r\n                1 <span>Review<\/span><\/a>\r\n        <\/div>\r\n    <\/div>\r\n","wishlist_button":{"post_data":null,"url":"{\"action\":\"https:\\\/\\\/blueskytechmage.com\\\/ohey\\\/en11\\\/wishlist\\\/index\\\/add\\\/\",\"data\":{\"product\":92,\"uenc\":\"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s\"}}","required_options":null}},"is_available":true}},"store":"15","currency":"USD","productCurrentScope":"website"}            }
+        }
+    }
+</script>
+
+
+</div></div></main>
+
+
+{% endblock %}
+
+</body>
+
+
+
