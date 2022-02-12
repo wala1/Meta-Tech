@@ -40,6 +40,7 @@ class SecurityController extends AbstractController
            
             $hash=$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($hash);
+            $user->setRoles(["ROLE_CLIENT"]);
              $EntityManager->persist($user);
              $EntityManager->flush();
              return $this->redirectToRoute('security_login');
@@ -81,21 +82,18 @@ class SecurityController extends AbstractController
             //on cherche si un utilisateur a cet email
             $user=$userRepo->findOneByEmail($donnes['email']);
             if(!$user){
-                $this->addFlash('danger', 'cette adresse n existe pas');
+                $this->addFlash('danger', 'This email adress in invalid');
                 $this->redirectToRoute('security_login');
             }
-            $token = $tokenGenerator->generateToken();
-            try{
+            else {$token = $tokenGenerator->generateToken();
+            
                 $user->setResetToken($token);
                 $EntityManager=$this->getDoctrine()->getManager();
         
                 $EntityManager->persist($user);
                 $EntityManager->flush();
         
-            }catch(\Exception $e){
-                $this->addFlash('waning', 'Une erreur est survenue: '. $e->getMessage());
-                $this->redirectToRoute('security_login');
-            }
+            
             //on genere l'URL de réinitialisation demot de passe 
             $url=$this->generateUrl('reset_pass',['token'=>$token], UrlGeneratorInterface::ABSOLUTE_URL);
             //envoi msg 
@@ -111,8 +109,8 @@ class SecurityController extends AbstractController
            // envoi email
            $mailer->send($message);
            //cree msg flash
-           $this->addFlash('message', 'un email de reinitialisation de mot de passe vous a ete envoye');
-           return $this->redirectToRoute('security_login');
+           $this->addFlash('message', 'you will receive an email with a link to reset your password.');}
+           return $this->redirectToRoute('security_login'); 
            //
         
         }

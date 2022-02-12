@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
  * fields={"email"},
- * message= "L'email que vous avez indiqué est deja utilisé")
+ * message= "This email is already in use")
  */
 class User implements UserInterface
 {
@@ -25,26 +25,31 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Email()
+     * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
+     * @Assert\NotNull(message="this field is  required")
+     
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="this field is  required")
      
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8",minMessage="Vote mot de passe doit faire minimum 8 caractères")
+     * @Assert\Length(min="8",minMessage="Your password must be at least 8 characters")
+     * @Assert\NotNull(message="this field is  required")
     
      */
     private $password;
     
  /**
     
-     * @Assert\EqualTo(propertyPath="password",message="Vous n'avez pas taper le meme mot de passe")
+     * @Assert\EqualTo(propertyPath="password",message="Password does not match")
+     * @Assert\NotNull(message="this field is  required")
      */
     public $confirm_password;
 

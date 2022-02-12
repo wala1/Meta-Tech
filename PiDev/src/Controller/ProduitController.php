@@ -10,7 +10,7 @@ use App\Entity\Produit ;
 class ProduitController extends AbstractController
 {
     /**
-     * @Route("/", name="produit")
+     * @Route("/produit", name="produit")
      */
     public function index(): Response
     {

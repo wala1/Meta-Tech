@@ -113,18 +113,18 @@
         
         <legend class="legend"><span>Sign-in Information</span></legend><br>
         
-        {{form_start(form)}}
+        {{form_start(form,{'attr':{'novalidate':'novalidate'}} )}}
         <div>
-        {{form_row(form.username,{'label' : 'Name','attr':{'placeholder':'....', 'novalidate':'novalidate'}})  }}
+        {{form_row(form.username,{'label' : 'Name','attr':{'placeholder':'....'}})  }}
         </div>
         <div>
-        {{form_row(form.email,{'label' : 'Email','attr':{'placeholder':'....','novalidate':'novalidate'}})  }}
+        {{form_row(form.email,{'label' : 'Email','attr':{'placeholder':'....'}} )  }}
         </div>
         <div>
-        {{form_row(form.password,{'label' : 'Password','attr':{'placeholder':'.....','novalidate':'novalidate'}})  }}
+        {{form_row(form.password,{'label' : 'Password','attr':{'placeholder':'.....'}})  }}
         </div>
         <div>
-        {{form_row(form.confirm_password,{'label' : 'Confirm Password','attr':{'placeholder':'....','novalidate':'novalidate'}})  }}
+        {{form_row(form.confirm_password,{'label' : 'Confirm Password','attr':{'placeholder':'....'}})  }}
         </div>
         <button type="submit" class="btn btn-success"> create </button>
 {{form_end(form)}}

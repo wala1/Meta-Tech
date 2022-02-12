@@ -16,7 +16,7 @@ class ResetPassType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class)
-            ->add('send',SubmitType::class)
+            ->add('Reset My Password',SubmitType::class)
         ;
     }
 

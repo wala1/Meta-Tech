@@ -12,10 +12,25 @@
        
  </div>
     
-    
+
     
    
 <div class="login-container"><div class="block block-customer-login">
+     {% for message in app.flashes('message') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('warning') %}
+    <div class="alert alert-warning" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('danger') %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
     <div class="block-title">
         <strong id="block-customer-login-heading" role="heading" aria-level="2">Registered Customers</strong>
     </div>
@@ -24,26 +39,24 @@
             <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>            <fieldset class="fieldset login" data-hasrequired="* Required Fields">
                 <div class="field note">If you have an account, sign in with your email address.</div>
                 <!-- nzid hnaaaaaaaaaaaaaaaaaa-->
-                
+               
                      <form action="{{path('security_login')}} " method="post">
-                     
-                     
+                    <div class="field email required">
+                     <label class="label" for="email"><span>Email:</span></label>
+                     </div>
                      <div class="form-group">
-                      <input placeholder="Adresse email..." required name="_username"
+                      <input label="Email:" placeholder="Enter your email adress..." required name="_username"
                     type="text" class="form-control">
                     </div>
-
+                    <div class="field email required">
+                     <label class="label" for="email"><span>Password:</span></label>
+                     </div>
 
                      <div class="form-group">
-                <input placeholder="Mot de passe..." required name="_password"
+                <input placeholder="Enter your password..." required name="_password"
                     type="password" class="form-control">
             </div>
-<div class="d-flex mb-5 align-items-center">
-                
-                <span class="ml-auto"><a  href="{{path('forgotton_pass')}}" class="forgot-pass">Show Password</a></span> 
-             
-              </div>
-              
+
           
              
                     <div class="actions-toolbar">
