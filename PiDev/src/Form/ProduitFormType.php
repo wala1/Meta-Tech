@@ -10,7 +10,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType ;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType ;
 use Symfony\Component\Form\Extension\Core\Type\NumberType ;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProduitFormType extends AbstractType
 {
@@ -22,7 +24,7 @@ class ProduitFormType extends AbstractType
                     'class'=>'form-control'
                 ]
             ])
-            ->add('desc_prod', TextType::class,[
+            ->add('desc_prod', TextAreaType::class,[
                 'attr' => [
                     'class'=>'form-control'
                 ]
@@ -45,6 +47,11 @@ class ProduitFormType extends AbstractType
             ->add('sousCategProd', EntityType::class,[
                 'class'=>SousCategorie::class, 
                 'choice_label'=>'nomSousCateg',
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
+            ->add('model_prod', TextAreaType::class,[
                 'attr' => [
                     'class'=>'form-control'
                 ]

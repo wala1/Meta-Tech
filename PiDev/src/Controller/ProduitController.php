@@ -22,7 +22,7 @@ class ProduitController extends AbstractController
         $produits = $repo->findAll() ; 
 
         return $this->render('produit/all-categories.html.twig', [
-            'produits' => $produits,
+            'produits' => $produits
         ]);
     }
 
@@ -30,15 +30,18 @@ class ProduitController extends AbstractController
     /**
      * @Route("/admin/produit", name="admin_product")
      */
-    public function showprods(): Response
-    {
+    public function showProds(): Response
+    {   
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findAll() ; 
 
         return $this->render('admin/gestionProd.html.twig', [
             'produits' => $produits,
+            'table' => 'produits'
         ]);
     }
+
+    
 
 
     /**
@@ -80,7 +83,8 @@ class ProduitController extends AbstractController
         }
         return $this->render('admin/ajouterProd.html.twig', [
             'form' => $form->createView(),
-            'editMode' => $produit->getId() !== null  
+            'editMode' => $produit->getId() !== null,
+            'table' => 'produits' 
         ]);
     }
 
@@ -105,10 +109,12 @@ class ProduitController extends AbstractController
     {
         $em=$this->getDoctrine()->getManager();
         $produit = $em->getRepository(Produit::class)->find($id);
-
+        
+          
+        $produit_details = $em->getRepository(Produit::class)->findAll() ; 
         
         $form = $this->createForm(ProduitFormType::class, $produit) ; 
-         $form->add('Modifier', SubmitType::class,[
+         $form->add('Enregistrer', SubmitType::class,[
                 'attr' => [
                     'class'=>'btn btn-success waves-effect waves-light'
                 ]
@@ -124,7 +130,10 @@ class ProduitController extends AbstractController
         }
         return $this->render('admin/ajouterProd.html.twig', [
             'form' => $form->createView()  ,
-            'editMode' => $produit->getId() !== null
+            'editMode' => $produit->getId() !== null,
+            'produit_details' => $produit_details,
+            'table' => 'produits',
+            'id' => $id
         ]);
     }
 

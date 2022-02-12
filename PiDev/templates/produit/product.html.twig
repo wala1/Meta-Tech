@@ -10,7 +10,11 @@
 
 {% for produit in produits %}
 <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
-    <img alt="main product photo" class="gallery-placeholder__image" src="{{produit.imageProd}}"/>
+    {% if produit.modelProd %}
+        {{produit.modelProd | raw   }}
+    {% else %}
+        <img alt="main product photo" class="gallery-placeholder__image" src="{{produit.imageProd}}"/>
+    {% endif %}
 </div>
 
 <script type="text/x-magento-init">

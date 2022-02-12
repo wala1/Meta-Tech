@@ -67,10 +67,12 @@ class Produit
     private $model_prod;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Product Sub Category is required")
+     * @ORM\ManyToOne(targetEntity=SousCategorie::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $sousCategProd;
+
+     
 
      
 
@@ -177,17 +179,19 @@ class Produit
         return $this;
     }
 
-    public function getSousCategProd(): ?string
+    public function getSousCategProd(): ?SousCategorie
     {
         return $this->sousCategProd;
     }
 
-    public function setSousCategProd(string $sousCategProd): self
+    public function setSousCategProd(?SousCategorie $sousCategProd): self
     {
         $this->sousCategProd = $sousCategProd;
 
         return $this;
     }
+
+    
 
      
 
