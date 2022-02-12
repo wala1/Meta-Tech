@@ -9,7 +9,7 @@
 <meta name="robots" content="INDEX,FOLLOW"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="format-detection" content="telephone=no"/>
-<title>Brake Systems</title>
+<title>Shop</title>
 <link rel="stylesheet" type="text/css" media="all" href="../static/version1640184821/_cache/merged/A.2efa3b95489a4189897749220a92fce0.min.css.pagespeed.cf._5GLoYDEdJ.css"/>
 <link rel="stylesheet" type="text/css" media="print" href="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/css/A.print.min.css.pagespeed.cf.vxbaswDj2V.css"/>
 <script type="text/javascript" src="../static/version1640184821/_cache/merged/af9d47abda4bdb126168e1a73fa371ad.min.js"></script>
@@ -478,7 +478,7 @@
 </a>
 </div></div></header><div class="category-view-breadcrumbs-banner"><div class="page-title-wrapper">
     <h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading&#x20;toolbar-amount">
-        <span class="base" data-ui-id="page-title-wrapper"> Brake Systems</span>    </h1>
+        <span class="base" data-ui-id="page-title-wrapper">Produits</span>    </h1>
     </div>
 <div class="breadcrumbs">
     <ul class="items">
@@ -487,7 +487,7 @@
                     Home                </a>
                         </li>
                     <li class="item category168">
-                            <strong> Brake Systems</strong>
+                            <strong> Tous les produits</strong>
                         </li>
             </ul>
 </div>
@@ -693,8 +693,8 @@
 
     <!-- ===============PRODUITS======================= -->
     {% for produit in produits %}
-    <li class="item product product-item">
-        <div class="product-item-info" data-container="product-grid">
+    <li class="item product product-item" >
+        <div class="product-item-info" data-container="product-grid" >
             <div class="product-item-inner">
     			<div class="product actions product-item-actions">
     			     <div data-role="add-to-links" class="actions-secondary visible-hover">
@@ -725,18 +725,21 @@
     						
     			</div>
     				
-                <a href="{{ path('product_show', {id : produit.id}) }} " class="product-photo photo product-item-photo product-list-image" tabindex="-1">
+            <a href="{{ path('product_show', {id : produit.id}) }} "   class="product-photo photo product-item-photo product-list-image" tabindex="-1">
+
     			
-                    <span class="product-image-container product-image-container-911653110027">
+                    <span class="product-image-container product-image-container-911653110027" >
+
                         <span class="product-image-wrapper">
-                            <img class="product-image-photo" src="{{ produit.imageProd }}" loading="lazy" width="500" height="500" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
+                            <img    class="product-image-photo" src="{{ produit.imageProd }}" loading="lazy" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
+
                         </span>
                     </span>
 
                     <style>.product-image-container-911653110027{width:500px}.product-image-container-911653110027 span.product-image-wrapper{padding-bottom:100%}</style><script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027  span.product-image-wrapper");for(var i=0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom="100%";}
                     </script>														
 
-                    <!--img class="image_hover" src="{{ produit.imageProd }}"/-->
+                     
 
     						
                 </a>
