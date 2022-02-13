@@ -18,7 +18,11 @@ class AddUserType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class)
-            ->add('username')
+            ->add('username',TextType::class,[
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
             ->add('password',PasswordType::class)
             ->add('confirm_password', PasswordType::class)
             ->add('roles',ChoiceType::class, [

@@ -597,7 +597,7 @@
                 </div>
                 <!-- End Page-content -->
 
-                {{ form_start(userAddForm) }}
+                {{ form_start(userAddForm,{'attr':{'novalidate':'novalidate'}}) }}
 {{ form_row(userAddForm.username,{ 'attr': {'placeholder': "Nom ..."  }}) }}
 {{ form_row(userAddForm.email,{ 'attr': {'placeholder': " email  "  }}) }}
 {{form_row(userAddForm.password,{'label' : 'Password','attr':{'placeholder':'.....','novalidate':'novalidate'}})  }}
