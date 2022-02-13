@@ -126,7 +126,7 @@ class ProduitController extends AbstractController
              
             $em->persist($produit) ;  
             $em->flush() ; 
-            return $this->redirectToRoute('admin_product') ; 
+            //return $this->redirectToRoute('admin_product') ; 
         }
         return $this->render('admin/ajouterProd.html.twig', [
             'form' => $form->createView()  ,
