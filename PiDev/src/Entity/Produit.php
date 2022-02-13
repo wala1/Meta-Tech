@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
@@ -19,11 +21,13 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Product Name is required")
      */
     private $nom_prod;
 
     /**
      * @ORM\Column(type="string", length=600)
+     * @Assert\NotBlank(message="Product Description is required")
      */
     private $desc_prod;
 
@@ -34,18 +38,45 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=400)
+     * @Assert\NotBlank(message="Product Image is required")
      */
     private $image_prod;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Product Price is  required")
+     * @Assert\Type(type="double", message="Product discount must be float.")
      */
     private $prix_prod;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="Please make sure to enter 0 if the product has no discount.")
+     * @Assert\Type(type="float",message="Product discount must be float.")
      */
     private $promo_prod;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ratingProd;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $model_prod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SousCategorie::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sousCategProd;
+
+     
+
+     
+
+    
 
     public function getId(): ?int
     {
@@ -123,4 +154,46 @@ class Produit
 
         return $this;
     }
+
+    public function getRatingProd(): ?int
+    {
+        return $this->ratingProd;
+    }
+
+    public function setRatingProd(int $ratingProd): self
+    {
+        $this->ratingProd = $ratingProd;
+
+        return $this;
+    }
+
+    public function getModelProd(): ?string
+    {
+        return $this->model_prod;
+    }
+
+    public function setModelProd(?string $model_prod): self
+    {
+        $this->model_prod = $model_prod;
+
+        return $this;
+    }
+
+    public function getSousCategProd(): ?SousCategorie
+    {
+        return $this->sousCategProd;
+    }
+
+    public function setSousCategProd(?SousCategorie $sousCategProd): self
+    {
+        $this->sousCategProd = $sousCategProd;
+
+        return $this;
+    }
+
+    
+
+     
+
+    
 }
