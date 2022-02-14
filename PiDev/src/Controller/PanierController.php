@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit ; 
+use App\Form\PanierProdFormType ;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
+use App\Repository\ProduitRepository ; 
 
 class PanierController extends AbstractController
 {
@@ -40,4 +44,27 @@ class PanierController extends AbstractController
         ]);
     }
 
+     /** 
+     * @Route("/updateProdDepuisPanier/{id}" , name="updateProdDepuisPanier")
+     */
+     function updateProdDepuisPanier(Request $request,$id): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $produit = $em->getRepository(Produit::class)->find($id);
+        $form = $this->createForm(PanierProdFormType::class, $produit) ; 
+         $form->add('Save Changes', SubmitType::class,[
+                'attr' => [
+                    'class'=>'btn btn-success waves-effect waves-light'
+                ]
+            ]) ;
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($produit) ;  
+            $em->flush() ; 
+            return $this->redirectToRoute('showPanierAdmin') ; 
+        }
+        return $this->render('panier/updatepanier.html.twig', [
+            'formA' => $form->createView(),
+        ]);
+    }
 }

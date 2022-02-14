@@ -40,7 +40,7 @@ class CategorieController extends AbstractController
         $form = $this->createForm(CategorieFormType::class, $categorie) ; 
         $form->add('Ajouter', SubmitType::class,[
                 'attr' => [
-                    'class'=>'btn btn-success waves-effect waves-light'
+                    'class'=>'btn btn-primary waves-effect waves-light'
                 ]
             ]) ;
         $form->handleRequest($request);

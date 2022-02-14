@@ -633,19 +633,26 @@
                                                                     <tr>
                                                                         <th scope="row"> <img width="70" height="70" src="{{ asset('desktop-computer-png-transparent.png') }}" alt="produit name"/></th>
                                                                         <td>{{produit.nom_prod}}</td>
-                                                                        <td>{{produit.prix_prod}}</td>
+                                                                        <td>${{produit.prix_prod}}</td>
                                                                         <td>1</td>
-                                                                        <td>{{produit.prix_prod}}</td>
+                                                                        <td>${{produit.prix_prod}}</td>
                                                                         <td>
-                                                                         <a href="updateProdDepuisPanier/1"><button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Edite</button></a>
-                                                                         <a href="deleteProdDepuisPanier/1"><button type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Remove</button></a>
+                                                                         <a href="updateProdDepuisPanier/{{produit.id}}"><button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Edite</button></a>
+                                                                         <a href="deleteProdDepuisPanier/{{produit.id}}"><button type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Remove</button></a>
                                                                         </td>
                                                                     </tr>
                                                                     {% endfor%}
+                                                                    
+                                                                    {% set prixTotal = 0 %}
+                                                                    {%for produit in produits%}
+                                                                        {% set prixTotal = prixTotal + produit.prix_prod %}
+                                                                    {%endfor%}
+
 																	<tr>
                                                                         <th scope="row">Total Price </th>
-                                                                        <td colspan="5">$250.000</td>
+                                                                        <td colspan="5">${{ prixTotal }}</td>
                                                                     </tr>
+                                                                    
                                                                     
                                                                 </tbody>
                                                             </table><br>
@@ -670,7 +677,6 @@
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
-
 
 
                 
