@@ -1,15 +1,18 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-
-<!-- =========================== PRODUIT ================================-->
-<body>
 {% block body %}
 
+
+<body>
 
 
 {% for produit in produits %}
 <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
-    <img alt="main product photo" class="gallery-placeholder__image" src="{{produit.imageProd}}"/>
+    {% if produit.modelProd %}
+        {{produit.modelProd | raw   }}
+    {% else %}
+        <img alt="main product photo" class="gallery-placeholder__image" src="{{produit.imageProd}}"/>
+    {% endif %}
 </div>
 
 <script type="text/x-magento-init">
@@ -206,8 +209,7 @@
 			</ul>	</div>
 </div></div>    
 
-{% endfor %}
-<!--========================= END PRODUIT ========================================== -->
+
 
 <div class="product info detailed">
                 <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
@@ -233,7 +235,7 @@
 <div class="block-content">
 <form action="https://blueskytechmage.com/ohey/en11/review/product/post/id/92/" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
     <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>        <fieldset class="fieldset review-fieldset" data-hasrequired="&#x2A;&#x20;Required&#x20;Fields">
-        <legend class="legend review-legend"><span>You&#039;re reviewing:</span><strong>Anzo – LED Headlights Gauge Kit</strong></legend><br/>
+        <legend class="legend review-legend"><span>You&#039;re reviewing:</span><strong>{{ produit.nomProd }}</strong></legend><br/>
                 <span id="input-message-box"></span>
         <fieldset class="field required review-field-ratings">
             <legend class="label"><span>Your Rating</span></legend><br/>
@@ -343,6 +345,11 @@
         </div>
     </div>
 </form>
+
+{% endfor %}
+<!--========================= END PRODUIT ========================================== -->
+
+
 <script type="text/x-magento-init">
 {
     "[data-role=product-review-form]": {
@@ -448,10 +455,10 @@
 
 </div></div></main>
 
-
-{% endblock %}
-
 </body>
 
 
+</body>
 
+  
+{% endblock %}

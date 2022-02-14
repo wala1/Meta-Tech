@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\SousCategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=CategorieRepository::class)
+ * @ORM\Entity(repositoryClass=SousCategorieRepository::class)
  */
-class Categorie
+class SousCategorie
 {
     /**
      * @ORM\Id
@@ -24,34 +24,39 @@ class Categorie
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Entrer un nom de catégorie valide.")
      */
-    private $nom_categorie;
+    private $nomSousCateg;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorie_prod")
+     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="sousCategProd")
      */
     private $produits;
-
-    
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
-        
     }
+
+   
+
+     
+
+    
+
+     
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomCategorie(): ?string
+    public function getNomSousCateg(): ?string
     {
-        return $this->nom_categorie;
+        return $this->nomSousCateg;
     }
 
-    public function setNomCategorie(string $nom_categorie): self
+    public function setNomSousCateg(string $nomSousCateg): self
     {
-        $this->nom_categorie = $nom_categorie;
+        $this->nomSousCateg = $nomSousCateg;
 
         return $this;
     }
@@ -68,7 +73,7 @@ class Categorie
     {
         if (!$this->produits->contains($produit)) {
             $this->produits[] = $produit;
-            $produit->setCategorieProd($this);
+            $produit->setSousCategProd($this);
         }
 
         return $this;
@@ -78,13 +83,19 @@ class Categorie
     {
         if ($this->produits->removeElement($produit)) {
             // set the owning side to null (unless already changed)
-            if ($produit->getCategorieProd() === $this) {
-                $produit->setCategorieProd(null);
+            if ($produit->getSousCategProd() === $this) {
+                $produit->setSousCategProd(null);
             }
         }
 
         return $this;
     }
 
-   
+    
+
+    
+
+    
+
+    
 }
