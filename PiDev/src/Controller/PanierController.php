@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Panier;
+use App\Entity\Produit ; 
 
 class PanierController extends AbstractController
 {
@@ -24,15 +24,19 @@ class PanierController extends AbstractController
      * @Route("/afficherPanier", name="afficherPanier");
      */
     public function afficherPanier(){
-        $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
-        return $this->render("panier/panier.html.twig", ["panier" => $panier]);
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
+        return $this->render("panier/panier.html.twig", [
+            "produits" => $produits
+        ]);
     }
 
     /**
      * @Route("/showPanierAdmin", name="showPanierAdmin");
      */
     public function showPanierAdmin(){
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         return $this->render("panier/gestionPanier.html.twig", [
+            "produits" => $produits
         ]);
     }
 
