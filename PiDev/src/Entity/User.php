@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
@@ -62,6 +64,16 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $Roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idUser")
+     */
+    private $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,6 +142,36 @@ class User implements UserInterface
     public function setRoles(array $Roles): self
     {
         $this->Roles = $Roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getIdUser() === $this) {
+                $avi->setIdUser(null);
+            }
+        }
 
         return $this;
     }
