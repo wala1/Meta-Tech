@@ -272,13 +272,13 @@
                             </li>
 
                             <li>
-                                <a href="http://127.0.0.1:8000/showPanierAdmin" class="has-arrow">
+                                <a href="javascript: void(0);" class="has-arrow">
                                 <i data-feather="briefcase"></i>
                                 <span data-key="t-components">Cart</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="charts-apex.html" data-key="t-apex-charts">Order list</a></li>
-                                    <li><a href="charts-echart.html" data-key="t-e-charts">Code</a></li>
+                                    <li><a href="{{ path('showPanierAdmin') }}" data-key="t-apex-charts">Order list</a></li>
+                                    <li><a href="#" data-key="t-e-charts">Code</a></li>
                                 </ul>
                             </li>
 
@@ -291,13 +291,13 @@
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li>
                                         <a href="{{ path('admin_categorie')}} ">
-                                            <span data-key="t-calendar">Catégories</span>
+                                            <span data-key="t-calendar">Category</span>
                                         </a>
                                     </li>
                                      
                                     <li>
                                         <a href="{{ path('admin_souscategorie')}}">
-                                            <span data-key="t-calendar">Sous Catégories</span>
+                                            <span data-key="t-calendar">Sub Category</span>
                                         </a>
                                     </li>
                                      
@@ -312,6 +312,21 @@
                                     </li-->
                                      
                                 </ul>
+                            </li>
+
+
+                            <li>
+                                <a href="{{ path('publicite')}}">
+                                    <i data-feather="layout"></i>
+                                    <span data-key="t-horizontal">Publicity</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#"  >
+                                    <i data-feather="file-text"></i>
+                                    <span data-key="t-pages">Blog</span>
+                                </a>
                             </li>
 
                              
@@ -532,27 +547,11 @@
 
         <script src="../assets/js/app.js"></script>
 
-        <!-- JAVASCRIPT -->
-<script src="../assets/libs/jquery/jquery.min.js"></script>
+        
+ 
+ 
 
-<script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<script src="../assets/libs/metismenu/metisMenu.min.js"></script>
-
-<script src="../assets/libs/simplebar/simplebar.min.js"></script>
-
-<script src="../assets/libs/node-waves/waves.min.js"></script>
-
-<script src="../assets/libs/feather-icons/feather.min.js"></script>
-
-        <!-- pace js -->
-<script src="../assets/libs/pace-js/pace.min.js"></script>
-
-
-        <!-- Required datatable js -->
-<script src="../assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-
-<script src="../assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+ 
 
         <!-- Buttons examples -->
 <script src="../assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
