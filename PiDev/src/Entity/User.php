@@ -23,6 +23,12 @@ class User implements UserInterface
      */
     private $id;
 
+     /**
+     * @ORM\OneToOne(targetEntity="Panier")
+     */
+    protected $panier;
+
+
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
