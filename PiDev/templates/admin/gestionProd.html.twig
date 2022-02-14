@@ -30,9 +30,9 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h2 class="card-title" style="font-size : 20px ; ">Produits</h2>
+                                        <h2 class="card-title" style="font-size : 20px ; ">Products</h2>
                                             <a href="{{ path('ajouter_produit')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
-                                                Ajouter Produit
+                                                Add Product
                                             </a>
                                             <!--a href="{{ path('admin_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
                                                 Categories
@@ -52,13 +52,13 @@
                                             <thead>
                                             <tr style="font-size : 16px">
                                                 <th>Image</th>
-                                                <th>Nom</th>
+                                                <th>Name</th>
                                                 <th>Description</th>
-                                                <th>Prix</th>
+                                                <th>Price</th>
                                                 <th>Promo</th>
-                                                <th>Categorie</th>
-                                                <th>Sous Categ.</th>
-                                                <th>Edit</th>
+                                                <th>Category</th>
+                                                <th>Sub Categ.</th>
+                                                <th>Action</th>
 
                                             </tr>
                                             </thead>
@@ -78,7 +78,7 @@
                                                 <td>{{ produit.categorieProd.nomCategorie }}</td>
                                                 <td>{{ produit.sousCategProd.nomSousCateg }}</td>
                                                 <td>
-                                                    <a href="{{path('modif',{'id':produit.id})}}" type="button" class="btn btn-success waves-effect waves-light  ">
+                                                    <!--a href="{{path('modif',{'id':produit.id})}}" type="button" class="btn btn-success waves-effect waves-light  ">
 
 
                                                         <i class="mdi mdi-pencil d-block font-size-16"></i>
@@ -88,7 +88,18 @@
                                                     <a href="{{path('delete_prod',{'id':produit.id})}}" type="button" class="btn btn-danger waves-effect waves-light ">
                                                         <i class="mdi mdi-trash-can d-block font-size-16"></i>
                                                         Delete
-                                                    </a>
+                                                    </a-->
+
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bx bx-dots-horizontal-rounded"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <li><a class="dropdown-item" href="{{path('modif',{'id':produit.id})}}">Modify</a></li>
+                                                            <li><a class="dropdown-item" href="{{path('delete_prod',{'id':produit.id})}}"> Delete</a></li>
+                                                            
+                                                        </ul>
+                                                    </div>
 
 
                                                 </td>
@@ -111,18 +122,11 @@
                                 <div class="card" >
                                     
                                     <div class="card-header">
-                                        <h2 class="card-title" style="font-size : 20px ; ">Categories</h2>
+                                        <h2 class="card-title" style="font-size : 20px ; ">Category</h2>
                                         <a href="{{ path('ajouter_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
-                                            Ajouter Categorie
+                                            Add Category
                                         </a>
-
-                                        <!--a href="{{ path('admin_product')}} " type="button" class="btn btn-primary waves-effect waves-light">
-                                            Produits
-                                        </a>
-
-                                        <a href="{{ path('admin_souscategorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
-                                            Sous Categories
-                                        </a-->
+ 
 
                                         <p class="card-title-desc"></p>
                                     </div>
@@ -134,7 +138,7 @@
                                             <thead>
                                                 <tr style="font-size : 16px">
                                                     <th>ID</th> 
-                                                    <th>Nom</th> 
+                                                    <th>Name</th> 
                                                     <th>Edit</th>
                                                 </tr>
                                             </thead>
@@ -151,18 +155,18 @@
                                                          
                                                         <td>
                                                             <center>
-                                                            <a href="{{path('modifCateg',{'id':categorie.id})}}" type="button" class="btn btn-success waves-effect waves-light  ">
+                                                            
 
-
-                                                                <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                                                Edit
-                                                            </a>
-
-                                                            <a href="{{path('delete_categ',{'id':categorie.id})}}" type="button" class="btn btn-danger waves-effect waves-light ">
-
-                                                                <i class="mdi mdi-trash-can d-block font-size-16"></i>
-                                                                Delete
-                                                            </a>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                                        <li><a class="dropdown-item" href="{{path('modifCateg',{'id':categorie.id})}}">Modify</a></li>
+                                                                        <li><a class="dropdown-item" href="{{path('delete_categ',{'id':categorie.id})}}"> Delete</a></li>
+                                                                        
+                                                                    </ul>
+                                                                </div>
                                                             </center>
 
                                                         </td>
@@ -197,16 +201,11 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h2 class="card-title" style="font-size : 20px ; ">Sous Categories</h2>
+                                        <h2 class="card-title" style="font-size : 20px ; ">Sub Category</h2>
                                             <a href="{{ path('ajouter_souscategorie')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
-                                                Ajouter Sous Categorie
+                                                Add Sub Category
                                             </a>
-                                            <!--a href="{{ path('admin_product')}} " type="button" class="btn btn-primary waves-effect waves-light">
-                                                Produits
-                                            </a>
-                                            <a href="{{ path('admin_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
-                                                Categories
-                                            </a-->
+                                             
 
                                         <p class="card-title-desc"> 
                                         </p>
@@ -220,7 +219,7 @@
                                                 <thead>
                                                 <tr style="font-size : 16px">
                                                     <th>ID</th>
-                                                    <th>Nom</th> 
+                                                    <th>Name</th> 
                                                     <th>Edit</th>
 
                                                 </tr>
@@ -237,17 +236,19 @@
                                                     <td >{{ souscategorie.id }}</td>
                                                     <td>{{ souscategorie.nomSousCateg }}</td> 
                                                     <td>
-                                                        <a href="{{path('modifSousCateg',{'id':souscategorie.id})}}" type="button" class="btn btn-success waves-effect waves-light  ">
+                                                         
 
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bx bx-dots-horizontal-rounded"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                                <li><a class="dropdown-item" href="{{path('modifSousCateg',{'id':souscategorie.id})}}">Modify</a></li>
+                                                                <li><a class="dropdown-item" href="{{path('delete_souscateg',{'id':souscategorie.id})}}"> Delete</a></li>
+                                                                
+                                                            </ul>
+                                                        </div>
 
-                                                            <i class="mdi mdi-pencil d-block font-size-16"></i>
-                                                            Edit
-                                                        </a>
-
-                                                        <a href="{{path('delete_souscateg',{'id':souscategorie.id})}}" type="button" class="btn btn-danger waves-effect waves-light ">
-                                                            <i class="mdi mdi-trash-can d-block font-size-16"></i>
-                                                            Delete
-                                                        </a>
 
 
                                                     </td>

@@ -1,0 +1,131 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block body %}
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+
+
+
+
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Manage Cart </h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Charts</a></li>
+                                            <li class="breadcrumb-item active">Jquery Knob</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                         <div class="col-xl-9">
+                                                <div class="tab-content text-muted mt-4 mt-xl-0" id="v-pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="v-price-one" role="tabpanel" aria-labelledby="v-pills-tab-one">
+                                                        <div class="table-responsive text-center">
+                                                            <table class="table table-bordered mb-0 table-centered">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td style="width: 23%;">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Item</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="width: 23%;">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Price</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="width: 23%;">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Quantity</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="width: 23%;">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Subtotal</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="width: 23%;">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Action</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% for produit in produits%}
+                                                                    <tr>
+                                                                        <th scope="row"> <img width="70" height="70" src="{{ asset('desktop-computer-png-transparent.png') }}" alt="produit name"/></th>
+                                                                        <td>{{produit.nom_prod}}</td>
+                                                                        <td>${{produit.prix_prod}}</td>
+                                                                        <td>1</td>
+                                                                        <td>${{produit.prix_prod}}</td>
+                                                                        <td>
+                                                                            <div class="dropdown">
+                                                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                                </button>
+                                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                                    <li><a class="dropdown-item" href="updateProdDepuisPanier/{{produit.id}}">Modify</a></li>
+                                                                                    <li><a class="dropdown-item" href="deleteProdDepuisPanier/{{produit.id}}"> Delete</a></li>
+                                                                                    
+                                                                                </ul>
+                                                                            </div>
+                                                                         <!--a href="updateProdDepuisPanier/{{produit.id}}"><button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Edite</button></a>
+                                                                         <a href="deleteProdDepuisPanier/{{produit.id}}"><button type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Remove</button></a-->
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endfor%}
+                                                                    
+                                                                    {% set prixTotal = 0 %}
+                                                                    {%for produit in produits%}
+                                                                        {% set prixTotal = prixTotal + produit.prix_prod %}
+                                                                    {%endfor%}
+
+																	<tr>
+                                                                        <th scope="row">Total Price </th>
+                                                                        <td colspan="5">${{ prixTotal }}</td>
+                                                                    </tr>
+                                                                    
+                                                                    
+                                                                </tbody>
+                                                            </table><br>
+                                                             <a href="/"><button type="button" class="btn btn-outline-primary waves-effect waves-light">Clear Shopping cart</button></a>
+                                                             <a href="/"><button type="button" class="btn btn-primary waves-effect waves-light"><b> Update shopping cart</b></button></a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end card body -->
+                                </div>
+                                <!-- end card -->
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                        
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+
+
+
+{% endblock %}

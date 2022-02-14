@@ -25,54 +25,59 @@ class Produit
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Product Name is required")
      */
-    private $nom_prod;
+    public $nom_prod;
 
     /**
      * @ORM\Column(type="string", length=600)
      * @Assert\NotBlank(message="Product Description is required")
      */
-    private $desc_prod;
+    public $desc_prod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="produits")
+     */
+    public $panier_prod;
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
      */
-    private $categorie_prod;
+    public $categorie_prod;
 
     /**
      * @ORM\Column(type="string", length=400)
      * @Assert\NotBlank(message="Product Image is required")
      */
-    private $image_prod;
+    public $image_prod;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Product Price is  required")
      * @Assert\Type(type="double", message="Product discount must be float.")
      */
-    private $prix_prod;
+    public $prix_prod;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Please make sure to enter 0 if the product has no discount.")
      * @Assert\Type(type="float",message="Product discount must be float.")
      */
-    private $promo_prod;
+    public $promo_prod;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $ratingProd;
+    public $ratingProd;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $model_prod;
+    public $model_prod;
 
     /**
      * @ORM\ManyToOne(targetEntity=SousCategorie::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $sousCategProd;
+    public $sousCategProd;
 
     /**
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idProd")
@@ -127,6 +132,18 @@ class Produit
     public function setCategorieProd(?Categorie $categorie_prod): self
     {
         $this->categorie_prod = $categorie_prod;
+
+        return $this;
+    }
+
+    public function getPanierProd(): ?Panier
+    {
+        return $this->panier_prod;
+    }
+
+    public function setPanierProd(?Panier $panier_prod): self
+    {
+        $this->panier_prod = $panier_prod;
 
         return $this;
     }

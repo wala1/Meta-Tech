@@ -1,0 +1,578 @@
+{% extends 'base.html.twig' %}
+	
+
+{% block body %}
+
+ 
+			
+
+<script>require(['jquery','rokanthemes/choose'],function($){'use strict';$("#choose_category").chosen();});</script>
+<script>require(['jquery'],function($){'use strict';$(document).ready(function(){$('.block-search .dropdown-toggle > .top-search').click(function(event){$('.block-search #search_mini_form').slideToggle();$('#search-input-autocomplate').focus();});});});</script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "searchsuiteautocomplete_form": {
+                    "component": "MageWorx_SearchSuiteAutocomplete/js/autocomplete"
+                },
+                "searchsuiteautocompleteBindEvents": {
+                    "component": "MageWorx_SearchSuiteAutocomplete/js/bindEvents",
+                    "config": {
+                        "searchFormSelector": "#search_mini_form",
+                        "searchButtonSelector": "button.search",
+                        "inputSelector": "#search, #mobile_search, .minisearch .search input[type=\"text\"]",
+                        "searchDelay": "500"
+                    }
+                },
+                "searchsuiteautocompleteDataProvider": {
+                    "component": "MageWorx_SearchSuiteAutocomplete/js/dataProvider",
+                    "config": {
+                        "url": "https://blueskytechmage.com/ohey/en11/mageworx_searchsuiteautocomplete/ajax/index/"
+                    }
+                }
+            }
+        }
+    }
+}
+</script>                    </div>
+
+
+
+
+
+
+              <!--  publicité 1 "ONLY PRICE -->
+
+
+
+
+
+<script>require(['jquery','rokanthemes/verticalmenu'],function($){$(".verticalmenu").VerticalMenu();$('.title-category-dropdown').click(function(event){$('.navigation.verticalmenu .togge-menu').slideToggle('slow');$(this).toggleClass('active');});$(document).ready(function(){var lenghtLi=$('.navigation.verticalmenu .ui-menu-item.level0').length;var limitItemShow=12;if(lenghtLi>limitItemShow){$('.navigation.verticalmenu .ui-menu-item.level0').each(function(index){if(index>(limitItemShow-1)){$(this).addClass('orther-link');$(this).hide();}});$('.navigation.verticalmenu .expand-category-link').show();$('.navigation.verticalmenu .expand-category-link').on("click",function(){$(this).toggleClass('expanding');$('.navigation.verticalmenu .ui-menu-item.level0.orther-link').slideToggle('slow');});}else{$('.expand-category-link').hide();}var screenWidth=$(window).width();if(screenWidth>1200){if(!$("html").hasClass("vertical-open")){$("html").addClass("vertical-before-open");$(".title-category-dropdown").addClass('active');$('.navigation.verticalmenu .togge-menu').show();setTimeout(function(){$("html").addClass("vertical-open");});}}});$(".title-category-dropdown").click(function(e){if(!$("html").hasClass("vertical-open")){$("html").addClass("vertical-before-open");setTimeout(function(){$("html").addClass("vertical-open");});}else{$("html").removeClass("vertical-open");setTimeout(function(){$("html").removeClass("vertical-before-open");});}});$("#close-vertical").click(function(e){if(!$("html").hasClass("vertical-open")){$("html").addClass("vertical-before-open");setTimeout(function(){$("html").addClass("vertical-open");});}else{$("html").removeClass("vertical-open");setTimeout(function(){$("html").removeClass("vertical-before-open");$("html").removeClass("vertical-open");});}});});</script>
+</div>
+
+
+
+
+<div class="col-top-right  col-auto">	
+
+<div class="section no-full-width slider-wrapper theme-default wrapper-the-blue-sky-slider">
+		<div id="rokanthemes-slidebanner-11">
+			<div class="nivoSlider-loading-page-still-unsuc">
+				<div class="nivoslider-show-loading-in-web d-none d-md-block" style="min-height: 400px;"></div>
+				<div class="nivoslider-show-loading-in-mobile d-block d-md-none" style="min-height: 300px;"></div>
+				<span></span>
+			</div>
+
+
+
+
+			<div class="container-the-blue-sky-slider nivoSlider">
+                {# <img class="banner-nivo-slider-mobile-and-web no-lazy" title="#htmlcaption33" src="../media/slidebanner/s/l/1.png" alt="Ohey carparts 01"> #}
+				<img class="banner-nivo-slider-mobile-and-web no-lazy" alt="Ohey carparts 01" title="#htmlcaption31" data-src-mobile="https://blueskytechmage.com/ohey/media/slidebanner/m/o/mobile1_14.jpg" data-src-desktop="https://www.leguidedugamer.fr/wp-content/uploads/2019/04/meilleur-peripherique-gamer.jpg" src="../media/slidebanner/s/l/4.jpg"/>				
+				{# <img class="banner-nivo-slider-mobile-and-web no-lazy" alt="Ohey carparts 01" title="#htmlcaption32" src="../media/slidebanner/s/l/huawei.jpg"/>					 #}
+					</div>
+						{% for pub in pubBack %}
+																					
+									  
+						<div class="container-the-blue-sky-banner-text nivo-html-caption nivo-caption" id="htmlcaption31">
+							<div class="timeline-loading-item" style="-webkit-animation: nivolodinglinetime 40000000ms ease-in-out; -moz-animation: nivolodinglinetime 40000000ms ease-in-out; -ms-animation: nivolodinglinetime 40000000ms ease-in-out; animation: nivolodinglinetime 40000000ms ease-in-out; ">
+							</div>
+							<div class="banner-postion-fixed the-blue-sky-banner-text left_center" >
+							<div class="container"  >
+								<h4 class="animate__animated animate__fadeInUp" style="color:#FFFFFF"> {{  pub.getNomPub()    }}</h4>
+								<h2 class="animate__animated animate__fadeInLeft" style="color:#FFFFFF"> {{  pub.getPromoPub()  }}</h2>
+								<h3 class="animate__animated animate__fadeInRight" style="color:#FFFFFF"> {{  pub.getDescPub()  }}</h3>
+								<p class="animate__animated animate__fadeInDown" style="color:#FFFFFF"> {{  pub.getPrixPub()    }}</p>
+								
+
+								<a href="#" title="Explore Now" class="btn button-style-nivo-slider animate__animated animate__zoomIn" style="color:#222222">Explore Now</a>					
+							</div> 
+						</div >
+						{% endfor %}
+						{# <div class="container-the-blue-sky-banner-text nivo-html-caption nivo-caption" id="htmlcaption32">
+												<div class="timeline-loading-item" style="-webkit-animation: nivolodinglinetime 40000000ms ease-in-out; -moz-animation: nivolodinglinetime 40000000ms ease-in-out; -ms-animation: nivolodinglinetime 40000000ms ease-in-out; animation: nivolodinglinetime 40000000ms ease-in-out; "></div>
+												<div class="banner-postion-fixed the-blue-sky-banner-text left_center">
+							<div class="container" >
+								<h4 class="animate__animated animate__zoomIn" style="color:#ffffff"> {{ pub.nomPub }}  </h4>
+								<h2 class="animate__animated animate__fadeInLeft" style="color:#EC5C0D">{% if  pub.id == 8  %} {% set test = pub.prixPub %} {{  test    }}</h2>
+								{% endif %}
+								<h3 class="animate__animated animate__fadeInRight" style="color:#ffffff">{% if  pub.id == 8  %} {% set test = pub.descPub %} {{  test    }}</h3>
+								{% endif %}
+								<p class="animate__animated animate__fadeInDown" style="color:#ffffff">{% if  pub.id == 8  %} {{  pub.promoPub    }}</p>
+								{% endif %}
+
+								<a href="#" title="Explore Now" class="btn button-style-nivo-slider animate__animated animate__zoomIn" style="color:#222222">Explore Now</a>							</div> 
+						
+						 #}
+						
+						
+						</div>
+					</div>
+
+					</div>
+
+					
+					
+
+				
+																	
+					
+					
+					{# <div class="container-the-blue-sky-banner-text nivo-html-caption nivo-caption" id="htmlcaption33">
+							<div class="timeline-loading-item" style="-webkit-animation: nivolodinglinetime 40000000ms ease-in-out; -moz-animation: nivolodinglinetime 40000000ms ease-in-out; -ms-animation: nivolodinglinetime 40000000ms ease-in-out; animation: nivolodinglinetime 40000000ms ease-in-out; ">
+							</div>
+						<div class="banner-postion-fixed the-blue-sky-banner-text left_center">
+							<div class="container">
+								<p class="animate__animated animate__fadeInDown" style="color:#ffffff"></p>
+								<h2 class="animate__animated animate__fadeInLeft" style="color:#EC5C0D">3 699,000 DT</h2>
+								<h2 class="animate__animated animate__fadeInRight" style="color:#ffffff"> Samsung Galaxy Z Flip 3</h2>
+								<p class="animate__animated animate__fadeInUp" style="color:#ffffff">Exclusive Offer - 10% Off This Week</p>
+								<a href="#" title="Explore Now" class="btn button-style-nivo-slider animate__animated animate__zoomIn" style="color:#222222">Explore Now</a>	
+							</div> 
+						
+						</div>
+					</div> #}
+	</div>
+	</div>
+
+
+
+
+
+	<script>require(['jquery','rokanthemes/nivoSlider'],function($,nivoSlider){'use strict';$(document).ready(function(){$('#rokanthemes-slidebanner-11 .nivoSlider').nivoSlider({effect:'random',slices:15,boxCols:8,boxRows:4,animSpeed:500,pauseTime:40000000,startSlide:1,directionNav:true,controlNav:true,controlNavThumbs:false,pauseOnHover:false,manualAdvance:false,prevText:'Prev',nextText:'Next',randomStart:false,beforeChange:function(){},afterChange:function(){},slideshowEnd:function(){},lastSlide:function(){},afterLoad:function(){$('#rokanthemes-slidebanner-11 .nivoSlider-loading-page-still-unsuc').css("display","none");}});});});</script>
+</div>
+
+
+	 	
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  publicité 2  "CUSTOM WHEELS" -->
+
+
+
+ 
+
+<div class="section full-width ">
+  <div class="container-fluid">
+     <div>
+      <div class="banner section carparts-banertop owl-carousel owl-theme" data-items="3" data-bigdesktop="3" data-smalldesktop="3" data-bigtablet="3" data-tablet="2" data-smalltablet="2" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
+		<div class="col-banner absolute-content-image lazyload-content   left center">
+				<div class="banner-img left center"><img src="../media/slidebanner/s/l/1.png" alt="">
+			</div>
+		  
+			<div class="content">
+			<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;"></h5>
+			<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;"></h4>
+  	 	 <div class=" btn "><a class="size-14" style="color: #ffffff;" href="#"></a>
+         </div>
+        </div>
+
+</div>
+
+<div class="col-banner absolute-content-image lazyload-content   left center">
+<div class="banner-img left center"><img src="" alt="">
+</div>
+<div class="content">
+<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Interior &amp; Accessories</h5>
+<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;">Only Price $99.00</h4>
+<div class=" btn "><a class=" size-14" style="color: #ffffff;" href="#">Shop Now</a></div>
+</div>
+</div>
+<div class="col-banner absolute-content-image lazyload-content   left center">
+<div class="banner-img left center"><img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/bn3_2.jpg" alt=""></div>
+<div class="content">
+<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Brake System</h5>
+<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;">Off 40% Today</h4>
+<div class=" btn "><a class=" size-14" style="color: #ffffff;" href="#">Shop Now</a></div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div><div class="section hot-deal-tab-slider hot-deal-tab-slider-customcss section-product    ">
+			<div class="rokan-title">
+			<div class="supper-deal-title flex-layout center">
+				<h3 class="title-deal module-title"><span>Best Deals  Of The Week!</span></h3>				<div class="right-deal flex-layout center_vertical no-wrap-desktop">
+					<span class="sub-title-deal hidden-xs">End in</span>					<div class="super-deal-countdown" data-date="03/26/2023"></div>
+				</div>
+			</div>
+		</div>
+		<div class="products wrapper grid products-grid">
+		<div class="products list items product-items owl-carousel owl-theme" data-rtl="false" data-items="4" data-bigdesktop="5" data-smalldesktop="4" data-bigtablet="4" data-tablet="3" data-smalltablet="2" data-mobile="2" data-margin="30" data-loop="true" data-center="false" data-mousedrag="true" data-touchdrag="true" data-stagepadding="1" data-nav="true" data-navnext="" data-navprev="" data-rewind="true" data-dots="false" data-autoplay="false" data-speed="500"> 
+		<div class="item-load group-rows-fixed-supper-deal item-row">				<div class="item product product-item">
+					<div class="product-item-info">
+						<div class="product-item-inner">
+							<a href="afe-bladerunner-turbocharger.html" class="product photo product-item-photo" tabindex="-1">
+								<span class="image0 image-switch product-image-container">
+									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/a/f/afe_bladerunner_turbocharger_1_3.jpg" width="550" height="550" alt="AFe – BladeRunner Turbocharger">
+								</span>
+															</a>
+														<div class="product actions product-item-actions">
+								<div data-role="add-to-links" class="actions-secondary">
+																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
+											<span>Wish List</span>
+										</a>
+																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
+										<span>Add to Compare</span>
+									</a>
+								</div>
+								<div class="actions-primary">
+																													<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/91/" method="post">
+											<input type="hidden" name="product" value="91">
+											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkxLw,,">
+											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+												<span>Add to Cart</span>
+											</button>
+										</form>
+																	</div>
+							</div>
+						</div>
+					
+						<div class="product details product-item-details">	
+							<strong class="product name product-item-name">
+								<a class="product-item-link" href="afe-bladerunner-turbocharger.html">
+									AFe – BladeRunner Turbocharger								</a>
+							</strong>	
+							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
+                <div class="rating-summary">
+             <span class="label"><span>Rating:</span></span>
+             <div class="rating-result" title="100%">
+                 <span style="width:100%">
+                 </span>
+             </div>
+         </div>
+                <div class="reviews-actions">
+            <a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
+                <span>Review</span>
+            </a>
+            <a class="action add" href="afe-bladerunner-turbocharger.html#review-form">Add Your Review</a>
+        </div>
+    </div>
+							
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
+    
+
+<span class="price-container price-final_price&#x20;tax&#x20;weee">
+        <span data-price-amount="900" data-price-type="finalPrice" class="price-wrapper "><span class="price">$900.00</span></span>
+        </span>
+
+</div>														<div class="product-sold">
+																<div class="ruler-sold">
+									<div class="ruler-sold-count" style="width: 0.4%;">
+									</div>
+								</div>
+								<div class="count-sold-available">
+									<div class="count-sold">
+										Sold:										<span>
+											1/249										</span>
+									</div>
+									
+								</div>
+															</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>			<div class="item-load group-rows-fixed-supper-deal item-row">				<div class="item product product-item">
+					<div class="product-item-info">
+						<div class="product-item-inner">
+							<a href="anzo-led-headlights-gauge-kit.html" class="product photo product-item-photo" tabindex="-1">
+								<span class="image0 image-switch product-image-container">
+									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/a/n/anzo_led_headlights_gauge_kit_1_1.jpg" width="550" height="550" alt="Anzo – LED Headlights Gauge Kit">
+								</span>
+															</a>
+														<div class="product-label">
+								<span class="onsale">
+									<span class="value">67%</span>
+								</span>
+							</div>
+														<div class="product actions product-item-actions">
+								<div data-role="add-to-links" class="actions-secondary">
+																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":92,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
+											<span>Wish List</span>
+										</a>
+																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"92","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
+										<span>Add to Compare</span>
+									</a>
+								</div>
+								<div class="actions-primary">
+																													<form data-role="tocart-form" data-product-sku="CP03" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/92/" method="post">
+											<input type="hidden" name="product" value="92">
+											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkyLw,,">
+											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+												<span>Add to Cart</span>
+											</button>
+										</form>
+																	</div>
+							</div>
+						</div> 
+					
+						<div class="product details product-item-details">	
+							<strong class="product name product-item-name">
+								<a class="product-item-link" href="anzo-led-headlights-gauge-kit.html">
+									Anzo – LED Headlights Gauge Kit								</a>
+							</strong>	
+							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
+                <div class="rating-summary">
+             <span class="label"><span>Rating:</span></span>
+             <div class="rating-result" title="100%">
+                 <span style="width:100%">
+                 </span>
+             </div>
+         </div>
+                <div class="reviews-actions">
+            <a class="action view" href="anzo-led-headlights-gauge-kit.html#reviews">
+                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
+                <span>Review</span>
+            </a>
+            <a class="action add" href="anzo-led-headlights-gauge-kit.html#review-form">Add Your Review</a>
+        </div>
+    </div>
+							
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="92" data-price-box="product-id-92">
+    <span class="special-price">
+        
+
+<span class="price-container price-final_price&#x20;tax&#x20;weee">
+            <span class="price-label">Special Price</span>
+        <span data-price-amount="100" data-price-type="finalPrice" class="price-wrapper "><span class="price">$100.00</span></span>
+        </span>
+    </span>
+    <span class="old-price">
+        
+
+<span class="price-container price-final_price&#x20;tax&#x20;weee">
+            <span class="price-label">Regular Price</span>
+        <span data-price-amount="300" data-price-type="oldPrice" class="price-wrapper "><span class="price">$300.00</span></span>
+        </span>
+    </span>
+
+</div>														<div class="product-sold">
+																<div class="ruler-sold">
+									<div class="ruler-sold-count" style="width: 0.16666666666667%;">
+									</div>
+								</div>
+								<div class="count-sold-available">
+									<div class="count-sold">
+										Sold:										<span>
+											1/599										</span>
+									</div>
+									
+								</div>
+															</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>			<div class="item-load group-rows-fixed-supper-deal item-row">				<div class="item product product-item">
+					<div class="product-item-info">
+						<div class="product-item-inner">
+							<a href="bosal-catalytic-converter-gauge-kit.html" class="product photo product-item-photo" tabindex="-1">
+								<span class="image0 image-switch product-image-container">
+									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/b/o/bosal_catalytic_converter_gauge_kit_1_1.jpg" width="550" height="550" alt="Bosal – Catalytic Converter Gauge Kit">
+								</span>
+															</a>
+														<div class="product actions product-item-actions">
+								<div data-role="add-to-links" class="actions-secondary">
+																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":93,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
+											<span>Wish List</span>
+										</a>
+																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"93","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
+										<span>Add to Compare</span>
+									</a>
+								</div>
+								<div class="actions-primary">
+																													<form data-role="tocart-form" data-product-sku="CP04" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/93/" method="post">
+											<input type="hidden" name="product" value="93">
+											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkzLw,,">
+											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+												<span>Add to Cart</span>
+											</button>
+										</form>
+																	</div>
+							</div>
+						</div>
+					
+						<div class="product details product-item-details">	
+							<strong class="product name product-item-name">
+								<a class="product-item-link" href="bosal-catalytic-converter-gauge-kit.html">
+									Bosal – Catalytic Converter Gauge Kit								</a>
+							</strong>	
+							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
+                <div class="rating-summary">
+             <span class="label"><span>Rating:</span></span>
+             <div class="rating-result" title="100%">
+                 <span style="width:100%">
+                 </span>
+             </div>
+         </div>
+                <div class="reviews-actions">
+            <a class="action view" href="bosal-catalytic-converter-gauge-kit.html#reviews">
+                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
+                <span>Review</span>
+            </a>
+            <a class="action add" href="bosal-catalytic-converter-gauge-kit.html#review-form">Add Your Review</a>
+        </div>
+    </div>
+							
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="93" data-price-box="product-id-93">
+    
+
+<span class="price-container price-final_price&#x20;tax&#x20;weee">
+        <span data-price-amount="300" data-price-type="finalPrice" class="price-wrapper "><span class="price">$300.00</span></span>
+        </span>
+
+</div>														<div class="product-sold">
+																<div class="ruler-sold">
+									<div class="ruler-sold-count" style="width: 0.16666666666667%;">
+									</div>
+								</div>
+								<div class="count-sold-available">
+									<div class="count-sold">
+										Sold:										<span>
+											1/599										</span>
+									</div>
+									
+								</div>
+															</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>			<div class="item-load group-rows-fixed-supper-deal item-row">				<div class="item product product-item">
+					<div class="product-item-info">
+						<div class="product-item-inner">
+							<a href="braum-elite-x-sport-seats.html" class="product photo product-item-photo" tabindex="-1">
+								<span class="image0 image-switch product-image-container">
+									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/b/r/braum_elite-x_sport_seats_gauge_kit_1_1.jpg" width="550" height="550" alt="Braum – Elite-X Sport Seats ">
+								</span>
+															</a>
+														<div class="product-label">
+								<span class="onsale">
+									<span class="value">56%</span>
+								</span>
+							</div>
+														<div class="product actions product-item-actions">
+								<div data-role="add-to-links" class="actions-secondary">
+																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":94,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
+											<span>Wish List</span>
+										</a>
+																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"94","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
+										<span>Add to Compare</span>
+									</a>
+								</div>
+								<div class="actions-primary">
+																													<form data-role="tocart-form" data-product-sku="CP05" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/94/" method="post">
+											<input type="hidden" name="product" value="94">
+											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0Lzk0Lw,,">
+											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+												<span>Add to Cart</span>
+											</button>
+										</form>
+																	</div>
+							</div>
+						</div>
+					
+						<div class="product details product-item-details">	
+							<strong class="product name product-item-name">
+								<a class="product-item-link" href="braum-elite-x-sport-seats.html">
+									Braum – Elite-X Sport Seats 								</a>
+							</strong>	
+							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
+                <div class="rating-summary">
+             <span class="label"><span>Rating:</span></span>
+             <div class="rating-result" title="100%">
+                 <span style="width:100%">
+                 </span>
+             </div>
+         </div>
+                <div class="reviews-actions">
+            <a class="action view" href="braum-elite-x-sport-seats.html#reviews">
+                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
+                <span>Review</span>
+            </a>
+            <a class="action add" href="braum-elite-x-sport-seats.html#review-form">Add Your Review</a>
+        </div>
+    </div>
+							
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="94" data-price-box="product-id-94">
+    <span class="special-price">
+        
+
+<span class="price-container price-final_price&#x20;tax&#x20;weee">
+            <span class="price-label">Special Price</span>
+        <span data-price-amount="200" data-price-type="finalPrice" class="price-wrapper "><span class="price">$200.00</span></span>
+        </span>
+    </span>
+    <span class="old-price">
+        
+
+<span class="price-container price-final_price&#x20;tax&#x20;weee">
+            <span class="price-label">Regular Price</span>
+        <span data-price-amount="450" data-price-type="oldPrice" class="price-wrapper "><span class="price">$450.00</span></span>
+        </span>
+    </span>
+
+</div>														<div class="product-sold">
+																<div class="ruler-sold">
+									<div class="ruler-sold-count" style="width: 0.16666666666667%;">
+									</div>
+								</div>
+								<div class="count-sold-available">
+									<div class="count-sold">
+										Sold:										<span>
+											1/599										</span>
+									</div>
+									
+								</div>
+															</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>								</div>
+			</div>
+</div>
+<script>require(["jquery",'mage/mage','rokanthemes/timecircles',"rokanthemes/owl"],function($){'use strict';$(document).ready(function(){if($('.super-deal-countdown').length>0){$(".super-deal-countdown").TimeCircles({fg_width:0.01,bg_width:1.2,text_size:0.07,circle_bg_color:"#ffffff",time:{Days:{show:true,text:"D",color:"#f9bc02"},Hours:{show:true,text:"H",color:"#f9bc02"},Minutes:{show:true,text:"M",color:"#f9bc02"},Seconds:{show:true,text:"S",color:"#f9bc02"}}});}});});</script>
+</div>
+<div><div class="banner section banner-middle owl-carousel owl-theme" data-items="2" data-bigdesktop="2" data-smalldesktop="2" data-bigtablet="2" data-tablet="2" data-smalltablet="1" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
+<div class="col-banner absolute-content-image lazyload-content left center">
+<div class="banner-img left center"><img src="../media/slidebanner/s/l/electromenager.jpg" alt=""></div>
+<div class="content">
+<h5 class="size-14" style="color: #fdb819; text-transform: uppercase; font-weight: bold;">Buy From Us &amp; Get Your</h5>
+<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Headlights</h4>
+<h2 class="size-46" style="color: #ffffff; font-weight: bold;">Up To <span style="color: #fdb819;">-70%</span></h2>
+<div class=" btn "><a href="#">Shop Now</a></div>
+</div>
+</div>
+<div class="col-banner absolute-content-image lazyload-content left center">
+<div class="banner-img left center"><img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/banner2.2.jpg" alt=""></div>
+<div class="content">
+<h5 class="size-14" style="color: #fdb819; text-transform: uppercase; font-weight: bold;">save on this week</h5>
+<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Wheels &amp; Tires</h4>
+<h2 class="size-46" style="color: #ffffff; font-weight: bold;">Save<span style="color: #fdb819;"> $69.00</span></h2>
+<div class=" btn "><a href="#">Shop Now</a></div>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}
