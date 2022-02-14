@@ -223,7 +223,11 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="../assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium">Shawn L.</span>
+                                    <span>
+                                       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                           {{ app.user.username }}
+                                        {% endif %}  
+                                        </span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -262,6 +266,14 @@
                                     <i data-feather="home"></i>
                                     <span data-key="t-dashboard">Dashboard</span>
                                 </a>
+                            </li>
+                            
+                              <li>
+                                <a href="{{ path('liste_utilisateurs')}}" class="has-arrow">
+                                    <i data-feather="users"></i>
+                                    <span data-key="t-authentication">Users</span>
+                                </a>
+                               
                             </li>
 
                             <li>
@@ -306,7 +318,7 @@
 
                              
 
-                             
+
 
                              
 
@@ -522,18 +534,7 @@
 
         <script src="../assets/js/app.js"></script>
 
-        <!-- JAVASCRIPT -->
-<script src="../assets/libs/jquery/jquery.min.js"></script>
-
-<script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<script src="../assets/libs/metismenu/metisMenu.min.js"></script>
-
-<script src="../assets/libs/simplebar/simplebar.min.js"></script>
-
-<script src="../assets/libs/node-waves/waves.min.js"></script>
-
-<script src="../assets/libs/feather-icons/feather.min.js"></script>
+  
 
         <!-- pace js -->
 <script src="../assets/libs/pace-js/pace.min.js"></script>
