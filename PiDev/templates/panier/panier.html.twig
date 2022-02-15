@@ -502,8 +502,16 @@
         }
     </script>
 </div>
-{% set len = panier | length %}
-{% if len != 0%}
+
+{% set panierExiste = false %}
+{% set userId = user.getId() %}
+{% for Panier in panier %}
+    {% if Panier.getUserPanier().getId() == userId%}
+        {% set panierExiste = true %}
+    {%endif%}
+{% endfor%}
+
+{% if panierExiste == true%}
 
 <script type="text/x-magento-init">
     {
@@ -614,6 +622,8 @@
 </ul>
 </div>
 
+
+
 <form action="https://blueskytechmage.com/ohey/en11/checkout/cart/updatePost/" method="post" id="form-validate" data-mage-init='{"Magento_Checkout/js/action/update-shopping-cart":
               {"validationURL" : "https://blueskytechmage.com/ohey/en11/checkout/cart/updateItemQty/",
               "updateCartActionContainer": "#update_cart_action_container"}
@@ -627,6 +637,7 @@
                         <!-- ============================================================== -->
 
 
+        
                                                     <table id="shopping-cart-table" class="cart items data table" data-mage-init='{"shoppingCart":{"emptyCartButton": ".action.clear",
                "                                            updateCartActionContainer": "#update_cart_action_container"}}'>
                                                         <thead>
@@ -638,7 +649,12 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                        {% set panierId = "" %}
+                                                        {% for Panier in panier %}
+                                                            {% if Panier.getUserPanier().getId() == userId%}
                                                             {% for produit in produits%}
+                                                                {% if Panier.getProduitPanier().getId() == produit.getId()%}
+                                                                {% set panierId = "#{Panier.getId()},#{panierId}" %}
                                                                 <tr>
                                                                     <td data-th="Item" class="col item">
                                                                             <a href="http://127.0.0.1:8000/product_show/{{produit.id}}" title="{{produit.nom_prod}}" tabindex="-1" class="product-item-photo">
@@ -655,8 +671,8 @@
                                                                             </div>
                                                                     </td>
                                                                     <th class="col price" scope="col">${{produit.prix_prod}}</th>
-                                                                    <th class="col qty" scope="col">1</th>
-                                                                    <th class="col subtotal" scope="col">${{produit.prix_prod}}</th>
+                                                                    <th class="col qty" scope="col">{{Panier.quantite}}</th>
+                                                                    <th class="col subtotal" scope="col">${{produit.prix_prod * Panier.quantite}}</th>
                                                                 </tr>
 
 
@@ -681,32 +697,40 @@
                                                                 </td>
                                                             </tr>
 
-                                                            {% endfor%}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        {% endif %}
+
+                                                    {%endfor%}
 
                                                             
                                                         </tbody>
                                                     </table>
+        
                 <!-- ============================================================== -->
                 <!-- Fin table cart -->
                 <!-- ============================================================== -->
 
 
                     </div>
-
-
                     <div class="cart main actions">
-                                    <a class="action continue" href="https://blueskytechmage.com/ohey/en11/" title="Continue&#x20;Shopping">
-                                <span>Continue Shopping</span>
-                            </a>
-                                <button type="button" name="update_cart_action" data-cart-empty="" value="empty_cart" title="Clear&#x20;Shopping&#x20;Cart" class="action clear" id="empty_cart_button">
-                            <span>Clear Shopping Cart</span>
-                        </button>
+                        <a class="action continue" href="/" title="Continue&#x20;Shopping">
+                            <span>Continue Shopping</span>
+                        </a>
+                        <a href="clearCart/{{panierId}}">
+                            <button type="button" name="update_cart_action" data-cart-empty="" value="empty_cart" title="Clear&#x20;Shopping&#x20;Cart" class="action clear" id="empty_cart_button">
+                                <span>Clear Shopping Cart</span>
+                            </button>
+                        </a>
                         <button type="submit" name="update_cart_action" data-cart-item-update="" value="update_qty" title="Update&#x20;Shopping&#x20;Cart" class="action update">
                             <span>Update Shopping Cart</span>
                         </button>
                         <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
                     </div>
-                </form>
+
+
+
+</form>
                 <div id="gift-options-cart" data-bind="scope:'giftOptionsCart'">
                     <!-- ko template: getTemplate() --><!-- /ko -->
                     <script type="text/x-magento-init">
@@ -722,10 +746,12 @@
                 </div></div>
 
     {% else%}
-        <div class="cart-empty">
-            <p>You have no items in your shopping cart.</p>
-            <p>Click <a href="/">here</a> to continue shopping.    </p>
-        </div>
+        {% if panierExiste == false%}
+            <div class="cart-empty">
+                <p>You have no items in your shopping cart.</p>
+                <p>Click <a href="/">here</a> to continue shopping.    </p>
+            </div>
+        {% endif%}
     {% endif%}
 
 </main>

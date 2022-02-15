@@ -44,7 +44,7 @@ class Produit
     /**
      * @return Collection|Panier[]
     */
-    public function getPanier(): Collection
+    public function getPanier()
     {
         return $this->panier;
     }

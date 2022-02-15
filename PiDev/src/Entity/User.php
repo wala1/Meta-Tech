@@ -37,7 +37,7 @@ class User implements UserInterface
     /**
      * @return Collection|Panier[]
      */
-    public function getPanier(): Collection
+    public function getPanier()
     {
         return $this->panier;
     }

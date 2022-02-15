@@ -9,12 +9,17 @@ use App\Entity\Produit ;
 use App\Form\PanierProdFormType ;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use App\Repository\ProduitRepository ;
 use App\Entity\Panier; 
+use App\Entity\User;
+use App\Controller\EntityManager;
+use App\Repository\PanierRepository;
 
 class PanierController extends AbstractController
 {
 
+    /************************* Front  *******************/
     /**
      * @Route("/panier", name="panier")
      */
@@ -29,13 +34,46 @@ class PanierController extends AbstractController
      * @Route("/afficherPanier", name="afficherPanier");
      */
     public function afficherPanier(){
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         return $this->render("panier/panier.html.twig", [
             "produits" => $produits,
             "panier" => $panier,
+            'user' => $user,
         ]);
     }
+
+    
+    /**
+     * @Route("/clearCart/{id}", name="clearCart");
+     */
+    public function clearCart($id , ProduitRepository $repository): Response{
+        $tab= [];
+        $i = 0;
+        $ch="";
+        for($j=0; $j<strlen($id); $j=$j+1){
+            $ch = substr($id, $j, strpos($id,","));
+            $tab[$i] = $ch;
+            $j=$j+strlen($ch);
+            $i=$i+1;
+        }
+        for( $i=0; $i<count($tab); $i=$i+1){
+            $panier = $this->getDoctrine()->getRepository(Panier::class)->find($tab[$i]);
+            $em = $this->getDoctrine()->getManager() ; 
+            $em->remove($panier) ; 
+            $em->flush() ; 
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        return $this->render("panier/panier.html.twig", [
+            "panier"=> array(),
+            "user"=> $user,
+
+        ]);
+    }
+
+    /******************* Back ******************/
 
     /**
      * @Route("/showPanierAdmin", name="showPanierAdmin");
