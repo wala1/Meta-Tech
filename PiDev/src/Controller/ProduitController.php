@@ -57,9 +57,9 @@ class ProduitController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findById($id) ; 
 
-        $avis = $this->getDoctrine()->getRepository(Avis::class) ; 
+        /*$avis = $this->getDoctrine()->getRepository(Avis::class) ; 
         $avis = $avis->findByidProd($id) ;
-
+        */
                   
         return $this->render('produit/product.html.twig', [
             'produits' => $produits,
