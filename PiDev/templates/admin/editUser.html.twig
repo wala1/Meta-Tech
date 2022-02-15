@@ -601,7 +601,7 @@
                 </div>
                 <!-- End Page-content -->
 
-{{ form_start(userForm) }}
+{{ form_start(userForm,{'attr':{'novalidate':'novalidate'}}) }}
 {{ form_row(userForm.username,{ 'attr': {'placeholder': "Nom ..."  }}) }}
 {{ form_row(userForm.email,{ 'attr': {'placeholder': " email  "  }}) }}
 {{ form_end(userForm) }}

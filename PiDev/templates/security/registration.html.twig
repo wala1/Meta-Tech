@@ -1,6 +1,10 @@
 
 
 {% extends 'base.html.twig' %}
+{% block title %}   
+           <title> Create your account! </title>
+           {% endblock %}
+
 
 {% block body %}
 
@@ -110,8 +114,10 @@
 
     <!--  'attr':{'novalidate':'novalidate'}-->
     
-        
+    
+     
         <legend class="legend"><span>Sign-in Information</span></legend><br>
+      
         
         {{form_start(form,{'attr':{'novalidate':'novalidate'}} )}}
         <div>
@@ -139,4 +145,4 @@
 
  
 
-{% endblock %}
+{% endblock body %}

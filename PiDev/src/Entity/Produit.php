@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -32,9 +34,22 @@ class Produit
     public $desc_prod;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="produits")
-     */
-    public $panier_prod;
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="produit_panier")
+    */
+    private $panier;
+
+    public function __construct()
+    {
+        $this->panier = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Panier[]
+    */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
@@ -77,6 +92,13 @@ class Produit
      */
     public $sousCategProd;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idProd")
+     */
+    private $avis;
+
+     
+
      
 
      
@@ -108,30 +130,6 @@ class Produit
     public function setDescProd(string $desc_prod): self
     {
         $this->desc_prod = $desc_prod;
-
-        return $this;
-    }
-
-    public function getCategorieProd(): ?Categorie
-    {
-        return $this->categorie_prod;
-    }
-
-    public function setCategorieProd(?Categorie $categorie_prod): self
-    {
-        $this->categorie_prod = $categorie_prod;
-
-        return $this;
-    }
-
-    public function getPanierProd(): ?Panier
-    {
-        return $this->panier_prod;
-    }
-
-    public function setPanierProd(?Panier $panier_prod): self
-    {
-        $this->panier_prod = $panier_prod;
 
         return $this;
     }
@@ -204,6 +202,36 @@ class Produit
     public function setSousCategProd(?SousCategorie $sousCategProd): self
     {
         $this->sousCategProd = $sousCategProd;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setIdProd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getIdProd() === $this) {
+                $avi->setIdProd(null);
+            }
+        }
 
         return $this;
     }

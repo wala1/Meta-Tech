@@ -18,6 +18,11 @@ class PanierProdFormType extends AbstractType
                 'class'=>'form-control'
             ]
         ])
+        ->add('quantite', TextType::class,[
+            'attr' => [
+                'class'=>'form-control'
+            ]
+        ])
         ->add('promo_prod', TextType::class,[
             'attr' => [
                 'class'=>'form-control'

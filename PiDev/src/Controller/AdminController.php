@@ -15,15 +15,15 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 class AdminController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function index(): Response
-    {
+     /**
+      * @Route("/admin", name="admin")
+  */
+     public function index(): Response
+     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+             'controller_name' => 'AdminController',
         ]);
-    }
+     }
 
       /**
      * @Route("utilisateurs", name="liste_utilisateurs")
@@ -45,11 +45,17 @@ class AdminController extends AbstractController
          $user = new User();
          $form =$this->createForm(AddUserType::class,$user);  
                      $form->handleRequest($request);
+                     $form->add('Add', SubmitType::class,[
+                        'attr' => [
+                            'class'=>'btn btn-success waves-effect waves-light'
+                        ]
+                    ]) ;
                      if($form->isSubmitted() && $form->isValid())
 
                      {
                         $hash=$encoder->encodePassword($user,$user->getPassword());
                         $user->setPassword($hash);
+                        $user->setRoles(["ROLE_ADMIN"]);
                          $manager->persist($user);
                          $manager->flush();
                          return $this->redirectToRoute('liste_utilisateurs');
@@ -60,6 +66,28 @@ class AdminController extends AbstractController
             'userAddForm' => $form->createView()
         ]);
          
+    }
+   /**
+     * @Route("/editUser/{id}", name="edit_user")
+     */
+    public function update(Request $request,$id )
+    {
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id) ; 
+        $form = $this->createForm(editUserType::class,$user) ; 
+      
+        $form->handleRequest($request) ;
+         
+        if ($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager() ; 
+            $em->persist($user);
+            $em->flush() ; 
+            return $this->redirectToRoute('liste_utilisateurs') ; 
+
+        } 
+
+        return $this->render("admin/modifyUser.html.twig", [
+            'editUserForm' => $form->createView()
+        ]) ;
     }
       /**
      * @Route("/utilisateurs/delete/{id}", name="delete_user")
@@ -72,29 +100,4 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('liste_utilisateurs');
        }
 
-
-       /**
-     
-     * @Route("editUser/{id}", name="edit_user" )
-     */
-
-    public function edit(Request $request,User $user,EntityManagerInterface $manager)
-    {
-        $form =$this->createForm(EditUserType::class,$user);  
-                     $form->handleRequest($request);
-        
-        if($form->isSubmitted() && $form->isValid())
-
-        {
-            $manager->persist($user);
-            $manager->flush();
-            $this->addFlash('message','Utilisateur modifié avec succès');
-            return $this->redirectToRoute('liste_utilisateurs');
-
-        }
-
-      return $this->render('admin/editUser.html.twig',[
-       'userForm' => $form->createView()
-]);
     }
-}
