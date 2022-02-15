@@ -19,28 +19,37 @@ class Panier
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="categorie_prod")
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="panier")
      */
-    private $produits;
+    private $produit_panier;
 
-    public function __construct()
+     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="panier")
+     */
+    protected $user_panier;
+
+    public function getProduitPanier(): ?Produit
     {
-        $this->produits = new ArrayCollection();
+        return $this->produit_panier;
     }
 
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getProduits()
+    public function setProduitPanier(?Produit $produit_panier): self
     {
-        return $this->produits;
+        $this->produit_panier = $produit_panier;
+        return $this;
     }
 
-    /**
-     * @ORM\OneToOne(targetEntity="User", inversedBy="panier")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
+    public function getUserPanier(): ?User
+    {
+        return $this->user_panier;
+    }
+
+    public function setUserPanier(?User $user_panier): self
+    {
+        $this->user_panier = $user_panier;
+
+        return $this;
+    }
 
     /*
     * Set panier_id
@@ -67,6 +76,11 @@ class Panier
      */
     private $prix_totale;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
     /****les getters et setters****/
 
     public function getId(): ?int
@@ -85,4 +99,17 @@ class Panier
 
         return $this;
     }
+    
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
 }
