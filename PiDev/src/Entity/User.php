@@ -89,10 +89,10 @@ class User implements UserInterface
      */
     private $avis;
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->avis = new ArrayCollection();
-    }
+    }*/
 
     public function getId(): ?int
     {

@@ -97,10 +97,7 @@ class Produit
      */
     private $avis;
 
-    public function __construct()
-    {
-        $this->avis = new ArrayCollection();
-    }
+     
 
      
 
