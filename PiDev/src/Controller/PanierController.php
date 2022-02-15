@@ -9,7 +9,8 @@ use App\Entity\Produit ;
 use App\Form\PanierProdFormType ;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
-use App\Repository\ProduitRepository ; 
+use App\Repository\ProduitRepository ;
+use App\Entity\Panier; 
 
 class PanierController extends AbstractController
 {
@@ -29,8 +30,10 @@ class PanierController extends AbstractController
      */
     public function afficherPanier(){
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
+        $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
         return $this->render("panier/panier.html.twig", [
-            "produits" => $produits
+            "produits" => $produits,
+            "panier" => $panier,
         ]);
     }
 
