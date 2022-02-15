@@ -33,7 +33,9 @@ class PubBack
      */
     private $prixPub;
 
-
+   /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $promoPub;
 
   
