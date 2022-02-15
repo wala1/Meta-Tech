@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Avis ; 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit ; 
 use App\Form\ProduitFormType ;
+use App\Form\AvisFormType ;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
 use App\Repository\ProduitRepository ; 
+use App\Repository\AvisRepository ; 
 
 class ProduitController extends AbstractController
 {
@@ -35,6 +38,8 @@ class ProduitController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findAll() ; 
 
+         
+
         return $this->render('admin/gestionProd.html.twig', [
             'produits' => $produits,
             'table' => 'produits'
@@ -47,13 +52,18 @@ class ProduitController extends AbstractController
     /**
      * @Route("/product_show/{id}", name="product_show")
      */
-    public function productShow($id): Response
+    public function productShow($id, Avis $avis=null): Response
     {
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findById($id) ; 
 
+        /*$avis = $this->getDoctrine()->getRepository(Avis::class) ; 
+        $avis = $avis->findByidProd($id) ;
+        */
+                  
         return $this->render('produit/product.html.twig', [
             'produits' => $produits,
+            'avis' => $avis 
         ]);
     }
 

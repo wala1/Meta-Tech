@@ -241,6 +241,10 @@
 <div class="block review-add">
     <div class="block-title"><strong>Write Your Own Review</strong></div>
 <div class="block-content">
+
+
+
+
 <form action="https://blueskytechmage.com/ohey/en11/review/product/post/id/92/" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
     <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>        <fieldset class="fieldset review-fieldset" data-hasrequired="&#x2A;&#x20;Required&#x20;Fields">
         <legend class="legend review-legend"><span>You&#039;re reviewing:</span><strong>{{ produit.nomProd }}</strong></legend><br/>
@@ -250,7 +254,7 @@
             <div class="control">
                 <div class="nested" id="product-review-table">
                                             <div class="field choice review-field-rating">
-                            <label class="label" id="Price_rating_label"><span>Price</span></label>
+                            <label class="label" id="Price_rating_label" style="font-size : 20px ; color : black ; "><span>Rating</span></label>
                             <div class="control review-control-vote">
                                                                                         <input type="radio" name="ratings[3]" id="Price_1" value="11" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_1_label"/>
                                 <label class="rating-1" for="Price_1" title="1&#x20;star" id="Price_1_label">
@@ -274,74 +278,21 @@
                                 </label>
                                                                                         </div>
                         </div>
-                                            <div class="field choice review-field-rating">
-                            <label class="label" id="Value_rating_label"><span>Value</span></label>
-                            <div class="control review-control-vote">
-                                                                                        <input type="radio" name="ratings[2]" id="Value_1" value="6" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_1_label"/>
-                                <label class="rating-1" for="Value_1" title="1&#x20;star" id="Value_1_label">
-                                    <span>1 star</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[2]" id="Value_2" value="7" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_2_label"/>
-                                <label class="rating-2" for="Value_2" title="2&#x20;stars" id="Value_2_label">
-                                    <span>2 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[2]" id="Value_3" value="8" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_3_label"/>
-                                <label class="rating-3" for="Value_3" title="3&#x20;stars" id="Value_3_label">
-                                    <span>3 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[2]" id="Value_4" value="9" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_4_label"/>
-                                <label class="rating-4" for="Value_4" title="4&#x20;stars" id="Value_4_label">
-                                    <span>4 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[2]" id="Value_5" value="10" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Value_rating_label Value_5_label"/>
-                                <label class="rating-5" for="Value_5" title="5&#x20;stars" id="Value_5_label">
-                                    <span>5 stars</span>
-                                </label>
-                                                                                        </div>
-                        </div>
-                                            <div class="field choice review-field-rating">
-                            <label class="label" id="Quality_rating_label"><span>Quality</span></label>
-                            <div class="control review-control-vote">
-                                                                                        <input type="radio" name="ratings[1]" id="Quality_1" value="1" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_1_label"/>
-                                <label class="rating-1" for="Quality_1" title="1&#x20;star" id="Quality_1_label">
-                                    <span>1 star</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[1]" id="Quality_2" value="2" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_2_label"/>
-                                <label class="rating-2" for="Quality_2" title="2&#x20;stars" id="Quality_2_label">
-                                    <span>2 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[1]" id="Quality_3" value="3" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_3_label"/>
-                                <label class="rating-3" for="Quality_3" title="3&#x20;stars" id="Quality_3_label">
-                                    <span>3 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[1]" id="Quality_4" value="4" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_4_label"/>
-                                <label class="rating-4" for="Quality_4" title="4&#x20;stars" id="Quality_4_label">
-                                    <span>4 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[1]" id="Quality_5" value="5" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Quality_rating_label Quality_5_label"/>
-                                <label class="rating-5" for="Quality_5" title="5&#x20;stars" id="Quality_5_label">
-                                    <span>5 stars</span>
-                                </label>
-                                                                                        </div>
+                                          
+
+
+
+
+                                           
                         </div>
                                     </div>
                 <input type="hidden" name="validate_rating" class="validate-rating" value=""/>
             </div>
         </fieldset>
-            <div class="field review-field-nickname required">
-            <label for="nickname_field" class="label"><span>Nickname</span></label>
-            <div class="control">
-                <input type="text" name="nickname" id="nickname_field" class="input-text" data-validate="{required:true}" data-bind="value: nickname()"/>
-            </div>
-        </div>
-        <div class="field review-field-summary required">
-            <label for="summary_field" class="label"><span>Summary</span></label>
-            <div class="control">
-                <input type="text" name="title" id="summary_field" class="input-text" data-validate="{required:true}" data-bind="value: review().title"/>
-            </div>
-        </div>
+             
+         
         <div class="field review-field-text required">
-            <label for="review_field" class="label"><span>Review</span></label>
+            <label for="review_field" class="label" style="font-size : 20px ; color : black ; "><span>Review</span></label>
             <div class="control">
                 <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
             </div>
@@ -353,6 +304,39 @@
         </div>
     </div>
 </form>
+
+
+<center>
+
+
+
+
+
+{% for avi in avis %}
+	<div class="item">
+		<div class="img-box"><img src="/examples/images/clients/1.jpg" alt=""></div>
+		<p class="testimonial">{{ avi.descAvis  }}</p>
+		<p class="overview">
+			<b>{{ avi.idUser.username }}</b>
+			{{ avi.timeAvis | date("m/d/Y")}}</p>
+	</div>
+{% endfor %}
+
+        
+             
+        
+
+    
+    
+
+
+
+
+
+
+
+</center>
+
 
 {% endfor %}
 <!--========================= END PRODUIT ========================================== -->
@@ -465,8 +449,7 @@
 
 </body>
 
-
-</body>
+ 
 
   
 {% endblock %}

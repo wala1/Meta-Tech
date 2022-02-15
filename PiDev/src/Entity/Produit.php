@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -90,7 +92,20 @@ class Produit
      */
     public $sousCategProd;
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idProd")
+     */
+    private $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
+
+     
+
+     
+
     
 
     public function getId(): ?int
@@ -190,6 +205,36 @@ class Produit
     public function setSousCategProd(?SousCategorie $sousCategProd): self
     {
         $this->sousCategProd = $sousCategProd;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Avis[]
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis[] = $avi;
+            $avi->setIdProd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getIdProd() === $this) {
+                $avi->setIdProd(null);
+            }
+        }
 
         return $this;
     }
