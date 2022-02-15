@@ -32,9 +32,22 @@ class Produit
     public $desc_prod;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="produits")
-     */
-    public $panier_prod;
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="produit_panier")
+    */
+    private $panier;
+
+    public function __construct()
+    {
+        $this->panier = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Panier[]
+    */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
@@ -77,10 +90,7 @@ class Produit
      */
     public $sousCategProd;
 
-     
-
-     
-
+    
     
 
     public function getId(): ?int
@@ -108,30 +118,6 @@ class Produit
     public function setDescProd(string $desc_prod): self
     {
         $this->desc_prod = $desc_prod;
-
-        return $this;
-    }
-
-    public function getCategorieProd(): ?Categorie
-    {
-        return $this->categorie_prod;
-    }
-
-    public function setCategorieProd(?Categorie $categorie_prod): self
-    {
-        $this->categorie_prod = $categorie_prod;
-
-        return $this;
-    }
-
-    public function getPanierProd(): ?Panier
-    {
-        return $this->panier_prod;
-    }
-
-    public function setPanierProd(?Panier $panier_prod): self
-    {
-        $this->panier_prod = $panier_prod;
 
         return $this;
     }

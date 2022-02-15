@@ -443,15 +443,31 @@ $('#search-input-autocomplate').focus();
 									</div>
 									<div class="col-action col-right">
 										<ul class="flex-layout action-header center_vertical">
+										
 											<li>
 												<ul class="header links">
+												 {% if not app.user %}
 													<li class="link authorization-link" data-label="or">
-														<a href="/connexion">Sign In</a>
+												
+														<a href="{{ path('security_login') }}">Sign In</a>
+													  
+
 													</li>
-													<li>
-														<a href="/inscription" id="idOeeZISUP">Create an Account</a>
-													</li>
+													    {% else %}
+													
+														<li class="link authorization-link" data-label="or">
+														<a href="{{ path('security_logout') }}">Sign Out</a>
+															</li>
+												
+														  {% endif %}
+
 												</ul>
+											</li>
+											<li class="link authorization-link">
+											
+											{% if is_granted('ROLE_ADMIN') %}
+													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+											{% endif %}
 											</li>
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
 												<a href="wishlist/index.html"></a>
@@ -705,13 +721,28 @@ return false;
 										<ul class="flex-layout action-header center_vertical ">
 											<li>
 												<ul class="header links">
+												 {% if not app.user %}
 													<li class="link authorization-link" data-label="or">
-														<a href="{{path('security_login')}}">Sign In</a>
+												
+														<a href="{{ path('security_login') }}">Sign In</a>
+													  
+
 													</li>
-													<li>
-														<a href="{{path('security_login')}}" id="idOeeZISUP">Create an Account</a>
-													</li>
+													    {% else %}
+													
+														<li class="link authorization-link" data-label="or">
+														<a href="{{ path('security_logout') }}">Sign Out</a>
+															</li>
+												
+														  {% endif %}
+
 												</ul>
+											</li>
+											<li class="link authorization-link">
+											
+											{% if is_granted('ROLE_ADMIN') %}
+													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+											{% endif %}
 											</li>
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
 												<a href="wishlist/index.html"></a>

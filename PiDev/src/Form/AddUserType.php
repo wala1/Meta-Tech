@@ -7,9 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType ;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 
 class AddUserType extends AbstractType
@@ -18,21 +21,15 @@ class AddUserType extends AbstractType
     {
         $builder
             ->add('email',EmailType::class)
-            ->add('username')
+            ->add('username',TextType::class,[
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
             ->add('password',PasswordType::class)
             ->add('confirm_password', PasswordType::class)
-            ->add('roles',ChoiceType::class, [
-                'choices' => [
-                'User' => 'ROLE_USER',
-                'Client' => 'ROLE_CLIENT',
-                'Administrator' => 'ROLE_ADMIN'
-                ],
-                'expanded' => true,
-                'multiple' => true,
-                'label' => 'Roles'
-
-            ])
-            ->add('valider', SubmitType::class)
+         
+          
         ;
     }
 

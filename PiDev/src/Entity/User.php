@@ -23,11 +23,24 @@ class User implements UserInterface
      */
     private $id;
 
-     /**
-     * @ORM\OneToOne(targetEntity="Panier")
+    /**
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="user_panier")
      */
-    protected $panier;
+    private $panier;
 
+    public function __construct()
+    {
+        $this->panier = new ArrayCollection();
+        
+    }
+
+    /**
+     * @return Collection|Panier[]
+     */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)

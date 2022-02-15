@@ -23,7 +23,7 @@ security:
                  check_path: security_login
             logout:
                  path: security_logout
-                 target: produit
+                 target: pubFront
             #provider: users_in_memory
 
             # activate different ways to authenticate
