@@ -45,11 +45,17 @@ class AdminController extends AbstractController
          $user = new User();
          $form =$this->createForm(AddUserType::class,$user);  
                      $form->handleRequest($request);
+                     $form->add('Add', SubmitType::class,[
+                        'attr' => [
+                            'class'=>'btn btn-success waves-effect waves-light'
+                        ]
+                    ]) ;
                      if($form->isSubmitted() && $form->isValid())
 
                      {
                         $hash=$encoder->encodePassword($user,$user->getPassword());
                         $user->setPassword($hash);
+                        $user->setRoles(["ROLE_ADMIN"]);
                          $manager->persist($user);
                          $manager->flush();
                          return $this->redirectToRoute('liste_utilisateurs');
@@ -69,7 +75,8 @@ class AdminController extends AbstractController
         $user = $this->getDoctrine()->getRepository(User::class)->find($id) ; 
         $form = $this->createForm(editUserType::class,$user) ; 
       
-        $form->handleRequest($request) ; 
+        $form->handleRequest($request) ;
+         
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager() ; 
             $em->persist($user);

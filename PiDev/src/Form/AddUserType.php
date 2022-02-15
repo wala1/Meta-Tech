@@ -28,18 +28,8 @@ class AddUserType extends AbstractType
             ])
             ->add('password',PasswordType::class)
             ->add('confirm_password', PasswordType::class)
-            ->add('roles',ChoiceType::class, [
-                'choices' => [
-                'User' => 'ROLE_USER',
-                'Client' => 'ROLE_CLIENT',
-                'Administrator' => 'ROLE_ADMIN'
-                ],
-                'expanded' => true,
-                'multiple' => true,
-                'label' => 'Roles'
-
-            ])
-            ->add('valider', SubmitType::class)
+         
+          
         ;
     }
 

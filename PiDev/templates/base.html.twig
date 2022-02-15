@@ -454,15 +454,31 @@ $('#search-input-autocomplate').focus();
 									</div>
 									<div class="col-action col-right">
 										<ul class="flex-layout action-header center_vertical">
+										
 											<li>
 												<ul class="header links">
+												 {% if not app.user %}
 													<li class="link authorization-link" data-label="or">
-														<a href="customer/account/login/referer/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s/index.html">Sign In</a>
+												
+														<a href="{{ path('security_login') }}">Sign In</a>
+													  
+
 													</li>
-													<li>
-														<a href="customer/account/create/index.html" id="idOeeZISUP">Create an Account</a>
-													</li>
+													    {% else %}
+													
+														<li class="link authorization-link" data-label="or">
+														<a href="{{ path('security_logout') }}">Sign Out</a>
+															</li>
+												
+														  {% endif %}
+
 												</ul>
+											</li>
+											<li class="link authorization-link">
+											
+											{% if is_granted('ROLE_ADMIN') %}
+													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+											{% endif %}
 											</li>
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
 												<a href="wishlist/index.html"></a>
