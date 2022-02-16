@@ -5,11 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Request;
 
 class CommandeController extends AbstractController
 {
     /**
-     * @Route("/commande", name="commande")
+     * @Route("/commande", name="index")
      */
     public function index(): Response
     {
@@ -17,4 +18,6 @@ class CommandeController extends AbstractController
             'controller_name' => 'CommandeController',
         ]);
     }
+
+    
 }

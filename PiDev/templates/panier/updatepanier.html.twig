@@ -1,14 +1,12 @@
-{% extends 'baseAdmin.html.twig' %}
-
+{% extends " base.html.twig" %}
 {% block body %}
 
-<div class="main-content"> 
+			<div class="main-content"> 
                 <div class="page-content">
                     <div class="container-fluid">
 						<h2>
                         <div>
 							{{ form_start(formA,{'attr': {'novalidate': 'novalidate'}} ) }}
-
 								<table  style="width : 25%">
 									<tr>
 										<td style="padding:1%">
@@ -25,8 +23,10 @@
 										</td>   
 									</tr>
 								</table>
-
-								{{ form_end(formA) }}
+							{{ form_end(formA) }}
 						</div>
+					</div>
+				</div>
+			</div>
 
 {% endblock %}

@@ -13,15 +13,17 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use App\Repository\ProduitRepository ;
 use App\Entity\Panier; 
 use App\Entity\User;
+use App\Entity\Commande;
 use App\Controller\EntityManager;
 use App\Repository\PanierRepository;
+use App\Form\CommandeFormType;
 
 class PanierController extends AbstractController
 {
 
     /************************* Front  *******************/
     /**
-     * @Route("/panier", name="panier")
+     * @Route("/cart", name="cart")
      */
     public function index(): Response
     {
@@ -31,9 +33,9 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/afficherPanier", name="afficherPanier");
+     * @Route("/cart_show", name="showCart");
      */
-    public function afficherPanier(){
+    public function showCart(){
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
@@ -41,12 +43,13 @@ class PanierController extends AbstractController
             "produits" => $produits,
             "panier" => $panier,
             'user' => $user,
+            "mode" => "cart"
         ]);
     }
 
     
     /**
-     * @Route("/clearCart/{id}", name="clearCart");
+     * @Route("/cart_clear/{id}", name="clearCart");
      */
     public function clearCart($id , ProduitRepository $repository): Response{
         $tab= [];
@@ -69,26 +72,59 @@ class PanierController extends AbstractController
         return $this->render("panier/panier.html.twig", [
             "panier"=> array(),
             "user"=> $user,
+            "mode" => "cart"
 
         ]);
     }
 
-    /******************* Back ******************/
+    /******************* Front Commande ******************/
+    
+    /**
+     * @Route("/command/{userId}", name="command")
+     */
+    public function commande($userId, Request $request): Response
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
+        $commande = new Commande();
+        $form = $this->createForm(CommandeFormType::class, $commande);
+        $form->add('Place Order',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($Commande);
+            $em->flush();
+            return $this->redirectToRoute("command");
+        }
+        return $this->render("panier/panier.html.twig", [
+            "formA"=> $form->createView(),
+            "user" => $user,
+            "panier" => $panier,
+            "produits"=> $produits,
+            "mode" => "store"
+        ]);
+    }
+
+    /******************* Back Commande ******************/
 
     /**
-     * @Route("/showPanierAdmin", name="showPanierAdmin");
+     * @Route("/command_admin_show", name="showCommandAdmin");
      */
-    public function showPanierAdmin(){
+    public function showCommandAdmin(){
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         return $this->render("panier/gestionPanier.html.twig", [
             "produits" => $produits
         ]);
     }
 
-     /** 
-     * @Route("/updateProdDepuisPanier/{id}" , name="updateProdDepuisPanier")
-     */
-     function updateProdDepuisPanier(Request $request,$id): Response
+    ///** 
+    //* @Route("/command_admin_update/{id}" , name="updateCommand")
+    //*/
+
+    /*
+     function updateCommand(Request $request,$id): Response
     {
         $em=$this->getDoctrine()->getManager();
         $produit = $em->getRepository(Produit::class)->find($id);
@@ -102,10 +138,11 @@ class PanierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($produit) ;  
             $em->flush() ; 
-            return $this->redirectToRoute('showPanierAdmin') ; 
+            return $this->redirectToRoute('showCommandAdmin') ; 
         }
         return $this->render('panier/updatepanier.html.twig', [
             'formA' => $form->createView(),
         ]);
-    }
+    }*/
+
 }
