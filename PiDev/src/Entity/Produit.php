@@ -194,9 +194,15 @@ class Produit
         return $this;
     }
 
-    
+    public function getCategProd(): ?Categorie
+    {
+        return $this->categorie_prod;
+    }
 
-     
+    public function setCategProd(?Categorie $categorie_prod): self
+    {
+        $this->categorie_prod = $categorie_prod;
 
-    
+        return $this;
+    }
 }

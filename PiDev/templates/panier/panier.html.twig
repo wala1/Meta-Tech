@@ -484,12 +484,34 @@
 <main id="maincontent" class="page-main">
 
 
+{% set panierExiste = false %}
+{% set userId = user.getId() %}
+{% for Panier in panier %}
+    {% if Panier.getUserPanier().getId() == userId%}
+        {% set panierExiste = true %}
+    {%endif%}
+{% endfor%}
+
+
+
+
+                            <!-- ============================================================== -->
+                            <!-- mode == "cart" -->
+                            <!-- ============================================================== -->
+
+
+
+
+
+{% if panierExiste == true and mode == "cart" %}
 
 <a id="contentarea" tabindex="-1"></a>
 <div class="page-title-wrapper">
     <h1 class="page-title">
-        <span class="base" data-ui-id="page-title-wrapper">Shopping Cart</span>    </h1>
-    </div>
+        <span class="base" data-ui-id="page-title-wrapper">Shopping Cart</span>   
+    </h1>
+</div>
+
 <div class="columns"><div class="column main"><input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
         <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
     <script type="text/x-magento-init">
@@ -503,15 +525,7 @@
     </script>
 </div>
 
-{% set panierExiste = false %}
-{% set userId = user.getId() %}
-{% for Panier in panier %}
-    {% if Panier.getUserPanier().getId() == userId%}
-        {% set panierExiste = true %}
-    {%endif%}
-{% endfor%}
 
-{% if panierExiste == true%}
 
 <script type="text/x-magento-init">
     {
@@ -608,16 +622,15 @@
                                                 </form>
     </div>
 </div>
-        <ul class="checkout methods items checkout-methods-items">
-                                                <li class="item">    <button type="button" data-role="proceed-to-checkout" title="Proceed&#x20;to&#x20;Checkout" data-mage-init='{
-                "Magento_Checkout/js/proceed-to-checkout":{
-                    "checkoutUrl":"https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcheckout\u002F"
-                }
-            }' class="action primary checkout">
-        <span>Proceed to Checkout</span>
-    </button>
-</li>
-                                                                                                                                                            <li class="item"><a class="action multicheckout" href="https://blueskytechmage.com/ohey/en11/multishipping/checkout/"><span>Check Out with Multiple Addresses</span></a>
+<ul class="checkout methods items checkout-methods-items">
+    <li class="item">    
+        <a href="command/{{userId}}">
+            <button type="button" data-role="proceed-to-checkout" title="Proceed&#x20;to&#x20;Checkout" class="action primary checkout">
+                <span>Proceed to Checkout</span>
+            </button>
+        </a>
+    </li>
+    <li class="item"><a class="action multicheckout" href="https://blueskytechmage.com/ohey/en11/multishipping/checkout/"><span>Check Out with Multiple Addresses</span></a>
 </li>
 </ul>
 </div>
@@ -651,13 +664,13 @@
                                                         <tbody>
                                                         {% set panierId = "" %}
                                                         {% for Panier in panier %}
-                                                            {% if Panier.getUserPanier().getId() == userId%}
+                                                            {% if Panier.getUserPanier().getId() == userId %}
                                                             {% for produit in produits%}
                                                                 {% if Panier.getProduitPanier().getId() == produit.getId()%}
                                                                 {% set panierId = "#{Panier.getId()},#{panierId}" %}
                                                                 <tr>
                                                                     <td data-th="Item" class="col item">
-                                                                            <a href="http://127.0.0.1:8000/product_show/{{produit.id}}" title="{{produit.nom_prod}}" tabindex="-1" class="product-item-photo">
+                                                                            <a href="product_show/{{produit.id}}" title="{{produit.nom_prod}}" tabindex="-1" class="product-item-photo">
                                                                             <span class="product-image-container product-image-container-93938126543">
                                                                                 <span class="product-image-wrapper">
                                                                                     <img class="product-image-photo" src="{{produit.image_prod}}" loading="lazy" width="100" height="100" alt="{{produit.nom_prod}}" "/>
@@ -666,7 +679,7 @@
                                                                             <style>.product-image-container-93938126543{width:100px}.product-image-container-93938126543 span.product-image-wrapper{padding-bottom:100%}</style><script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-93938126543");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="100px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-93938126543  span.product-image-wrapper");for(var i=0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom="100%";}</script>                            </a>
                                                                             <div class="product-item-details">
                                                                                 <strong class="product-item-name">
-                                                                                    <a href="http://127.0.0.1:8000/product_show/{{produit.id}}">{{produit.nom_prod}}</a>
+                                                                                    <a href="product_show/{{produit.id}}">{{produit.nom_prod}}</a>
                                                                                 </strong>
                                                                             </div>
                                                                     </td>
@@ -712,6 +725,9 @@
                 <!-- ============================================================== -->
 
 
+
+
+
                     </div>
                     <div class="cart main actions">
                         <a class="action continue" href="/" title="Continue&#x20;Shopping">
@@ -745,13 +761,168 @@
                 </div>
                 </div></div>
 
-    {% else%}
-        {% if panierExiste == false%}
+
+
+                        <!-- ============================================================== -->
+                        <!-- mode == "store" -->
+                        <!-- ============================================================== -->
+
+
+    {% elseif panierExiste == true and mode == "store" %}
+        <a id="contentarea" tabindex="-1"></a>
+        <div class="page-title-wrapper">
+            <h1 class="page-title">
+                <span class="base" data-ui-id="page-title-wrapper">Express Shopping</span>   
+            </h1>
+        </div>
+        <div class="short-description"> </div>
+
+        <div class="columns"><div class="column main"><input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
+        <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#authenticationPopup": {
+                "Magento_Ui/js/core/app": {"components":{"authenticationPopup":{"component":"Magento_Customer\/js\/view\/authentication-popup","children":{"messages":{"component":"Magento_Ui\/js\/view\/messages","displayArea":"messages"},"captcha":{"component":"Magento_Captcha\/js\/view\/checkout\/loginCaptcha","displayArea":"additional-login-form-fields","formId":"user_login","configSource":"checkout"},"amazon-button":{"component":"Amazon_Login\/js\/view\/login-button-wrapper","sortOrder":"0","displayArea":"additional-login-form-fields","config":{"tooltip":"Securely login to our website using your existing Amazon details.","componentDisabled":true}}}}}}            },
+            "*": {
+                "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
+            }
+        }
+    </script>
+</div>
+
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/section-config": {
+                "sections": {"stores\/store\/switch":["*"],"stores\/store\/switchrequest":["*"],"directory\/currency\/switch":["*"],"*":["messages"],"customer\/account\/logout":["*","recently_viewed_product","recently_compared_product","persistent"],"customer\/account\/loginpost":["*"],"customer\/account\/createpost":["*"],"customer\/account\/editpost":["*"],"customer\/ajax\/login":["checkout-data","cart","captcha"],"catalog\/product_compare\/add":["compare-products"],"catalog\/product_compare\/remove":["compare-products"],"catalog\/product_compare\/clear":["compare-products"],"sales\/guest\/reorder":["cart"],"sales\/order\/reorder":["cart"],"checkout\/cart\/add":["cart","directory-data"],"checkout\/cart\/delete":["cart"],"checkout\/cart\/updatepost":["cart"],"checkout\/cart\/updateitemoptions":["cart"],"checkout\/cart\/couponpost":["cart"],"checkout\/cart\/estimatepost":["cart"],"checkout\/cart\/estimateupdatepost":["cart"],"checkout\/onepage\/saveorder":["cart","checkout-data","last-ordered-items"],"checkout\/sidebar\/removeitem":["cart"],"checkout\/sidebar\/updateitemqty":["cart"],"rest\/*\/v1\/carts\/*\/payment-information":["cart","last-ordered-items","captcha","instant-purchase"],"rest\/*\/v1\/guest-carts\/*\/payment-information":["cart","captcha"],"rest\/*\/v1\/guest-carts\/*\/selected-payment-method":["cart","checkout-data"],"rest\/*\/v1\/carts\/*\/selected-payment-method":["cart","checkout-data","instant-purchase"],"customer\/address\/*":["instant-purchase"],"customer\/account\/*":["instant-purchase"],"vault\/cards\/deleteaction":["instant-purchase"],"multishipping\/checkout\/overviewpost":["cart"],"paypal\/express\/placeorder":["cart","checkout-data"],"paypal\/payflowexpress\/placeorder":["cart","checkout-data"],"paypal\/express\/onauthorization":["cart","checkout-data"],"persistent\/index\/unsetcookie":["persistent"],"review\/product\/post":["review"],"wishlist\/index\/add":["wishlist"],"wishlist\/index\/remove":["wishlist"],"wishlist\/index\/updateitemoptions":["wishlist"],"wishlist\/index\/update":["wishlist"],"wishlist\/index\/cart":["wishlist","cart"],"wishlist\/index\/fromcart":["wishlist","cart"],"wishlist\/index\/allcart":["wishlist","cart"],"wishlist\/shared\/allcart":["wishlist","cart"],"wishlist\/shared\/cart":["cart"],"braintree\/paypal\/placeorder":["cart","checkout-data"],"braintree\/googlepay\/placeorder":["cart","checkout-data"]},
+                "clientSideSections": ["checkout-data","cart-data","chatData"],
+                "baseUrls": ["https:\/\/blueskytechmage.com\/ohey\/en11\/"],
+                "sectionNames": ["messages","customer","compare-products","last-ordered-items","cart","directory-data","captcha","instant-purchase","loggedAsCustomer","persistent","review","wishlist","chatData","recently_viewed_product","recently_compared_product","product_data_storage","paypal-billing-agreement"]            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/customer-data": {
+                "sectionLoadUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Fsection\u002Fload\u002F",
+                "expirableSectionLifetime": 60,
+                "expirableSectionNames": ["cart","persistent"],
+                "cookieLifeTime": "3600",
+                "updateSessionUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Faccount\u002FupdateSession\u002F"
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/invalidation-processor": {
+                "invalidationRules": {
+                    "website-rule": {
+                        "Magento_Customer/js/invalidation-rules/website-rule": {
+                            "scopeConfig": {
+                                "websiteId": "5"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/","handles":["default","checkout_cart_index"],"originalRequest":{"route":"checkout","controller":"cart","action":"index","uri":"\/ohey\/en11\/checkout\/cart\/"},"versionCookieName":"private_content_version"}        }
+    }
+</script>
+
+<div class="cart-container"><div class="cart-summary"><strong class="summary&#x20;title">Summary</strong><div id="block-shipping" class="block shipping" data-mage-init='{"collapsible":{"openedState": "active", "saveState": true}}'>
+    <div class="title" data-role="title">
+        <strong id="block-shipping-heading" role="heading" aria-level="2">
+            Estimate Shipping and Tax        </strong>
+    </div>
+    <div id="block-summary" data-bind="scope:'block-summary'" class="content" data-role="content" aria-labelledby="block-shipping-heading">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        
+           </div>
+</div>
+<div id="cart-totals" class="cart-totals" data-bind="scope:'block-totals'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+            {
+                "#cart-totals": {
+                    "Magento_Ui/js/core/app": {"components":{"block-totals":{"component":"Magento_Checkout\/js\/view\/cart\/totals","displayArea":"totals","config":{"template":"Magento_Checkout\/cart\/totals"},"children":{"subtotal":{"component":"Magento_Tax\/js\/view\/checkout\/summary\/subtotal","config":{"title":"Subtotal","template":"Magento_Tax\/checkout\/summary\/subtotal","excludingTaxMessage":"(Excl. Tax)","includingTaxMessage":"(Incl. Tax)"},"sortOrder":"10"},"shipping":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/shipping","config":{"title":"Shipping","template":"Magento_Tax\/checkout\/cart\/totals\/shipping","excludingTaxMessage":"Excl. Tax","includingTaxMessage":"Incl. Tax"},"sortOrder":"30"},"grand-total":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/grand-total","config":{"title":"Order Total","template":"Magento_Tax\/checkout\/cart\/totals\/grand-total","exclTaxLabel":"Order Total Excl. Tax","inclTaxLabel":"Order Total Incl. Tax"},"sortOrder":"100"},"discount":{"component":"Magento_SalesRule\/js\/view\/cart\/totals\/discount","config":{"title":"Discount"},"sortOrder":"20"},"before_grandtotal":{"component":"uiComponent","sortOrder":"30","children":[]},"tax":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/tax","config":{"template":"Magento_Tax\/checkout\/cart\/totals\/tax","title":"Tax"},"sortOrder":"40"},"weee":{"component":"Magento_Weee\/js\/view\/cart\/totals\/weee","config":{"title":"FPT"},"sortOrder":"35"},"vertex-messages":{"component":"Vertex_Tax\/js\/view\/checkout\/summary\/tax-messages","config":{"template":"Vertex_Tax\/checkout\/cart\/totals\/tax-messages","title":"Vertex Messages"}}}}}}                }
+            }
+    </script>
+</div>
+        <div class="columns">
+            <div class="column main">
+                <input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/>
+                <div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
+                    <div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
+							{{ form_start(formA,{'attr': {'novalidate': 'novalidate'}} ) }}
+								<table  style="width : 25%">
+									<tr>
+										<td style="padding:1%">
+
+											{{ form_label(formA.place,"Place ") }}
+											{{ form_widget(formA.place) }}
+											{{ form_errors(formA.place) }}
+											<br>
+
+											{{ form_label(formA.payement_method,"Payment Method") }}
+											{{ form_widget(formA.payement_method) }}
+											{{ form_errors(formA.payement_method) }}
+											<br> 
+										</td>   
+                                        <td style="padding:1%">
+
+											{{ form_label(formA.code_Coupon,"Discount Code ") }}
+											{{ form_widget(formA.code_Coupon) }}
+											{{ form_errors(formA.code_Coupon) }}
+											<br>
+
+											{{ form_label(formA.comment,"Comment ") }}
+											{{ form_widget(formA.comment) }}
+											{{ form_errors(formA.comment) }}
+											<br> 
+										</td>  
+                                        <td style="padding:1%">
+
+											{{ form_label(formA.date,"Delivery Date ") }}
+											{{ form_widget(formA.date) }}
+											{{ form_errors(formA.date) }}
+											<br>
+
+											{{ form_label(formA.phone_Number,"Phone Number ") }}
+											{{ form_widget(formA.phone_Number) }}
+											{{ form_errors(formA.phone_Number) }}
+											<br> 
+
+											{{ form_label(formA.street,"Street") }}
+											{{ form_widget(formA.street) }}
+											{{ form_errors(formA.street) }}
+											<br> 
+										</td>  
+									</tr>
+								</table>
+							{{ form_end(formA) }}
+						</div>
+					</div>
+				</div>
+            </div>
+
+    {% elseif panierExiste == false %}
             <div class="cart-empty">
                 <p>You have no items in your shopping cart.</p>
                 <p>Click <a href="/">here</a> to continue shopping.    </p>
             </div>
-        {% endif%}
+    {% else %}
+            /**************erreurs****************/
     {% endif%}
 
 </main>
