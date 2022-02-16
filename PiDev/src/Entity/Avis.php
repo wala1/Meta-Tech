@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AvisRepository::class)
@@ -31,11 +32,18 @@ class Avis
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "Please insert a rating between 1 and 5.",
+     * )
+     * @Assert\NotBlank(message="Please add a rating.")
      */
     private $ratingAvis;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Make sure to add your review.")
      */
     private $descAvis;
 

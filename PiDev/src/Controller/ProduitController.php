@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Avis ; 
+use App\Entity\Avis ;
+use App\Entity\User ; 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit ; 
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
 use App\Repository\ProduitRepository ; 
 use App\Repository\AvisRepository ; 
+use Symfony\Component\Validator\Constraints\DateTime ; 
 
 class ProduitController extends AbstractController
 {
@@ -52,18 +54,47 @@ class ProduitController extends AbstractController
     /**
      * @Route("/product_show/{id}", name="product_show")
      */
-    public function productShow($id, Avis $avis=null): Response
+    public function productShow($id, Avis $avis=null, Request $request): Response
     {
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findById($id) ; 
 
-        /*$avis = $this->getDoctrine()->getRepository(Avis::class) ; 
+        $avis = $this->getDoctrine()->getRepository(Avis::class) ; 
         $avis = $avis->findByidProd($id) ;
-        */
+
+        $prod = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(['id'=>$id]) ; 
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id'=> 103 ]) ; 
+
+        $avisNew = new Avis() ; 
+        $form = $this->createForm(AvisFormType::class, $avisNew) ; 
+        $form->add('Submit Review', SubmitType::class,[
+                'attr' => [
+                    'class'=>'btn btn-success waves-effect waves-light'
+                ]
+            ]) ;
+ 
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $avisNew->setIdProd($prod) ; 
+            $avisNew->setIdUser($user) ; 
+
+            $em = $this->getDoctrine()->getManager(); 
+            $em->persist($avisNew) ; 
+            $em->flush() ; 
+            return $this->render('produit/product.html.twig', [
+            'produits' => $produits,
+            'avis' => $avis,
+            'form' => $form->createView() 
+        ]); 
+        } 
                   
+
         return $this->render('produit/product.html.twig', [
             'produits' => $produits,
-            'avis' => $avis 
+            'avis' => $avis,
+            'form' => $form->createView() 
         ]);
     }
 

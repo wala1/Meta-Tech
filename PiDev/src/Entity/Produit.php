@@ -34,11 +34,6 @@ class Produit
     public $desc_prod;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="produits")
-     */
-    public $panier_prod;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
      */
     public $categorie_prod;
@@ -89,7 +84,7 @@ class Produit
         $this->avis = new ArrayCollection();
     }
 
-     
+      
 
      
 
@@ -136,22 +131,14 @@ class Produit
         return $this;
     }
 
-    public function getPanierProd(): ?Panier
-    {
-        return $this->panier_prod;
-    }
-
-    public function setPanierProd(?Panier $panier_prod): self
-    {
-        $this->panier_prod = $panier_prod;
-
-        return $this;
-    }
+   
 
     public function getImageProd(): ?string
     {
         return $this->image_prod;
     }
+
+   
 
     public function setImageProd(string $image_prod): self
     {

@@ -25,10 +25,7 @@ class User implements UserInterface
      */
     private $id;
 
-     /**
-     * @ORM\OneToOne(targetEntity="Panier")
-     */
-    protected $panier;
+     
 
 
     /**
@@ -182,4 +179,16 @@ class User implements UserInterface
         return $this;
     }
 
+
+
+
+
+
+
+
+
+    public function setId(int $id)
+    {
+        $this->id = $id; 
+    }
 }
