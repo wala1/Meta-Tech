@@ -45,11 +45,7 @@ class AdminController extends AbstractController
          $user = new User();
          $form =$this->createForm(AddUserType::class,$user);  
                      $form->handleRequest($request);
-                     $form->add('Add', SubmitType::class,[
-                        'attr' => [
-                            'class'=>'btn btn-success waves-effect waves-light'
-                        ]
-                    ]) ;
+                  
                      if($form->isSubmitted() && $form->isValid())
 
                      {

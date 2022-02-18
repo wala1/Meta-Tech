@@ -79,13 +79,11 @@
                                                                                     <i class="bx bx-dots-horizontal-rounded"></i>
                                                                                 </button>
                                                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                                                    <li><a class="dropdown-item" href="updateProdDepuisPanier/{{produit.id}}">Modify</a></li>
-                                                                                    <li><a class="dropdown-item" href="deleteProdDepuisPanier/{{produit.id}}"> Delete</a></li>
+                                                                                    <li><a class="dropdown-item" href="updateCommand/{{produit.id}}">Modify</a></li>
+                                                                                    <li><a class="dropdown-item" href="removeCommand/{{produit.id}}"> Remove</a></li>
                                                                                     
                                                                                 </ul>
                                                                             </div>
-                                                                         <!--a href="updateProdDepuisPanier/{{produit.id}}"><button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Edite</button></a>
-                                                                         <a href="deleteProdDepuisPanier/{{produit.id}}"><button type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Remove</button></a-->
                                                                         </td>
                                                                     </tr>
                                                                     {% endfor%}
