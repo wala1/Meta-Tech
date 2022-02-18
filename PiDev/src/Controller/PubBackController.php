@@ -67,7 +67,12 @@ class PubBackController extends AbstractController
     function Add(Request $request){
         $pubBack=new PubBack();
         $form=$this->createform(PubType::class,$pubBack);
-        $form->add('Add New', SubmitType::class) ; 
+        $form->add('Add New ', SubmitType::class,[
+            'attr' => [
+                'class'=>'btn btn-info waves-effect waves-light',
+                'style'=>'margin-left : 50px '
+            ]
+        ]) ;
         $form->handleRequest($request) ; 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager() ; 
@@ -91,7 +96,12 @@ class PubBackController extends AbstractController
     {
         $pubBack = $this->getDoctrine()->getRepository(PubBack::class)->find($id) ; 
         $form = $this->createForm(PubType::class,$pubBack) ; 
-        $form->add("Modify",SubmitType::class) ; 
+        $form->add("Modify",SubmitType::class,[
+            'attr' => [
+                'class'=>'btn btn-info waves-effect waves-light',
+                'style'=>'margin-left : 50px '
+            ]
+        ]) ; 
         $form->handleRequest($request) ; 
         if ($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager() ; 
