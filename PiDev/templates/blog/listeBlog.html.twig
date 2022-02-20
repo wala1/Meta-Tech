@@ -661,19 +661,12 @@
            <tbody>
              {%  for publication in  publications  %}
          <tr>
-            <th scope="row">
-                <div class="form-check font-size-16">
-                    <input type="checkbox" class="form-check-input" id="contacusercheck1">
-                    <label class="form-check-label" for="contacusercheck1"></label>
-                </div>
-            </th>
-
         
                 <th scope="col">{{publication.titrePubl}}</th>
-                <th scope="col"><div style="  width: 300px; height: 120px; overflow:auto;">
+                <th scope="col"><div >
                                 {{publication.descriptionPubl}}
                 </div></th>
-                <th scope="col">{{publication.imagePubl}}</th>
+                <th scope="col"> <img src="{{publication.imagePubl}}" width="100px" ></th>
                 <th scope="col">{{publication.tempsPubl | date }}</th>
                 <th>
                     <div class="dropdown">

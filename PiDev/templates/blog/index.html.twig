@@ -16,11 +16,11 @@
         <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
                 dans la categorie de publications </div>
         <div class="content">
-            <img src="http://placehold.it/350x150" alt="">
+            <img src="{{publication.imagepubl}}" width="200px;" alt="">
             <p>
                     {{ publication.descriptionPubl }}
             </p>
-            <a href="  {{ path('blog_show', {'id' : publication.id }) }} " class="btn btn-primary">lire la suite</a>
+            <a href="  {{ path('blog_show', {'id' : publication.id }) }} " class="btn btn-primary">lire la suite ({{publication.commentaires.count }}) </a>
           
     </div>
    
