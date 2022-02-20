@@ -290,7 +290,7 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium">Shawn L.</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium">Bacha.med arbi</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -575,12 +575,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">User List</h4>
-
+                                    <h1 class="mb-sm-0 font-size-18">Les listes des Publications</h1>
+                                    
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
-                                            <li class="breadcrumb-item active">User List</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Publications de clients</a></li>
+                                            <li class="breadcrumb-item active">LISTE DES CLIENTS</li>
                                         </ol>
                                     </div>
 
@@ -592,7 +592,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <h5 class="card-title">Contact List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                                    <h2 class="card-title">les listes de Publications <span class="text-muted fw-normal ms-2">(834)</span></h2>
                                 </div>
                             </div>
 
@@ -629,62 +629,72 @@
                         </div>
                         <!-- end row -->
 
+                    
+
+
+
                         <div class="table-responsive mb-4">
                             <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
-                                <thead>
-                                  <tr>
-                                    <th scope="col" style="width: 50px;">
-                                        <div class="form-check font-size-16">
-                                            <input type="checkbox" class="form-check-input" id="checkAll">
-                                            <label class="form-check-label" for="checkAll"></label>
-                                        </div>
-                                    </th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Tags</th>
-                                    <th style="width: 80px; min-width: 80px;">Action</th>
+
+                 <thead>
+                    <tr>
+                        <th scope="col" style="width: 50px;">
+                         <div class="form-check font-size-16">
+                            <input type="checkbox" class="form-check-input" id="checkAll">
+                            <label class="form-check-label" for="checkAll"></label>
+                                                                       </div>
+                                                               </th>
+
+                        <th> 
+                        <a href="#" class="text-body">titre de la publication</a>
+                        </th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th >date et heure de la publication</th>  
+                        <th style="width: 80px; min-width: 80px;"></th> 
+                    </tr>
+                </thead>
+
+
+
+
+           <tbody>
+             {%  for publication in  publications  %}
+         <tr>
+            <th scope="row">
+                <div class="form-check font-size-16">
+                    <input type="checkbox" class="form-check-input" id="contacusercheck1">
+                    <label class="form-check-label" for="contacusercheck1"></label>
+                </div>
+            </th>
+
+        
+                <th scope="col">{{publication.titrePubl}}</th>
+                <th scope="col"><div style="  width: 300px; height: 120px; overflow:auto;">
+                                {{publication.descriptionPubl}}
+                </div></th>
+                <th scope="col">{{publication.imagePubl}}</th>
+                <th scope="col">{{publication.tempsPubl | date }}</th>
+                <th>
+                    <div class="dropdown">
+                        <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            
+                            <li><a class="dropdown-item" href=" {{ path('delete_publ_back', {'id' : publication.id }) }} ">Supprimer Publication</a></li>
+                            
+                        </ul>
+                    </div>
+                </th>
+                                                                
+                                                            
+                                    ></th>
                                   </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <div class="form-check font-size-16">
-                                                <input type="checkbox" class="form-check-input" id="contacusercheck1">
-                                                <label class="form-check-label" for="contacusercheck1"></label>
-                                            </div>
-                                        </th>
-                                        <td>
-                                            <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-sm rounded-circle me-2">
-                                            <a href="#" class="text-body">Phyllis Gatlin</a>
-                                        </td>
-                                        <td>UI/UX Designer</td>
-                                        <td>phyllisgatlin@minia.com</td>
-                                        <td>
-                                            <div class="d-flex gap-2">
-                                                <a href="#" class="badge badge-soft-primary">Photoshop</a>
-                                                <a href="#" class="badge badge-soft-primary">illustrator</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bx bx-dots-horizontal-rounded"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-
-
-
-
+                                  {%  endfor %}
                                 </tbody>
+
+                                
                             </table>
                             <!-- end table -->
                         </div>

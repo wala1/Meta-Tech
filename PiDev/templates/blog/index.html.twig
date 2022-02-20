@@ -2,21 +2,30 @@
  
 
 {% block body %}
+
+
+
+<h1> Publications: <a href=" {{ path ("ajouter_blog")}} " class="btn btn-primary">Publier une publication</a></h1>
 <body> 
 <section class="publication">
    
+{#  html #}
 
+
+
+{# end html #}
    {% for publication in publications %}
 <publication>  
         <h2>{{ publication.titrePubl }}</h2>
         <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
-                dans la categorie </div>
+                dans la categorie de publications </div>
         <div class="content">
             <img src="http://placehold.it/350x150" alt="">
             <p>
                     {{ publication.descriptionPubl }}
             </p>
             <a href="  {{ path('blog_show', {'id' : publication.id }) }} " class="btn btn-primary">lire la suite</a>
+          
     </div>
    
 </publication>

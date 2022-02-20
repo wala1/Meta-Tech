@@ -17,7 +17,8 @@
                     {{ publication.descriptionPubl }}
             </p>
             
-            <a href="  " class="btn btn-primary">Supprimer</a>
+            <a href=" {{ path('delete_publ', {'id' : publication.id }) }} " class="btn btn-sm btn-outline-secondery"  onclick="return confirm ('attention ce ci va supprimer ')">Supprimer</a>
+            <a href=" {{ path('modifier_blog', {'id' : publication.id }) }} " class="btn btn-primary">modifier</a>
     </div>
    
 </publication>
