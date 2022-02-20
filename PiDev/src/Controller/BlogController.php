@@ -48,7 +48,7 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-           
+            $publication->setTempsPubl(new \DateTime);
             $em = $this->getDoctrine()->getManager();
            $em->persist($publication) ; 
             $em->flush() ; 
@@ -118,7 +118,7 @@ class BlogController extends AbstractController
 /**
      * @param $id
      *  @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/delete_publication_back/{id}", name="delete_publ")
+     * @Route("/delete_publication_back/{id}", name="delete_publ_back")
      */
     public function delete_publ_back($id, Publication $repository): Response
     {   
