@@ -620,8 +620,12 @@
 
 
 <div>
+  
    <div class="banner section banner-middle owl-carousel owl-theme" data-items="2" data-bigdesktop="2" data-smalldesktop="2" data-bigtablet="2" data-tablet="2" data-smalltablet="1" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
+
+   {# {% if pub.coupon1 != null and pub.coupon1.id == 1	%} #}
 <div class="col-banner absolute-content-image lazyload-content left center">
+
 <div class="banner-img left center"><img src="" data-src="https://www.cnet.com/a/img/cpzHajwZ4I0JuX-7sPfzc5FhZZI=/1200x675/2021/01/07/3626616c-83af-4199-a029-76db418938f0/galaxy-z-flip-fold-samsung-product-promo-hoyle-2021.jpg" alt=""></div>
 <div class="content">
 <h5 class="size-14" style="color: #fdb819; text-transform: uppercase; font-weight: bold;">Buy From Us &amp; Get Your</h5>
@@ -630,15 +634,20 @@
 <div class=" btn "><a href="#">Shop Now</a></div>
 </div>
 </div>
+
+{% for pub in pubBack %}  
+ {% if pub.calender != null 	%}  
 <div class="col-banner absolute-content-image lazyload-content left center">
-<div class="banner-img left center"><img src="" data-src="https://cdn.thewirecutter.com/wp-content/media/2021/06/protablets-2048px-7588.jpg" alt=""></div>
+<div class="banner-img left center"><img src="" data-src="{{ pub.calender.imageEvent }}" alt=""></div>
 <div class="content">
-<h5 class="size-14" style="color: #ffffff; text-transform: uppercase; font-weight: bold;">save on this week</h5>
-<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Apple  iPad</h4>
+<h5 class="size-14" style="color: #ffffff; text-transform: uppercase; font-weight: bold;">{{ pub.calender.title }}</h5>
+<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{ pub.calender.description }}</h4>
 <h2 class="size-46" style="color: #ffffff; font-weight: bold;">Save<span style="color: #ffffff;"> $329.00</span></h2>
 <div class=" btn "><a href="#">Shop Now</a></div>
 </div>
 </div>
+{% endif %}
+{% endfor %}
 </div></div>
 </div>
 </div>
