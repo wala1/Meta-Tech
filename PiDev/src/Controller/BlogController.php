@@ -202,23 +202,23 @@ class BlogController extends AbstractController
     {
         
      
-        if($id != null)
+        if($id != null) 
         {
             $desc = $request->get('description');
             $idCommentaire = $request->get('idCommentaire');
-            if($idCommentaire != null )
+            if($idCommentaire != null )//modifier
             {
                 $em = $this->getDoctrine()->getManager();
-                $commentaire = $em->getRepository(Commentaire::class)->find($id);
+                $commentaire = $em->getRepository(Commentaire::class)->find($idCommentaire);
                 if( $commentaire != null )
                 {
                 $commentaire->setTempsComm( new \DateTime);
                 $commentaire->setDescriptionComm($desc);    
                 $em->persist($commentaire) ; 
-                $em->flush() ; 
+                $em->flush() ; //pour appliquer la modification
                 return $this->redirectToRoute('blog_show' , [ 'id' => $id ]) ; 
                 }
-            } else 
+            } else //ajout
             {
                 
             $em = $this->getDoctrine()->getManager();
