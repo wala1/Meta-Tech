@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html lang="en">
 
     
@@ -9,7 +9,7 @@
         {% block title %}
         
         {% endblock %}
-
+     
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
@@ -32,7 +32,8 @@
         <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
 
@@ -344,7 +345,20 @@
                                 </a>
                             </li>
 
-                             
+                            <li>
+                                <a href="/Events" class="has-arrow">
+                                    <i data-feather="map"></i>
+                                    <span data-key="t-maps">Events</span>
+                                </a>
+                                  <ul class="sub-menu" aria-expanded="false">
+                                  
+                                    <li><a href="/Calendar" data-key="t-l-maps">Calendar</a></li>
+                                   
+                                  
+                                </ul>
+                               
+                            </li>
+
 
 
 
@@ -546,6 +560,7 @@
         <script src="../assets/libs/simplebar/simplebar.min.js"></script>
         <script src="../assets/libs/node-waves/waves.min.js"></script>
         <script src="../assets/libs/feather-icons/feather.min.js"></script>
+   
         <!-- pace js -->
         <script src="../assets/libs/pace-js/pace.min.js"></script>
 
@@ -603,7 +618,8 @@
 
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+        {% block javascripts %}{% endblock %}
 
     </body>
 

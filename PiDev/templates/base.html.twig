@@ -463,12 +463,18 @@ $('#search-input-autocomplate').focus();
 
 												</ul>
 											</li>
-											<li class="link authorization-link">
+											<li class="link authorization-link" data-label="or">
 											
 											{% if is_granted('ROLE_ADMIN') %}
 													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+													
 											{% endif %}
-											</li>
+									  	{% if is_granted('ROLE_CLIENT') %}
+													<li> <a href="{{path('account')}}">Account</a> </li>
+											{% endif %}
+											</li>	
+										
+										
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
 												<a href="wishlist/index.html"></a>
 											</li>

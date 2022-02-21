@@ -33,6 +33,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->panier = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
         
     }
 
@@ -55,6 +56,13 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="this field is  required")
+      * @Assert\Length(
+     *      min = 3,
+     *      max = 10,
+     *      minMessage = "Your username must be at least {{ limit }} characters long",
+     *      maxMessage = "Your username  cannot be longer than {{ limit }} characters"
+     * )
+     
      
      */
     private $username;
@@ -63,6 +71,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8",minMessage="Your password must be at least 8 characters")
      * @Assert\NotNull(message="this field is  required")
+     
     
      */
     private $password;
@@ -88,6 +97,27 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idUser")
      */
     private $avis;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Calendar::class, mappedBy="user")
+     */
+    private $calendars;
+
+    // /**
+    //  * @ORM\Column(type="bigint")
+    //   * @Assert\Positive(message="Your phone number cannot be negative")
+    //     * @Assert\Length(
+    //  *      min = 8,
+    //  *      max=10,
+    //  *      minMessage = "The Phone Number should have exactly {{limit}}",
+    //  *      maxMessage = "The Event Title cannot be longer than {{ limit }} characters"
+    //  * )
+     
+
+    
+
+    //  */
+    // private $phoneNumber;
 
     /*public function __construct()
     {
@@ -127,10 +157,20 @@ class User implements UserInterface
     {
         return $this->password;
     }
+    public function getConfirm_password(): ?string
+    {
+        return $this->confirm_password;
+    }
 
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+    public function setConfirm_password(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
 
         return $this;
     }
@@ -190,6 +230,45 @@ class User implements UserInterface
             if ($avi->getIdUser() === $this) {
                 $avi->setIdUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    // public function getPhoneNumber(): ?string
+    // {
+    //     return $this->phoneNumber;
+    // }
+
+    // public function setPhoneNumber(string $phoneNumber): self
+    // {
+    //     $this->phoneNumber = $phoneNumber;
+
+    //     return $this;
+    // }
+
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->removeElement($calendar)) {
+            $calendar->removeUser($this);
         }
 
         return $this;

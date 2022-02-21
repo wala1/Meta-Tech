@@ -1,9 +1,8 @@
-
-           {%  extends 'baseAdmin.html.twig'   %}
+{%  extends 'baseAdmin.html.twig'   %}
            
            
            {% block title %}   
-           <title>  Users </title>
+           <title>  Events </title>
            {% endblock %}
 
            {%  block body  %}
@@ -20,12 +19,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Users List</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Events List</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Users</a></li>
-                                            <li class="breadcrumb-item active">Users List</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Events</a></li>
+                                            <li class="breadcrumb-item active">Events List</li>
                                         </ol>
                                     </div>
 
@@ -37,7 +36,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <h5 class="card-title">Contact List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                                    <h5 class="card-title">Events List <span class="text-muted fw-normal ms-2">(834)</span></h5>
                                 </div>
                             </div>
 
@@ -54,7 +53,7 @@
                                         </ul>
                                     </div>
                                     <div>
-                                        <a href="{{path('add_user')}}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                        <a href="{{path('calendar_new')}}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
                                     </div>
                                     
                                     <div class="dropdown">
@@ -94,18 +93,24 @@
                                             <label class="form-check-label" for="checkAll"></label>
                                         </div>
                                     </th>
-                                  
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                   {# <th scope="col">Phone Number</th> #}
+                                    
+                                     <th scope="col">Image</th>
 
-                                    <th scope="col">Roles</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">End</th>
+                                     <th scope="col">All Day</th>
+                                      <th scope="col">Background color</th>
+                                       <th scope="col">Border coloer</th>
+                                        <th scope="col">Text Color</th>
+ 
 
                                     <th style="width: 80px; min-width: 80px;">Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                   {% for user in users %}
+                                   {% for calendar in calendars %}
 
                                    
                                     <tr>
@@ -119,33 +124,26 @@
                                        
                                        
                                     
-                                      
-                                       
-                                       
-                                       
-                                        <td> {{ user.username }}</td>
-                                       
-                                       
-                                       
-                                        <td>{{ user.email }}</td>
-                                             {# <td>{{ user.phoneNumber }}</td> #}
-                                         <td>
-                                         {% for role in user.Roles %}
-                                            {% if role == "ROLE_USER" %}
-                                                  User
-                                            {% elseif role == "ROLE_CLIENT" %}
-                                                   Client  
-                                           {% elseif role == "ROLE_ADMIN" %}
-                                                   Administrator
-                                            {% endif %}
-                                        {% endfor %}
-                                        
-                                         
+                                     <td><img  src="{{calendar.imageEvent}}" width="100px"	height="100px" center/>  </td>
+                                    
+                                     
+                                        <td> {{ calendar.title }}</td>
+                                        <td>{{ calendar.description}}</td>
+                                          <td>
+                                     
+                                             {{calendar.start ? calendar.start|date('Y-m-d H:i:s') : '' }}
                                          
                                          </td>
                                        
-                                       
-                               
+                                       <td>{{ calendar.end  ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
+                                
+                                        <td> {{ calendar.allDay ? 'Yes' : 'No'}}</td>
+
+                                        <td> {{ calendar.backgroundColor }}</td>
+
+                                        <td> {{ calendar.borderColor }}</td>
+
+                                        <td> {{ calendar.textColor }}</td>
 
                                         <td>
                                             <div class="dropdown">
@@ -153,15 +151,15 @@
                                                     <i class="bx bx-dots-horizontal-rounded"></i>
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li><a class="dropdown-item" href="{{path('edit_user',{'id': user.id})}}">Modify</a></li>
-                                                    <li><a class="dropdown-item" href="{{path('delete_user',{'id': user.id})}}"> Delete</a></li>
+                                                    <li><a class="dropdown-item" href="{{path('edit_event',{'id': calendar.id})}}">Modify</a></li>
+                                                    <li><a class="dropdown-item" href="{{path('delete_event',{'id': calendar.id})}}"> Delete</a></li>
                                                     
                                                 </ul>
                                             </div>
                                         </td>
 {% else %}
   <tr> 
-  <td colspan=5 > Il n'ya pas d'utilisateurs inscrits </td>
+  <td colspan=5 > There is no Events </td>
     </tr>
     {% endfor %}
 
