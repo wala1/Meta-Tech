@@ -33,6 +33,8 @@ class User implements UserInterface
     public function __construct()
     {
         $this->panier = new ArrayCollection();
+        $this->publications = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
         
     }
 
@@ -88,6 +90,16 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idUser")
      */
     private $avis;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Publication::class, mappedBy="utilisateur")
+     */
+    private $publications;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur")
+     */
+    private $commentaires;
 
     /*public function __construct()
     {
@@ -189,6 +201,66 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($avi->getIdUser() === $this) {
                 $avi->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Publication>
+     */
+    public function getPublications(): Collection
+    {
+        return $this->publications;
+    }
+
+    public function addPublication(Publication $publication): self
+    {
+        if (!$this->publications->contains($publication)) {
+            $this->publications[] = $publication;
+            $publication->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublication(Publication $publication): self
+    {
+        if ($this->publications->removeElement($publication)) {
+            // set the owning side to null (unless already changed)
+            if ($publication->getUtilisateur() === $this) {
+                $publication->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getUtilisateur() === $this) {
+                $commentaire->setUtilisateur(null);
             }
         }
 

@@ -1,41 +1,58 @@
 {% extends "base.html.twig" %}
- 
 
 {% block body %}
 
+{% if app.user %}
+<h1> Publications: <a href="{{ path('ajouter_blog')}}" class=" btn btn-primary">Publier une publication</a></h1>
+{% endif %}
+<div class="publication">
+        {% if app.user %}
+        <h2>Mes Publications</h2>
+        {% endif %}
+        <div class="row">
+                {% for publication in mesPublications %}
+                <div class="col-6">
+                        <h3>{{ publication.titrePubl }}</h3>
+                        <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
+                                dans la categorie de publications </div>
+                        <div class="content">
+                                <img src="{{publication.imagepubl}}" width="200px;" alt="">
+                                <p>
+                                        {{ publication.descriptionPubl }}
+                                </p>
+                                <a href="  {{ path('blog_show', {'id' : publication.id }) }} "
+                                        class="btn btn-primary">lire la suite ({{publication.commentaires.count
+                                        }}) </a>
+                        </div>
+                </div>
+                {% endfor %}
+        </div>
+</div>
+<br>
+<div class="publication">
+        {% if app.user %}
+        <h2>Autre Publications</h2>
+        {% endif %}
+        <div class="row">
+                {% for publication in publications %}
+                <div class="col-6">
+                        <h3>{{ publication.titrePubl }}</h3>
+                        <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
+                                dans la categorie de publications </div>
+                        <div class="content">
+                                <img src="{{publication.imagepubl}}" width="200px;" alt="">
+                                <p>
+                                        {{ publication.descriptionPubl }}
+                                </p>
+                                <a href="  {{ path('blog_show', {'id' : publication.id }) }} "
+                                        class="btn btn-primary">lire la suite ({{publication.commentaires.count
+                                        }}) </a>
+                        </div>
+                </div>
+                {% endfor %}
+        </div>
 
+</div>
 
-<h1> Publications: <a href=" {{ path ("ajouter_blog")}} " class="btn btn-primary">Publier une publication</a></h1>
-<body> 
-<section class="publication">
-   
-
-   {% for publication in publications %}
-<publication>  
-        <h2>{{ publication.titrePubl }}</h2>
-        <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
-                dans la categorie de publications </div>
-        <div class="content">
-            <img src="{{publication.imagepubl}}" width="200px;" alt="">
-            <p>
-                    {{ publication.descriptionPubl }}
-            </p>
-            <a href="  {{ path('blog_show', {'id' : publication.id }) }} " class="btn btn-primary">lire la suite ({{publication.commentaires.count }}) </a>
-          
-    </div>
-   
-</publication>
-
-
-
-
-{% endfor %}
-
-
-
-    
-</section>
 </body>
 {% endblock %}
-
-

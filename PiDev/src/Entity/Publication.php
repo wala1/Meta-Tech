@@ -47,6 +47,11 @@ class Publication
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="publications")
+     */
+    private $utilisateur;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -133,6 +138,18 @@ class Publication
                 $commentaire->setIdPubl(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

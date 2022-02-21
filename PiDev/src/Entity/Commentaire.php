@@ -18,11 +18,6 @@ class Commentaire
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $username;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Publication::class, inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -38,22 +33,16 @@ class Commentaire
      */
     private $temps_comm;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaires")
+     */
+    private $utilisateur;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
 
     public function getIdPubl(): ?Publication
     {
@@ -87,6 +76,18 @@ class Commentaire
     public function setTempsComm(\DateTimeInterface $temps_comm): self
     {
         $this->temps_comm = $temps_comm;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
