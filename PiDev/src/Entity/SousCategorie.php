@@ -22,7 +22,7 @@ class SousCategorie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Entrer un nom de catégorie valide.")
+     * @Assert\NotBlank(message="Sub Category name must not be empty.")
      */
     private $nomSousCateg;
 

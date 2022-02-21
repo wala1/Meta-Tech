@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType ;
 
 /**
  * @ORM\Entity(repositoryClass=AvisRepository::class)
@@ -38,6 +39,7 @@ class Avis
      *      notInRangeMessage = "Please insert a rating between 1 and 5.",
      * )
      * @Assert\NotBlank(message="Please add a rating.")
+     * @Assert\Type(type="numeric", message="Rating should be an integer.")
      */
     private $ratingAvis;
 
@@ -49,7 +51,8 @@ class Avis
 
     /**
      * @ORM\Column(type="datetime")
-     */
+     * @ORM\JoinColumn(nullable=true)
+     */ 
     private $timeAvis;
 
     public function getId(): ?int

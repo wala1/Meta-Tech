@@ -1,7 +1,15 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block title %}
-	<title>Ajouter Produit</title>
+
+    {% if table=="produits" %}
+        <title>Products</title>
+    {% elseif table=="categories" %}
+        <title>Categories</title>
+    {% elseif table=="souscategories" %}
+        <title>SubCategories</title>
+    {% endif %}
+	
 {% endblock %}
 
 {% block body %}
@@ -70,7 +78,7 @@
                                             
                                             {% for produit in produits %}
                                             <tr style="font-weight:bold ; color : black ">
-                                                <td><img style="width:100px ; height:100px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" src="{{produit.imageProd}}"></td>
+                                                <td><img style="width:80px ; height:80px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" src="{{produit.imageProd}}"></td>
                                                 <td >{{ produit.nomProd }}</td>
                                                 <td>{{ produit.descProd }}</td>
                                                 <td>{{ produit.prixProd }}</td>
@@ -290,8 +298,8 @@
 
  
 
-<div class='sk-ww-twitch-live-videos' data-embed-id='74211'></div>
-<script src='https://widgets.sociablekit.com/twitch-live-videos/widget.js' async defer></script>
+<!--div class='sk-ww-twitch-live-videos' data-embed-id='74211'></div>
+<script src='https://widgets.sociablekit.com/twitch-live-videos/widget.js' async defer></script-->
 
 
 

@@ -39,6 +39,11 @@ class ProduitFormType extends AbstractType
                     'class'=>'form-control' 
                 ]
             ])
+            ->add('stockProd', NumberType::class,[
+                'attr' => [
+                    'class'=>'form-control' 
+                ]
+            ])
             ->add('promo_prod', NumberType::class,[
                 'attr' => [
                     'class'=>'form-control'

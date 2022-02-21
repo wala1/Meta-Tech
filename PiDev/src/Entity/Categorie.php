@@ -22,7 +22,7 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Entrer un nom de catégorie valide.")
+     * @Assert\NotBlank(message="Category name must not be empty.")
      */
     private $nom_categorie;
 

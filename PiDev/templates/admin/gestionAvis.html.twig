@@ -1,0 +1,153 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	<title>Ajouter Produit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+		<div class="main-content"> <div class="page-content">
+			<div
+				class="container-fluid"> 
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header"> 
+									<h2 class="card-title" style="font-size : 20px ; ">
+									<a href="{{ path('admin_avis')}} " style="margin-right : 20px ; " type="button" class="btn btn-primary waves-effect waves-light"> 
+										Back
+									</a>
+									{% if details == null %}
+										Reviews
+									{% elseif details == "avis" %}
+										Reviews  
+									{% endif %}
+
+										 
+									
+									</h2>
+									 
+								</div>
+								<div class="card-body">
+
+                                {% if details == null %}
+									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+											<tr style="font-size : 16px">
+												<th>Image</th>
+												<th>Name</th> 
+												<th>Reviews</th>
+
+											</tr>
+										</thead>
+
+
+										<tbody style="font-weight:bold ; color : black "> 
+											
+                                            {% for produit in produits %}
+                                                <tr>
+                                                    <td>
+                                                        <img style="width:80px ; height:80px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" src="{{ produit.imageProd }}">
+                                                          
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        {{ produit.nomProd }}
+                                                    </td>
+                                                    
+                                                    <td> 
+                                                        <a href="{{ path('avis_prod_admin', {'id' : produit.id }) }} "  type="button" class="btn btn-success waves-effect waves-light">
+                                                           Check Reviews
+                                                        </a>    
+                                                    </td>
+                                                </tr>
+											{% endfor %}
+ 
+										</tbody>
+									</table>
+
+
+                            <!-- ================== TABLE AVIS ====================== -->
+
+                                {% elseif details == "avis"  %}
+                                    <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+											<tr style="font-size : 16px">
+												<th>Username</th>
+												<th>Review</th> 
+												<th>Rating</th>
+                                                <th>Edit</th>
+											</tr>
+										</thead>
+
+
+										<tbody style="font-weight:bold ; color : black "> 
+											
+                                            {% for avi in avis %}
+                                                <tr>
+                                                    <td>
+                                                         {{ avi.idUser.username }}
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        {{ avi.descAvis }}
+                                                    </td>
+                                                    <td>
+                                                        
+                                                        {% for i in range(1,avi.ratingAvis) %}
+                                                            <span style="color : orange" class="fa fa-star checked"></span>
+                                                        {% endfor %}
+                                                        
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bx bx-dots-horizontal-rounded"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end"> 
+                                                                <li><a class="dropdown-item" href="{{path('delete_avis_avis',{'id':avi.id })}}"> Delete</a></li>
+                                                                
+                                                            </ul>
+                                                        </div>   
+                                                    </td>
+                                                </tr>
+											{% endfor %}
+ 
+										</tbody>
+									</table>
+                                
+
+
+
+                                {% endif %}
+
+
+								</div>
+							</div>
+							<!-- end cardaa -->
+						</div>
+						<!-- end col -->
+					</div>
+					<!-- end row -->
+
+
+					 
+
+
+			</div>
+			<!-- container-fluid -->
+		</div>
+		<!-- End Page-content -->
+
+ 
+
+
+	{% endblock %}
+

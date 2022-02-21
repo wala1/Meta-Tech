@@ -1,0 +1,169 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Form\ReclamationFormType ;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Reclamation ; 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType ;
+use App\Repository\ReclamationRepository ; 
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
+
+class ReclamationController extends AbstractController
+{
+    /**
+     * @Route("/reclamation", name="reclamation")
+     */
+    public function index(Request $request, Reclamation $reclamation=null): Response
+    {
+        if (!$reclamation) {
+            $reclamation = new Reclamation();
+        }
+        
+        $form = $this->createForm(ReclamationFormType::class, $reclamation) ; 
+         
+        $form->handleRequest($request);
+     
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reclamation) ; 
+            $em->flush() ; 
+            return $this->redirectToRoute('reclamation',array('sent'=>1)) ; 
+        }
+        return $this->render('reclamation/contact-us.html.twig', [
+            'form' => $form->createView() 
+        ]);
+    }
+
+
+    // ====================== ADMIN =========================
+    /**
+     * @Route("/admin/reclamation", name="admin_reclamation")
+     */
+    public function showReclamation(): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Reclamation::class) ; 
+        $reclamations = $repo->findAll() ; 
+
+         
+
+        return $this->render('reclamation/admin_reclamation.html.twig', [
+            'reclamations' => $reclamations ,
+            'details' =>  null
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/reclamation_id/{id}", name="reclamation_id")
+     */
+    public function showRecsId($id,  ReclamationRepository $repository): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Reclamation::class) ; 
+        $reclamations = $repo->findById($id) ;
+         
+
+        return $this->render('reclamation/admin_reclamation.html.twig', [
+            'reclamations' => $reclamations ,
+            'details' => "reclamation",
+            'mail_sent'=>0
+        ]);
+    }
+
+
+    /** 
+     * @Route("/reclamation_traite/{id}" , name="reclamation_traite")
+     */
+    public function modifierTraiteReclamation(Request $request,$id): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $reclamation = $em->getRepository(Reclamation::class)->find($id);
+        $reclamation->setTraiteReclamation(1) ;  
+
+        $em->persist($reclamation) ;  
+        $em->flush() ; 
+        return $this->redirectToRoute('reclamation_id', array('id'=>$id)) ; 
+        
+    }
+
+    /**
+     * @Route("/delete_reclamation/{id}", name="delete_reclamation")
+     */
+    public function delete_reclamation_back($id, ReclamationRepository $repository): Response
+    {   
+        $reclamation = $repository->find($id) ; 
+        $em = $this->getDoctrine()->getManager() ; 
+        $em->remove($reclamation) ; 
+        $em->flush() ; 
+        return $this->redirectToRoute('admin_reclamation') ;
+    }
+
+
+    /**
+     * @Route("/mail_reclamation/{id}", name="mail_reclamation")
+     */
+    public function mail(\Swift_Mailer $mailer , $id): Response
+    {   
+         
+        $address = $_POST['address'] ; 
+        $reply = $_POST['reply']  ;  
+        $name = $_POST['name']  ;  
+        $message= (new \Swift_Message('Reply To Report'))
+          
+            ->setFrom('contact@metatech.com')
+            ->setTo($address)
+           
+            ->setBody("<html>
+                        <head>
+                            <title></title>
+                        </head>
+                        <body>
+
+                            <center>
+                                
+                                <h1 style='color : green ; margin-top : 15px ; font-size : 25px ;  '>Thank you for your report</h1>
+                                <br> 
+                            </center>	
+                                <div>
+                                    <p style='color : black ; font-size : 16px ; '>
+                                        Hello <strong>".$name."</strong>,<br><br>
+                                    </p>
+                                    <p style='color : black !important ; '>
+                                        ".$reply."
+                                        <br>
+                                        <br>
+                                        <div style='color : black ;float:right'> Abdelaziz Makhlouf, Development Team</div><br>
+                                        <div style='color : black ;float:right'> Cordially,</div><br>
+                                        <div style='color : black ;float:right'> MetaTech</div>
+                                    </p>
+                                </div>
+                                
+                                <img height='300px' scr='logoFinal.png' />
+
+                        </body>
+                        </html>", 'text/html') 
+                ;
+           // envoi email
+           $mailer->send($message);
+
+
+           $repo = $this->getDoctrine()->getRepository(Reclamation::class) ; 
+           $reclamations = $repo->findById($id) ;
+         
+
+        return $this->render('reclamation/admin_reclamation.html.twig', [
+            'reclamations' => $reclamations ,
+            'details' => "reclamation",
+            'mail_sent'=>1
+        ]); 
+    }
+
+
+
+}

@@ -20,7 +20,7 @@ class Produit
      * @ORM\Column(type="integer")
      */
     private $id;
-
+ 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Product Name is required")
@@ -41,6 +41,9 @@ class Produit
     /**
      * @ORM\Column(type="string", length=400)
      * @Assert\NotBlank(message="Product Image is required")
+     * @Assert\Url(
+     * message = "The image must has an URL format.",
+     * )
      */
     public $image_prod;
 
@@ -48,13 +51,14 @@ class Produit
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Product Price is  required")
      * @Assert\Type(type="double", message="Product discount must be float.")
+     * @Assert\Positive(message="Price should be a positive value.")
      */
     public $prix_prod;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Please make sure to enter 0 if the product has no discount.")
-     * @Assert\Type(type="float",message="Product discount must be float.")
+     * @Assert\Type(type="float",message="Product discount must be float.") 
      */
     public $promo_prod;
 
@@ -64,7 +68,7 @@ class Produit
     public $ratingProd;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=1500, nullable=true)
      */
     public $model_prod;
 
@@ -74,10 +78,17 @@ class Produit
      */
     public $sousCategProd;
 
-    /**
+    /**  
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idProd")
      */
     private $avis;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive(message="Quantity should be a positive value.")
+     * @Assert\NotBlank(message="Please make sure to enter the quantity of your product.")
+     */
+    private $stockProd;
 
     public function __construct()
     {
@@ -233,6 +244,18 @@ class Produit
                 $avi->setIdProd(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStockProd(): ?int
+    {
+        return $this->stockProd;
+    }
+
+    public function setStockProd(?int $stockProd): self
+    {
+        $this->stockProd = $stockProd;
 
         return $this;
     }

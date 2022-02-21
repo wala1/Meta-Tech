@@ -15,9 +15,23 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType ;
 use App\Repository\ProduitRepository ; 
 use App\Repository\AvisRepository ; 
 use Symfony\Component\Validator\Constraints\DateTime ; 
+use Symfony\Component\Security\Core\Security;
 
 class ProduitController extends AbstractController
-{
+{   
+
+
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+       $this->security = $security;
+    }
+
+
     /**
      * @Route("/produit", name="produit")
      */
@@ -63,7 +77,8 @@ class ProduitController extends AbstractController
         $avis = $avis->findByidProd($id) ;
 
         $prod = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(['id'=>$id]) ; 
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id'=> 103 ]) ; 
+        //$user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id'=> 103 ]) ; 
+        $user = $this->security->getUser();
 
         $avisNew = new Avis() ; 
         $form = $this->createForm(AvisFormType::class, $avisNew) ; 
@@ -77,23 +92,31 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             
+            if ($user==null) {
+                return $this->redirectToRoute('security_login') ; 
+            }
+
             $avisNew->setIdProd($prod) ; 
+            $user = $this->security->getUser();
             $avisNew->setIdUser($user) ; 
+            $avisNew->setTimeAvis(new \DateTime()) ; 
 
             $em = $this->getDoctrine()->getManager(); 
             $em->persist($avisNew) ; 
             $em->flush() ; 
-            return $this->render('produit/product.html.twig', [
-            'produits' => $produits,
-            'avis' => $avis,
-            'form' => $form->createView() 
-        ]); 
+            
+            
+            return $this->redirectToRoute('product_show', array('id'=>$id, 'produits' => $produits, 'form' => $form->createView(), 'avis' => $avis, 'user'=>$user  )) ;
+             
+
+             
         } 
                   
 
         return $this->render('produit/product.html.twig', [
             'produits' => $produits,
             'avis' => $avis,
+            'user'=>$user,
             'form' => $form->createView() 
         ]);
     }
@@ -117,6 +140,7 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
      
         if ($form->isSubmitted() && $form->isValid()) {
+            $produit->setRatingProd(1) ; 
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit) ; 
             $em->flush() ; 
