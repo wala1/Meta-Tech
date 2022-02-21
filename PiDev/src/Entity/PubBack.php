@@ -66,7 +66,12 @@ class PubBack
     /**
      * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="pubBacks")
      */
-    private $calendar;
+    private $calender;
+
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="pubBacks")
+    //  */
+    // private $calendar;
 
     public function __construct()
     {
@@ -192,15 +197,18 @@ class PubBack
              return $this;
          }
 
-         public function getCalendar(): ?Calendar
+         public function getCalender(): ?Calendar
          {
-             return $this->calendar;
+             return $this->calender;
          }
 
-         public function setCalendar(?Calendar $calendar): self
+         public function setCalender(?Calendar $calender): self
          {
-             $this->calendar = $calendar;
+             $this->calender = $calender;
 
              return $this;
          }
+
+ 
+         
 }
