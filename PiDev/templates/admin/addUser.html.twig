@@ -1,0 +1,61 @@
+
+       {%  extends 'baseAdmin.html.twig'   %}
+           
+           
+           {% block title %}   
+           <title> Add User </title>
+           {% endblock %}
+
+           {%  block body  %}
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Add New User</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
+                                            <li class="breadcrumb-item active">Add User</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+
+
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                {{ form_start(userAddForm,{'attr':{'novalidate':'novalidate'}}) }}
+{{ form_row(userAddForm.username,{ 'attr': {'placeholder': "Nom ..."  }}) }}
+{{ form_row(userAddForm.email,{ 'attr': {'placeholder': " email  "  }}) }}
+{{form_row(userAddForm.password,{'label' : 'Password','attr':{'placeholder':'.....','novalidate':'novalidate'}})  }}
+{{form_row(userAddForm.confirm_password,{'label' : 'Confirm Password','attr':{'placeholder':'....','novalidate':'novalidate'}})  }}
+
+{{ form_end(userAddForm) }} 
+         {% endblock  %}
+
+
+
+
+
+
+
+
+

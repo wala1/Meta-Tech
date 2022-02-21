@@ -274,10 +274,10 @@ setCookie("shownewsletter", '0', 1)
 								<div class="flex-layout space-between center_vertical center-mobile">
 									<div class=" topbar-contact-email hidden-sm">
 										<p class="phone">
-											<a href="tel:393525684593">Need Help? +44 (0) 123 4567</a>
+											<a href="tel:393525684593">Need Help? +216 222222222</a>
 										</p>
 										<p class="email">
-											<a href="mailto:hello@domain.com">support@ohey.com</a>
+											<a href="mailto:hello@domain.com">support@metatech.tn</a>
 										</p>
 									</div>
 									<div class="col-right flex-layout center_vertical">
@@ -344,8 +344,8 @@ setCookie("shownewsletter", '0', 1)
 											<span data-action="toggle-nav" class="action nav-toggle">
 												<span>Toggle Nav</span>
 											</span>
-											<a class="logo" href="index.html" title="" aria-label="store logo">
-												<img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/logo/stores/15/xlogo.png.pagespeed.ic.yMZPYmpp-3.png" title="" alt=""/>
+											<a class="logo" href="/" title="" aria-label="store logo">
+												<img src="../media/slidebanner/s/l/logo.png" title="" alt="" width="100"/>
 											</a>
 										</div>
 									</div>
@@ -363,19 +363,8 @@ setCookie("shownewsletter", '0', 1)
 															<div class="field-by-cat-search hidden-xs">
 																<select name="cat" id="choose_category">
 																	<option value="">All Categories</option>
-																	<option value="157">Engine Systems</option>
-																	<option value="159">Interior</option>
-																	<option value="160">Performance</option>
-																	<option value="128">Shop</option>
-																	<option value="161">Lighting</option>
-																	<option value="162">Wheels & Tires</option>
-																	<option value="163">Exterior</option>
-																	<option value="164">Repair Parts</option>
-																	<option value="165">Body Parts</option>
-																	<option value="166">Audios & Electronic</option>
-																	<option value="167">Oils & Fluids</option>
-																	<option value="168">
-																		Brake Systems</option>
+																	<option value="157">Engine Systems</option> 
+																	<option value="168">Brake Systems</option>
 																</select>
 															</div>
 															<div class="field search">
@@ -454,15 +443,31 @@ $('#search-input-autocomplate').focus();
 									</div>
 									<div class="col-action col-right">
 										<ul class="flex-layout action-header center_vertical">
+										
 											<li>
 												<ul class="header links">
+												 {% if not app.user %}
 													<li class="link authorization-link" data-label="or">
-														<a href="customer/account/login/referer/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s/index.html">Sign In</a>
+												
+														<a href="{{ path('security_login') }}">Sign In</a>
+													  
+
 													</li>
-													<li>
-														<a href="customer/account/create/index.html" id="idOeeZISUP">Create an Account</a>
-													</li>
+													    {% else %}
+													
+														<li class="link authorization-link" data-label="or">
+														<a href="{{ path('security_logout') }}">Sign Out</a>
+															</li>
+												
+														  {% endif %}
+
 												</ul>
+											</li>
+											<li class="link authorization-link">
+											
+											{% if is_granted('ROLE_ADMIN') %}
+													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+											{% endif %}
 											</li>
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
 												<a href="wishlist/index.html"></a>
@@ -595,7 +600,7 @@ $('#search-input-autocomplate').focus();
 											<ul class="custommenu-list menu">
 
 												<li class="ui-menu-item level0 classic ">
-													<a class="level-top" href="index.html">Home</a>
+													<a class="level-top" href="/">Home</a>
 												</li>
 												<li class="ui-menu-item level0 fullwidth menu-item-has-children parent">
 													<div class="open-children-toggle"></div>
@@ -609,31 +614,7 @@ $('#search-input-autocomplate').focus();
 																		<span>Body Parks</span>
 																	</a>
 																	<ul class="subchildmenu ">
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/body-parks/bumpers.html">
-																				<span>Bumpers</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/body-parks/doors.html">
-																				<span>Doors</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/body-parks/fenders.html">
-																				<span>Fenders</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/body-parks/mirrors.html">
-																				<span>Mirrors</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/body-parks/brake-discs.html">
-																				<span>Brake Discs</span>
-																			</a>
-																		</li>
+																		  
 																		<li class="ui-menu-item level2 ">
 																			<a href="shop/body-parks/calipers.html">
 																				<span>Calipers</span>
@@ -641,37 +622,15 @@ $('#search-input-autocomplate').focus();
 																		</li>
 																	</ul>
 																</li>
+
 																<li class="ui-menu-item level1 parent ">
 																	<div class="open-children-toggle"></div>
 																	<a href="shop/electronics.html">
 																		<span>Electronics</span>
 																	</a>
 																	<ul class="subchildmenu ">
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/electronics/amplifiers.html">
-																				<span>Amplifiers</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/electronics/tools-garage.html">
-																				<span>Tools & Garage</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/electronics/speakers.html">
-																				<span>Speakers</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/electronics/stereos.html">
-																				<span>Stereos</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/electronics/shocks.html">
-																				<span>Shocks</span>
-																			</a>
-																		</li>
+																		  
+																		 
 																		<li class="ui-menu-item level2 ">
 																			<a href="shop/electronics/struts.html">
 																				<span>
@@ -686,31 +645,7 @@ $('#search-input-autocomplate').focus();
 																		<span>Wheels & Tires</span>
 																	</a>
 																	<ul class="subchildmenu ">
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/wheels-tires/amplifiers.html">
-																				<span>Amplifiers</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/wheels-tires/installation-parts.html">
-																				<span>Installation Parts</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/wheels-tires/speakers.html">
-																				<span>Speakers</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/wheels-tires/stereo.html">
-																				<span>Stereo</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/wheels-tires/fog-lights.html">
-																				<span>Fog Lights</span>
-																			</a>
-																		</li>
+																		 
 																		<li class="ui-menu-item level2 ">
 																			<a href="shop/wheels-tires/headlights.html">
 																				<span>Headlights</span>
@@ -724,31 +659,7 @@ $('#search-input-autocomplate').focus();
 																		<span>Performace Parts</span>
 																	</a>
 																	<ul class="subchildmenu ">
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/performace-parts/air-intake-systems.html">
-																				<span>Air Intake Systems</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/performace-parts/engine-components.html">
-																				<span>Engine Components</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/performace-parts/exhaust-systems.html">
-																				<span>Exhaust Systems</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/performace-parts/performance-chips.html">
-																				<span>Performance Chips</span>
-																			</a>
-																		</li>
-																		<li class="ui-menu-item level2 ">
-																			<a href="shop/performace-parts/components.html">
-																				<span>Components</span>
-																			</a>
-																		</li>
+																		 
 																		<li class="ui-menu-item level2 ">
 																			<a href="shop/performace-parts/replacement-bulbs.html">
 																				<span>Replacement Bulbs</span>
@@ -768,25 +679,16 @@ $('#search-input-autocomplate').focus();
 															<ul class="subchildmenu ">
 																<li class="ui-menu-item level2 ">
 																	<a href="store-locator/index.html">Store Locator</a>
-																</li>
-																<li class="ui-menu-item level2 ">
-																	<a href="rokanthemes-brand.html">Shop by brand</a>
-																</li>
-																<li class="ui-menu-item level2 ">
-																	<a href="rokanfaq.html">Faq</a>
-																</li>
-																<li class="ui-menu-item level2 ">
-																	<a href="404/index.html">404 page</a>
-																</li>
+																</li> 
 															</ul>
 														</div>
 													</div>
 												</li>
 												<li class="ui-menu-item level0">
-													<a class="level-top" href="blog/index.html">Blog</a>
+													<a class="level-top" href="{{path('blog')}}">Blog</a>
 												</li>
 												<li class="ui-menu-item level0 classic ">
-													<a class="level-top" href="contact/index.html">Contact us</a>
+													<a class="level-top" href="{{path('produit')}}">Products</a>
 												</li>
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="about-us/index.html">About us</a>
@@ -819,13 +721,28 @@ return false;
 										<ul class="flex-layout action-header center_vertical ">
 											<li>
 												<ul class="header links">
+												 {% if not app.user %}
 													<li class="link authorization-link" data-label="or">
-														<a href="customer/account/login/referer/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s/index.html">Sign In</a>
+												
+														<a href="{{ path('security_login') }}">Sign In</a>
+													  
+
 													</li>
-													<li>
-														<a href="customer/account/create/index.html" id="idOeeZISUP">Create an Account</a>
-													</li>
+													    {% else %}
+													
+														<li class="link authorization-link" data-label="or">
+														<a href="{{ path('security_logout') }}">Sign Out</a>
+															</li>
+												
+														  {% endif %}
+
 												</ul>
+											</li>
+											<li class="link authorization-link">
+											
+											{% if is_granted('ROLE_ADMIN') %}
+													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+											{% endif %}
 											</li>
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
 												<a href="wishlist/index.html"></a>
@@ -1002,14 +919,18 @@ return false;
 										</span>
 									</a>
 								</div>
+					
 
 
 
 
 
 
+		{% block title %}
+			
+		{% endblock %}
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -1020,21 +941,13 @@ return false;
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
-   
-   
-   
-   
     <body>
         {% block body %}
-		
-		
+			 
 		{% endblock %}
+	
     </body>
-
-
-
-
-
+		
 <footer class="page-footer">
 	<div id="focus-area"></div>
 	<div id="back-top" class="">
@@ -1092,7 +1005,7 @@ return false;
 						<h4 class="footer-title">here to help</h4>
 						<div class="footer-contents">
 							<p>Have a question? You may find an answer in our FAQs.
-								But you can also contact us:</p>
+																But you can also contact us:</p>
 							<div class="info_help">
 								<div class="info_content info_phone">
 									<span class="icon-phone-outgoing">
@@ -1232,19 +1145,21 @@ return false;
 		</div>
 	</div>
 </footer>
+
+
 <script type="text/x-magento-init">
 	{
-	            "*": {
-	                "Magento_Ui/js/core/app": {
-	                    "components": {
-	                        "storage-manager": {
-	                            "component": "Magento_Catalog/js/storage-manager",
-	                            "appendTo": "",
-	                            "storagesConfiguration" : {"recently_viewed_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"recently_compared_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"product_data_storage":{"updateRequestConfig":{"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/rest\/en11\/V1\/products-render-info"},"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"allowToSendRequest":null}}                        }
-	                    }
-	                }
-	            }
-	        }
+		            "*": {
+		                "Magento_Ui/js/core/app": {
+		                    "components": {
+		                        "storage-manager": {
+		                            "component": "Magento_Catalog/js/storage-manager",
+		                            "appendTo": "",
+		                            "storagesConfiguration" : {"recently_viewed_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"recently_compared_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"product_data_storage":{"updateRequestConfig":{"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/rest\/en11\/V1\/products-render-info"},"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"allowToSendRequest":null}}                        }
+		                    }
+		                }
+		            }
+		        }
 </script>
 <div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper">
 	<a id="ajaxsuite-close" class="ajaxsuite-close"></a>
@@ -1316,5 +1231,5 @@ $(this).addClass("transition");
 });
 });</script></body><!-- Mirrored from blueskytechmage.com/ohey/en11/anzo-led-headlights-gauge-kit.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Feb 2022 19:00:33 GMT --></html>
 
-    
+
 </html>

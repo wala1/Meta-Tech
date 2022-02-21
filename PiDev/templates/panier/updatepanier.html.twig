@@ -1,0 +1,32 @@
+{% extends " base.html.twig" %}
+{% block body %}
+
+			<div class="main-content"> 
+                <div class="page-content">
+                    <div class="container-fluid">
+						<h2>
+                        <div>
+							{{ form_start(formA,{'attr': {'novalidate': 'novalidate'}} ) }}
+								<table  style="width : 25%">
+									<tr>
+										<td style="padding:1%">
+
+											{{ form_label(formA.prix_prod,"Price ") }}
+											{{ form_widget(formA.prix_prod) }}
+											{{ form_errors(formA.prix_prod) }}
+											<br>
+
+											{{ form_label(formA.promo_prod,"Promotion ") }}
+											{{ form_widget(formA.promo_prod) }}
+											{{ form_errors(formA.promo_prod) }}
+											<br> 
+										</td>   
+									</tr>
+								</table>
+							{{ form_end(formA) }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+{% endblock %}
