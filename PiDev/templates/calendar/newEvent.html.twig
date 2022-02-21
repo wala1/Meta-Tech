@@ -1,0 +1,151 @@
+   {%  extends 'baseAdmin.html.twig'   %}
+           
+           
+           {% block title %}   
+           <title> New Event </title>
+           {% endblock %}
+
+           {%  block body  %}
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Add New Event</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Event</a></li>
+                                            <li class="breadcrumb-item active">Add Event</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+
+
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+                {# <div style="margin-left : 50px  ">
+{{form(formEvent,{'attr':{'novalidate':'novalidate'}})}}
+</div> #}
+                 <div style="margin-left : 90px  ">
+
+							{{ form_start(formEvent,{'attr': {'novalidate': 'novalidate'}} ) }}
+                                   <table  style="width : 80%">
+                                   
+                                       <tr> 
+                                     
+                                       	<br>
+										<td style="padding:1%">
+                                           
+											{{ form_label(formEvent.title,"Title ") }}
+											{{ form_widget(formEvent.title) }}
+											{{ form_errors(formEvent.title) }}
+										 
+
+											<br> 
+
+										 
+											{{ form_label(formEvent.description,"Description ") }}
+											{{ form_widget(formEvent.description) }} 
+											{{ form_errors(formEvent.description) }}
+										 
+
+											 <br>
+
+											{{ form_label(formEvent.imageEvent,"Image ") }}
+											{{ form_widget(formEvent.imageEvent) }}
+											{{ form_errors(formEvent.imageEvent) }} 
+
+										 
+											
+										</td>
+										<br>
+                                       
+                                       </tr>
+                                        
+                                       <tr>
+										<td style="padding:1%">
+											{{ form_label(formEvent.start,"Start ") }}
+											{{ form_widget(formEvent.start) }}
+											{{ form_errors(formEvent.start) }}
+											<br>
+										</td>   
+										
+											
+										<td style="padding:1%">
+											{{ form_label(formEvent.end,"End ") }}
+											{{ form_widget(formEvent.end) }}
+											{{ form_errors(formEvent.end) }}
+											<br> 
+										
+											
+											
+										</td>
+                                        	<td style="padding:1%">
+											{{ form_label(formEvent.allDay,"All Day ?  ") }}
+											{{ form_widget(formEvent.allDay) }}
+											{{ form_errors(formEvent.allDay) }}
+											<br> 
+										
+											
+											
+										</td>
+                                        </tr>
+                                         <tr>
+										<td style="padding:1%">
+											{{ form_label(formEvent.backgroundColor,"Background ") }}
+											{{ form_widget(formEvent.backgroundColor) }}
+											{{ form_errors(formEvent.backgroundColor) }}
+											<br>
+										</td>   
+										
+											
+										<td style="padding:1%">
+											{{ form_label(formEvent.borderColor,"Border") }}
+											{{ form_widget(formEvent.borderColor) }}
+											{{ form_errors(formEvent.borderColor) }}
+											<br> 
+										
+											
+											
+										</td>
+                                        	<td style="padding:1%">
+											{{ form_label(formEvent.textColor,"Text") }}
+											{{ form_widget(formEvent.textColor) }}
+											{{ form_errors(formEvent.textColor) }}
+											<br> 
+										
+											
+											
+										</td>
+                                        </tr>
+
+                                    </table>
+
+                        {{form_end(formEvent)}}
+
+                     </div>
+
+    <a href="\Events">back to list</a>
+
+         {% endblock  %}
+
+
+
+
