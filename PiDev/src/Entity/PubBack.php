@@ -63,6 +63,11 @@ class PubBack
      */
     private $produit;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="pubBacks")
+     */
+    private $calendar;
+
     public function __construct()
     {
         $this->coupon = new ArrayCollection();
@@ -183,6 +188,18 @@ class PubBack
          public function setProduit(?Produit $produit): self
          {
              $this->produit = $produit;
+
+             return $this;
+         }
+
+         public function getCalendar(): ?Calendar
+         {
+             return $this->calendar;
+         }
+
+         public function setCalendar(?Calendar $calendar): self
+         {
+             $this->calendar = $calendar;
 
              return $this;
          }
