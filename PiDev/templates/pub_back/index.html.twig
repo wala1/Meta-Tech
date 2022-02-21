@@ -20,12 +20,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Liste des utilisateurs</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Liste des Produits</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
-                                            <li class="breadcrumb-item active">Liste des utilisateurs</li>
+                                            <li class="breadcrumb-item active">Liste des Produits</li>
                                         </ol>
                                     </div>
 
@@ -37,7 +37,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <h5 class="card-title">Contact List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                                    <h5 class="card-title">Publicité <span class="text-muted fw-normal ms-2">(834)</span></h5>
                                 </div>
                             </div>
 
@@ -54,6 +54,8 @@
                                         </ul>
                                     </div>
                                     <div>
+
+                                                <!--   BOTTOM ADD   -->
                                         <a href="{{path('addP')}}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
                                     </div>
                                     
@@ -112,9 +114,9 @@
 
                                     
 
-                                      {% for pub in pubBack %}
+                                    {% for pub in pubBack %}
      
-
+                
    
 
                                     <tr >
@@ -141,7 +143,9 @@
                                                     <i class="bx bx-dots-horizontal-rounded"></i>
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
+                                                <!--   BOTTOM MODIFY   -->
                                                     <li><a class="dropdown-item" href="{{ path('update', {'id': pub.id }) }}">Modify</a></li>
+                                                <!--   BOTTOM DELETE   -->
                                                     <li><a class="dropdown-item" href="{{ path('delete', {'id': pub.id }) }}">Delete</a></li>
                                                 </ul>
                                             </div>

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CouponRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,21 @@ class Coupon
      */
     private $codeCoup;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=PubBack::class, inversedBy="coupon")
+     */
+    private $pubBack;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PubBack::class, mappedBy="coupon1")
+     */
+    private $pubBack1;
+
+    public function __construct()
+    {
+        $this->pubBack1 = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +52,48 @@ class Coupon
     public function setCodeCoup(string $codeCoup): self
     {
         $this->codeCoup = $codeCoup;
+
+        return $this;
+    }
+
+    public function getPubBack(): ?PubBack
+    {
+        return $this->pubBack;
+    }
+
+    public function setPubBack(?PubBack $pubBack): self
+    {
+        $this->pubBack = $pubBack;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PubBack[]
+     */
+    public function getPubBack1(): Collection
+    {
+        return $this->pubBack1;
+    }
+
+    public function addPubBack1(PubBack $pubBack1): self
+    {
+        if (!$this->pubBack1->contains($pubBack1)) {
+            $this->pubBack1[] = $pubBack1;
+            $pubBack1->setCoupon1($this);
+        }
+
+        return $this;
+    }
+
+    public function removePubBack1(PubBack $pubBack1): self
+    {
+        if ($this->pubBack1->removeElement($pubBack1)) {
+            // set the owning side to null (unless already changed)
+            if ($pubBack1->getCoupon1() === $this) {
+                $pubBack1->setCoupon1(null);
+            }
+        }
 
         return $this;
     }

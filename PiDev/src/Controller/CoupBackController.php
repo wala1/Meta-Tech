@@ -30,8 +30,8 @@ class CoupBackController extends AbstractController
          /**
       * @Route("/coupon", name="coupon")
      */ 
-     public function  Coupon(CouponRepository $coupBack) {
-      return $this->render("coup_back/index.html.twig", [
+    public function  Coupon(CouponRepository $coupBack) {
+      return $this->render('coup_back/index.html.twig', [
            'coupBack' => $coupBack->findAll()
        ]);
      
