@@ -48,7 +48,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
-            $publication->setTempsPubl(new \DateTime);
+            $publication->setTempsPubl(new \DateTime); // date system date
+            
             $em = $this->getDoctrine()->getManager();
            $em->persist($publication) ; 
             $em->flush() ; 

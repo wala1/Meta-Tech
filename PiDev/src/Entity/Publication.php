@@ -51,11 +51,9 @@ class Publication
     {
         $this->commentaires = new ArrayCollection();
     }
-
     
 
     
-
     public function getId(): ?int
     {
         return $this->id;
