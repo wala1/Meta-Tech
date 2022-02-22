@@ -151,4 +151,21 @@ class ProfileController extends AbstractController
 
 
 
+
+
+/**
+     * @Route("/eventUser", name="events_user")
+     */
+    public function eventUser(): Response
+    {
+        return $this->render('profile/eventUser.html.twig', [
+            'controller_name' => 'ProfileController',
+        ]);
+    }
+
+
+
+
+
+
 }

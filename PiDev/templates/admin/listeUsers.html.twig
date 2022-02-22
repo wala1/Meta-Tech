@@ -100,6 +100,8 @@
                                    {# <th scope="col">Phone Number</th> #}
 
                                     <th scope="col">Roles</th>
+                                  <th scope="col">Events</th> 
+
 
                                     <th style="width: 80px; min-width: 80px;">Actions</th>
                                   </tr>
@@ -144,7 +146,9 @@
                                          
                                          </td>
                                        
-                                       
+                                         <td>{% if user.calendar != null  %} 
+                                         {{ user.calendar.title }}
+                                         {% endif %}</td> 
                                
 
                                         <td>

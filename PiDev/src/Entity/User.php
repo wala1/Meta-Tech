@@ -99,9 +99,11 @@ class User implements UserInterface
     private $avis;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Calendar::class, mappedBy="user")
+     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="participant")
      */
-    private $calendars;
+    private $calendar;
+
+  
 
     // /**
     //  * @ORM\Column(type="bigint")
@@ -247,31 +249,17 @@ class User implements UserInterface
     //     return $this;
     // }
 
-    /**
-     * @return Collection|Calendar[]
-     */
-    public function getCalendars(): Collection
+    public function getCalendar(): ?Calendar
     {
-        return $this->calendars;
+        return $this->calendar;
     }
 
-    public function addCalendar(Calendar $calendar): self
+    public function setCalendar(?Calendar $calendar): self
     {
-        if (!$this->calendars->contains($calendar)) {
-            $this->calendars[] = $calendar;
-            $calendar->addUser($this);
-        }
+        $this->calendar = $calendar;
 
         return $this;
     }
 
-    public function removeCalendar(Calendar $calendar): self
-    {
-        if ($this->calendars->removeElement($calendar)) {
-            $calendar->removeUser($this);
-        }
-
-        return $this;
-    }
-
+   
 }

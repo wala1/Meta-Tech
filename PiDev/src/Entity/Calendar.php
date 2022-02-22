@@ -91,15 +91,20 @@ class Calendar
      * @Assert\NotBlank(message="Event image is required")
      */
     private $imageEvent;
+    //Each event have many users / each user have one event
+
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="calendars")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="calendar")
      */
-    private $user;
+    private $participant;
+
+  
 
     public function __construct()
     {
         $this->user = new ArrayCollection();
+        $this->participant = new ArrayCollection();
     }
 
   
@@ -219,26 +224,34 @@ class Calendar
     /**
      * @return Collection|User[]
      */
-    public function getUser(): Collection
+    public function getParticipant(): Collection
     {
-        return $this->user;
+        return $this->participant;
     }
 
-    public function addUser(User $user): self
+    public function addParticipant(User $participant): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->participant->contains($participant)) {
+            $this->participant[] = $participant;
+            $participant->setCalendar($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeParticipant(User $participant): self
     {
-        $this->user->removeElement($user);
+        if ($this->participant->removeElement($participant)) {
+            // set the owning side to null (unless already changed)
+            if ($participant->getCalendar() === $this) {
+                $participant->setCalendar(null);
+            }
+        }
 
         return $this;
     }
+
+  
 
 
 }

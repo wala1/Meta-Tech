@@ -101,6 +101,8 @@
                                     <th scope="col">Start</th>
                                     <th scope="col">End</th>
                                      <th scope="col">All Day</th>
+                                        {# <th scope="col">the participants</th>   #}
+
                                       <th scope="col">Background color</th>
                                        <th scope="col">Border coloer</th>
                                         <th scope="col">Text Color</th>
@@ -138,6 +140,8 @@
                                        <td>{{ calendar.end  ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
                                 
                                         <td> {{ calendar.allDay ? 'Yes' : 'No'}}</td>
+                                          {# <td> {{ calendar.participant.username }}</td>   #}
+
 
                                         <td> {{ calendar.backgroundColor }}</td>
 
