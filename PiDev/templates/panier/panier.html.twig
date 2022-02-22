@@ -25,7 +25,7 @@
         }
     </script>
     </head>
-    <body data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader checkout-cart-index page-layout-1column">
+    <body style="font-family: Mark\ Pro,sans-serif;" data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader checkout-cart-index page-layout-1column">
         <div class="enable-sticky-header"></div>
 
 <script type="text/x-magento-init">
@@ -103,7 +103,8 @@
                 <p>
                     <strong>JavaScript seems to be disabled in your browser.</strong>
                     <span>
-                        For the best experience on our site, be sure to turn on Javascript in your browser.                    </span>
+                        For the best experience on our site, be sure to turn on Javascript in your browser.                    
+                    </span>
                 </p>
             </div>
         </div>
@@ -121,7 +122,8 @@
 			<div class="content">
 								<h2>Get Our Email Letter</h2>
 <p>Subscribe to the Ohey mailing list to receive updates on new arrivals, special offers and other discount information.</p>			</div>
-			<form class="form subscribe" novalidate action="https://blueskytechmage.com/ohey/en11/newsletter/subscriber/new/" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="newsletter-validate-popup">
+			<form class="form subscribe" novalidate action="" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="newsletter-validate-popup">
+				<form class="form subscribe" novalidate action="https://blueskytechmage.com/ohey/en11/newsletter/subscriber/new/" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="newsletter-validate-popup">
 				<div class="field newsletter">
 					<div class="control">
 						<input name="email" type="email" id="newsletter-popup" placeholder="Enter your email address" data-validate="{required:true, 'validate-email':true}"/>
@@ -296,24 +298,13 @@
 <div data-block="minicart" class="minicart-wrapper">
     <a class="action showcart" href="index.html" data-bind="scope: 'minicart_content'">
 		<span class="counter qty empty" data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-				<!-- <span class="icon-cart-header"><i class="menu-icon  icon flaticon-shopping-cart6">&nbsp;</i></span> -->
 				<span class="total-mini-cart-item">
-				<!-- ko if: getCartParam('summary_count') -->
-					<!-- ko text: getCartParam('summary_count') --><!-- /ko -->
-				<!-- /ko -->
-				<!-- ko if: !getCartParam('summary_count') -->
-					0
-				<!-- /ko -->
 				</span>
 		</span>
 		<span class="mini-cart-text"> 
 			<span class="content-cart hidden-xs">
-				<!-- ko if: getCartParam('subtotal') -->
 				<span class="total-mini-cart-price" data-bind="html: getCartParam('subtotal')"></span>
-				<!-- /ko -->
-				<!-- ko if: !getCartParam('subtotal') -->
 					<span class="total-mini-cart-price"><span class="price">$0.000</span></span>
-				<!-- /ko -->
 			</span>
 		</span>
     </a>
@@ -503,162 +494,47 @@
 
 
 
-{% if panierExiste == true and mode == "cart" %}
 
-<a id="contentarea" tabindex="-1"></a>
-<div class="page-title-wrapper">
-    <h1 class="page-title">
-        <span class="base" data-ui-id="page-title-wrapper">Shopping Cart</span>   
-    </h1>
-</div>
+        <a id="contentarea" tabindex="-1"></a>
+        <div class="page-title-wrapper" style="position: relative; width: 100%; height: auto; margin-top: 5rem; ">
+            <h1 class="page-title" style="font-size: 5rem; line-height: 1; margin-bottom: 0; font-weight: 500;">
+                <span class="base" data-ui-id="page-title-wrapper" style="font-size: 5rem; line-height: 1; margin-bottom: 0; font-weight: 500;">
+                    {% if mode == "store" %}
+                        Express Checkout
+                    {% else %}
+                        <center style="marging-left:12.6cm;"> Shopping Cart </center>
+                    {% endif %}
+                </span>   
+            </h1>
+        </div>
 
-<div class="columns"><div class="column main"><input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
-        <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
-    <script type="text/x-magento-init">
-        {
-            "#authenticationPopup": {
-                "Magento_Ui/js/core/app": {"components":{"authenticationPopup":{"component":"Magento_Customer\/js\/view\/authentication-popup","children":{"messages":{"component":"Magento_Ui\/js\/view\/messages","displayArea":"messages"},"captcha":{"component":"Magento_Captcha\/js\/view\/checkout\/loginCaptcha","displayArea":"additional-login-form-fields","formId":"user_login","configSource":"checkout"},"amazon-button":{"component":"Amazon_Login\/js\/view\/login-button-wrapper","sortOrder":"0","displayArea":"additional-login-form-fields","config":{"tooltip":"Securely login to our website using your existing Amazon details.","componentDisabled":true}}}}}}            },
-            "*": {
-                "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
-            }
-        }
-    </script>
-</div>
+{% if panierExiste == true %}
 
 
 
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/section-config": {
-                "sections": {"stores\/store\/switch":["*"],"stores\/store\/switchrequest":["*"],"directory\/currency\/switch":["*"],"*":["messages"],"customer\/account\/logout":["*","recently_viewed_product","recently_compared_product","persistent"],"customer\/account\/loginpost":["*"],"customer\/account\/createpost":["*"],"customer\/account\/editpost":["*"],"customer\/ajax\/login":["checkout-data","cart","captcha"],"catalog\/product_compare\/add":["compare-products"],"catalog\/product_compare\/remove":["compare-products"],"catalog\/product_compare\/clear":["compare-products"],"sales\/guest\/reorder":["cart"],"sales\/order\/reorder":["cart"],"checkout\/cart\/add":["cart","directory-data"],"checkout\/cart\/delete":["cart"],"checkout\/cart\/updatepost":["cart"],"checkout\/cart\/updateitemoptions":["cart"],"checkout\/cart\/couponpost":["cart"],"checkout\/cart\/estimatepost":["cart"],"checkout\/cart\/estimateupdatepost":["cart"],"checkout\/onepage\/saveorder":["cart","checkout-data","last-ordered-items"],"checkout\/sidebar\/removeitem":["cart"],"checkout\/sidebar\/updateitemqty":["cart"],"rest\/*\/v1\/carts\/*\/payment-information":["cart","last-ordered-items","captcha","instant-purchase"],"rest\/*\/v1\/guest-carts\/*\/payment-information":["cart","captcha"],"rest\/*\/v1\/guest-carts\/*\/selected-payment-method":["cart","checkout-data"],"rest\/*\/v1\/carts\/*\/selected-payment-method":["cart","checkout-data","instant-purchase"],"customer\/address\/*":["instant-purchase"],"customer\/account\/*":["instant-purchase"],"vault\/cards\/deleteaction":["instant-purchase"],"multishipping\/checkout\/overviewpost":["cart"],"paypal\/express\/placeorder":["cart","checkout-data"],"paypal\/payflowexpress\/placeorder":["cart","checkout-data"],"paypal\/express\/onauthorization":["cart","checkout-data"],"persistent\/index\/unsetcookie":["persistent"],"review\/product\/post":["review"],"wishlist\/index\/add":["wishlist"],"wishlist\/index\/remove":["wishlist"],"wishlist\/index\/updateitemoptions":["wishlist"],"wishlist\/index\/update":["wishlist"],"wishlist\/index\/cart":["wishlist","cart"],"wishlist\/index\/fromcart":["wishlist","cart"],"wishlist\/index\/allcart":["wishlist","cart"],"wishlist\/shared\/allcart":["wishlist","cart"],"wishlist\/shared\/cart":["cart"],"braintree\/paypal\/placeorder":["cart","checkout-data"],"braintree\/googlepay\/placeorder":["cart","checkout-data"]},
-                "clientSideSections": ["checkout-data","cart-data","chatData"],
-                "baseUrls": ["https:\/\/blueskytechmage.com\/ohey\/en11\/"],
-                "sectionNames": ["messages","customer","compare-products","last-ordered-items","cart","directory-data","captcha","instant-purchase","loggedAsCustomer","persistent","review","wishlist","chatData","recently_viewed_product","recently_compared_product","product_data_storage","paypal-billing-agreement"]            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/customer-data": {
-                "sectionLoadUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Fsection\u002Fload\u002F",
-                "expirableSectionLifetime": 60,
-                "expirableSectionNames": ["cart","persistent"],
-                "cookieLifeTime": "3600",
-                "updateSessionUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Faccount\u002FupdateSession\u002F"
-            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/invalidation-processor": {
-                "invalidationRules": {
-                    "website-rule": {
-                        "Magento_Customer/js/invalidation-rules/website-rule": {
-                            "scopeConfig": {
-                                "websiteId": "5"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "body": {
-            "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/","handles":["default","checkout_cart_index"],"originalRequest":{"route":"checkout","controller":"cart","action":"index","uri":"\/ohey\/en11\/checkout\/cart\/"},"versionCookieName":"private_content_version"}        }
-    }
-</script>
-
-<div class="cart-container"><div class="cart-summary"><strong class="summary&#x20;title">Summary</strong><div id="block-shipping" class="block shipping" data-mage-init='{"collapsible":{"openedState": "active", "saveState": true}}'>
-    <div class="title" data-role="title">
-        <strong id="block-shipping-heading" role="heading" aria-level="2">
-            Estimate Shipping and Tax        </strong>
-    </div>
-    <div id="block-summary" data-bind="scope:'block-summary'" class="content" data-role="content" aria-labelledby="block-shipping-heading">
-        <!-- ko template: getTemplate() --><!-- /ko -->
-        
-           </div>
-</div>
-<div id="cart-totals" class="cart-totals" data-bind="scope:'block-totals'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
-    <script type="text/x-magento-init">
-            {
-                "#cart-totals": {
-                    "Magento_Ui/js/core/app": {"components":{"block-totals":{"component":"Magento_Checkout\/js\/view\/cart\/totals","displayArea":"totals","config":{"template":"Magento_Checkout\/cart\/totals"},"children":{"subtotal":{"component":"Magento_Tax\/js\/view\/checkout\/summary\/subtotal","config":{"title":"Subtotal","template":"Magento_Tax\/checkout\/summary\/subtotal","excludingTaxMessage":"(Excl. Tax)","includingTaxMessage":"(Incl. Tax)"},"sortOrder":"10"},"shipping":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/shipping","config":{"title":"Shipping","template":"Magento_Tax\/checkout\/cart\/totals\/shipping","excludingTaxMessage":"Excl. Tax","includingTaxMessage":"Incl. Tax"},"sortOrder":"30"},"grand-total":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/grand-total","config":{"title":"Order Total","template":"Magento_Tax\/checkout\/cart\/totals\/grand-total","exclTaxLabel":"Order Total Excl. Tax","inclTaxLabel":"Order Total Incl. Tax"},"sortOrder":"100"},"discount":{"component":"Magento_SalesRule\/js\/view\/cart\/totals\/discount","config":{"title":"Discount"},"sortOrder":"20"},"before_grandtotal":{"component":"uiComponent","sortOrder":"30","children":[]},"tax":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/tax","config":{"template":"Magento_Tax\/checkout\/cart\/totals\/tax","title":"Tax"},"sortOrder":"40"},"weee":{"component":"Magento_Weee\/js\/view\/cart\/totals\/weee","config":{"title":"FPT"},"sortOrder":"35"},"vertex-messages":{"component":"Vertex_Tax\/js\/view\/checkout\/summary\/tax-messages","config":{"template":"Vertex_Tax\/checkout\/cart\/totals\/tax-messages","title":"Vertex Messages"}}}}}}                }
-            }
-    </script>
-</div>
-<div class="block discount" id="block-discount" data-mage-init='{"collapsible":{"active": false, "openedState": "active", "saveState": false}}'>
-    <div class="title" data-role="title">
-        <strong id="block-discount-heading" role="heading" aria-level="2">Apply Discount Code</strong>
-    </div>
-    <div class="content" data-role="content" aria-labelledby="block-discount-heading">
-        <form id="discount-coupon-form" action="https://blueskytechmage.com/ohey/en11/checkout/cart/couponPost/" method="post" data-mage-init='{"discountCode":{"couponCodeSelector": "#coupon_code",
-                                               "removeCouponSelector": "#remove-coupon",
-                                               "applyButton": "button.action.apply",
-                                               "cancelButton": "button.action.cancel"}}'>
-            <div class="fieldset coupon">
-                <input type="hidden" name="remove" id="remove-coupon" value="0"/>
-                <div class="field">
-                    <label for="coupon_code" class="label"><span>Enter discount code</span></label>
-                    <div class="control">
-                        <input type="text" class="input-text" id="coupon_code" name="coupon_code" value="" placeholder="Enter&#x20;discount&#x20;code"/>
-                    </div>
-                </div>
-                <div class="actions-toolbar">
-                                        <div class="primary">
-                        <button class="action apply primary" type="button" value="Apply&#x20;Discount">
-                            <span>Apply Discount</span>
-                        </button>
-                    </div>
-                                    </div>
-            </div>
-                                                </form>
-    </div>
-</div>
-<ul class="checkout methods items checkout-methods-items">
-    <li class="item">    
-        <a href="command/{{userId}}">
-            <button type="button" data-role="proceed-to-checkout" title="Proceed&#x20;to&#x20;Checkout" class="action primary checkout">
-                <span>Proceed to Checkout</span>
-            </button>
-        </a>
-    </li>
-    <li class="item"><a class="action multicheckout" href="https://blueskytechmage.com/ohey/en11/multishipping/checkout/"><span>Check Out with Multiple Addresses</span></a>
-</li>
-</ul>
-</div>
-
-
-
-<form action="https://blueskytechmage.com/ohey/en11/checkout/cart/updatePost/" method="post" id="form-validate" data-mage-init='{"Magento_Checkout/js/action/update-shopping-cart":
-              {"validationURL" : "https://blueskytechmage.com/ohey/en11/checkout/cart/updateItemQty/",
-              "updateCartActionContainer": "#update_cart_action_container"}
-          }' class="form form-cart">
-        <input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/>    
-        <div class="cart table-wrapper">
-
-
-                        <!-- ============================================================== -->
-                        <!-- Cart table start from here -->
-                        <!-- ============================================================== -->
-
+{% if mode == "cart" %}
 
         
-                                                    <table id="shopping-cart-table" class="cart items data table" data-mage-init='{"shoppingCart":{"emptyCartButton": ".action.clear",
-               "                                            updateCartActionContainer": "#update_cart_action_container"}}'>
+        
+{%endif%}
+
+
+        <div class="cart table-wrapper" style="width: 33cm; margin-left: 1cm;">
+
+
+                                    <!-- ============================================================== -->
+                                    <!-- Cart table start from here -->
+                                    <!-- ============================================================== -->
+
+
+                        {% if mode == "cart" %}
+                                                    <table>
                                                         <thead>
                                                             <tr>
-                                                                <th class="col item" scope="col"><span>Item</span></th>
-                                                                <th class="col price" scope="col"><span>Price</span></th>
-                                                                <th class="col qty" scope="col"><span>Qty</span></th>
-                                                                <th class="col subtotal" scope="col"><span>Subtotal</span></th>
+                                                                <th><span>Item</span></th>
+                                                                <th><span>Price</span></th>
+                                                                <th><span>Qty</span></th>
+                                                                <th><span>Subtotal</span></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -669,23 +545,22 @@
                                                                 {% if Panier.getProduitPanier().getId() == produit.getId()%}
                                                                 {% set panierId = "#{Panier.getId()},#{panierId}" %}
                                                                 <tr>
-                                                                    <td data-th="Item" class="col item">
-                                                                            <a href="product_show/{{produit.id}}" title="{{produit.nom_prod}}" tabindex="-1" class="product-item-photo">
-                                                                            <span class="product-image-container product-image-container-93938126543">
-                                                                                <span class="product-image-wrapper">
-                                                                                    <img class="product-image-photo" src="{{produit.image_prod}}" loading="lazy" width="100" height="100" alt="{{produit.nom_prod}}" "/>
+                                                                    <td>
+                                                                            <a href="product_show/{{produit.id}}" title="{{produit.nom_prod}}">
+                                                                            <span>
+                                                                                <span >
+                                                                                    <img src="{{produit.image_prod}}" width="100" height="100" alt="{{produit.nom_prod}}"/>
                                                                                 </span>
                                                                             </span>
-                                                                            <style>.product-image-container-93938126543{width:100px}.product-image-container-93938126543 span.product-image-wrapper{padding-bottom:100%}</style><script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-93938126543");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="100px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-93938126543  span.product-image-wrapper");for(var i=0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom="100%";}</script>                            </a>
-                                                                            <div class="product-item-details">
-                                                                                <strong class="product-item-name">
+                                                                            <div>
+                                                                                <strong>
                                                                                     <a href="product_show/{{produit.id}}">{{produit.nom_prod}}</a>
                                                                                 </strong>
                                                                             </div>
                                                                     </td>
-                                                                    <th class="col price" scope="col">${{produit.prix_prod}}</th>
-                                                                    <th class="col qty" scope="col">{{Panier.quantite}}</th>
-                                                                    <th class="col subtotal" scope="col">${{produit.prix_prod * Panier.quantite}}</th>
+                                                                    <th>${{produit.prix_prod}}</th>
+                                                                    <th>{{Panier.quantite}}</th>
+                                                                    <th>${{produit.prix_prod * Panier.quantite}}</th>
                                                                 </tr>
 
 
@@ -693,228 +568,320 @@
                                                             <tr class="item-actions">
                                                                 <td colspan="4">
                                                                     <div class="actions-toolbar">
-                                                                        <div id="gift-options-cart-item-871" data-bind="scope:'giftOptionsCartItem-871'" class="gift-options-cart-item">
-                                                                            <!-- ko template: getTemplate() --><!-- /ko -->
-                                                                            <script type="text/x-magento-init">
-                                                                                {
-                                                                                    "#gift-options-cart-item-871": {
-                                                                                    "Magento_Ui/js/core/app": {"types":[],"components":{"giftOptionsCartItem-871":{"component":"Magento_GiftMessage\/js\/view\/gift-message","config":{"template":"Magento_GiftMessage\/gift-message-item-level","formTemplate":"Magento_GiftMessage\/gift-message-form","itemId":"871"}}}}                }
-                                                                                }
-                                                                            </script>
+                                                                        <div id="gift-options-cart-item-871" class="gift-options-cart-item">
                                                                         </div>
-                                                                        <a href="#" title="Remove item" class="action action-delete" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/cart\/delete\/","data":{"id":"871","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0Lw,,"}}'>
-                                                                            <span>
-                                                                                Remove item    </span>
+                                                                        <a href="update_produit_panier/{{Panier.id}}" title="Update item">
+                                                                            <span> Update item </span>
+                                                                        </a>
+                                                                        <a href="remove_produit_panier/{{Panier.id}}" title="Remove item">
+                                                                            <span> Remove item </span>
                                                                         </a>
                                                                     </div>
                                                                 </td>
                                                             </tr>
 
+
                                                             {% endif %}
-                                                        {% endfor %}
-                                                        {% endif %}
-
-                                                    {%endfor%}
-
-                                                            
+                                                            {% endfor %}
+                                                            {% endif %}
+                                                        {%endfor%}
                                                         </tbody>
                                                     </table>
-        
-                <!-- ============================================================== -->
-                <!-- Fin table cart -->
-                <!-- ============================================================== -->
+                                                </div>
+
+                                    <div>
+                                        <a href="/">
+                                            <button type="button">
+                                                <span>Continue Shopping</span>
+                                            </button>
+                                        </a>
+                                        <div style="position: relative; left: 22cm; top: -1.4cm;">
+                                            <a href="cart_clear">
+                                                <button type="button" name="update_cart_action" data-cart-empty="" value="empty_cart" title="Clear Shopping Cart" class="action clear" id="empty_cart_button">
+                                                    <span>Clear Shopping Cart</span>
+                                                </button>
+                                            </a>
+                                            <a href="command/{{userId}}">
+                                                <button type="button" data-role="proceed-to-checkout" title="Proceed&#x20;to&#x20;Checkout" class="action primary checkout">
+                                                    <span>Proceed to Checkout</span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
 
 
 
-
-
-                    </div>
-                    <div class="cart main actions">
-                        <a class="action continue" href="/" title="Continue&#x20;Shopping">
-                            <span>Continue Shopping</span>
-                        </a>
-                        <a href="clearCart/{{panierId}}">
-                            <button type="button" name="update_cart_action" data-cart-empty="" value="empty_cart" title="Clear&#x20;Shopping&#x20;Cart" class="action clear" id="empty_cart_button">
-                                <span>Clear Shopping Cart</span>
-                            </button>
-                        </a>
-                        <button type="submit" name="update_cart_action" data-cart-item-update="" value="update_qty" title="Update&#x20;Shopping&#x20;Cart" class="action update">
-                            <span>Update Shopping Cart</span>
-                        </button>
-                        <input type="hidden" value="" id="update_cart_action_container" data-cart-item-update=""/>
-                    </div>
+                                    </form>
+                                            <div id="gift-options-cart" data-bind="scope:'giftOptionsCart'">
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <script type="text/x-magento-init">
+                                                        {
+                                                            "#gift-options-cart": {
+                                                                "Magento_Ui/js/core/app": {"types":[],"components":{"giftOptionsCart":{"component":"Magento_GiftMessage\/js\/view\/gift-message","config":{"template":"Magento_GiftMessage\/gift-message","formTemplate":"Magento_GiftMessage\/gift-message-form"}}}}            }
+                                                        }
+                                                    </script>
+                                                    <script>window.giftOptionsConfig={"giftMessage":{"itemLevel":{"871":[]}},"isItemLevelGiftOptionsEnabled":false,"priceFormat":{"pattern":"$%s","precision":2,"requiredPrecision":2,"decimalSymbol":".","groupSymbol":",","groupLength":3,"integerRequired":false},"storeCode":"en11","isCustomerLoggedIn":false,"formKey":"e3ulpvJtGh654MxM","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script></div>
+                                                    <script>require(['jquery','mage/mage'],function($){'use strict';var number_click=1;$(".qty-down-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('.control.qty .input-text.qty').val();val_input=parseInt(val_input);if(val_input<=number_click){val_input=number_click;}else{val_input=val_input-number_click;}$(this).closest('div.field').find('.control.qty .input-text.qty').val(val_input);return false;});$(".qty-up-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('.control.qty .input-text.qty').val();val_input=parseInt(val_input);val_input=val_input+number_click;$(this).closest('div.field').find('.control.qty .input-text.qty').val(val_input);return false;});});</script>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
 
-</form>
-                <div id="gift-options-cart" data-bind="scope:'giftOptionsCart'">
-                    <!-- ko template: getTemplate() --><!-- /ko -->
-                    <script type="text/x-magento-init">
-                        {
-                            "#gift-options-cart": {
-                                "Magento_Ui/js/core/app": {"types":[],"components":{"giftOptionsCart":{"component":"Magento_GiftMessage\/js\/view\/gift-message","config":{"template":"Magento_GiftMessage\/gift-message","formTemplate":"Magento_GiftMessage\/gift-message-form"}}}}            }
-                        }
-                    </script>
-                <script>window.giftOptionsConfig={"giftMessage":{"itemLevel":{"871":[]}},"isItemLevelGiftOptionsEnabled":false,"priceFormat":{"pattern":"$%s","precision":2,"requiredPrecision":2,"decimalSymbol":".","groupSymbol":",","groupLength":3,"integerRequired":false},"storeCode":"en11","isCustomerLoggedIn":false,"formKey":"e3ulpvJtGh654MxM","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script></div>
-                <script>require(['jquery','mage/mage'],function($){'use strict';var number_click=1;$(".qty-down-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('.control.qty .input-text.qty').val();val_input=parseInt(val_input);if(val_input<=number_click){val_input=number_click;}else{val_input=val_input-number_click;}$(this).closest('div.field').find('.control.qty .input-text.qty').val(val_input);return false;});$(".qty-up-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('.control.qty .input-text.qty').val();val_input=parseInt(val_input);val_input=val_input+number_click;$(this).closest('div.field').find('.control.qty .input-text.qty').val(val_input);return false;});});</script>
-
-                </div>
-                </div></div>
+                                        
+                                        <!-- ============================================================== -->
+                                        <!-- mode == "store" -->
+                                        <!-- ============================================================== -->
 
 
-
-                        <!-- ============================================================== -->
-                        <!-- mode == "store" -->
-                        <!-- ============================================================== -->
-
-
-    {% elseif panierExiste == true and mode == "store" %}
-        <a id="contentarea" tabindex="-1"></a>
-        <div class="page-title-wrapper">
-            <h1 class="page-title">
-                <span class="base" data-ui-id="page-title-wrapper">Express Shopping</span>   
-            </h1>
-        </div>
-        <div class="short-description"> </div>
-
-        <div class="columns"><div class="column main"><input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
-        <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
-    <script type="text/x-magento-init">
-        {
-            "#authenticationPopup": {
-                "Magento_Ui/js/core/app": {"components":{"authenticationPopup":{"component":"Magento_Customer\/js\/view\/authentication-popup","children":{"messages":{"component":"Magento_Ui\/js\/view\/messages","displayArea":"messages"},"captcha":{"component":"Magento_Captcha\/js\/view\/checkout\/loginCaptcha","displayArea":"additional-login-form-fields","formId":"user_login","configSource":"checkout"},"amazon-button":{"component":"Amazon_Login\/js\/view\/login-button-wrapper","sortOrder":"0","displayArea":"additional-login-form-fields","config":{"tooltip":"Securely login to our website using your existing Amazon details.","componentDisabled":true}}}}}}            },
-            "*": {
-                "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
-            }
-        }
-    </script>
-</div>
+                    {% elseif mode =="store" %}
+                            <div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
+                                <div class="container">
+                                <div class="row align-items-start">
+                                    <div class="col" style="width: 10cm;margin-left: -1.1cm;margin-right: -5cm;">
+                                    <div class="card border-light mb-3" style="max-width: 10cm;">
+                                            <center><div class="card-header" style="background: #fffdfd;width: 9cm;"><h5 style="margin-left:-5cm;" class="card-title border-light mb-3">Shipping Address</h5></div>
+                                            </center>
+                                            <div class="card-body">
+                                                <div id="checkout-step-shipping" class="step-content" data-role="content">
+                                                <form class="form form-login" data-role="email-width-possible-login" data-bind="submit:login" method="post" style="display: block;">
+                                                    ***************************
+                                                </form>
+                                                <form class="form form-shipping-address" id="co-shipping-form" data-bind="afterRender: autoFillAddress, attr: {'data-hasrequired': $t('* Required Fields')}" data-hasrequired="* Required Fields" style="display: block;">
+                                                    ****************************
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
 
 
+                                    <div class="col" style="margin-right: -5cm;">
+                                    <div class="col-6 col-sm-4" style="width: 11cm">
+                                        <div class="card border-light mb-3" style="max-width: 11cm;">
+                                        <center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h5 style="margin-left:-4.5cm;" class="card-title">Payment Method</h5></div>
+                                        </center>
+                                        <div class="card-body">
+                                        <div id="checkout-step-payment" class="step-content" data-role="content" role="tabpanel" aria-hidden="false">
+                                                <form id="co-payment-form" class="form payments" novalidate="novalidate" >
+                                                    ****************************
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
 
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/section-config": {
-                "sections": {"stores\/store\/switch":["*"],"stores\/store\/switchrequest":["*"],"directory\/currency\/switch":["*"],"*":["messages"],"customer\/account\/logout":["*","recently_viewed_product","recently_compared_product","persistent"],"customer\/account\/loginpost":["*"],"customer\/account\/createpost":["*"],"customer\/account\/editpost":["*"],"customer\/ajax\/login":["checkout-data","cart","captcha"],"catalog\/product_compare\/add":["compare-products"],"catalog\/product_compare\/remove":["compare-products"],"catalog\/product_compare\/clear":["compare-products"],"sales\/guest\/reorder":["cart"],"sales\/order\/reorder":["cart"],"checkout\/cart\/add":["cart","directory-data"],"checkout\/cart\/delete":["cart"],"checkout\/cart\/updatepost":["cart"],"checkout\/cart\/updateitemoptions":["cart"],"checkout\/cart\/couponpost":["cart"],"checkout\/cart\/estimatepost":["cart"],"checkout\/cart\/estimateupdatepost":["cart"],"checkout\/onepage\/saveorder":["cart","checkout-data","last-ordered-items"],"checkout\/sidebar\/removeitem":["cart"],"checkout\/sidebar\/updateitemqty":["cart"],"rest\/*\/v1\/carts\/*\/payment-information":["cart","last-ordered-items","captcha","instant-purchase"],"rest\/*\/v1\/guest-carts\/*\/payment-information":["cart","captcha"],"rest\/*\/v1\/guest-carts\/*\/selected-payment-method":["cart","checkout-data"],"rest\/*\/v1\/carts\/*\/selected-payment-method":["cart","checkout-data","instant-purchase"],"customer\/address\/*":["instant-purchase"],"customer\/account\/*":["instant-purchase"],"vault\/cards\/deleteaction":["instant-purchase"],"multishipping\/checkout\/overviewpost":["cart"],"paypal\/express\/placeorder":["cart","checkout-data"],"paypal\/payflowexpress\/placeorder":["cart","checkout-data"],"paypal\/express\/onauthorization":["cart","checkout-data"],"persistent\/index\/unsetcookie":["persistent"],"review\/product\/post":["review"],"wishlist\/index\/add":["wishlist"],"wishlist\/index\/remove":["wishlist"],"wishlist\/index\/updateitemoptions":["wishlist"],"wishlist\/index\/update":["wishlist"],"wishlist\/index\/cart":["wishlist","cart"],"wishlist\/index\/fromcart":["wishlist","cart"],"wishlist\/index\/allcart":["wishlist","cart"],"wishlist\/shared\/allcart":["wishlist","cart"],"wishlist\/shared\/cart":["cart"],"braintree\/paypal\/placeorder":["cart","checkout-data"],"braintree\/googlepay\/placeorder":["cart","checkout-data"]},
-                "clientSideSections": ["checkout-data","cart-data","chatData"],
-                "baseUrls": ["https:\/\/blueskytechmage.com\/ohey\/en11\/"],
-                "sectionNames": ["messages","customer","compare-products","last-ordered-items","cart","directory-data","captcha","instant-purchase","loggedAsCustomer","persistent","review","wishlist","chatData","recently_viewed_product","recently_compared_product","product_data_storage","paypal-billing-agreement"]            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/customer-data": {
-                "sectionLoadUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Fsection\u002Fload\u002F",
-                "expirableSectionLifetime": 60,
-                "expirableSectionNames": ["cart","persistent"],
-                "cookieLifeTime": "3600",
-                "updateSessionUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Faccount\u002FupdateSession\u002F"
-            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/invalidation-processor": {
-                "invalidationRules": {
-                    "website-rule": {
-                        "Magento_Customer/js/invalidation-rules/website-rule": {
-                            "scopeConfig": {
-                                "websiteId": "5"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "body": {
-            "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/","handles":["default","checkout_cart_index"],"originalRequest":{"route":"checkout","controller":"cart","action":"index","uri":"\/ohey\/en11\/checkout\/cart\/"},"versionCookieName":"private_content_version"}        }
-    }
-</script>
+                                        <div class="col-6 col-sm-4"  style="width: 11cm">
+                                        <div class="card border-light mb-3" style="max-width: 11cm;">
+                                        <center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h5 style="margin-left:-4.5cm;" class="card-title">Shipping Method</h5></div>
+                                        </center>
+                                        <div class="card-body">
+                                        <div class="checkout-shipping-method" >
+                                            <form style="-webkit-tap-highlight-color: rgba(0,0,0,0)" id="co-shipping-method-form" class="form methods-shipping" novalidate="novalidate" data-bind="submit: setShippingInformation" >
+                                                **************************
 
-<div class="cart-container"><div class="cart-summary"><strong class="summary&#x20;title">Summary</strong><div id="block-shipping" class="block shipping" data-mage-init='{"collapsible":{"openedState": "active", "saveState": true}}'>
-    <div class="title" data-role="title">
-        <strong id="block-shipping-heading" role="heading" aria-level="2">
-            Estimate Shipping and Tax        </strong>
-    </div>
-    <div id="block-summary" data-bind="scope:'block-summary'" class="content" data-role="content" aria-labelledby="block-shipping-heading">
-        <!-- ko template: getTemplate() --><!-- /ko -->
-        
-           </div>
-</div>
-<div id="cart-totals" class="cart-totals" data-bind="scope:'block-totals'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
-    <script type="text/x-magento-init">
-            {
-                "#cart-totals": {
-                    "Magento_Ui/js/core/app": {"components":{"block-totals":{"component":"Magento_Checkout\/js\/view\/cart\/totals","displayArea":"totals","config":{"template":"Magento_Checkout\/cart\/totals"},"children":{"subtotal":{"component":"Magento_Tax\/js\/view\/checkout\/summary\/subtotal","config":{"title":"Subtotal","template":"Magento_Tax\/checkout\/summary\/subtotal","excludingTaxMessage":"(Excl. Tax)","includingTaxMessage":"(Incl. Tax)"},"sortOrder":"10"},"shipping":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/shipping","config":{"title":"Shipping","template":"Magento_Tax\/checkout\/cart\/totals\/shipping","excludingTaxMessage":"Excl. Tax","includingTaxMessage":"Incl. Tax"},"sortOrder":"30"},"grand-total":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/grand-total","config":{"title":"Order Total","template":"Magento_Tax\/checkout\/cart\/totals\/grand-total","exclTaxLabel":"Order Total Excl. Tax","inclTaxLabel":"Order Total Incl. Tax"},"sortOrder":"100"},"discount":{"component":"Magento_SalesRule\/js\/view\/cart\/totals\/discount","config":{"title":"Discount"},"sortOrder":"20"},"before_grandtotal":{"component":"uiComponent","sortOrder":"30","children":[]},"tax":{"component":"Magento_Tax\/js\/view\/checkout\/cart\/totals\/tax","config":{"template":"Magento_Tax\/checkout\/cart\/totals\/tax","title":"Tax"},"sortOrder":"40"},"weee":{"component":"Magento_Weee\/js\/view\/cart\/totals\/weee","config":{"title":"FPT"},"sortOrder":"35"},"vertex-messages":{"component":"Vertex_Tax\/js\/view\/checkout\/summary\/tax-messages","config":{"template":"Vertex_Tax\/checkout\/cart\/totals\/tax-messages","title":"Vertex Messages"}}}}}}                }
-            }
-    </script>
-</div>
-        <div class="columns">
-            <div class="column main">
-                <input name="form_key" type="hidden" value="e3ulpvJtGh654MxM"/>
-                <div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
-                    <div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
-							{{ form_start(formA,{'attr': {'novalidate': 'novalidate'}} ) }}
-								<table  style="width : 25%">
-									<tr>
-										<td style="padding:1%">
+                                            </form>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
 
-											{{ form_label(formA.place,"Place ") }}
-											{{ form_widget(formA.place) }}
-											{{ form_errors(formA.place) }}
-											<br>
 
-											{{ form_label(formA.payement_method,"Payment Method") }}
-											{{ form_widget(formA.payement_method) }}
-											{{ form_errors(formA.payement_method) }}
-											<br> 
-										</td>   
-                                        <td style="padding:1%">
+                                        <div class="col" style="margin-right: -5cm;">
+                                            <div class="col-6 col-sm-4" style="width: 11cm">
+                                                <div class="card border-light mb-3" style="max-width: 10cm;">
+                                                    <center>
+                                                        <div class="card-header" style="background: #fffdfd;width: 8cm;">
+                                                            <h5 style="margin-left:-4.5cm;" class="card-title" style="font-weight: 700;font-family: Mark\ Pro,sans-serif;">
+                                                                Order Summary
+                                                            </h5>
+                                                        </div>
+                                                    </center>
+                                                    <div class="card-body">
+                                                        <div class="opc-block-summary" data-bind="blockLoader: isLoading" style="background: #fffdfd; padding: 24px 2px; margin: 0 0 24px;">
+                                                            <div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': isItemsBlockExpanded()}}" data-collapsible="true" role="tablist">
+                                                                <div class="title" data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0">
+                                                                    {% set len = 0 %}
+                                                                    {% for Panier in panier %}
+                                                                        {% if Panier.getUserPanier().getId() == userId %}
+                                                                            {% set len = len +1 %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
 
-											{{ form_label(formA.code_Coupon,"Discount Code ") }}
-											{{ form_widget(formA.code_Coupon) }}
-											{{ form_errors(formA.code_Coupon) }}
-											<br>
+                                                                    <strong role="heading" aria-level="1">
+                                                                        <span data-bind="text: getCartSummaryItemsCount()">{{ len }}</span>
+                                                                        <span>Item in Cart</span>
+                                                                        
+                                                                    </strong>
+                                                                </div>
+                                                                <div class="content minicart-items" data-role="content" role="tabpanel" aria-hidden="true" style="display: block;">
+                                                                    <div class="minicart-items-wrapper">
+                                                                        <ol class="minicart-items">
+                                                                            {% set panierId = "" %}
+                                                                            {% for Panier in panier %}
+                                                                                {% if Panier.getUserPanier().getId() == userId %}
+                                                                                {% set len = len +1 %}
+                                                                                    {% for produit in produits%}
+                                                                                        {% if Panier.getProduitPanier().getId() == produit.getId()%}
+                                                                                            {% set panierId = "#{Panier.getId()},#{panierId}" %}
+                                                                                                <li class="product-item">
+                                                                                                    <div class="product">
+                                                                                                        <span class="product-image-container" data-bind="attr: {'style': 'height: ' + getHeight($parents[1])/2 + 'px; width: ' + getWidth($parents[1])/2 + 'px;' }" style="height: 70px; width: 70px;" >
+                                                                                                            <span class="product-image-wrapper">
+                                                                                                                <img src="{{produit.image_prod}}" width="140" height="140" alt="Bosal – Catalytic Converter Gauge Kit" title="Bosal – Catalytic Converter Gauge Kit">
+                                                                                                            </span>
+                                                                                                        </span>
+                                                                                                        <div class="product-item-details">
+                                                                                                            <div class="product-item-inner">
+                                                                                                                <div class="product-item-name-block">
+                                                                                                                    <strong class="product-item-name"><a href="http://127.0.0.1:8000/product_show/{{produit.id}}" >{{produit.nom_prod}}</a></strong>
+                                                                                                                    <div class="details-qty">
+                                                                                                                        <span class="label">
+                                                                                                                            <span>Qty</span>
+                                                                                                                        </span>
+                                                                                                                        <input type="number" title="Qty" value="{{Panier.quantite}}" min="1" max="3">
+                                                                                                                        <span class="qty-button">
+                                                                                                                            <span class="increase" data-bind="attr: {action: 'increase', itemId: $parent.item_id}, click: updateQtyButton" action="increase" itemid="884">
+                                                                                                                                "&nbsp;"
+                                                                                                                            </span>
+                                                                                                                            <span class="decrease" data-bind="attr: {action: 'decrease', itemId: $parent.item_id}, click: updateQtyButton" action="decrease" itemid="884">
+                                                                                                                                "&nbsp;"
+                                                                                                                            </span>
+                                                                                                                        </span>
+                                                                                                                        <span class="error-message"></span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="subtotal">
+                                                                                                                    <span class="price-excluding-tax" data-bind="attr:{'data-label': $t('Excl. Tax')}" data-label="Excl. Tax">
+                                                                                                                        <span class="cart-price">
+                                                                                                                            <span >${{produit.prix_prod}}</span>
+                                                                                                                        </span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                        {% endif %}
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
 
-											{{ form_label(formA.comment,"Comment ") }}
-											{{ form_widget(formA.comment) }}
-											{{ form_errors(formA.comment) }}
-											<br> 
-										</td>  
-                                        <td style="padding:1%">
+                                                                        </ol>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <table class="data table table-totals">
+                                                                <caption></caption>
+                                                                <tbody>
+                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                                        <th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">Cart Subtotal</th>
+                                                                        <td class="amount" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                            {% set total = 0 %}
+                                                                            {% for Panier in panier %}
+                                                                                {% if Panier.getUserPanier().getId() == userId %}
+                                                                                    {% for produit in produits %}
+                                                                                        {% if produit.id == Panier.getProduitPanier().getId() %}
+                                                                                            {% set total = total + produit.prix_prod*Panier.quantite %}
+                                                                                        {% endif %}
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                            <span class="price" >${{ total}}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                                        <th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">
+                                                                            <span class="label" data-bind="i18n: title" style="margin: 0 0 8px; display: inline-block;">Shipping</span>
+                                                                            <span style="color: #999; display: block;font-style: italic; font-family: Mark Pro,sans-serif,'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; font-weight: 400;">
+                                                                                Flat Rate - Fixed
+                                                                            </span>
+                                                                        </th>
+                                                                        <td class="amount" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                            <span class="price" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">$5.00</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                                        <th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">Order Total</th>
+                                                                        <td class="amount" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                            <span class="price" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">${{total + 5.00}}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
 
-											{{ form_label(formA.date,"Delivery Date ") }}
-											{{ form_widget(formA.date) }}
-											{{ form_errors(formA.date) }}
-											<br>
+                                                        <div class="order-comment-block" style="margin-top:-1cm">
+                                                            <label class="label" value="">
+                                                                <span data-bind="i18n: 'Order comment'">Order comment</span>    
+                                                            </label>
+                                                            <div class="control"> 
+                                                            <textarea maxlength="50" class="admin__control-textarea" data-bind=" value: value, valueUpdate: valueUpdate, hasFocus: focused, attr: { name: inputName, cols: cols, rows: rows, 'aria-describedby': noticeId, placeholder: placeholder, id: uid, disabled: disabled }" name="" cols="15" rows="2" aria-describedby="notice-C092642" id="C092642">
+                                                            </textarea> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="choice field" style="margin-top:0.5cm;margin-bottom:0.5cm;" >
+                                                            <input type="checkbox" class="checkbox" data-bind="
+                                                                checked: value,
+                                                                attr: {
+                                                                        id: uid,
+                                                                        disabled: disabled,
+                                                                        name: inputName,
+                                                                        'aria-describedby': getDescriptionId(),
+                                                                        'aria-required': required,
+                                                                        'aria-invalid': error() ? true : 'false'
+                                                                        },
+                                                                hasFocus: focused" id="AQ9AL4G" name="" aria-invalid="false">
 
-											{{ form_label(formA.phone_Number,"Phone Number ") }}
-											{{ form_widget(formA.phone_Number) }}
-											{{ form_errors(formA.phone_Number) }}
-											<br> 
+                                                            <label class="label" data-bind="checked: value, attr: { for: uid }" for="AQ9AL4G">
+                                                                <span data-bind="text: description || label">Check To Subscribe Order Newsletter</span>
+                                                            </label>
+                                                        </div>
 
-											{{ form_label(formA.street,"Street") }}
-											{{ form_widget(formA.street) }}
-											{{ form_errors(formA.street) }}
-											<br> 
-										</td>  
-									</tr>
-								</table>
-							{{ form_end(formA) }}
-						</div>
-					</div>
-				</div>
+                                                        <div class="payment-option opc-payment-additional discount-code">
+                                                            <div class="payment-option-content" data-role="content">
+                                                            <div data-role="checkout-messages" class="messages" data-bind="visible: isVisible(), click: removeAll" style="display: none;">
+                                                                <div aria-atomic="true" role="alert" class="message message-error error">
+                                                                    <div data-ui-id="checkout-cart-validationmessages-message-error" data-bind="text: $data">"email" is required. Enter and try again.</div>
+                                                                </div>
+                                                            </div>
+                                                                <form class="form form-discount" id="discount-form" method="post" action="ajouterCommande()">
+                                                                    *************************
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="actions-toolbar" style="margin-top:0.4cm;">
+                                                            <div class="primary">
+                                                                <button style="width:9.2cm;" class="action primary checkout btn-placeorder" type="submit" data-bind="
+                                                                        enable: isPlaceOrderActionAllowed(),
+                                                                        click: placeOrder,
+                                                                        attr: {
+                                                                            title: placeOrderLabel()
+                                                                        },
+                                                                        css: {disabled: !isPlaceOrderActionAllowed()},
+                                                                        fadeVisible: isVisible
+                                                                        " title="Place Order">
+                                                                    <span data-bind="text: placeOrderLabel()">Place Order</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                    {% endif %}
+
             </div>
+        </div>
+        
+                <!-- ============================================================== -->
+                <!-- Cart Vide -->
+                <!-- ============================================================== -->
+
+
 
     {% elseif panierExiste == false %}
             <div class="cart-empty">
@@ -1054,10 +1021,6 @@ But you can also contact us:</p>
 <div class="quickview-popup-wrapper" id="quickview-popup-wrapper">
     <a id="quickview-close" class="quickview-close"></a>
     <div id="quickview-popup-content"></div>
-</div>
-<div data-url="https://blueskytechmage.com/ohey/en11/themeoption/fakeorder/getitem/" id="purchase-fake-order" data-seconds-hide="5" data-seconds-displayed="10" class="purchase-order fadeInUp animated hidden-xs" style="display: none;">
-	<a class="purchase-close" href="javascript:void(0);"></a>
-	<div class="product-purchase"></div>
 </div>
 </div>    <script>require(["jquery"],function($){require(["rokanthemes/lazyloadimg"],function(lazy){$("img[data-src]").lazy({"bind":"event","attribute":"data-src",visibleOnly:true,threshold:0,enableThrottle:true,throttle:500,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});$(document).ready(function($){var win=$(window);$(".owl-carousel").on("translated.owl.carousel",function(event){var bounds=$(this).offset();var viewport={top:win.scrollTop(),left:win.scrollLeft()};viewport.bottom=viewport.top+win.height();if(viewport.bottom>bounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var new_url=$(this).attr("data-src");$(this).attr("src",new_url);$(this).removeAttr("data-src");$(this).addClass("lazy-loaded");$(this).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(this).addClass("transition");},1000);}});},1000);});});});</script></body>
 

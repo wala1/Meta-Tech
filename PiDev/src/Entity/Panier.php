@@ -18,15 +18,17 @@ class Panier
 
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="panier")
-     */
-    private $produit_panier;
-
      /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="panier")
+     * @ORM\JoinColumn(name="user_panier_id", nullable=false)
      */
     protected $user_panier;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="panier")
+     * @ORM\JoinColumn(name="produit_panier_id", nullable=false)
+    */
+    private $produit_panier;
 
     public function getProduitPanier(): ?Produit
     {
@@ -70,11 +72,6 @@ class Panier
     {
         return $this->panier_id;
     }
-    
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $prix_totale;
 
     /**
      * @ORM\Column(type="integer")
@@ -87,19 +84,7 @@ class Panier
     {
         return $this->id;
     }
-    
-    public function getPrix_totale(): ?float
-    {
-        return $this->prix_totale;
-    }
 
-    public function setPrix_totale(float $prix_totale): self
-    {
-        $this->prix_totale = $prix_totale;
-
-        return $this;
-    }
-    
     public function getQuantite(): ?int
     {
         return $this->quantite;
@@ -111,5 +96,7 @@ class Panier
 
         return $this;
     }
+
+    
 
 }

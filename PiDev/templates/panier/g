@@ -1,0 +1,30 @@
+                                <!--  Table Delivered Order -->
+
+                                        <div class="row" >
+                                            <div class="col-12" >
+                                                <div class="card" >
+                                                    
+                                                </div>
+                                                <!-- end cardaa -->
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                        <!-- end row -->
+                               
+
+
+                                <!--  Table Canceled Order -->
+
+                                        <div class="row" >
+                                            <div class="col-12" >
+                                                <div class="card" >
+                                                
+
+
+
+                                                </div>
+                                                <!-- end cardaa -->
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                        <!-- end row -->

@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -19,54 +23,94 @@ class Commande
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="This field is required")
      */
-    private $place;
+    public $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="This field is required")
      */
-    private $payement_method;
-
+    public $lastName;
+    
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="This field is required")
      */
-    private $code_Coupon;
-
-    /**
-     * @ORM\Column(type="string", length=600, nullable=true)
-     */
-    private $comment;
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $date;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $phone_Number;
+    public $street_Adress;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="This field is required")
      */
-    private $street;
+    public $city;
+
+    /**
+     * @ORM\Column(type="integer", length=255)
+     * @Assert\Length(min="4",minMessage="Your zip/post code must be at least 4 characters")
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $zip_PostalCode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $country;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $company;
+
+    /**
+     * @ORM\Column(type="integer", length=8)
+     * @Assert\Length(min="8",minMessage="Your phone number must be at least 8 characters")
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $phone_Number;
+    
+        /**
+     * @ORM\Column(type="string", length=10)
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $payement_method;
+
+    /**
+     * @ORM\Column(type="date", length=255)
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $date;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="50",maxMessage="Your delivery comment must be at most 50 characters")
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $delivery_comment;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $newsletter;
+    
+        /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="50",maxMessage="Your order comment must be at most 50 characters")
+     * @Assert\NotNull(message="This field is required")
+     */
+    public $order_comment;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    public $code_Coupon;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPlace(): ?string
-    {
-        return $this->place;
-    }
-
-    public function setPlace(string $place): self
-    {
-        $this->place = $place;
-
-        return $this;
     }
 
     public function getPayementMethod(): ?string
@@ -129,15 +173,58 @@ class Commande
         return $this;
     }
 
-    public function getStreet(): ?string
+    public function getStreetAdress(): ?string
     {
-        return $this->street;
+        return $this->street_Adress;
     }
 
-    public function setStreet(string $street): self
+    public function setStreetAdress(string $street_Adress): self
     {
-        $this->street = $street;
-
+        $this->street_Adress = $street_Adress;
         return $this;
     }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    public function setZip_PostalCode(int $zip_PostalCode): self
+    {
+        $this->zip_PostalCode = $zip_PostalCode;
+        return $this;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    public function setCompany(string $company): self
+    {
+        $this->company = $company;
+        return $this;
+    }
+
+    public function setDelivery_comment(string $delivery_comment): self
+    {
+        $this->delivery_comment = $delivery_comment;
+        return $this;
+    }
+
+    public function setNewsletter(string $newsletter): self
+    {
+        $this->newsletter = $newsletter;
+        return $this;
+    }
+
+    public function setOrder_comment(string $order_comment): self
+    {
+        $this->order_comment = $order_comment;
+        return $this;
+    }
+
+    
 }

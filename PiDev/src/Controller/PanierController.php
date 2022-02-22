@@ -21,21 +21,13 @@ use App\Form\CommandeFormType;
 class PanierController extends AbstractController
 {
 
-    /************************* Front  *******************/
-    /**
-     * @Route("/cart", name="cart")
-     */
-    public function index(): Response
-    {
-        return $this->render('panier/index.html.twig', [
-            'controller_name' => 'PanierController',
-        ]);
-    }
+    /************************* Front Cart *******************/
+
 
     /**
      * @Route("/cart_show", name="showCart");
      */
-    public function showCart(){
+    public function showCart(Request $request): Response{
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
@@ -46,36 +38,191 @@ class PanierController extends AbstractController
             "mode" => "cart"
         ]);
     }
-
     
+
     /**
-     * @Route("/cart_clear/{id}", name="clearCart");
+     * @Route("/cart_clear", name="clearCart");
      */
-    public function clearCart($id , ProduitRepository $repository): Response{
-        $tab= [];
-        $i = 0;
-        $ch="";
-        for($j=0; $j<strlen($id); $j=$j+1){
-            $ch = substr($id, $j, strpos($id,","));
-            $tab[$i] = $ch;
-            $j=$j+strlen($ch);
-            $i=$i+1;
-        }
-        for( $i=0; $i<count($tab); $i=$i+1){
-            $panier = $this->getDoctrine()->getRepository(Panier::class)->find($tab[$i]);
-            $em = $this->getDoctrine()->getManager() ; 
-            $em->remove($panier) ; 
-            $em->flush() ; 
-        }
-        
+    public function clearCart(ProduitRepository $repository): Response{
+
+        $em = $this->getDoctrine()->getManager() ;
         $user = $this->get('security.token_storage')->getToken()->getUser();
+        $panier = $this->getDoctrine()->getRepository(Panier::class)->findBy(
+            [ "user_panier" => $user ]
+        );
+        foreach($panier as $cart){
+            $produit = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(
+                ['id' => $cart->getProduitPanier()->getId()]
+            );
+            $produit->setQuantiteProd($produit->getQuantiteProd() + $cart->getQuantite());
+            if($produit->getInStock() == 0){
+                $produit->setInStock(1);
+            }
+            
+            $em->remove($cart) ; 
+        }
+        $em->flush(); 
         return $this->render("panier/panier.html.twig", [
             "panier"=> array(),
             "user"=> $user,
-            "mode" => "cart"
+            "mode" => "cart",
+            "produits" => array(),
 
         ]);
     }
+
+        /**
+     * @Route("/remove_produit_panier/{id}", name="removeProduitPanier");
+     */
+    public function removeProduitPanier($id, ProduitRepository $repository): Response{
+
+        $em = $this->getDoctrine()->getManager() ;
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $panier = $this->getDoctrine()->getRepository(Panier::class)->find($id);
+        $produit = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(
+            ['id' => $panier->getProduitPanier()->getId()]
+        );
+        $produit->setQuantiteProd($produit->getQuantiteProd() + $panier->getQuantite());
+        if($produit->getInStock() == 0){
+            $produit->setInStock(1);
+        }
+        $em->remove($panier);
+        $em->flush(); 
+        return $this->redirectToRoute('showCart') ;
+    }
+
+
+
+    /**
+     * @Route("/Panier_Produit_add/{id}", name="ajouterProduitPanier") 
+     */
+    public function ajouterProduitPanier($id, Request $request, Panier $panier=null): Response
+    {
+        if (!$panier) {
+            $panier = new Panier();
+        }
+        
+        $panier = new Panier();
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $produit = $this->getDoctrine()->getRepository(Produit::class)->find($id);
+        $oldPanier = $this->getDoctrine()->getRepository(Panier::class)->findOneBy(
+            [ "user_panier" => $user, "produit_panier" => $produit]
+        );
+        $form = $this->createForm(PanierProdFormType::class, $panier);
+        $form->add('Add to Cart', SubmitType::class,[
+                'attr' => [
+                    'class'=>'btn btn-success waves-effect waves-light'
+                ]
+            ]) ;
+        $form->handleRequest($request);
+        $panier->setUserPanier($user);
+
+        if($oldPanier){
+            $newQuantite = $panier->getQuantite();
+            $quantite = $newQuantite + $oldPanier->getQuantite();
+            $oldForm = $this->createForm(PanierProdFormType::class, $oldPanier);
+            $oldForm->get('quantite')->setData($quantite);
+            $oldPanier = $oldForm->getData(); 
+            $oldPanier->setQuantite($quantite);
+        }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $panier->setProduitPanier($produit);
+            $panier->setUserPanier($user);
+            $em = $this->getDoctrine()->getManager();
+
+            if($oldPanier){
+
+                $q = $produit->getQuantiteProd() - $newQuantite;
+                if($q > 0){
+                    $em->persist($oldPanier);
+                    $produit->setQuantiteProd($q);
+                }
+                else{
+                    if($q == 0){
+                        $em->persist($oldPanier);
+                        $produit->setInStock(0);
+                        $produit->setQuantiteProd($q);
+                    }else{
+                        /* erreur */
+                    }
+                }
+            }else{
+                $q = $produit->getQuantiteProd() - $panier->getQuantite() ;
+                if($q > 0){
+                    $em->persist($panier);
+                    $produit->setQuantiteProd($q);
+                }else{
+                    if($q == 0){
+                        $em->persist($panier);
+                        $produit->setInStock(0);
+                        $produit->setQuantiteProd($q);
+                    }else{
+                        /* erreur */
+                    }
+                }
+            }
+            $em->flush() ;
+            return $this->redirectToRoute('showCart') ; 
+        }
+        return $this->render('panier/addproduitPanier.html.twig', [
+            'form' => $form->createView(),
+            "produit" => $produit,
+        ]);
+    }
+
+    
+    /** 
+     * @Route("/update_produit_panier/{id}" , name="updatePanierProduit")
+     */
+    public function updatePanierProduit(Request $request,$id): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $panier = $em->getRepository(Panier::class)->find($id);
+        $oldQuantite = $panier->getQuantite(); //ancien quantite 
+        $form = $this->createForm(PanierProdFormType::class, $panier) ; 
+        $form->add('Update', SubmitType::class,[
+                'attr' => [
+                    'class'=>'btn btn-success waves-effect waves-light'
+                ]
+            ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $produit = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(
+                ['id' => $panier->getProduitPanier()->getId()]
+            );
+            $newQuantite = $form->get('quantite')->getData();
+            if($oldQuantite > $newQuantite){
+                //Remove panier
+                $q = $produit->getQuantiteProd() + ( $oldQuantite - $newQuantite);
+                $produit->setQuantiteProd($q);
+                if($produit->getInStock() == 0){
+                    $produit->setInStock(1);
+                }
+            }
+            else{
+                //add panier
+                $q = $produit->getQuantiteProd() - ( $newQuantite - $oldQuantite);
+                if($q > 0){
+                    $produit->setQuantiteProd($q);
+                }else{
+                    if($q == 0){
+                        $produit->setInStock(0);
+                        $produit->setQuantiteProd(0);
+                    }else{
+                        /* erreur */
+                    }
+                }
+            }
+            $em->persist($panier);
+            $em->flush() ; 
+            return $this->redirectToRoute('showCart');
+        }
+        return $this->render('panier/updatepanier.html.twig', [
+            'form' => $form->createView(),
+            "panier" => $panier,
+        ]);
+    }
+
 
     /******************* Front Commande ******************/
     
@@ -83,6 +230,35 @@ class PanierController extends AbstractController
      * @Route("/command/{userId}", name="command")
      */
     public function commande($userId, Request $request): Response
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
+        $commande = new Commande();
+        $form1 = $this->createForm(CommandeFormType::class, $commande);
+        $form1->add('Place Order',SubmitType::class);
+        $form1->handleRequest($request);
+        if($form1->isSubmitted() && $form1->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commande);
+            $em->flush();
+            return $this->redirectToRoute("showCart");
+        }
+        return $this->render("panier/pan.html.twig", [
+            "form"=> $form1->createView(),
+            "user" => $user,
+            "panier" => $panier,
+            "produits"=> $produits,
+            "mode" => "store",
+            "form1"=>null,
+        ]);
+    }
+
+    /**
+     * @Route("/ajouterCommande", name="ajouterCommande")
+     */
+    public function ajouterCommande(Request $request): Response
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
@@ -96,16 +272,16 @@ class PanierController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($Commande);
             $em->flush();
-            return $this->redirectToRoute("command");
+            return $this->redirectToRoute("showCart");
         }
-        return $this->render("panier/panier.html.twig", [
+        return $this->render("panier/pan.html.twig", [
             "formA"=> $form->createView(),
             "user" => $user,
             "panier" => $panier,
-            "produits"=> $produits,
-            "mode" => "store"
+            "produits"=> $produits
         ]);
     }
+
 
     /******************* Back Commande ******************/
 
@@ -113,33 +289,82 @@ class PanierController extends AbstractController
      * @Route("/command_admin_show", name="showCommandAdmin");
      */
     public function showCommandAdmin(){
-        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
-        return $this->render("panier/gestionPanier.html.twig", [
-            "produits" => $produits
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findAll();
+        return $this->render("panier/gestionCommande.html.twig", [
+            "commandes" => $commandes,
+            "user" => $user,
+            "message" => null,
         ]);
     }
 
+    /**
+     * @Route("/command_admin_add", name="addCommandAdmin");
+     */
+    public function addCommandAdmin(Request $request): Response{
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
+        $commande = new Commande();
+        $form = $this->createForm(CommandeFormType::class, $commande);
+        $form->add('Place Order',SubmitType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commande);
+            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->addFlash('success', 'Command Created successfuly!');
+            }
+            return $this->redirectToRoute("showCommandAdmin");
+        }
+        return $this->render("panier/addCommande.html.twig", [
+            "form"=> $form->createView(),
+            "user" => $user,
+            "produits"=> $produits
+        ]);
+    }
+
+    
+    /**
+     * @Route("/command_admin_clear/{id}", name="clearCommandAdmin");
+     */
+    public function clearCommandAdmin($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $commande = $em->getRepository(Commande::class)->find($id);
+        
+        $em->remove($commande);
+        $em->flush();
+        $this->addFlash('success', 'Command removed successfuly!');
+        return $this->redirectToRoute("showCommandAdmin");
+    }
+
+    /**
+     * @Route("/command_admin_clear", name="clearAllCommandAdmin");
+     */
+    public function clearAllCommandAdmin()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $commandes = $em->getRepository(Commande::class)->findAll();
+
+        $commande =  new Commande();
+        foreach($commandes as $commande){
+            $em->remove($commande);
+        }
+        $em->flush();
+        $this->addFlash('success', 'All the store cleared successfuly!');
+        return $this->redirectToRoute("showCommandAdmin");
+    }
+
+
     ///** 
-    //* @Route("/command_admin_update/{id}" , name="updateCommand")
+    //* @Route("/changeStatus/{status}/{id}" , name="updateCommand")
     //*/
 
     /*
-     function updateCommand(Request $request,$id): Response
+     function changeStatus($status, $id): Response
     {
-        $em=$this->getDoctrine()->getManager();
-        $produit = $em->getRepository(Produit::class)->find($id);
-        $form = $this->createForm(PanierProdFormType::class, $produit) ; 
-         $form->add('Save Changes', SubmitType::class,[
-                'attr' => [
-                    'class'=>'btn btn-success waves-effect waves-light'
-                ]
-            ]) ;
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($produit) ;  
-            $em->flush() ; 
-            return $this->redirectToRoute('showCommandAdmin') ; 
-        }
         return $this->render('panier/updatepanier.html.twig', [
             'formA' => $form->createView(),
         ]);

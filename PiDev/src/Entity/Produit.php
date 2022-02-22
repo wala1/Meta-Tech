@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 
 /**
@@ -44,10 +46,12 @@ class Produit
     /**
      * @return Collection|Panier[]
     */
-    public function getPanier()
+    public function getPanier(): Collection
     {
         return $this->panier;
     }
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
@@ -85,12 +89,19 @@ class Produit
     public $model_prod;
 
     /**
+     * @ORM\Column(type="integer", length=255, nullable=true)
+     */
+    public $inStock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $quantite_prod;
+    /**
      * @ORM\ManyToOne(targetEntity=SousCategorie::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
      */
     public $sousCategProd;
-
-    
     
 
     public function getId(): ?int
@@ -180,6 +191,30 @@ class Produit
         $this->model_prod = $model_prod;
 
         return $this;
+    }    
+
+    public function getInStock(): ?int
+    {
+        return $this->inStock;
+    }
+
+    public function setInStock(?int $inStock): self
+    {
+        $this->inStock = $inStock;
+
+        return $this;
+    }
+
+    public function getQuantiteProd(): ?int
+    {
+        return $this->quantite_prod;
+    }
+
+    public function setQuantiteProd(?int $quantite_prod): self
+    {
+        $this->quantite_prod = $quantite_prod;
+
+        return $this;
     }
 
     public function getSousCategProd(): ?SousCategorie
@@ -202,6 +237,28 @@ class Produit
     public function setCategProd(?Categorie $categorie_prod): self
     {
         $this->categorie_prod = $categorie_prod;
+
+        return $this;
+    }
+
+    
+    public function addPanier(Panier $produipaniert): self
+    {
+        if (!$this->panier->contains($panier)) {
+            $this->panier[] = $panier;
+            $panier->setProduitPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->panier->removeElement($panier)) {
+            if ($panier->getProduitPanier() === $this) {
+                $panier->setProduitPanier(null);
+            }
+        }
 
         return $this;
     }

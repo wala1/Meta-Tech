@@ -1,0 +1,163 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block body %}
+
+<center style="margin-top:5cm;">
+    <div style="width: 10cm; margin-top: 2cm; margin-bottom: -2cm; margin-left: 2.2cm;">
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+								<table >
+									<tr>
+										<td >
+											{{ form_label(form.firstName,"first Name ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.firstName) }}
+                                            {% if form_errors(form.firstName) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.firstName) }}
+                                                </div>
+                                            {% endif %}
+
+										</td>
+										<td >
+											{{ form_label(form.lastName,"lastName ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.lastName) }}
+                                            {% if form_errors(form.lastName) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.lastName) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.street_Adress,"street_Adress ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.street_Adress) }}
+                                            {% if form_errors(form.street_Adress) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.street_Adress) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.city,"city ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.city) }}
+                                            {% if form_errors(form.city) %}
+                                                <div class="alert alert-danger" role="alert" style="width5cm:; height:2cm; margin-top:0.2cm; ">
+                                                    {{ form_errors(form.city) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.zip_PostalCode,"zip_PostalCode ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.zip_PostalCode) }}
+                                            {% if form_errors(form.zip_PostalCode) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.zip_PostalCode) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.country,"country ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.country) }}
+                                            {% if form_errors(form.country) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.country) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.company,"company ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.company) }}
+                                            {% if form_errors(form.company) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.company) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.phone_Number,"phone_Number ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.phone_Number) }}
+                                            {% if form_errors(form.phone_Number) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.phone_Number) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.payement_method,"payement_method ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.payement_method) }}
+                                            {% if form_errors(form.payement_method) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.payement_method) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.date,"date ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.date) }}
+                                            {% if form_errors(form.date) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.date) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.delivery_comment,"delivery_comment ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.delivery_comment) }}
+                                            {% if form_errors(form.delivery_comment) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.delivery_comment) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.newsletter,"newsletter ") }}
+											{{ form_widget(form.newsletter) }}
+                                            {% if form_errors(form.newsletter) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.newsletter) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.order_comment,"order_comment ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.order_comment) }}
+                                            {% if form_errors(form.order_comment) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.order_comment) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+										<td >
+											{{ form_label(form.code_Coupon,"code_Coupon ") }}
+											{{ form_widget(form.code_Coupon) }}
+                                            {% if form_errors(form.code_Coupon) %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ form_errors(form.code_Coupon) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+
+								</table>
+
+							{{ form_end(form) }}
+						</center>
+
+
+{% endblock %}

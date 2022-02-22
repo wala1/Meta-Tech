@@ -286,10 +286,17 @@
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow">
                                 <i data-feather="briefcase"></i>
-                                <span data-key="t-components">Cart</span>
+                                <span data-key="t-components">Order</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ path('showCommandAdmin') }}" data-key="t-apex-charts">Order list</a></li>
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow"> <span data-key="t-email">Order list</span> </a>
+                                        <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                            <li><a href="apps-email-inbox.html" data-key="t-inbox">Order list</a></li>
+                                            <li><a href="apps-email-inbox.html" data-key="t-inbox">Delivered</a></li>
+                                            <li><a href="apps-email-read.html" data-key="t-read-email">Canceled</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="#" data-key="t-e-charts">Charts</a></li>
                                 </ul>
                             </li>
