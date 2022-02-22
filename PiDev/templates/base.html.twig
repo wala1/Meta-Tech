@@ -280,8 +280,8 @@ setCookie("shownewsletter", '0', 1)
    {% for pub in pubBack %}  
    {% if pub.coupon1 != null and pub.coupon1.id == 1	%}  
 <div class="typewriter">
-		<p> -20% EN +</p>
-		<p> {{ pub.coupon1.codeCoup }}</p> 
+		<p> -20% EN + Code :  {{ pub.coupon1.codeCoup }}</p>
+		
 		
 </div>	
 {% endif %} 
@@ -334,7 +334,7 @@ p {
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Feb 22, 2022").getTime();
+var countDownDate = new Date("Feb 23, 2022").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {

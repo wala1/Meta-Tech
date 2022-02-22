@@ -93,8 +93,7 @@
 
 			<div class="container-the-blue-sky-slider nivoSlider">
                 {# <img class="banner-nivo-slider-mobile-and-web no-lazy" title="#htmlcaption33" src="../media/slidebanner/s/l/1.png" alt="Ohey carparts 01"> #}
-			<iframe style="min-height:450px;min-width:300px;width:100%;height:100%;" src="https://sketchfab.com/models/d1d8282c9916438091f11aeb28787b66/embed" frameborder="0"    ></iframe>		
-				{# <img class="banner-nivo-slider-mobile-and-web no-lazy" alt="Ohey carparts 01" title="#htmlcaption32" src="../media/slidebanner/s/l/huawei.jpg"/>					 #}
+<iframe style="min-height:450px;min-width:300px;width:100%;height:100%;" src="https://sketchfab.com/models/d1d8282c9916438091f11aeb28787b66/embed?autostart=1&amp;autospin=-0.1&amp;autostart=1&amp;camera=0&amp;double_click=0&amp;internal=1&amp;max_texture_size=1024&amp;preload=1&amp;scrollwheel=0&amp;sound_enable=0&amp;transparent=1&amp;ui_animations=0&amp;ui_annotations=0&amp;ui_ar=1&amp;ui_ar_help=0&amp;ui_color=white&amp;ui_fadeout=0&amp;ui_fullscreen=0&amp;ui_help=0&amp;ui_infos=0&amp;ui_inspector=0&amp;ui_settings=0&amp;ui_stop=0&amp;ui_theatre=0&amp;ui_theme=dark&amp;ui_vr=0&amp;ui_watermark=0" frameborder="0"    ></iframe>				{# <img class="banner-nivo-slider-mobile-and-web no-lazy" alt="Ohey carparts 01" title="#htmlcaption32" src="../media/slidebanner/s/l/huawei.jpg"/>					 #}
 					</div>
 
 
@@ -292,11 +291,11 @@
 						<div class="product details product-item-details">	
 							<strong class="product name product-item-name">
 								<a class="product-item-link" href="afe-bladerunner-turbocharger.html">
-													</a>
+											{{pub.produit.nom_prod}}		</a>
 							</strong>	
 							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
                 <div class="rating-summary">
-             <span class="label"><span>Rating:</span></span>
+             <span class="label"><span>{{pub.produit.ratingProd}}</span></span>
              <div class="rating-result" title="100%">
                  <span style="width:100%">
                  </span>
@@ -315,7 +314,7 @@
     
 
 <span class="price-container price-final_price&#x20;tax&#x20;weee">
-        <span data-price-amount="900" data-price-type="finalPrice" class="price-wrapper "><span class="price">$900.00</span></span>
+        <span data-price-amount="900" data-price-type="finalPrice" class="price-wrapper "><span class="price">{{pub.produit.prix_prod}}</span></span>
         </span>
 
 </div>														<div class="product-sold">
@@ -325,8 +324,8 @@
 								</div>
 								<div class="count-sold-available">
 									<div class="count-sold">
-										Sold:										<span>
-											1/249										</span>
+										Promo:										<span>
+										{{pub.produit.promo_prod}}								</span>
 									</div>
 									
 								</div>
@@ -624,26 +623,26 @@
    <div class="banner section banner-middle owl-carousel owl-theme" data-items="2" data-bigdesktop="2" data-smalldesktop="2" data-bigtablet="2" data-tablet="2" data-smalltablet="1" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
 
    {# {% if pub.coupon1 != null and pub.coupon1.id == 1	%} #}
-<div class="col-banner absolute-content-image lazyload-content left center">
+{# <div class="col-banner absolute-content-image lazyload-content left center">
 
-<div class="banner-img left center"><img src="" data-src="https://www.cnet.com/a/img/cpzHajwZ4I0JuX-7sPfzc5FhZZI=/1200x675/2021/01/07/3626616c-83af-4199-a029-76db418938f0/galaxy-z-flip-fold-samsung-product-promo-hoyle-2021.jpg" alt=""></div>
+<div class="banner-img left center"><img src="" data-src="" alt=""></div>
 <div class="content">
 <h5 class="size-14" style="color: #fdb819; text-transform: uppercase; font-weight: bold;">Buy From Us &amp; Get Your</h5>
 <h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Galaxy Z Fold 2</h4>
 <h2 class="size-46" style="color: #ffffff; font-weight: bold;">Up To <span style="color: #fdb819;">-70%</span></h2>
 <div class=" btn "><a href="#">Shop Now</a></div>
 </div>
-</div>
+</div> #}
 
 {% for pub in pubBack %}  
  {% if pub.calender != null 	%}  
 <div class="col-banner absolute-content-image lazyload-content left center">
 <div class="banner-img left center"><img src="" data-src="{{ pub.calender.imageEvent }}" alt=""></div>
 <div class="content">
-<h5 class="size-14" style="color: #ffffff; text-transform: uppercase; font-weight: bold;">{{ pub.calender.title }}</h5>
-<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{ pub.calender.description }}</h4>
-<h2 class="size-46" style="color: #ffffff; font-weight: bold;">Save<span style="color: #ffffff;"> $329.00</span></h2>
-<div class=" btn "><a href="#">Shop Now</a></div>
+<h5 class="size-14" style="color: #ffffff; text-transform: uppercase; font-weight: bold;"></h5>
+<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{ pub.calender.title }}</h4>
+<h2 class="size-46" style="color: #ffffff; font-weight: bold;">{{ pub.calender.description }}<span style="color: #ffffff;"> </span></h2>
+<div class=" btn "><a href="#">Inscrit Now</a></div>
 </div>
 </div>
 {% endif %}

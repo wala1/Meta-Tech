@@ -6,6 +6,7 @@ use App\Repository\CouponRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CouponRepository::class)
@@ -21,11 +22,18 @@ class Coupon
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 8,
+     *      minMessage = "The Coupon Code must be at least {{ limit }} characters long",
+     *      maxMessage = "The Coupon Code cannot be longer than {{ limit }} characters"
+     * )
      */
     private $codeCoup;
 
     /**
      * @ORM\ManyToOne(targetEntity=PubBack::class, inversedBy="coupon")
+     * 
      */
     private $pubBack;
 
