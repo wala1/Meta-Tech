@@ -99,7 +99,9 @@
                             <div class="form-group">
                            
                                 <label > event </label>
+                                {% if app.user.calendar != null %}
                        <input type="event" id="event" name="event" class="form-control" value="{{app.user.calendar.title}}">
+                       {% endif %}
                             </div>
                           </div>
                         </div>

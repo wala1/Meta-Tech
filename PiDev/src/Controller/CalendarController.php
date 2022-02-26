@@ -158,5 +158,26 @@ class CalendarController extends AbstractController
 
 
 
+
+
+
+
+
+        // affcihage dans front
+/**
+     * @Route("/eventFront", name="event_front")
+     */
+    public function eventFront(): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Calendar::class) ; 
+        $calendar = $repo->findAll() ; 
+
+        return $this->render('calendar/eventFront1.html.twig', [
+            'calendar' => $calendar
+        ]);
+    }
+
+
+
 }
 
