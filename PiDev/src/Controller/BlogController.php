@@ -103,6 +103,19 @@ class BlogController extends AbstractController
         }
 
 
+        /**
+         * @Route("/back_consuler_publ", name="consuler_publ")
+         */
+        public function consulter_Publ_back(): Response
+        {
+            $repo = $this->getDoctrine()->getRepository(Publication::class) ; 
+        $publications = $repo->findAll() ; 
+
+        return $this->render('blog/consulterBlogback.html.twig', [
+            'publications' => $publications
+        ]);
+            
+        }
 
 
 
