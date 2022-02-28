@@ -58,6 +58,12 @@
                                                                         name="idCommentaire" hidden />
                                                         </div>
                                                 </form>
+                                                <form method="post" class="row"
+                                                        action="{{ path('commenter_blog', {'id' : publication.id }) }}">
+                                                        <div class="col-2">
+                                                                <button type="submit" value="like">aimer</button>
+                                                        </div>
+                                                </form>
                                                 {% endif %}
                                         </div>
                                 </publication>
