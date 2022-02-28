@@ -111,7 +111,7 @@ class BlogController extends AbstractController
             $repo = $this->getDoctrine()->getRepository(Publication::class) ; 
         $publications = $repo->findAll() ; 
 
-        return $this->render('blog/consulterBlogback.html.twig', [
+        return $this->render('blog/blog.html.twig', [
             'publications' => $publications
         ]);
             
