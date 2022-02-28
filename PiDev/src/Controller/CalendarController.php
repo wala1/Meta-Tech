@@ -177,6 +177,59 @@ class CalendarController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/event_detail/{id}", name="event_detail")
+     */
+    public function eventDetail($id): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Calendar::class) ; 
+        $calendar = $repo->findById($id) ; 
+
+      
+        return $this->render('calendar/eventShow.html.twig', [
+            'calendar' => $calendar,
+          
+        ]);
+    }
+
+
+
+
+
+    
+
+    /**
+     * @Route("/CalendarUser", name="calendar_user")
+     */
+    public function calendarUser(CalendarRepository $calendar): Response
+    {
+        $events=$calendar->findAll();
+        $rdvs= [];
+        foreach($events as $event)
+        {
+            $rdvs[] =[
+                'id' => $event->getId(),
+                'title' => $event->getTitle(),
+                'description' => $event->getDescription(),
+                'start' => $event->getStart()->format('Y-m-d H:i:s'),
+                'end' => $event->getEnd()->format('Y-m-d H:i:s'),
+                'allDay' => $event->getAllDay(),
+                 'backgroundColor' => $event->getBackgroundColor(),
+                'borderColor' => $event->getBorderColor(),
+                'textColor' => $event->getTextColor(),
+      ];
+        }
+        $data =json_encode($rdvs);
+        return $this->render('calendar/calendarFront.html.twig', compact('data'));
+    }
+
+
+
+
+
+
+
+
 
 
 }

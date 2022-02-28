@@ -39,6 +39,7 @@ var require = {
 		<meta property="og:url" content="https://blueskytechmage.com/ohey/en11/anzo-led-headlights-gauge-kit.html"/>
 		<meta property="product:price:amount" content="100"/>
 		<meta property="product:price:currency" content="USD"/>
+		 
 	</head>
 	<body data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" itemtype="http://schema.org/Product" itemscope="itemscope" class="bluesky-page-preloader catalog-product-view product-anzo-led-headlights-gauge-kit categorypath-all-categories category-all-categories page-layout-1column">
 		<div class="enable-sticky-header"></div>
@@ -696,8 +697,25 @@ $('#search-input-autocomplate').focus();
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="{{path('produit')}}">Products</a>
 												</li>
-												<li class="ui-menu-item level0 classic ">
+												{# <li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="{{path('event_front')}}">Events</a>
+												</li> #}
+												<li class="ui-menu-item level0  classic menu-item-has-children parent">
+													<a class="level-top">Events</a>
+													<div class="open-children-toggle">&nbsp;</div>
+													<div class="level0 submenu">
+														<div class="row">
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 ">
+																	<a href="{{path('event_front')}}">Events List</a>
+																</li>
+																<li class="ui-menu-item level2 ">
+																	<a href="{{path('calendar_user')}}">New Event</a>
+																</li>
+																
+															</ul>
+														</div>
+													</div>
 												</li>
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="about-us/index.html">About us</a>
@@ -942,13 +960,15 @@ return false;
 
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
+		   		 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
+        {# {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}
+        {% endblock %} #}
     </head>
     <body>
         {% block body %}
@@ -1238,7 +1258,12 @@ $(this).addClass("transition");
 }, 1000);
 });
 });
-});</script></body><!-- Mirrored from blueskytechmage.com/ohey/en11/anzo-led-headlights-gauge-kit.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Feb 2022 19:00:33 GMT --></html>
+});</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+        {% block javascripts %}{% endblock %}
+</body><!-- Mirrored from blueskytechmage.com/ohey/en11/anzo-led-headlights-gauge-kit.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Feb 2022 19:00:33 GMT --></html>
 
 
 </html>
