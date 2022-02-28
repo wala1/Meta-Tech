@@ -52,9 +52,15 @@ class Publication
      */
     private $utilisateur;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class)
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
     
 
@@ -150,6 +156,30 @@ class Publication
     public function setUtilisateur(?User $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(User $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+        }
+
+        return $this;
+    }
+
+    public function removeLike(User $like): self
+    {
+        $this->likes->removeElement($like);
 
         return $this;
     }
