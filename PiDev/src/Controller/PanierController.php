@@ -236,14 +236,27 @@ class PanierController extends AbstractController
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
         $form1 = $this->createForm(CommandeFormType::class, $commande);
-        $form1->add('Place Order',SubmitType::class);
+        $form1->add('Place Order',SubmitType::class,[
+            'attr' => [
+                'class'=>'btn btn-success waves-effect waves-light'
+            ]
+        ]) ;
         $form1->handleRequest($request);
         if($form1->isSubmitted() && $form1->isValid())
         {
             $em = $this->getDoctrine()->getManager();
             $em->persist($commande);
             $em->flush();
-            return $this->redirectToRoute("showCart");
+            //return $this->redirectToRoute("showCart", ["etat" => "final"]);
+            return $this->render("panier/pan.html.twig", [
+                "form"=> null,
+                "user" => $user,
+                "panier" => null,
+                "produits"=> null,
+                "mode" => "success",
+                "command" => $commande,
+                "form1"=>null
+            ]);
         }
         return $this->render("panier/pan.html.twig", [
             "form"=> $form1->createView(),
@@ -265,7 +278,11 @@ class PanierController extends AbstractController
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
         $form = $this->createForm(CommandeFormType::class, $commande);
-        $form->add('Place Order',SubmitType::class);
+        $form->add('Place Order',SubmitType::class,[
+            'attr' => [
+                'class'=>'btn btn-success waves-effect waves-light'
+            ]
+        ]) ;
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
@@ -306,7 +323,11 @@ class PanierController extends AbstractController
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
         $form = $this->createForm(CommandeFormType::class, $commande);
-        $form->add('Place Order',SubmitType::class);
+        $form->add('Place Order',SubmitType::class,[
+            'attr' => [
+                'class'=>'btn btn-success waves-effect waves-light'
+            ]
+        ]) ;
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {

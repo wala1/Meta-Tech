@@ -46,7 +46,6 @@ class CommandeFormType extends AbstractType
             ])
             ->add('country', ChoiceType::class, [
                 'choices' => [
-                    '' => 'null',
                     'Tunisia' => 'TN',
                     'Algeria' => 'DZ',
                     'Egypt' => 'EG',

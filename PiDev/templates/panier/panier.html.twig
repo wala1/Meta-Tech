@@ -471,6 +471,16 @@
 </a>
 </div></div></header>
 
+        <center>
+        <div style="width: 10cm; margin-top: 0cm; margin-bottom: -2cm; margin-left: 2.2cm;">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+        </center>
 
 <main id="maincontent" class="page-main">
 
@@ -508,6 +518,13 @@
             </h1>
         </div>
 
+
+
+
+
+
+
+
 {% if panierExiste == true %}
 
 
@@ -528,6 +545,7 @@
 
 
                         {% if mode == "cart" %}
+
                                                     <table>
                                                         <thead>
                                                             <tr>
@@ -635,6 +653,7 @@
 
 
                     {% elseif mode =="store" %}
+
                             <div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
                                 <div class="container">
                                 <div class="row align-items-start">

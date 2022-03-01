@@ -27,7 +27,6 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="user_panier")
-     * @ORM\JoinColumn(nullable: false)
      */
     private $panier;
 

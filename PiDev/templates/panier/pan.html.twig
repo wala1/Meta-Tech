@@ -5,7 +5,23 @@
 
 {%if mode =="cart" %}
 
+{% elseif mode == "success" %}
+
+
+                            <center> <h1> Thank you for your purchase!</h1></center>
+
+                            <div class="cart-empty">
+                                <p>Your order # is: {{command.id}}.</p>
+                                <p>We'll email you an order confirmation with details and tracking info. </p>
+                                <a href="/"><button>Continue Shopping</button></a>
+
+                                <p>You can track your order status by creating an account.</>
+                                <p>Email Address: {{user.email}}</p>
+                                <a href="addUser"><button> Create An Account</button></a>
+                            </div>
+
 {% elseif mode=="store"%}
+
                         <div>
 
                             {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}

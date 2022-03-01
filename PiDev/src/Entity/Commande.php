@@ -105,6 +105,7 @@ class Commande
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotNull(message="This field is required")
      */
     public $code_Coupon;
 
