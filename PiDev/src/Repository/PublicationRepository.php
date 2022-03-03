@@ -33,6 +33,20 @@ class PublicationRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+   
+    public function findlLikeIfExist($value , $idPub) 
+    {
+        return $this->createQueryBuilder('p')->select('p.likes')
+            ->andWhere('p.likes = :val' )
+            ->andWhere('p.id = :id' )
+            ->setParameter('val', $value)
+            ->setParameter('id', $idPub)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     

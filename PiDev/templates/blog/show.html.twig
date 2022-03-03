@@ -8,12 +8,12 @@
                 <div class="container-fluid">
                         <section>
                                 {% for publication in publications %}
-                                <publication id="descripForm">
+                                <publication id="descripForm" style="align-text:center ;">
                                         <h2>{{ publication.titrePubl }}</h2>
                                         <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
                                                 dans la categorie </div>
                                         <div class="content">
-                                                <img src="{{ publication.imagepubl }}" width="300px" alt="">
+                                                <img src="{{ publication.imagepubl }}"  alt="">
                                                 <p>
                                                         {{ publication.descriptionPubl }}
                                                 </p>
@@ -29,18 +29,23 @@
                                                 <br>
                                                 {% for commentaire in publication.commentaires %}
                                                 <div id="descripbr" class="col-6">
-                                                        <p> {{ commentaire.descriptionComm}} <i> by {{
+                                                        <p> <span  style="border: 2px solid transparent;
+  border-radius: 2px; background-color: #DCDCDC	;">{{ commentaire.descriptionComm}}</span> <i> by {{
                                                                         commentaire.utilisateur.username}} at
                                                                         {{commentaire.tempsComm |
                                                                         date }} </i>
-                                                                {% if app.user == commentaire.utilisateur %}
-                                                                <a href="#descripbr"
+                                                               
+                                                        </p>
+                                                        <p style="margin-top : -20px;">
+                                                         {% if app.user == commentaire.utilisateur %}
+                                                                <a href="#descripbr" style="color : blue"
                                                                         onclick="onClickModifier({{ commentaire.id}} , '{{commentaire.descriptionComm }}')">
-                                                                        modifier </a> <a
+                                                                        modifier </a> 
+                                                                        <a style="margin-left : 30px; color : red"
                                                                         href="{{ path('supprrimer_commentaire_blog', {'idPublication' : publication.id, 'id' : commentaire.id }) }}">
                                                                         supprimer </a>
                                                                 {% endif %}
-                                                        </p>
+                                                                </p>
                                                 </div>
                                                 {% endfor %}
                                                 <br>
@@ -53,16 +58,21 @@
                                                         <div class="col-2">
                                                                 <button type="submit" value="ajouter">commenter</button>
                                                         </div>
-                                                        <div class="col-8">
-                                                                <input id="idCommentaire" type="text"
-                                                                        name="idCommentaire" hidden />
-                                                        </div>
-                                                </form>
-                                                <form method="post" class="row"
-                                                        action="{{ path('commenter_blog', {'id' : publication.id }) }}">
-                                                        <div class="col-2">
-                                                                <button type="submit" value="like">aimer</button>
-                                                        </div>
+                                                       
+                                                        <div class="col-2" style="font-size:50px">
+	                       
+			<ul class="mobile-bottom-link flex-layout space-between list-unstyled no-wrap">
+
+
+					<a    {% if  publication.likes.contains(app.user) == false %} href=" {{ path('aimer_blog', {'id' : publication.id }) }}" {% endif %} >
+						<span class="icon {% if  publication.likes.contains(app.user) == true %} icon-favorite  {% else %} icon-favorite_border {% endif %} ">
+                                                
+                                                </span>
+                                                {{publication.likes.count}}
+                                                </a>
+				</li>
+                                                </ul>
+                                              
                                                 </form>
                                                 {% endif %}
                                         </div>
@@ -81,4 +91,7 @@
                 document.getElementById('idCommentaire').setAttribute("value", id);
         }
 </script>
+</div>
+</div>
+
 {% endblock %}

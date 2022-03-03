@@ -124,12 +124,19 @@ class BlogController extends AbstractController
      */
     
         public function publShow($id): Response {
-            $repo = $this->getDoctrine()->getRepository(Publication::class) ; 
-           
+
+            $user = $this->security->getUser();
+
+            $repo = $this->getDoctrine()->getRepository(Publication::class); 
             $publication = $repo->findById($id) ; 
+            $isLiked = false ;
+        // $repo->findlLikeIfExist($user , $id);
+               
+
+           
 
             return $this->render('blog/show.html.twig', [
-                'publications' => $publication
+                'publications' => $publication , 'isLiked' => $isLiked
             ]);
         }
        
@@ -274,4 +281,35 @@ class BlogController extends AbstractController
         return $this->redirectToRoute('blog_show' , [ 'id' => $idPublication ]) ; 
 
     }
+
+    
+/**
+     * @Route("/blog/aimer/{id}", name="aimer_blog") 
+     */
+    public function aimerBlog(Request $request,$id): Response
+    {
+        
+     
+        if($id != null) 
+        {
+            if($id != null )//modifier
+            {
+                
+                
+            $em = $this->getDoctrine()->getManager();
+            $publication = $em->getRepository(publication::class)->find($id);
+
+            $user = $this->security->getUser();
+            $publication->addLike($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($publication) ; 
+            $em->flush() ; 
+            return $this->redirectToRoute('blog_show' , [ 'id' => $id ]) ; 
+
+            }
+        }
+        return $this->redirectToRoute('blog_show' , [ 'id' => $id ]) ; 
+
+    }
+
 }

@@ -266,135 +266,84 @@
 }
 </script>                    </div>
 	                <div class="col-action col-right">
-	                    <ul class="flex-layout action-header center_vertical ">
-											<li>
-												<ul class="header links">
-												 {% if not app.user %}
-													<li class="link authorization-link" data-label="or">
-												
-														<a href="{{ path('security_login') }}">Sign In</a>
-													  
+	                    <ul class="flex-layout action-header center_vertical">
+	                        <li><ul class="header links"><li class="link authorization-link" data-label="or">
+    <a href="customer/account/login/referer/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9ibG9n/index.html">Sign In</a>
+</li>
+<li><a href="customer/account/create/index.html" id="idsPGkvgee">Create an Account</a></li></ul></li>
+	                        <li class="link wishlist" data-bind="scope: 'wishlist'">
+    <a href="wishlist/index.html">
+		
+    </a>
+</li>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "wishlist": {
+                        "component": "Magento_Wishlist/js/view/wishlist"
+                    }
+                }
+            }
+        }
+    }
 
-													</li>
-													    {% else %}
-													
-														<li class="link authorization-link" data-label="or">
-														<a href="{{ path('security_logout') }}">Sign Out</a>
-															</li>
-												
-														  {% endif %}
-
-												</ul>
-											</li>
-											<li class="link authorization-link">
-											
-											{% if is_granted('ROLE_ADMIN') %}
-													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
-											{% endif %}
-											</li>
-											<li class="link wishlist" data-bind="scope: 'wishlist'">
-												<a href="wishlist/index.html"></a>
-											</li>
-											<script type="text/x-magento-init">
-												{
-												        "*": {
-												            "Magento_Ui/js/core/app": {
-												                "components": {
-												                    "wishlist": {
-												                        "component": "Magento_Wishlist/js/view/wishlist"
-												                    }
-												                }
-												            }
-												        }
-												    }
-
-											</script>
-											<li class="minicart-li-content-show-hide">
-
-												<div data-block="minicart" class="minicart-wrapper">
-													<a class="action showcart" href="checkout/cart/index.html" data-bind="scope: 'minicart_content'">
-														<span
-															class="counter qty empty" data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-															<!-- <span class="icon-cart-header"><i class="menu-icon  icon flaticon-shopping-cart6">&nbsp;</i></span> -->
-															<span class="total-mini-cart-item">
-																<!-- ko if: getCartParam('summary_count') -->
-																<!-- ko text: getCartParam('summary_count') -->
-																<!-- /ko -->
-																<!-- /ko -->
-																<!-- ko if: !getCartParam('summary_count') -->
-															0
-																<!-- /ko -->
-															</span>
-														</span>
-														<span class="mini-cart-text">
-															<span
-																class="content-cart hidden-xs">
-																<!-- ko if: getCartParam('subtotal') -->
-																<span class="total-mini-cart-price" data-bind="html: getCartParam('subtotal')"></span>
-																<!-- /ko -->
-																<!-- ko if: !getCartParam('subtotal') -->
-																<span class="total-mini-cart-price">
-																	<span class="price">$0.00</span>
-																</span>
-																<!-- /ko -->
-															</span>
-														</span>
-													</a>
-													<div class="block block-minicart" data-role="dropdownDialog" data-mage-init='{"dropdownDialog":{
-															                "appendTo":"[data-block=minicart]",
-															                "triggerTarget":".showcart",
-															                "timeout": "2000",
-															                "closeOnMouseLeave": false,
-															                "closeOnEscape": true,
-															                "triggerClass":"active",
-															                "parentClass":"active",
-															                "buttons":[]}}'>
-														<div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'"><!-- ko template: getTemplate() -->
-															<!-- /ko -->
-														</div>
-													</div>
-													<script>
-														window.checkout = {
-"shoppingCartUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/cart\/",
-"checkoutUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/",
-"updateItemQtyUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/sidebar\/updateItemQty\/",
-"removeItemUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/sidebar\/removeItem\/",
-"imageTemplate": "Magento_Catalog\/product\/image_with_borders",
-"baseUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/",
-"minicartMaxItemsVisible": 5,
-"websiteId": "5",
-"maxItemsToDisplay": 10,
-"storeId": "15",
-"storeGroupId": "6",
-"customerLoginUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/login\/referer\/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s\/",
-"isRedirectRequired": false,
-"autocomplete": "off",
-"captcha": {
-"user_login": {
-"isCaseSensitive": false,
-"imageHeight": 50,
-"imageSrc": "",
-"refreshUrl": "https:\/\/blueskytechmage.com\/ohey\/en11\/captcha\/refresh\/",
-"isRequired": false,
-"timestamp": 1643741373
-}
-}
-};
-													</script>
-													<script type="text/x-magento-init">
-														{
-														        "[data-block='minicart']": {
-														            "Magento_Ui/js/core/app": {"components":{"minicart_content":{"children":{"subtotal.container":{"children":{"subtotal":{"children":{"subtotal.totals":{"config":{"display_cart_subtotal_incl_tax":0,"display_cart_subtotal_excl_tax":1,"template":"Magento_Tax\/checkout\/minicart\/subtotal\/totals"},"children":{"subtotal.totals.msrp":{"component":"Magento_Msrp\/js\/view\/checkout\/minicart\/subtotal\/totals","config":{"displayArea":"minicart-subtotal-hidden","template":"Magento_Msrp\/checkout\/minicart\/subtotal\/totals"}}},"component":"Magento_Tax\/js\/view\/checkout\/minicart\/subtotal\/totals"}},"component":"uiComponent","config":{"template":"Magento_Checkout\/minicart\/subtotal"}}},"component":"uiComponent","config":{"displayArea":"subtotalContainer"}},"item.renderer":{"component":"Magento_Checkout\/js\/view\/cart-item-renderer","config":{"displayArea":"defaultRenderer","template":"Magento_Checkout\/minicart\/item\/default"},"children":{"item.image":{"component":"Magento_Catalog\/js\/view\/image","config":{"template":"Magento_Catalog\/product\/image","displayArea":"itemImage"}},"checkout.cart.item.price.sidebar":{"component":"uiComponent","config":{"template":"Magento_Checkout\/minicart\/item\/price","displayArea":"priceSidebar"}}}},"extra_info":{"component":"uiComponent","config":{"displayArea":"extraInfo"}},"promotion":{"component":"uiComponent","config":{"displayArea":"promotion"}}},"config":{"itemRenderer":{"default":"defaultRenderer","simple":"defaultRenderer","virtual":"defaultRenderer"},"template":"Magento_Checkout\/minicart\/content"},"component":"Magento_Checkout\/js\/view\/minicart"}},"types":[]}        },
-														        "*": {
-														            "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
-														        }
-														    }
-													</script>
-												</div>
+</script>
+	                        <li class="minicart-li-content-show-hide">
+	                            
+<div data-block="minicart" class="minicart-wrapper">
+    <a class="action showcart" href="checkout/cart/index.html" data-bind="scope: 'minicart_content'">
+		<span class="counter qty empty" data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
+				<!-- <span class="icon-cart-header"><i class="menu-icon  icon flaticon-shopping-cart6">&nbsp;</i></span> -->
+				<span class="total-mini-cart-item">
+				<!-- ko if: getCartParam('summary_count') -->
+					<!-- ko text: getCartParam('summary_count') --><!-- /ko -->
+				<!-- /ko -->
+				<!-- ko if: !getCartParam('summary_count') -->
+					0
+				<!-- /ko -->
+				</span>
+		</span>
+		<span class="mini-cart-text"> 
+			<span class="content-cart hidden-xs">
+				<!-- ko if: getCartParam('subtotal') -->
+				<span class="total-mini-cart-price" data-bind="html: getCartParam('subtotal')"></span>
+				<!-- /ko -->
+				<!-- ko if: !getCartParam('subtotal') -->
+					<span class="total-mini-cart-price"><span class="price">$0.00</span></span>
+				<!-- /ko -->
+			</span>
+		</span>
+    </a>
+            <div class="block block-minicart" data-role="dropdownDialog" data-mage-init='{"dropdownDialog":{
+                "appendTo":"[data-block=minicart]",
+                "triggerTarget":".showcart",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}'>
+            <div id="minicart-content-wrapper" data-bind="scope: 'minicart_content'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+                    </div>
+        <script>window.checkout={"shoppingCartUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/cart\/","checkoutUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/","updateItemQtyUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/sidebar\/updateItemQty\/","removeItemUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/checkout\/sidebar\/removeItem\/","imageTemplate":"Magento_Catalog\/product\/image_with_borders","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/","minicartMaxItemsVisible":5,"websiteId":"5","maxItemsToDisplay":10,"storeId":"15","storeGroupId":"6","customerLoginUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/login\/referer\/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9ibG9n\/","isRedirectRequired":false,"autocomplete":"off","captcha":{"user_login":{"isCaseSensitive":false,"imageHeight":50,"imageSrc":"","refreshUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/captcha\/refresh\/","isRequired":false,"timestamp":1643741836}}};</script>
+    <script type="text/x-magento-init">
+    {
+        "[data-block='minicart']": {
+            "Magento_Ui/js/core/app": {"components":{"minicart_content":{"children":{"subtotal.container":{"children":{"subtotal":{"children":{"subtotal.totals":{"config":{"display_cart_subtotal_incl_tax":0,"display_cart_subtotal_excl_tax":1,"template":"Magento_Tax\/checkout\/minicart\/subtotal\/totals"},"children":{"subtotal.totals.msrp":{"component":"Magento_Msrp\/js\/view\/checkout\/minicart\/subtotal\/totals","config":{"displayArea":"minicart-subtotal-hidden","template":"Magento_Msrp\/checkout\/minicart\/subtotal\/totals"}}},"component":"Magento_Tax\/js\/view\/checkout\/minicart\/subtotal\/totals"}},"component":"uiComponent","config":{"template":"Magento_Checkout\/minicart\/subtotal"}}},"component":"uiComponent","config":{"displayArea":"subtotalContainer"}},"item.renderer":{"component":"Magento_Checkout\/js\/view\/cart-item-renderer","config":{"displayArea":"defaultRenderer","template":"Magento_Checkout\/minicart\/item\/default"},"children":{"item.image":{"component":"Magento_Catalog\/js\/view\/image","config":{"template":"Magento_Catalog\/product\/image","displayArea":"itemImage"}},"checkout.cart.item.price.sidebar":{"component":"uiComponent","config":{"template":"Magento_Checkout\/minicart\/item\/price","displayArea":"priceSidebar"}}}},"extra_info":{"component":"uiComponent","config":{"displayArea":"extraInfo"}},"promotion":{"component":"uiComponent","config":{"displayArea":"promotion"}}},"config":{"itemRenderer":{"default":"defaultRenderer","simple":"defaultRenderer","virtual":"defaultRenderer"},"template":"Magento_Checkout\/minicart\/content"},"component":"Magento_Checkout\/js\/view\/minicart"}},"types":[]}        },
+        "*": {
+            "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
+        }
+    }
+    </script>
+</div>
 
 
-											</li>
-										</ul>
+	                        </li>
+	                    </ul>
 	                </div>
 	            </div>
 	        </div>
@@ -431,28 +380,12 @@
 </div>
 </div>
 </li>
-<li class="ui-menu-item level0  classic menu-item-has-children parent"><a class="level-top">Blog</a>
-<div class="open-children-toggle">&nbsp;</div>
-<div class="level0 submenu">
-<div class="row">
-<ul class="subchildmenu ">
-<li class="ui-menu-item level2 "><a href="">Vist Blogs</a></li>
-{% if app.user %}
-<li class="ui-menu-item level2 "><a href="{{ path('ajouter_blog')}}">Post Something ..</a></li>
-{% endif %}
-</ul>
-</div>
-</div>
-</li>	<li class="ui-menu-item level0 classic ">
-													<a class="level-top" href="{{path('produit')}}">Products</a>
-												</li>
-												<li class="ui-menu-item level0 classic ">
-													<a class="level-top" href="about-us/index.html">About us</a>
-												</li>
-
-												<li class="my_account_link_custom ui-menu-item level0 classic">
-													<a href="customer/account/index.html" title="My Account" class="level-top">My Account</a>
-												</li></ul>
+<li class="ui-menu-item level0"><a class="level-top" href="blog/index.html">Blog</a></li>
+<li class="ui-menu-item level0 classic "><a class="level-top" href="contact/index.html">Contact us</a></li>
+<li class="ui-menu-item level0 classic "><a class="level-top" href="about-us/index.html">About us</a></li>
+ 
+			<li class="my_account_link_custom ui-menu-item level0 classic"><a href="customer/account/index.html" title="My Account" class="level-top">My Account</a></li>
+		</ul>
 	</div>
 </div>
 <script>require(['jquery','rokanthemes/custommenu'],function($){$(".custommenu").CustomMenu();$(document).ready(function(){$(document).on('click','.custommenu .menu-mobile-title a',function(){var data=$(this).data('menu');$('.custommenu .menu-mobile-title a').removeClass('active');$(this).addClass('active');$('.custommenu ul.menu').hide();$(this).closest('.custommenu').find('ul.menu.'+data+'').show();return false;});});});</script>
@@ -661,29 +594,28 @@
 
         <div class="post-list-wrapper">
                 <ul class="blog-list-post">
-                            
-                            {% for publication in publications %} <div class="post-item">
                             <li class="item-post-full post-holder post-holder-27 has-thumb">
+                            {% for publication in mesPublications %} <div class="post-item">
 		<div class="blog-post-thumb">
 											<div class="post-ftimg-hld">
-					<a href="{{ path('blog_show', {'id' : publication.id }) }}" title=" Live Poker How To Win Tournament Games">
-						<img src="{{publication.imagepubl}}" alt=" Live Poker How To Win Tournament Games"/>
+					<a href="blog/post/live-poker-how-to-win-tournament-games.html" title=" Live Poker How To Win Tournament Games">
+						<img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/magefan_blog/35.jpg" alt=" Live Poker How To Win Tournament Games"/>
 					</a>
 				</div>
 					</div>
 		<div class="blog-post-info">
 							<div class="item post-categories">
-																						<a title="Carparts" href="#">{{publication.utilisateur.username}}</a>									</div>
+																						<a title="Carparts" href="blog/category/carparts.html">Carparts</a>									</div>
 						<div class="post-header">
 				<div class="post-info flex-layout no-wrap center">
 																<div class="item post-posed-date">
-							<span class="value">{{ publication.tempsPubl | date }}</span>
+							<span class="value">September 06, 2021</span>
 						</div>
 									</div>
 				<div class="post-title-holder clearfix">
 					<h2 class="post-title">
 						<a class="post-item-link" href="blog/post/live-poker-how-to-win-tournament-games.html">
-							{{publication.titrePubl}}					</a>
+							 Live Poker How To Win Tournament Games						</a>
 					</h2>
 				</div>
 			</div>
@@ -691,19 +623,17 @@
 			<div class="post-content">
 				<div class="post-description clearfix">
 					<div class="post-text-hld clearfix">
-						<p> {{ publication.descriptionPubl }}</div>
+						<p>Suspendisse turpis ipsum, tempus in nulla eu, posuere pharetra nibh. In dignissim vitae lorem non mollis. Praesent pretium tellus in tortor viverra condimentum. Nullam dignissim facilisis nisl</p>					</div>
 				</div>
 			</div>
 			<div class="post-bottom">
 				<div class="flex-layout center">
-					<a class="post-read-more btn" href= "{{ path('blog_show', {'id' : publication.id }) }} "
-                                        class="btn btn-primary">
-						lire la suite ({{publication.commentaires.count}})					</a>
+					<a class="post-read-more btn" href="blog/post/live-poker-how-to-win-tournament-games.html" title=" Live Poker How To Win Tournament Games">
+						Read more					</a>
 					
 				</div>
 			</div>
-		</div>
-
+		
 
           {% endfor     %}	</div>
 </li>                                                      </ul>
@@ -784,32 +714,114 @@
 
 <div class="widget block block-recent-posts block-list-posts">
     <div class="block-title">
-        <strong>My Posts</strong>
+        <strong>Recent Posts</strong>
     </div>
     <div class="block-content">
-                                   
-                                                
-                             
-                {% for pub in mesPublications %}
-                <a class="post-item-link" href="{{ path('blog_show', {'id' : pub.id }) }}">
-                    {{ pub.titrePubl}}               </a>
+                                <div class="item clearfix">
+                                                    <div class="post-image">
+                                                <a class="post-item-link" title=" Live Poker How To Win Tournament Games" href="blog/post/live-poker-how-to-win-tournament-games.html">
+                            <img data-width-amp="400" data-height-amp="252" layout="responsive" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/blog/cache/400x252/magefan_blog/x35.jpg.pagespeed.ic.AjBQM7JkCI.jpg" alt=" Live Poker How To Win Tournament Games"/>
+                        </a>
+                    </div>
+                
+                <a class="post-item-link" title=" Live Poker How To Win Tournament Games" href="blog/post/live-poker-how-to-win-tournament-games.html">
+                     Live Poker How To Win Tournament Games                </a>
 
                                     <div class="post-item-date">
-                        <span class="value">{{ pub.tempsPubl | date }}</span>
+                        <span class="value">September 06, 2021</span>
                     </div>
                             </div>
                                 <div class="item clearfix">
                                                     <div class="post-image">
-                                                <a class="post-item-link" title=" Will The Democrats Be Able To Reverse The Online Gambling Ban" href="{{ path('blog_show', {'id' : pub.id }) }}">
-                            <img data-width-amp="400" data-height-amp="252" layout="responsive" src="{{pub.imagepubl}}" data-src="{{pub.imagepubl}}" alt=" Will The Democrats Be Able To Reverse The Online Gambling Ban"/>
+                                                <a class="post-item-link" title=" Will The Democrats Be Able To Reverse The Online Gambling Ban" href="blog/post/will-the-democrats-be-able-to-reverse-the-online-gambling-ban.html">
+                            <img data-width-amp="400" data-height-amp="252" layout="responsive" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/blog/cache/400x252/magefan_blog/x25.jpg.pagespeed.ic.0zMe9KoeIh.jpg" alt=" Will The Democrats Be Able To Reverse The Online Gambling Ban"/>
                         </a>
-                  
-   
+                    </div>
+                
+                <a class="post-item-link" title=" Will The Democrats Be Able To Reverse The Online Gambling Ban" href="blog/post/will-the-democrats-be-able-to-reverse-the-online-gambling-ban.html">
+                     Will The Democrats Be Able To Reverse The Online Gambling Ban                </a>
 
-{% endfor %}
+                                    <div class="post-item-date">
+                        <span class="value">July 28, 2021</span>
+                    </div>
+                            </div>
+                                <div class="item clearfix">
+                                                    <div class="post-image">
+                                                <a class="post-item-link" title=" Unmatched Toner Cartridge Quality 20 Less Than Oem Price" href="blog/post/unmatched-toner-cartridge-quality-20-less-than-oem-price.html">
+                            <img data-width-amp="400" data-height-amp="252" layout="responsive" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/blog/cache/400x252/magefan_blog/x14.jpg.pagespeed.ic.tHRKQ80zlV.jpg" alt=" Unmatched Toner Cartridge Quality 20 Less Than Oem Price"/>
+                        </a>
+                    </div>
+                
+                <a class="post-item-link" title=" Unmatched Toner Cartridge Quality 20 Less Than Oem Price" href="blog/post/unmatched-toner-cartridge-quality-20-less-than-oem-price.html">
+                     Unmatched Toner Cartridge Quality 20 Less Than Oem Price                </a>
+
+                                    <div class="post-item-date">
+                        <span class="value">July 08, 2021</span>
+                    </div>
+                            </div>
+                                <div class="item clearfix">
+                                                    <div class="post-image">
+                                                <a class="post-item-link" title="3 Ways of Lying to Yourself About Your  New Relationship." href="blog/post/3-ways-of-lying-to-yourself-about-your-new-relationship.html">
+                            <img data-width-amp="400" data-height-amp="252" layout="responsive" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/blog/cache/400x252/magefan_blog/x1.jpg.pagespeed.ic.4wsBMUrKAS.jpg" alt="3 Ways of Lying to Yourself About Your  New Relationship."/>
+                        </a>
+                    </div>
+                
+                <a class="post-item-link" title="3 Ways of Lying to Yourself About Your  New Relationship." href="blog/post/3-ways-of-lying-to-yourself-about-your-new-relationship.html">
+                    3 Ways of Lying to Yourself About Your  New Relationship.                </a>
+
+                                    <div class="post-item-date">
+                        <span class="value">June 09, 2021</span>
+                    </div>
+                            </div>
+                                <div class="item clearfix">
+                                                    <div class="post-image">
+                                                <a class="post-item-link" title=" Choosing The Best Audio Player Software For Your Computer" href="blog/post/choosing-the-best-audio-player-software-for-your-computer.html">
+                            <img data-width-amp="400" data-height-amp="252" layout="responsive" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/blog/cache/400x252/magefan_blog/x72.jpg.pagespeed.ic.4h0FSu3SA1.jpg" alt=" Choosing The Best Audio Player Software For Your Computer"/>
+                        </a>
+                    </div>
+                
+                <a class="post-item-link" title=" Choosing The Best Audio Player Software For Your Computer" href="blog/post/choosing-the-best-audio-player-software-for-your-computer.html">
+                     Choosing The Best Audio Player Software For Your Computer                </a>
+
+                                    <div class="post-item-date">
+                        <span class="value">June 06, 2021</span>
+                    </div>
+                            </div>
+            </div>
 </div>
 
+<div class="widget block block-archive" data-bind="scope: 'blog-archive'">
+    <div class="block-title">
+        <strong>Archive</strong>
+    </div>
+    <div class="block-content">
+                                <div class="item">
+                <a title="Archive September 2021" class="archive-item-link" href="blog/archive/2021-09.html">
+                    September 2021                </a>
+            </div>
 
+                                <div class="item">
+                <a title="Archive July 2021" class="archive-item-link" href="blog/archive/2021-07.html">
+                    July 2021                </a>
+            </div>
+
+                                <div class="item">
+                <a title="Archive June 2021" class="archive-item-link" href="blog/archive/2021-06.html">
+                    June 2021                </a>
+            </div>
+
+                                <div class="item">
+                <a title="Archive February 2021" class="archive-item-link" href="blog/archive/2021-02.html">
+                    February 2021                </a>
+            </div>
+
+                                <div class="item">
+                <a title="Archive January 2021" class="archive-item-link" href="blog/archive/2021-01.html">
+                    January 2021                </a>
+            </div>
+
+            </div>
+</div>
 
 </div></div></main>
 
