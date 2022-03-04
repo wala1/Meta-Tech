@@ -19,10 +19,10 @@ security:
              anonymous: true
              oauth:
                  resource_owners: 
-                   facebook: "/connexion/check-facebook"
+                   facebook: "/login/check-facebook"
                  use_forward: false
-                 login_path: /connexion
-                 failure_path: /connexion
+                 login_path: /login
+                 failure_path: /login
                  oauth_user_provider:
                    service: my.oauth_aware.user_provider.service
              provider: in_database 
