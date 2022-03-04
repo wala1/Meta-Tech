@@ -129,11 +129,11 @@ class User implements UserInterface
     private $activation_token;
     protected $captchaCode;
     /**
-     *  @ORM\column('type="string",length=255,nullable=true)
+     *  @ORM\column(type="string",length=255,nullable=true)
      */
     private $facebookID;
        /**
-     *  @ORM\column('type="string",length=255,nullable=true)
+     *  @ORM\column(type="string",length=255,nullable=true)
      */
     private $facebookAccessToken;
   
@@ -345,7 +345,7 @@ class User implements UserInterface
     {
         return $this->activation_token;
     }
-
+  
     public function setActivationToken(?string $activation_token): self
     {
         $this->activation_token = $activation_token;
@@ -366,10 +366,16 @@ class User implements UserInterface
     {
         return $this->facebookID;
     }
+  // public function setUsername(string $username): self
+    // {
+    //     $this->username = $username;
 
-    public function setFacebookID($facebookID): void
+    //     return $this;
+    // }
+    public function setFacebookID(string $facebookID): self
     {
         $this->facebookID= $facebookID;
+        return $this;
 
         
     }
@@ -378,9 +384,10 @@ class User implements UserInterface
         return $this->facebookAccessToken;
     }
 
-    public function setFacebookAccessToken($facebookID): void
+    public function setFacebookAccessToken(string $facebookAccessToken): self
     {
         $this->facebookAccessToken= $facebookAccessToken;
+        return $this;
 
     }
 }
