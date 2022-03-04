@@ -88,7 +88,7 @@
                     <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
                     <span>Review</span>
                 </a> #}
-                <a class="action add" href="#">Partiticpants</a>
+                <a class="action add" href="#description">Partiticpants</a>
              </div>
         </div>
         
@@ -224,121 +224,49 @@
                 <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
                                             <div class="data item title" data-role="collapsible" id="tab-label-description">
                     <a class="data switch" tabindex="-1" data-toggle="trigger" href="#description" id="tab-label-description-title">
-                        Details                    </a>
+                        Participants                    </a>
                 </div>
                 <div class="data item content" aria-labelledby="tab-label-description-title" id="description" data-role="content">
                     
 <div class="product attribute description">
-        <div class="value"><p>{{ cal.description }}</p>
-<p>List of participants</p></div>
+        <div class="value">
+
+
+
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"> Name</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+ {% set nb = 1 %}
+  {% for p in participants %}
+
+{% if cal.id == p.event.id %}
+  <tbody>
+    <tr>
+    
+      <th scope="row">{{ nb }} </th>
+      <td>{{p.user.username }}</td>
+      <td>{{p.user.email }}</td>
+          {% set nb = nb + 1  %}
+
+     
+    </tr>
+  
+  </tbody>
+   {% endif %}
+{% endfor %}
+</table> 
+
+
+
+</div>
 </div>
                 </div>
-                                                            {# <div class="data item title" data-role="collapsible" id="tab-label-reviews">
-                    <a class="data switch" tabindex="-1" data-toggle="trigger" href="#reviews" id="tab-label-reviews-title">
-                        Reviews <span class="counter">1</span>                    </a>
-                </div>
-                <div class="data item content" aria-labelledby="tab-label-reviews-title" id="reviews" data-role="content">
-                    <div id="product-review-container" data-role="product-review"></div>
-<div class="block review-add">
-    <div class="block-title"><strong>Write Your Own Review</strong></div>
-<div class="block-content">
-
-
-
-
-<form action="https://blueskytechmage.com/ohey/en11/review/product/post/id/92/" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
-    <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>        <fieldset class="fieldset review-fieldset" data-hasrequired="&#x2A;&#x20;Required&#x20;Fields">
-        <legend class="legend review-legend"><span>You&#039;re reviewing:</span><strong>{{ cal.title }}</strong></legend><br/>
-                <span id="input-message-box"></span>
-        <fieldset class="field required review-field-ratings">
-            <legend class="label"><span>Your Rating</span></legend><br/>
-            <div class="control">
-                <div class="nested" id="product-review-table">
-                                            <div class="field choice review-field-rating">
-                            <label class="label" id="Price_rating_label" style="font-size : 20px ; color : black ; "><span>Rating</span></label>
-                            <div class="control review-control-vote">
-                                                                                        <input type="radio" name="ratings[3]" id="Price_1" value="11" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_1_label"/>
-                                <label class="rating-1" for="Price_1" title="1&#x20;star" id="Price_1_label">
-                                    <span>1 star</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_2" value="12" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_2_label"/>
-                                <label class="rating-2" for="Price_2" title="2&#x20;stars" id="Price_2_label">
-                                    <span>2 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_3" value="13" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_3_label"/>
-                                <label class="rating-3" for="Price_3" title="3&#x20;stars" id="Price_3_label">
-                                    <span>3 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_4" value="14" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_4_label"/>
-                                <label class="rating-4" for="Price_4" title="4&#x20;stars" id="Price_4_label">
-                                    <span>4 stars</span>
-                                </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_5" value="15" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_5_label"/>
-                                <label class="rating-5" for="Price_5" title="5&#x20;stars" id="Price_5_label">
-                                    <span>5 stars</span>
-                                </label>
-                                                                                        </div>
-                        </div>
-                                          
-
-
-
-
-                                           
-                        </div>
-                                    </div>
-                <input type="hidden" name="validate_rating" class="validate-rating" value=""/>
-            </div>
-        </fieldset>
-             
-         
-        <div class="field review-field-text required">
-            <label for="review_field" class="label" style="font-size : 20px ; color : black ; "><span>Review</span></label>
-            <div class="control">
-                <textarea name="detail" id="review_field" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail"></textarea>
-            </div>
-        </div>
-    </fieldset>
-    <div class="actions-toolbar review-form-actions">
-        <div class="primary actions-primary">
-            <button type="submit" class="action submit primary"><span>Submit Review</span></button>
-        </div>
-    </div>
-</form> #}
-
-
-<center>
-
-
-
-
-
-{# {% for avi in avis %}
-	<div class="item">
-		<div class="img-box"><img src="/examples/images/clients/1.jpg" alt=""></div>
-		<p class="testimonial">{{ avi.descAvis  }}</p>
-		<p class="overview">
-			<b>{{ avi.idUser.username }}</b>
-			{{ avi.timeAvis | date("m/d/Y")}}</p>
-	</div>
-{% endfor %} #}
-
-        
-             
-        
-
-    
-    
-
-
-
-
-
-
-
-</center>
-
-
+                                                    
 {% endfor %}
 <!--========================= END PRODUIT ========================================== -->
 

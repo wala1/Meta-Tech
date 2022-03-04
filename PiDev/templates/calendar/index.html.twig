@@ -165,11 +165,14 @@
 {% endblock %}
 
 {% block javascripts %}
+<link href='fullcalendar/main.css' rel='stylesheet' />
+<script src='fullcalendar/main.js'></script>
 <script>
 window.onload = () => {
     let calendarElt=document.querySelector("#calendrier")
     let calendar = new FullCalendar.Calendar(calendarElt,{
         initialView : 'dayGridMonth',
+                         selectable: true,
 
         headerToolbar: {
                 start: 'prev,next today',
@@ -177,9 +180,17 @@ window.onload = () => {
                 end: 'dayGridMonth,timeGridWeek'
                 
             },
+
             events: {{ data|raw }},
             editable: true,
             eventResizableFromStart: true,
+              eventClick: function(info) {
+    alert('Event: ' + info.event.title);
+  
+
+    // change the border color just for fun
+    info.el.style.borderColor = 'red';
+  }
 
     })
 

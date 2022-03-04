@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 
 /**
@@ -18,6 +20,8 @@ class Calendar
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
+
      */
     private $id;
 
@@ -35,6 +39,7 @@ class Calendar
      *     match=false,
      *     message="The Event Title  cannot contain a number"
      * )
+     * @Groups("post:read")
 
      */
     private $title;
@@ -42,6 +47,7 @@ class Calendar
     /**
      * @ORM\Column(type="datetime")
     * @Assert\NotBlank(message="Event start time is required")
+    *@Groups("post:read")
     
 
     */
@@ -50,6 +56,8 @@ class Calendar
     /**
      * @ORM\Column(type="datetime")
     * @Assert\NotBlank(message="Event end time is required")
+
+*@Groups("post:read")
 
      */
     private $end;
@@ -63,11 +71,13 @@ class Calendar
      *      minMessage = "The Event Description must be at least {{ limit }} characters long",
      *      maxMessage = "The Event Description cannot be longer than {{ limit }} characters"
      * )
+     * @Groups("post:read")
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("post:read")
      */
     private $allDay;
 
@@ -99,12 +109,18 @@ class Calendar
      */
     private $participant;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Participants::class, mappedBy="event")
+     */
+    private $participants;
+
   
 
     public function __construct()
     {
         $this->user = new ArrayCollection();
         $this->participant = new ArrayCollection();
+        $this->participants = new ArrayCollection();
     }
 
   
@@ -249,6 +265,14 @@ class Calendar
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Participants[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
     }
 
   

@@ -101,12 +101,12 @@
                                     <th scope="col">Start</th>
                                     <th scope="col">End</th>
                                      <th scope="col">All Day</th>
-                                        {# <th scope="col">the participants</th>   #}
+                                        <th scope="col">the participants</th>  
 
-                                      <th scope="col">Background color</th>
+                                      {# <th scope="col">Background color</th>
                                        <th scope="col">Border coloer</th>
                                         <th scope="col">Text Color</th>
- 
+  #}
 
                                     <th style="width: 80px; min-width: 80px;">Actions</th>
                                   </tr>
@@ -140,14 +140,15 @@
                                        <td>{{ calendar.end  ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
                                 
                                         <td> {{ calendar.allDay ? 'Yes' : 'No'}}</td>
-                                          {# <td> {{ calendar.participant.username }}</td>   #}
+                                         <td>
+                                         {% for p in participants %}
+                                           {% if p.event.id == calendar.id %}
+                                          {{ p.user.username }}
+                                          {% endif %}
+                                         {% endfor %}
+                                         </td>  
 
 
-                                        <td> {{ calendar.backgroundColor }}</td>
-
-                                        <td> {{ calendar.borderColor }}</td>
-
-                                        <td> {{ calendar.textColor }}</td>
 
                                         <td>
                                             <div class="dropdown">
@@ -157,6 +158,8 @@
                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                     <li><a class="dropdown-item" href="{{path('edit_event',{'id': calendar.id})}}">Modify</a></li>
                                                     <li><a class="dropdown-item" href="{{path('delete_event',{'id': calendar.id})}}"> Delete</a></li>
+                                                  <li><a class="dropdown-item" href="{{path('participants_to_event',{'id': calendar.id})}}"> View Praticipants</a></li>
+
                                                     
                                                 </ul>
                                             </div>

@@ -98,10 +98,59 @@
                           <div class="col">
                             <div class="form-group">
                            
-                                <label > event </label>
-                                {% if app.user.calendar != null %}
-                       <input type="event" id="event" name="event" class="form-control" value="{{app.user.calendar.title}}">
-                       {% endif %}
+                                
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"> Event Title</th>
+     <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">actions</th>
+
+     
+
+
+
+    </tr>
+  </thead>
+ {% set nb = 1 %}
+  {% for p in participants %}
+
+{% if app.user.id == p.user.id %}
+  <tbody>
+    <tr>
+    
+      <th scope="row">{{ nb }} </th>
+      <td> {{p.event.title}}</td>
+     <td> {{p.event.start ? p.event.start|date('Y-m-d H:i:s') : '' }}</td>
+     <td> {{p.event.end ? p.event.end|date('Y-m-d H:i:s') : '' }}</td>
+      <td> <div class="dropdown">
+                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="{{path('event_detail',{'id':p.event.id})}}">More Details</a></li>
+                                                    <li><a class="dropdown-item" href="#"> quit</a></li>
+                                                    
+                                                </ul>
+                                            </div>
+					</td>
+
+
+
+
+          {% set nb = nb + 1  %}
+
+     
+    </tr>
+  
+  </tbody>
+   {% endif %}
+{% endfor %}
+</table> 
+                              
+                   
                             </div>
                           </div>
                         </div>

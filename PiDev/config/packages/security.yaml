@@ -15,15 +15,39 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-            provider: in_database 
             
-            form_login:
+             anonymous: true
+             oauth:
+                 resource_owners: 
+                   facebook: "/connexion/check-facebook"
+                 use_forward: false
+                 login_path: /connexion
+                 failure_path: /connexion
+                 oauth_user_provider:
+                   service: my.oauth_aware.user_provider.service
+             provider: in_database 
+            
+             form_login:
                  login_path: security_login
                  check_path: security_login
-            logout:
+             logout:
                  path: security_logout
-                 target: pubFront
+                 target: security_login
+             user_checker: App\Security\UserChecker
+             
+            
+                
+                    
+            
+
+            
+              
+
+
+               
+
+
+                #target: pubFront
             #provider: users_in_memory
 
             # activate different ways to authenticate
@@ -37,6 +61,9 @@ security:
     access_control:
         #- { path: ^/admin, roles: ROLE_ADMIN }
         #- { path: ^/profile, roles: ROLE_USER }
+        #  { path: ^/connexion , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # { path: ^/connect , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
     
     role_hierarchy:
         ROLE_CLIENT: ROLE_USER

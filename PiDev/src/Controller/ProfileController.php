@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProfileType ;
 use App\Form\ChangePassType ;
+use App\Repository\ParticipantsRepository;
+
 
 
 
@@ -156,10 +158,12 @@ class ProfileController extends AbstractController
 /**
      * @Route("/eventUser", name="events_user")
      */
-    public function eventUser(): Response
+    public function eventUser(ParticipantsRepository $participants): Response
     {
         return $this->render('profile/eventUser.html.twig', [
             'controller_name' => 'ProfileController',
+            'participants' => $participants->findAll()
+
         ]);
     }
 

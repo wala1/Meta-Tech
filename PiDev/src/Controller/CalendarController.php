@@ -7,8 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CalendarRepository ; 
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\ParticipantsRepository;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 use App\Form\CalendarType ;
 use App\Entity\Calendar;
+use App\Entity\Participants;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
@@ -16,7 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class CalendarController extends AbstractController
 {
 
-    //Pour traiter la liste des events dans une calendrier
+    ##################"Pour traiter la liste des events dans une calendrier#################""
 
 
 
@@ -57,25 +62,7 @@ class CalendarController extends AbstractController
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Pour traiter la liste des events dans un tableau 
+#########################""""Pour traiter la liste des events dans un tableau ############################"""
 
 
 
@@ -83,10 +70,11 @@ class CalendarController extends AbstractController
   /**
      * @Route("/Events", name="calendar_index", methods={"GET"})
      */
-    public function AllEvents(CalendarRepository $calendarRepository): Response
+    public function AllEvents(CalendarRepository $calendarRepository ,ParticipantsRepository $participants): Response
     {
         return $this->render('calendar/listEvents.html.twig', [
             'calendars' => $calendarRepository->findAll(),
+            'participants' => $participants->findAll()
         ]);
     }
  /**
@@ -163,7 +151,7 @@ class CalendarController extends AbstractController
 
 
 
-        // affcihage dans front
+        ################################# affcihage dans front##############################""""
 /**
      * @Route("/eventFront", name="event_front")
      */
@@ -180,7 +168,7 @@ class CalendarController extends AbstractController
     /**
      * @Route("/event_detail/{id}", name="event_detail")
      */
-    public function eventDetail($id): Response
+    public function eventDetail($id,ParticipantsRepository $participants): Response
     {
         $repo = $this->getDoctrine()->getRepository(Calendar::class) ; 
         $calendar = $repo->findById($id) ; 
@@ -188,6 +176,8 @@ class CalendarController extends AbstractController
       
         return $this->render('calendar/eventShow.html.twig', [
             'calendar' => $calendar,
+            'participants' => $participants->findAll()
+
           
         ]);
     }
@@ -196,7 +186,7 @@ class CalendarController extends AbstractController
 
 
 
-    
+      ############################Front Calendar for user ############################"""
 
     /**
      * @Route("/CalendarUser", name="calendar_user")
@@ -222,6 +212,70 @@ class CalendarController extends AbstractController
         $data =json_encode($rdvs);
         return $this->render('calendar/calendarFront.html.twig', compact('data'));
     }
+
+
+    
+
+ ##########################JSON#################################
+
+
+
+
+  /**
+     * @Route("eventsJson", name="liste_events_json")
+     */ 
+    public function  listEventsJson(NormalizerInterface $Normalizer) {
+        $repo=$this->getDoctrine()->getRepository(Calendar::class);
+        $calendar=$repo->findAll();
+       
+      
+        $jsonContent=$Normalizer->normalize($calendar,'json',['groups'=>'post:read']);
+         return new Response (json_encode($jsonContent));
+    
+     
+     
+         } 
+     /**
+      
+     * @Route("addEventJson/new", name="add_event_json" ,methods = {"GET", "POST"})
+     */
+    
+
+    public function  addEventJson(Request $request,NormalizerInterface $Normalizer) {
+
+        $em=$this->getDoctrine()->getManager();
+        $calendar=new Calendar();
+        $calendar->setTitle($request->get('title'));
+        $calendar->setStart($request->get('start'));
+        $calendar->setEnd($request->get('end'));
+        $calendar->setDescription($request->get('description'));
+        $calendar->setAllDay($request->get('allDay'));
+
+
+ 
+        $em->persist($calendar);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($calendar,'json',['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+ 
+          } 
+
+          /**
+    * @Route("deleteEventJson/{id}", name="deleteEventJson" ,methods = {"GET", "POST"})
+    */
+   
+
+   public function deleteEventJson(Request $request,NormalizerInterface $Normalizer,$id) {
+
+    $em=$this->getDoctrine()->getManager();
+    $calendar=$em->getRepository(Calendar::class)->find($id);
+    $em->remove($calendar);
+    $em->flush();
+    $jsonContent=$Normalizer->normalize($calendar,'json',['groups' => 'post:read']);
+    return new Response("Event Deleted successfuly".json_encode($jsonContent));
+
+   }
+
 
 
 
