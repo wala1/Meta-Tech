@@ -161,7 +161,15 @@
                                                                         </td>
                                                                         <td style="font-size : 16px">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">{{commande.payement_method}}</h5>
+                                                                                <h5 class="font-size-16 mb-0">
+                                                                                    {% if commande.payement_method == "cash" %}
+                                                                                        <img src="{{asset('cash.png')}}" style="width:70px;height:70px;">
+                                                                                    {% elseif commande.payement_method == "bank" %}
+                                                                                        <img src="{{asset('bank.png')}}" style="width:70px;height:70px;">
+                                                                                    {% elseif commande.payement_method == "check" %}
+                                                                                        <img src="{{asset('paypal.png')}}"style="width:70px;height:70px;">
+                                                                                    {% endif %}
+                                                                                </h5>
                                                                             </div>
                                                                         </td>
                                                                         <td style="font-size : 16px">

@@ -338,7 +338,7 @@ class PanierController extends AbstractController
         $form = $this->createForm(CommandeFormType::class, $commande);
         $form->add('Place Order',SubmitType::class,[
             'attr' => [
-                'class'=>'btn btn-success waves-effect waves-light',
+                'class'=>'btn btn-primary waves-effect waves-light',
                 'style' => 'width:9.5cm',
             ]
         ]) ;

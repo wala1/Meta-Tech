@@ -65,18 +65,18 @@ class CommandeFormType extends AbstractType
             ])
             ->add('payement_method', ChoiceType::class, [
                 'choices' => [
-                    'Check / Money order' => 'info',
-                    'Bank Transfer Payment' => 'star',
-                    'Cash On Delivery' => 'other',
+                    'Check / Money order' => 'check',
+                    'Bank Transfer Payment' => 'bank',
+                    'Cash On Delivery' => 'cash',
                 ],
                 'attr' => [
                     'class'=>'form-control',
                 ],
                 // attributes for input elements
                 'choice_attr' => [
-                    'Info' => ['class' => 'whatever'],
-                    'Star' => ['class' => 'whatever'],
-                    'Some other label' => ['class' => 'whatever'],
+                    'check' => ['class' => 'whatever'],
+                    'bank' => ['class' => 'whatever'],
+                    'cash' => ['class' => 'whatever'],
                  ],
                 // setting these options results in radio buttons
                 // being generated, instead of a select element
