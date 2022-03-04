@@ -576,9 +576,12 @@
                                                                                 </strong>
                                                                             </div>
                                                                     </td>
-                                                                    <th>${{produit.prix_prod}}</th>
+
+                                                                    <th>
+                                                                        <span classe="price" id="Price1">{{produit.prix_prod}} $</span>
+                                                                    </th>
                                                                     <th>{{Panier.quantite}}</th>
-                                                                    <th>${{produit.prix_prod * Panier.quantite}}</th>
+                                                                    <th>{{produit.prix_prod * Panier.quantite}}</th>
                                                                 </tr>
 
 
@@ -1033,6 +1036,10 @@ But you can also contact us:</p>
             }
         }
 </script>
+
+
+
+
 <div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper">
     <a id="ajaxsuite-close" class="ajaxsuite-close"></a>
     <div id="ajaxsuite-popup-content"></div>

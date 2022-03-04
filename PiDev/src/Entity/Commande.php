@@ -41,7 +41,6 @@ class Commande
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="This field is required")
      */
     public $city;
 
@@ -84,28 +83,22 @@ class Commande
     public $date;
     
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="50",maxMessage="Your delivery comment must be at most 50 characters")
-     * @Assert\NotNull(message="This field is required")
+     * @ORM\Column(type="string", length=500)
      */
     public $delivery_comment;
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotNull(message="This field is required")
      */
     public $newsletter;
     
         /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="50",maxMessage="Your order comment must be at most 50 characters")
-     * @Assert\NotNull(message="This field is required")
+     * @ORM\Column(type="string", length=500)
      */
     public $order_comment;
 
     /**
      * @ORM\Column(type="string", length=20)
-     * @Assert\NotNull(message="This field is required")
      */
     public $code_Coupon;
 

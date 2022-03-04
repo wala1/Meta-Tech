@@ -229,16 +229,19 @@ class PanierController extends AbstractController
     /**
      * @Route("/command/{userId}", name="command")
      */
-    public function commande($userId, Request $request): Response
+    public function commande($userId, Request $request, \Swift_Mailer $mailer): Response
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
+        $panier = $this->getDoctrine()->getRepository(Panier::class)->findBy(
+            [ "user_panier" => $user ]
+        );
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
         $form1 = $this->createForm(CommandeFormType::class, $commande);
         $form1->add('Place Order',SubmitType::class,[
             'attr' => [
-                'class'=>'btn btn-success waves-effect waves-light'
+                'class'=>'btn btn-success waves-effect waves-light',
+                'style' => 'width:9.5cm',
             ]
         ]) ;
         $form1->handleRequest($request);
@@ -247,7 +250,16 @@ class PanierController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($commande);
             $em->flush();
+            $message= (new \Swift_Message('Commande added'))
+            ->setTo($user->getEmail())
+           
+            ->setBody(
+                "<p>Bonjour,</p><p>Une commande a été passé. </p>",
+                'text/html' ) 
+                ;
+           $mailer->send($message);
             //return $this->redirectToRoute("showCart", ["etat" => "final"]);
+            
             return $this->render("panier/pan.html.twig", [
                 "form"=> null,
                 "user" => $user,
@@ -280,7 +292,8 @@ class PanierController extends AbstractController
         $form = $this->createForm(CommandeFormType::class, $commande);
         $form->add('Place Order',SubmitType::class,[
             'attr' => [
-                'class'=>'btn btn-success waves-effect waves-light'
+                'class'=>'btn btn-success waves-effect waves-light',
+                'style' => 'width:9.5cm',
             ]
         ]) ;
         $form->handleRequest($request);
@@ -325,7 +338,8 @@ class PanierController extends AbstractController
         $form = $this->createForm(CommandeFormType::class, $commande);
         $form->add('Place Order',SubmitType::class,[
             'attr' => [
-                'class'=>'btn btn-success waves-effect waves-light'
+                'class'=>'btn btn-success waves-effect waves-light',
+                'style' => 'width:9.5cm',
             ]
         ]) ;
         $form->handleRequest($request);

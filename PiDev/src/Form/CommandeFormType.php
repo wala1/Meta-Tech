@@ -60,7 +60,7 @@ class CommandeFormType extends AbstractType
             ])
             ->add('phone_Number', NumberType::class,[
                 'attr' => [
-                    'class'=>'form-control'
+                    'class'=>'form-control',
                 ]
             ])
             ->add('payement_method', ChoiceType::class, [
@@ -69,9 +69,8 @@ class CommandeFormType extends AbstractType
                     'Bank Transfer Payment' => 'star',
                     'Cash On Delivery' => 'other',
                 ],
-                // attributes for label elements
                 'attr' => [
-                    'class'=>'form-control'
+                    'class'=>'form-control',
                 ],
                 // attributes for input elements
                 'choice_attr' => [
@@ -84,15 +83,18 @@ class CommandeFormType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
             ])
-
-            ->add('date', DateType::class,[
+            ->add('date', DateType::class, [ 
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'data' => new \DateTime(),
                 'attr' => [
                     'class'=>'form-control'
                 ]
             ])
             ->add('delivery_comment', TextAreaType::class,[
                 'attr' => [
-                    'class'=>'form-control'
+                    'class'=>'form-control',
+                    'style' => 'width: 350px; height: 70px; font-size: 16px; font-family: cursive;',
                 ]
             ])
             ->add('newsletter', CheckboxType::class, [
@@ -104,7 +106,8 @@ class CommandeFormType extends AbstractType
             
             ->add('order_comment', TextAreaType::class,[
                 'attr' => [
-                    'class'=>'form-control'
+                    'class'=>'form-control',
+                    'style' => 'width: 350px; height: 70px; font-size: 16px; font-family: cursive;',
                 ]
             ])
             ->add('code_Coupon', TextType::class,[
