@@ -12,6 +12,11 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 use App\Form\CalendarType ;
 use App\Entity\Calendar;
+use App\Entity\User;
+use App\Entity\Coupon;
+use App\Repository\CouponRepository;
+
+
 use App\Entity\Participants;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -89,6 +94,8 @@ class CalendarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $calendar->setOrigine("admin");
+            $calendar->setEtat(1);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($calendar);
             $entityManager->flush();
@@ -131,17 +138,73 @@ class CalendarController extends AbstractController
         ]) ;
     }
    /**
-     * @Route("deleteEvent/{id}", name="delete_event")
+     * @Route("cancelEvent/{id}", name="cancel_event")
      */ 
 
-    public function deleteEvent(Calendar $calendar){
-        $em =$this->getDoctrine()->getManager();
+    public function cancelEvent(Calendar $calendar,\Swift_Mailer $mailer ){
+       
+        // $participants= $this->getDoctrine()->getRepository(Participants::class)->findByEvent($id) ; 
+        // $user= $this->getDoctrine()->getRepository(User::class)->findAll() ; 
+
+      
+         $message= (new \Swift_Message('Event'))
+         ->setFrom('aalimi.wala@gmail.com')
+         ->setTo('wala.alimi@esprit.tn')
+         ->setBody(
+             $this->renderView(
+          'emails\canceledEvent.html.twig' 
+         ) ,
+          'text/html'
+
+          ) ;  
+          $mailer->send($message);
+        //   removeParticipant(Participants $participant) 
+        
+         $em =$this->getDoctrine()->getManager();
          $em->remove($calendar);
          $em->flush();
          return $this->redirectToRoute('calendar_index');
         }
  
 
+ 
+################## deuxième table requests ############################""""
+
+  /**
+     * @Route("/Requests", name="requests_sent", methods={"GET"})
+     */
+    public function requests(CalendarRepository $calendarRepository ): Response
+    {
+        return $this->render('calendar/requestEvents.html.twig', [
+            'calendars' => $calendarRepository->findAll(),
+        ]);
+    }
+
+/**
+ * @Route("Requests/accept/{id}", name="accept_event")
+
+ */
+public function acceptEvent(Calendar $calendar)
+{
+        $calendar->setEtat(1);
+         $em =$this->getDoctrine()->getManager();
+         $em->persist($calendar);
+        $em->flush();
+    return $this->redirectToRoute('requests_sent');
+}
+
+/**
+ * @Route("Requests/refuse/{id}", name="refuse_event")
+
+ */
+public function RefuseEvent(Calendar $calendar)
+{  
+     $calendar->setEtat(-1);
+    $em =$this->getDoctrine()->getManager();
+    $em->persist($calendar);
+   $em->flush();
+    return $this->redirectToRoute('requests_sent');
+}
 
 
 
@@ -214,7 +277,57 @@ class CalendarController extends AbstractController
     }
 
 
-    
+   /**
+     * @Route("/newEventRequest", name="calendar_new_request", methods={"GET","POST"})
+     */
+    public function newEventRequest(Request $request): Response
+    {
+        $calendar = new Calendar();
+        $form = $this->createForm(CalendarType::class, $calendar);
+        $form->add('send Request', SubmitType::class) ; 
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $calendar->setOrigine("client");
+            $calendar->setEtat(0);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($calendar);
+            $entityManager->flush();
+            $this->addFlash('success', 'Request is sent to admin! wait for his approval to be published!');
+
+           return $this->redirectToRoute('event_front');
+        }
+
+        return $this->render('calendar/newEvent.html.twig', [
+            'calendar' => $calendar,
+            'formEvent' => $form->createView(),
+        ]);
+    } 
+  
+     /**
+     * @Route("/participate/{id}", name="participate", methods={"GET","POST"})
+     */
+    public function participate(Request $request , $id,Calendar $calendar)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        // $c = new Coupon ;
+        // $c->setCodeCoup($user->getUsername());
+        // $c->setNum($id);
+        // $em = $this->getDoctrine()->getManager();
+        // $em = $this->getDoctrine()->getManager() ; 
+        // $em->persist($c);
+        // $em->flush() ; 
+        // return $this->redirectToRoute('event_front');
+        $p=new  Participants;
+        $p->setEvent($calendar);
+        $p->setUser($user);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($p);
+        $em->flush() ; 
+        return $this->redirectToRoute('event_detail');
+
+    }
 
  ##########################JSON#################################
 

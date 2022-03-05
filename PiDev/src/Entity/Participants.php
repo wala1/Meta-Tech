@@ -18,12 +18,12 @@ class Participants
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="participants")
+     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="participants" , cascade={"remove"})
      */
     private $event;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participants")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participants" )
      */
     private $user;
 

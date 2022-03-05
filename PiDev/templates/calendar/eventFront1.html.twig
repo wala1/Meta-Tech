@@ -504,7 +504,7 @@
 																	<a href="{{path('event_front')}}">Events List</a>
 																</li>
 																<li class="ui-menu-item level2 ">
-																	<a href="{{path('calendar_user')}}">New Event</a>
+																	<a href="{{path('calendar_user')}}">Calendar</a>
 																</li>
 																
 															</ul>
@@ -753,7 +753,8 @@
         <div class="post-list-wrapper">
                 <ul class="blog-list-post">
                             
-                            {% for cal in calendar %}    
+                            {% for cal in calendar %}   
+                            {% if cal.etat == 1 %} 
                             
                             <li class="item-post-full post-holder post-holder-27 has-thumb">
 	<div class="post-item">
@@ -766,7 +767,7 @@
 					</div>
 		<div class="blog-post-info">
 							<div class="item post-categories">
-																						<a title="Carparts" href="blog/category/carparts.html">Participate</a>									</div>
+								<a title="Carparts" href="{{path('participate', {id : cal.id})}}">Participate</a>		</div>
 						 <div class="post-header">
 			
 				<div class="post-title-holder clearfix">
@@ -792,9 +793,17 @@
 					
 				</div>
 			</div>
+            <div class="post-bottom">
+				<div class="flex-layout center">
+					<a class="post-read-more btn" href="#" title="#">
+						Read more					</a>
+					
+				</div>
+			</div>
 		</div>
 	</div>
 </li>      
+{% endif %}
    {% endfor %}                     
 
  </ul>
@@ -863,12 +872,25 @@
 </div>
 
 <div class="widget block block-recent-posts block-list-posts">
+ {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
     <div class="block-title">
         <strong>Recent Posts</strong>
     </div>
+    <div >
+			
+        <ul class="accordion" id="accordion-2">
+           <li> <a href="{{path('calendar_new_request')}}"> Add Your Event  </a></li>  
+         </ul>                  
+   </div>
     <div class="block-content">
    {% for cal in calendar %}
-                                <div class="item clearfix">
+            {% if cal.etat == 1 %} 
+
+              <div class="item clearfix">
                                                     <div class="post-image">
                                                 <a class="post-item-link" title=" Live Poker How To Win Tournament Games" href="blog/post/live-poker-how-to-win-tournament-games.html">
                             <img data-width-amp="400" data-height-amp="252" layout="responsive" src="{{ cal.imageEvent }}"/>
@@ -882,7 +904,8 @@
                         <span class="value"> {{cal.start ? cal.start|date('Y-m-d ') : '' }}</span>
                     </div>
                             </div>
-                                
+                             
+                             {% endif %}
                             
                        {% endfor %}
                             

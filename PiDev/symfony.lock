@@ -94,6 +94,15 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.5"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.8.3"
+    },
     "hwi/oauth-bundle": {
         "version": "1.4",
         "recipe": {
@@ -135,6 +144,9 @@
     },
     "php-http/discovery": {
         "version": "1.14.1"
+    },
+    "php-http/guzzle6-adapter": {
+        "version": "v2.0.2"
     },
     "php-http/httplug": {
         "version": "2.3.0"
@@ -227,6 +239,9 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"

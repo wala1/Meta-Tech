@@ -108,13 +108,13 @@ class User implements UserInterface
     private $avis;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="participant")
+     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="participant" ,  cascade={"remove"})
      * @Groups("post:read")
      */
     private $calendar;
 
     /**
-     * @ORM\OneToMany(targetEntity=Participants::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Participants::class, mappedBy="user" , cascade={"remove"})
      */
     private $participants;
 
@@ -163,6 +163,14 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    
+    public function setId(int $id): self
+    {
+        $this->id=$id;
+
+        return $this;
     }
 
     public function getEmail(): ?string

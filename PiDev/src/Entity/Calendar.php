@@ -110,9 +110,19 @@ class Calendar
     private $participant;
 
     /**
-     * @ORM\OneToMany(targetEntity=Participants::class, mappedBy="event")
+     * @ORM\OneToMany(targetEntity=Participants::class, mappedBy="event" , cascade={"remove"})
      */
     private $participants;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     */
+    private $origine;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $etat;
 
   
 
@@ -128,6 +138,13 @@ class Calendar
     {
         return $this->id;
     }
+    public function setId(int $id): self
+    {
+        $this->id=$id;
+
+        return $this;
+    }
+
 
     public function getTitle(): ?string
     {
@@ -273,6 +290,42 @@ class Calendar
     public function getParticipants(): Collection
     {
         return $this->participants;
+    }
+    
+    public function removeParticipants(Participants $participants): self
+    {
+        if ($this->participants->removeElement($participants)) {
+            // set the owning side to null (unless already changed)
+            if ($participants->getEvent() === $this) {
+                $participants->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOrigine(): ?string
+    {
+        return $this->origine;
+    }
+
+    public function setOrigine(string $origine): self
+    {
+        $this->origine = $origine;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
     }
 
   

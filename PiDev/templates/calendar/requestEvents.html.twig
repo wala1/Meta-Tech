@@ -2,7 +2,7 @@
            
            
            {% block title %}   
-           <title>  Events </title>
+           <title>      Requests </title>
            {% endblock %}
 
            {%  block body  %}
@@ -19,12 +19,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Events List</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Event Request List</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Events</a></li>
-                                            <li class="breadcrumb-item active">Events List</li>
+                                            <li class="breadcrumb-item active">Requests</li>
                                         </ol>
                                     </div>
 
@@ -36,7 +36,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <h5 class="card-title">Events List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                                    <h5 class="card-title">Event Requests <span class="text-muted fw-normal ms-2">(834)</span></h5>
                                 </div>
                             </div>
 
@@ -53,7 +53,7 @@
                                         </ul>
                                     </div>
                                     <div>
-                                        <a href="{{path('calendar_new')}}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                        <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
                                     </div>
                                     
                                     <div class="dropdown">
@@ -101,19 +101,13 @@
                                     <th scope="col">Start</th>
                                     <th scope="col">End</th>
                                      <th scope="col">All Day</th>
-                                        <th scope="col">the participants</th>  
-
-                                      {# <th scope="col">Background color</th>
-                                       <th scope="col">Border coloer</th>
-                                        <th scope="col">Text Color</th>
-  #}
 
                                     <th style="width: 80px; min-width: 80px;">Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                    {% for calendar in calendars %}
-                                      {% if calendar.etat == 1%}
+                                      {% if calendar.etat == 0 %}
                                    
                                     <tr>
                                         
@@ -140,13 +134,7 @@
                                        <td>{{ calendar.end  ? calendar.end|date('Y-m-d H:i:s') : '' }}</td>
                                 
                                         <td> {{ calendar.allDay ? 'Yes' : 'No'}}</td>
-                                         <td>
-                                         {% for p in participants %}
-                                           {% if p.event.id == calendar.id %}
-                                          {{ p.user.username }}
-                                          {% endif %}
-                                         {% endfor %}
-                                         </td>  
+                                         
 
 
 
@@ -156,21 +144,19 @@
                                                     <i class="bx bx-dots-horizontal-rounded"></i>
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                    <li><a class="dropdown-item" href="{{path('edit_event',{'id': calendar.id})}}">Modify Event</a></li>
-                                                    <li><a class="dropdown-item" href="{{path('cancel_event',{'id': calendar.id})}}"> Cancel Event</a></li>
-                                                  <li><a class="dropdown-item" href="{{path('participants_to_event',{'id': calendar.id})}}"> View Praticipants</a></li>
+                                                    <li><a class="dropdown-item" href="{{path('accept_event',{'id': calendar.id})}}">Accept</a></li>
+                                                    <li><a class="dropdown-item" href="{{path('refuse_event',{'id': calendar.id})}}"> Refuse</a></li>
 
                                                     
                                                 </ul>
                                             </div>
-     
-                                        </td>
-                                        {% endif %}
+                                 </td>
+                                     {% endif %}    
 {% else %}
   <tr> 
-  <td colspan=5 > There is no Events </td>
+  <td colspan=5 > There is no requests </td>
     </tr>
-    
+   
     {% endfor %}
 
 
