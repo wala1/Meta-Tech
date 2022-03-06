@@ -29,6 +29,22 @@ var require = {
 			            }
 			        }
 		</script>
+
+
+
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
 	</head>
 	<body data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader page-with-filter page-products categorypath-all-categories category-all-categories catalog-category-view page-layout-2columns-left">
 		<div class="enable-sticky-header"></div>
@@ -348,9 +364,9 @@ setCookie("shownewsletter", '0', 1)
 															<i class="icon-search2"></i>
 														</div>
 													</div>
-													<form class="form minisearch search-content cat-search" id="search_mini_form" action="https://blueskytechmage.com/ohey/en11/catalogsearch/result/" method="get">
+													<form class="form minisearch search-content cat-search" id="search_mini_form" action="{{path('search_produit')}}" method="GET">
 														<div class="search-form">
-															<div class="field-by-cat-search hidden-xs">
+															<!--div class="field-by-cat-search hidden-xs">
 																<select name="cat" id="choose_category">
 																	<option value="">All Categories</option>
 																	<option value="157">Engine Systems</option>
@@ -367,24 +383,20 @@ setCookie("shownewsletter", '0', 1)
 																	<option value="168">
 																		Brake Systems</option>
 																</select>
-															</div>
+															</div-->
 															<div class="field search">
 																<label class="label" for="search-input-autocomplate" data-role="minisearch-label">
 																	<span>Search</span>
 																</label>
 																<div class="control">
-																	<input id="search-input-autocomplate" data-mage-init='{"quickSearch":{
-																		                                        "formSelector":"#search_mini_form",
-																		                                        "url":"https://blueskytechmage.com/ohey/en11/search/ajax/suggest/",
-																		                                        "destinationSelector":"#search_autocomplete"}
-																		                                   }' type="text" name="q" value="" placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" aria-expanded="false" autocomplete="off"/>
+																	<input   id="search-input-autocomplate"  type="text" name="input"  placeholder="Search entire store here..." class="input-text" maxlength="128" role="combobox" aria-haspopup="false" aria-autocomplete="both" aria-expanded="false" autocomplete="off"/>
 																	<div id="search_autocomplete" class="search-autocomplete"></div>
 																	<div data-bind="scope: 'searchsuiteautocomplete_form'"><!-- ko template: getTemplate() -->
 																		<!-- /ko -->
 																	</div>
 																</div>
 																<div class="actions">
-																	<button type="submit" title="Search" class="action search">
+																	<button type="submit" name="submit" title="Search" class="action search">
 																		<span>Search</span>
 																	</button>
 																</div>
@@ -784,20 +796,56 @@ return false;
 			<div class="category-view-breadcrumbs-banner">
 				<div class="page-title-wrapper">
 					<h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading&#x20;toolbar-amount">
-						<span class="base" data-ui-id="page-title-wrapper">Produits</span>
+						<span class="base" data-ui-id="page-title-wrapper">
+						{% if aliexpress is defined %}
+							<center>
+								<table style="width : 30% ; ">
+									<tr>
+										<td VALIGN="center" align="right">Ali Express</td>
+										<td VALIGN="center"><img width="80px" height="80px" src="https://f.hellowork.com/blogdumoderateur/2018/10/aliexpress-logo-612x612.jpg"></td>
+									</tr>
+								</table>
+							</center>	
+						{% elseif amazon is defined %}
+							<center>
+								 
+								<img width="200px" height="120px" src="http://pngimg.com/uploads/amazon/amazon_PNG6.png"> 
+									 
+							</center>	
+
+
+						{% else %}	
+							{% if crypto is not defined %} 
+								Products
+							{% else %}
+								
+								<center> 
+
+									Exclusive Products
+									<table style="width : 22% ; "> 
+										<tr>
+											<td VALIGN="center" align="center"><h5>Based on Etherum Blockchain </h5> </td>
+											<td VALIGN="center" align="left"><img style="width : 30px ; height : 50px" src="https://www.pngall.com/wp-content/uploads/10/Ethereum-Logo-PNG-HD-Image.png"></td>
+										</tr>
+									</table>
+								</center>
+								
+							{% endif %}
+						{% endif %}
+						</span>
 					</h1>
 				</div>
 				<div class="breadcrumbs">
 					<ul class="items">
 						<li class="item home">
-							<a href="/" title="Go to Home Page">
-								Home
+							<a href="/produit" title="Go to Home Page">
+								All products
 							</a>
 						</li>
-						<li class="item category168">
+						<!--li class="item category168">
 							<strong>
 								Tous les produits</strong>
-						</li>
+						</li-->
 					</ul>
 				</div>
 			</div>
@@ -991,18 +1039,15 @@ return false;
 
 							<div class="toolbar-sorter sorter">
 								<label class="sorter-label" for="sorter">Sort By</label>
-								<select id="sorter" data-role="sorter" class="sorter-options">
-									<option value="position" selected="selected">
-										Position
-									</option>
+								<select id="sorter" data-role="sorter" class="sorter-options" onchange="showProds(this.value)"> 
 									<option value="name">
 										Product Name
 									</option>
 									<option value="price">
 										Price
 									</option>
-									<option value="color">
-										Color
+									<option value="date">
+										Publish Date
 									</option>
 								</select>
 								<a title="Set&#x20;Descending&#x20;Direction" href="#" class="action sorter-action sort-asc" data-role="direction-switcher" data-value="desc">
@@ -1016,14 +1061,41 @@ return false;
 							            "addToWishlist": {"productType":["simple","virtual","downloadable","bundle","grouped","configurable"]}        }
 							    }
 						</script>
+						
+						{% if aliexpress is not defined and amazon is not defined %}
+							{% if crypto is not defined %}
+								{% set produits = produits | filter((v) => v.categorie_prod.nomCategorie != 'Crypto') %}
+								{% set categories = categories | filter((v) => v.nomCategorie != 'Crypto') %}
+							{% else %}
+								{% set produits = produits | filter((v) => v.categorie_prod.nomCategorie == 'Crypto') %}
+							{% endif %}
+						{% endif %}
 
-						<div class="products wrapper grid products-grid">
+						<div class="products wrapper grid products-grid" id="gridprods">
+
+						{% if ((aliexpress is not defined) and (amazon is not defined)) %}
 							<ol
-								class="products list items product-items container-products-switch" data-view-mode="3">
+								class="products list items product-items container-products-switch" data-view-mode="3" id="products_list">
 
 
 								<!-- ===============PRODUITS======================= -->
-								{% for produit in produits %}
+							 	{% set items_page = 0 %}
+								{% set page_number = 1 %}
+
+								{% if app.request.get('p') is not null %}
+									{% set page_number = app.request.get('p') %}
+								{% endif %}
+
+								
+								{% set start = (page_number -1) *12 %}
+								{% set finish = start + 12 %}
+								
+
+								{% for produit in produits|sort((a,b) => a.id - b.id) %}
+
+									{% set items_page = items_page + 1 %}
+								
+									{% if items_page in start..finish %}
 									<li class="item product product-item">
 										<div class="product-item-info" data-container="product-grid">
 											<div class="product-item-inner">
@@ -1078,51 +1150,1354 @@ return false;
 													<script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027span.product-image-wrapper");for(varbounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var</body
 															i="0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom="100%";} </script> </a> <div class="product-label"> </div> </div> 
                                                             
-<div style="background-color : #F0F0F0 ; padding : 8px ; " class="product details product-item-details">
+												<div style="background-color : #F0F0F0 ; padding : 8px ; " class="product details product-item-details">
 
-	<strong class="product name product-item-name">
-		<a class="product-item-link" href="{{ path('product_show', {id : produit.id}) }}">
-			{{ produit.nomProd }}
-		</a>
-	</strong>
-	<div class="product-reviews-summary short">
-		<div class="rating-summary">
-			<span class="label">
-				<span>Rating:</span>
-			</span>
-			<div class="rating-result" title="100%">
-				<span style="width:100%">
-					<span>100%</span>
-				</span>
-			</div>
-		</div>
-		<div class="reviews-actions">
-			<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
-				1
-				<span>Review</span>
-			</a>
-		</div>
-	</div>
+													<strong class="product name product-item-name">
+														<a class="product-item-link" href="{{ path('product_show', {id : produit.id}) }}">
+															{{ produit.nomProd }}
+														</a>
+													</strong>
+													<div class="product-reviews-summary short">
+														<div class="rating-summary">
+															<span class="label">
+																<span>Rating:</span>
+															</span>
+															<div class="rating-result" title="100%">
+															
+
+
+																{% set avg = 0 %}
+																{% set size = 0 %}
+																{% for avi in avis %}
+																	{% if avi.idProd.id == produit.id %}
+																		{% set avg = avg + avi.ratingAvis %}
+																		{% set size = size + 1 %}
+																	{% endif %}
+																{% endfor %}
+
+																{% if size != 0 %}
+																	{% set avd = (avg / size) * 20 %}
+																	{% set avd =  avd | round %}
+																{% else %}
+																	{% set avd = 100 %}
+																{% endif %}
+																
+																<span style="width:{{ avd }}%">
+																	<span>100%</span>
+																</span>
+															</div>
+														</div>
+														<div class="reviews-actions">
+															<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+																1
+																<span>Review</span>
+															</a>
+														</div>
+													</div>
 
                                                             
                                                             
                                                             <div  class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91"> <span class="price-container price-final_price&#x20;tax&#x20;weee"> <span id="product-price-91" data-price-amount="900" data-price-type="finalPrice" class="price-wrapper ">
                                                             
+															{% if crypto is not defined %}
 
-                                                            {% if produit.promoProd != 0 %}
-                                                                <span class="price" style="font-size : 17px ; font-weight : bold ;" >{{ produit.promoProd }} DT</span> &nbsp;
-                                                                <strike style="color : red ; "><span class="price" style="font-size : 15px ; color : red ; ">{{ produit.prixProd }} DT</span></strike>
-                                                            {% else %}
-                                                                <span class="price" style="font-size : 17px ; font-weight : bold ;" >{{ produit.prixProd }} DT</span>
-                                                            {% endif %}
+
+																{% if produit.promoProd != 0 %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;" >{{ produit.promoProd }} DT</span> &nbsp;
+																	<strike style="color : red ; "><span class="price" style="font-size : 15px ; color : red ; ">{{ produit.prixProd }} DT</span></strike>
+																{% else %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;" >{{ produit.prixProd }} DT</span>
+																{% endif %}
+
+
+															{% else %}
+
+
+																{% if produit.promoProd != 0 %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;" >{{ produit.promoProd }} ETH</span> &nbsp;
+																	<strike style="color : red ; "><span class="price" style="font-size : 15px ; color : red ; ">{{ produit.prixProd }} ETH</span></strike>
+																{% else %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;" >{{ produit.prixProd }} ETH</span>
+																{% endif %}
+
+
+															{% endif %}
                                                             
                                                             
                                                             
                                                             
-                                                            </span> </span> </div> </div> </div> </li> 
+                                                            
+                                                            </span> 
+													</span> 
+											</div> 
+										</div> 
+									</div> 
+								</li> 
+								
+								{% endif %}
                                                             
                                                             
                                                             
-                                                            {% endfor %} </ol> </div> <div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":{"mode":"product_list_mode","direction":"product_list_dir","order":"product_list_order","limit":"product_list_limit","modeDefault":"grid","directionDefault":"asc","orderDefault":"position","limitDefault":12,"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/all-categories.html","formKey":"vedeAn56iqjqPQd2","post":false}}'> <div class="modes"> <strong class="modes-label" id="modes-label">View as</strong> <strong title="Grid" class="modes-mode active mode-grid" data-value="grid"> <span>Grid</span> </strong> <a class="modes-mode mode-list" title="List" href="#" data-role="mode-switcher" data-value="list" id="mode-list" aria-labelledby="modes-label mode-list"> <span>List</span> </a> </div> <p class="toolbar-amount" id="toolbar-amount"> Items <span class="toolbar-number">1</span>-<span class="toolbar-number">12</span> of <span class="toolbar-number">14</span> </p> <div class="pages"> <strong class="label pages-label" id="paging-label">Page</strong> <ul class="items pages-items" aria-labelledby="paging-label"> <li class="item current"> <strong class="page"> <span class="label">You&#039;re currently reading page</span> <span>1</span> </strong> </li> <li class="item"> <a href="all-categories905b.html?p=2" class="page"> <span class="label">Page</span> <span>2</span> </a> </li> <li class="item pages-item-next"> <a class="action next" href="all-categories905b.html?p=2" title="Next"> <span class="label">Page</span> <span>Next</span> </a> </li> </ul> </div> <div class="grid-mode-show-type-products"> <a href="#" class="grid-mode-2" data-grid-mode="2">2</a> <a href="#" class="grid-mode-3 actived" data-grid-mode="3">3</a> <a href="#" class="grid-mode-4" data-grid-mode="4">4</a> <a href="#" class="grid-mode-5" data-grid-mode="5">5</a> </div> <div class="field limiter"> <label class="label" for="limiter"> <span>Show</span> </label> <div class="control"> <select id="limiter" data-role="limiter" class="limiter-options"> <option value="12" selected="selected"> 12 </option> <option value="24"> 24 </option> <option value="36"> 36 </option> </select> </div> <span class="limiter-text">per page</span> </div> <div class="toolbar-sorter sorter"> <label class="sorter-label" for="sorter">Sort By</label> <select id="sorter" data-role="sorter" class="sorter-options"> <option value="position" selected="selected"> Position </option> <option value="name"> Product Name </option> <option value="price"> Price </option> <option value="color"> Color </option> </select> <a title="Set&#x20;Descending&#x20;Direction" href="#" class="action sorter-action sort-asc" data-role="direction-switcher" data-value="desc"> <span>Set Descending Direction</span> </a> </div> </div> <script type="text/x-magento-init"> { "[data-role=tocart-form], .form.map.checkout": { "catalogAddToCart": { "product_sku": "CP13" } } } </script> <script type="text/x-magento-init"> { "body": { "requireCookie": {"noCookieUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/cookie\/index\/noCookies\/","triggers":[".action.towishlist"],"isRedirectCmsPage":true} } } </script> </div><div class="sidebar sidebar-main"> <div class="block filter" id="layered-filter-block" data-mage-init=' { "collapsible": { "openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } } }'> <div class="block-title filter-title" data-count="0"> <strong data-role="title">Shop By</strong> </div> <div class="block-content filter-content"> <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle">Shopping Options</strong> <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init=' { "accordion": { "openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false } }'> <div data-role="collapsible" class="filter-options-item"> <div data-role="title" class="filter-options-title"><strong>Price</strong></div> <div data-role="content" class="filter-options-content"> <ol class="items"> <li class="item"> <a href="all-categoriesf5d2.html?price=100-200" rel="nofollow"> <span class="price">$100.00</span> - <span class="price">$199.99</span> <span class="count">2 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categoriesd3cd.html?price=200-300" rel="nofollow"> <span class="price">$200.00</span> - <span class="price">$299.99</span> <span class="count">2 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categoriesb8cb.html?price=300-400" rel="nofollow"> <span class="price">$300.00</span> - <span class="price">$399.99</span> <span class="count">2 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categories4528.html?price=400-500" rel="nofollow"> <span class="price">$400.00</span> - <span class="price">$499.99</span> <span class="count">5 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categories7ab6.html?price=900-1000" rel="nofollow"> <span class="price">$900.00</span> and above <span class="count">3 <span class="filter-count-label"> item</span></span> </a> </li> </ol> </div> </div> <div data-role="collapsible" class="filter-options-item"> <div data-role="title" class="filter-options-title"><strong>Product Brand</strong></div> <div data-role="content" class="filter-options-content"> <ol class="items"> <li class="item"> <a href="all-categoriese34f.html?product_brand=1" rel="nofollow"> Brand 1 <span class="count">3 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categories2206.html?product_brand=2" rel="nofollow"> Brand-2 <span class="count">3 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categoriesa540.html?product_brand=3" rel="nofollow"> Brand-3 <span class="count">3 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categoriesf9fd.html?product_brand=4" rel="nofollow"> Brand-4 <span class="count">1 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categories4fe2.html?product_brand=5" rel="nofollow"> Brand-5 <span class="count">3 <span class="filter-count-label"> item</span></span> </a> </li> <li class="item"> <a href="all-categoriesf83d.html?product_brand=6" rel="nofollow"> Brand-6 <span class="count">1 <span class="filter-count-label"> item</span></span> </a> </li> </ol> </div> </div> </div> </div> </div> </div><div class="sidebar sidebar-additional"><div class="block block-compare" data-bind="scope: 'compareProducts'" data-role="compare-products-sidebar"> <div class="block-title"> <strong id="block-compare-heading" role="heading" aria-level="2">Compare Products</strong> <span class="counter qty no-display" data-bind="text: compareProducts().countCaption, css: {'no-display': !compareProducts().count}"></span> </div> <!-- ko if: compareProducts().count --> <div class="block-content no-display" aria-labelledby="block-compare-heading" data-bind="css: {'no-display': !compareProducts().count}"> <ol id="compare-items" class="product-items product-items-names" data-bind="foreach: compareProducts().items"> <li class="product-item"> <input type="hidden" class="compare-item-id" data-bind="value: id"/> <strong class="product-item-name"> <a data-bind="attr: {href: product_url}, html: name" class="product-item-link"></a> </strong> <a href="#" data-bind="attr: {'data-post': remove_url}" title="Remove&#x20;This&#x20;Item" class="action delete"> <span>Remove This Item</span> </a> </li> </ol> <div class="actions-toolbar"> <div class="primary"> <a data-bind="attr: {'href': compareProducts().listUrl}" class="action compare primary"><span>Compare</span></a> </div> <div class="secondary"> <a id="compare-clear-all" href="#" class="action clear" data-post="{&quot;action&quot;:&quot;https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/clear\/&quot;,&quot;data&quot;:{&quot;uenc&quot;:&quot;&quot;,&quot;confirmation&quot;:true,&quot;confirmationMessage&quot;:&quot;Are you sure you want to remove all items from your Compare Products list?&quot;}}"> <span>Clear All</span> </a> </div> </div> </div> <!-- /ko --> <!-- ko ifnot: compareProducts().count --> <div class="empty">You have no items to compare.</div> <!-- /ko --> </div> <script type="text/x-magento-init"> {"[data-role=compare-products-sidebar]": {"Magento_Ui/js/core/app": {"components":{"compareProducts":{"component":"Magento_Catalog\/js\/view\/compare-products"}}}}} </script> <div class="block block-wishlist" data-bind="scope: 'wishlist'"> <div class="block-title"> <strong role="heading" aria-level="2">My Wish List</strong> <!-- ko if: wishlist().counter --> <span data-bind="text: wishlist().counter" class="counter"></span> <!-- /ko --> </div> <div class="block-content"> <strong class="subtitle">Last Added Items</strong> <!-- ko if: wishlist().counter --> <ol class="product-items no-display" id="wishlist-sidebar" data-bind="foreach: wishlist().items, css: {'no-display': null}"> <li class="product-item"> <div class="product-item-info"> <a class="product-item-photo" data-bind="attr: { href: product_url, title: product_name }"> <!-- ko template: {name: $data.image.template, data: $data.image} --><!-- /ko --> </a> <div class="product-item-details"> <strong class="product-item-name"> <a data-bind="attr: { href: product_url }" class="product-item-link"> <span data-bind="text: product_name"></span> </a> </strong> <div data-bind="html: product_price"></div> <div class="product-item-actions"> <!-- ko if: product_is_saleable_and_visible --> <div class="actions-primary"> <!-- ko if: product_has_required_options --> <a href="#" data-bind="attr: {'data-post': add_to_cart_params}" class="action tocart primary"> <span>Add to Cart</span> </a> <!-- /ko --> <!-- ko ifnot: product_has_required_options --> <button type="button" class="action tocart primary" data-bind="attr: {'data-post': add_to_cart_params}"> <span>Add to Cart</span> </button> <!-- /ko --> </div> <!-- /ko --> <div class="actions-secondary"> <a href="#" data-bind="attr: {'data-post': delete_item_params}" title="Remove&#x20;This&#x20;Item" class="btn-remove action delete"> <span>Remove This Item</span> </a> </div> </div> </div> </div> </li> </ol> <div class="actions-toolbar no-display" data-bind="css: {'no-display': null}"> <div class="primary"> <a class="action details" href="wishlist/index.html" title="Go&#x20;to&#x20;Wish&#x20;List"> <span>Go to Wish List</span> </a> </div> </div> <!-- /ko --> <!-- ko ifnot: wishlist().counter --> <div class="empty">You have no items in your wish list.</div> <!-- /ko --> </div> </div> <script type="text/x-magento-init"> { "*": { "Magento_Ui/js/core/app": { "components": { "wishlist": { "component": "Magento_Wishlist/js/view/wishlist" } } } } } </script> </div></div></main><footer class="page-footer"><div id="focus-area"></div> <div id="back-top" class=""><i class="icon icon-chevrons-up"></i></div> <div class="footer-container enable-mobile-menu layout-9"> <div class="footer-top"> <div class="footer content"> <div class="footer-static_link flex-layout space-between"> <div class="footer-links col-links"> <img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/rokanthemes/footerlogo/stores/15/xlogo11_1.png.pagespeed.ic.bSdxIDD9z_.png" alt=""/> <p> Since 2013 we’ve been creating industrial design, residential architecture, commercial interiors. Chase mice attack feet but rub face on everything cepteur sint occaecat cupidatat proident. </p> <h4 class="footer-title">Follow us</h4> <ul class="social-link footer-contents"> <li><a href="#"><span class="icon-facebook-f"><span class="text">Facebook</span></span></a></li> <li><a href="#"><span class="icon-instagram"><span class="text">instagram</span></span></a></li> <li><a href="#"><span class="icon-twitter"><span class="text">twitter</span></span></a></li> <li><a href="#"><span class="icon-dribbble"><span class="text">dribbble</span></span></a></li> <li><a href="#"><span class="icon-play-circle"><span class="text">youtube</span></span></a></li> </ul> </div> <div class="footer-links col-links to_help"> <h4 class="footer-title">here to help</h4> <div class="footer-contents"> <p>Have a question? You may find an answer in our FAQs. But you can also contact us:</p> <div class="info_help"> <div class="info_content info_phone"> <span class="icon-phone-outgoing"><span class="text">phone</span></span> <h4>Order by phone</h4> <p>Available everyday</p> <p class="text_inner text_phone">+391 (0)35 2568</p> </div> <div class="info_content info_email"> <span class="icon-mail"><span class="text">email</span></span> <h4>Email Us</h4> <p>Get in touch by email</p> <p class="text_inner">support@ohey.com</p> </div> </div> </div> </div> <div class="footer-links"> <h4 class="footer-title">Customer Service</h4> <ul class="footer-contents"> <li><a href="#">Help & Contact Us</a></li> <li><a href="#">COVID-19 information</a></li> <li><a href="#">Orders & Shipping</a></li> <li><a href="#">Payment & Pricing</a></li> <li><a href="#">Returns & Refunds</a></li> <li><a href="#">FAQs</a></li> <li><a href="#">Terms & Conditions</a></li> <li><a href="#">Privacy Policy</a></li> <li><a href="#">Accessibility</a></li> <li><a href="#">Contact Us</a></li> <li><a href="#">Documentation</a></li> </ul> </div> <div class="footer-links"> <h4 class="footer-title">About ohey</h4> <ul class="footer-contents"> <li><a href="#">My Account</a></li> <li><a href="#">Investors</a></li> <li><a href="#">Boutique Partners</a></li> <li><a href="#">Affiliate Programme</a></li> <li><a href="#">Careers</a></li> <li><a href="#">Customer Promise</a></li> <li><a href="#">Ohey App</a></li> <li><a href="#">Sitemap</a></li> <li><a href="#">Positively Ohey</a></li> </ul> </div> </div> </div> </div> <div class="footer-bottom"> <div class="container-inner border-top"> <div class="footer content flex-layout space-between center_vertical"> <small class="copyright"> <span>© Copyright Ohey Limited. All rights reserved.</span> </small> <div class="footer-payment"> <div class="flex-layout center_vertical"> <h4>Secure payments</h4> <div class="img_payment"><img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/payment.png" alt=""/></div> </div> </div> </div> </div> </div> </div> <div class="fixed-bottom d-block d-md-none"> <div class="link-on-bottom"> <ul class="mobile-bottom-link flex-layout space-between list-unstyled no-wrap"> <li><a href="index.html"><span class="icon icon-home"></span>Home</a></li> <li><a href="customer/account/index.html"><span class="icon icon-user-circle-o"></span>Account</a></li> <li><a href="#" class="toggle-nav-footer"><span class="icon icon-menu1"></span>Menu</a></li> <li><a href="wishlist/index.html"><span class="icon icon-favorite_border"></span>Wishlist</a></li> <li><a href="checkout/cart/index.html"><span class="icon icon-cart"></span>Cart</a></li> </ul> </div> </div> </footer><script type="text/x-magento-init"> { "*": { "Magento_Ui/js/core/app": { "components": { "storage-manager": { "component": "Magento_Catalog/js/storage-manager", "appendTo": "", "storagesConfiguration" : {"recently_viewed_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"recently_compared_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"product_data_storage":{"updateRequestConfig":{"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/rest\/en11\/V1\/products-render-info"},"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"allowToSendRequest":null}} } } } } } </script> <div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper"> <a id="ajaxsuite-close" class="ajaxsuite-close"></a> <div id="ajaxsuite-popup-content"></div> </div> <div class="quickview-popup-wrapper" id="quickview-popup-wrapper"> <a id="quickview-close" class="quickview-close"></a> <div id="quickview-popup-content"></div> </div> <div data-url="https://blueskytechmage.com/ohey/en11/themeoption/fakeorder/getitem/" id="purchase-fake-order" data-seconds-hide="5" data-seconds-displayed="10" class="purchase-order fadeInUp animated hidden-xs" style="display: none;"> <a class="purchase-close" href="javascript:void(0);"></a> <div class="product-purchase"></div> </div> </div> <script>require(["jquery"],function($){require(["rokanthemes/lazyloadimg"],function(lazy){$("img[data-src]").lazy({"bind":"event","attribute":"data-src",visibleOnly:true,threshold:0,enableThrottle:true,throttle:500,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});$(document).ready(function($){var win=$(window);$(".owl-carousel").on("translated.owl.carousel",function(event){var bounds=$(this).offset();var viewport={top:win.scrollTop(),left:win.scrollLeft()};viewport.bottom=viewport.top+win.height();if(viewport.bottom>" new_url="$(this).attr("data-src");$(this).attr("src",new_url);$(this).removeAttr("data-src");$(this).addClass("lazy-loaded");$(this).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(this).addClass("transition");},1000);}});},1000);});});});</script>"><!-- Mirrored from blueskytechmage.com/ohey/en11/all-categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Feb 2022 19:00:33 GMT -->
-														</html>
+							{% endfor %} 
+ 
+							
+						</ol> 
+
+
+						 
+
+						<!-- ============================ SORT ON PRICE ===================================== -->
+
+						<ol class="products list items product-items container-products-switch" data-view-mode="3" id="products_sort_price" style="display : none ; ">
+							
+							{% set items_page = 0 %}
+							{% set page_number = 1 %}
+
+							{% if app.request.get('p') is not null %}
+								{% set page_number = app.request.get('p') %}
+							{% endif %}
+
+							
+							{% set start = (page_number -1) *12 %}
+							{% set finish = start + 12 %}
+								
+							
+							{% for produit in produits|sort((a,b) => a.prixProd - b.prixProd) %}
+
+								{% set items_page = items_page + 1 %}
+								
+								{% if items_page in start..finish %}
+								<li class="item product product-item">
+									<div class="product-item-info" data-container="product-grid">
+										<div class="product-item-inner">
+											<div class="product actions product-item-actions">
+												<div data-role="add-to-links" class="actions-secondary visible-hover">
+
+													<a href="#" class="action towishlist" title="Add&#x20;to&#x20;Wish&#x20;List" aria-label="Add&#x20;to&#x20;Wish&#x20;List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' data-action="add-to-wishlist" role="button">
+
+														<span>Wish List</span>
+													</a>
+
+													<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' role="button">
+
+														<span>Add to Compare</span>
+													</a>
+												</div>
+
+												<div class="actions-primary visible-hover">
+													<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s/product/91/" method="post">
+
+														<input type="hidden" name="product" value="91">
+														<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOWhiR3d0WTJGMFpXZHZjbWxsY3k1b2RHMXMvcHJvZHVjdC85MS8,">
+														<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>
+
+														<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+															<span>Add to Cart</span>
+														</button>
+													</form>
+												</div>
+
+											</div>
+
+											<a href="{{ path('product_show', {id : produit.id}) }} " class="product-photo photo product-item-photo product-list-image" tabindex="-1">
+
+
+												<span class="product-image-container product-image-container-911653110027">
+
+													<span class="product-image-wrapper">
+														<img class="product-image-photo" src="{{ produit.imageProd }}" loading="lazy" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
+
+													</span>
+												</span>
+
+												<style>
+													.product-image-container-911653110027 {
+														width: 500px
+													}
+													.product-image-container-911653110027 span.product-image-wrapper {
+														padding-bottom: 100%
+													}
+												</style>
+												<script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027span.product-image-wrapper");for(varbounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var</body i="0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom=" 100%";} </script> </a> <div class=" product-label"></div>
+												</div>
+
+												<div style="background-color : #F0F0F0 ; padding : 8px ; " class="product details product-item-details">
+
+													<strong class="product name product-item-name">
+														<a class="product-item-link" href="{{ path('product_show', {id : produit.id}) }}">
+															{{ produit.nomProd }}
+														</a>
+													</strong>
+													<div class="product-reviews-summary short">
+														<div class="rating-summary">
+															<span class="label">
+																<span>Rating:</span>
+															</span>
+															<div class="rating-result" title="100%">
+
+
+																{% set avg = 0 %}
+																{% set size = 0 %}
+																{% for avi in avis %}
+																	{% if avi.idProd.id == produit.id %}
+																		{% set avg = avg + avi.ratingAvis %}
+																		{% set size = size + 1 %}
+																	{% endif %}
+																{% endfor %}
+
+																{% if size != 0 %}
+																	{% set avd = (avg / size) * 20 %}
+																	{% set avd =  avd | round %}
+																{% else %}
+																	{% set avd = 100 %}
+																{% endif %}
+
+																<span style="width:{{ avd }}%">
+																	<span>100%</span>
+																</span>
+															</div>
+														</div>
+														<div class="reviews-actions">
+															<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+																1
+																<span>Review</span>
+															</a>
+														</div>
+													</div>
+
+
+													<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
+														<span class="price-container price-final_price&#x20;tax&#x20;weee">
+															<span id="product-price-91" data-price-amount="900" data-price-type="finalPrice" class="price-wrapper ">
+
+
+																{% if produit.promoProd != 0 %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;">{{ produit.promoProd }}
+																		DT</span>
+																	&nbsp;
+																	<strike style="color : red ; ">
+																		<span class="price" style="font-size : 15px ; color : red ; ">{{ produit.prixProd }}
+																			DT</span>
+																	</strike>
+																{% else %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;">{{ produit.prixProd }}
+																		DT</span>
+																{% endif %}
+
+
+															</span>
+														</span>
+													</div>
+												</div>
+											</div>
+										</li>
+										{% endif %}
+
+
+									{% endfor %}
+								
+								</ol> 
+
+
+							<!-- =================================== SORT ON NAME ========================================= -->
+
+								<ol class="products list items product-items container-products-switch" data-view-mode="3" id="products_sort_name" style="display : none ; ">
+							
+
+								{% set items_page = 0 %}
+								{% set page_number = 1 %}
+
+								{% if app.request.get('p') is not null %}
+									{% set page_number = app.request.get('p') %}
+								{% endif %}
+
+
+								{% set start = (page_number -1) *12 %}
+								{% set finish = start + 12 %}
+
+								{% for produit in produits|sort((a,b) => a.nomProd > b.nomProd) %}
+								
+								{% set items_page = items_page + 1 %}
+								{% if items_page in start..finish %}
+								<li class="item product product-item">
+									<div class="product-item-info" data-container="product-grid">
+										<div class="product-item-inner">
+											<div class="product actions product-item-actions">
+												<div data-role="add-to-links" class="actions-secondary visible-hover">
+
+													<a href="#" class="action towishlist" title="Add&#x20;to&#x20;Wish&#x20;List" aria-label="Add&#x20;to&#x20;Wish&#x20;List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' data-action="add-to-wishlist" role="button">
+
+														<span>Wish List</span>
+													</a>
+
+													<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' role="button">
+
+														<span>Add to Compare</span>
+													</a>
+												</div>
+
+												<div class="actions-primary visible-hover">
+													<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s/product/91/" method="post">
+
+														<input type="hidden" name="product" value="91">
+														<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOWhiR3d0WTJGMFpXZHZjbWxsY3k1b2RHMXMvcHJvZHVjdC85MS8,">
+														<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>
+
+														<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+															<span>Add to Cart</span>
+														</button>
+													</form>
+												</div>
+
+											</div>
+
+											<a href="{{ path('product_show', {id : produit.id}) }} " class="product-photo photo product-item-photo product-list-image" tabindex="-1">
+
+
+												<span class="product-image-container product-image-container-911653110027">
+
+													<span class="product-image-wrapper">
+														<img class="product-image-photo" src="{{ produit.imageProd }}" loading="lazy" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
+
+													</span>
+												</span>
+
+												<style>
+													.product-image-container-911653110027 {
+														width: 500px
+													}
+													.product-image-container-911653110027 span.product-image-wrapper {
+														padding-bottom: 100%
+													}
+												</style>
+												<script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027span.product-image-wrapper");for(varbounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var</body i="0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom=" 100%";} </script> </a> <div class=" product-label"></div>
+												</div>
+
+												<div style="background-color : #F0F0F0 ; padding : 8px ; " class="product details product-item-details">
+
+													<strong class="product name product-item-name">
+														<a class="product-item-link" href="{{ path('product_show', {id : produit.id}) }}">
+															{{ produit.nomProd }}
+														</a>
+													</strong>
+													<div class="product-reviews-summary short">
+														<div class="rating-summary">
+															<span class="label">
+																<span>Rating:</span>
+															</span>
+															<div class="rating-result" title="100%">
+
+
+																{% set avg = 0 %}
+																{% set size = 0 %}
+																{% for avi in avis %}
+																	{% if avi.idProd.id == produit.id %}
+																		{% set avg = avg + avi.ratingAvis %}
+																		{% set size = size + 1 %}
+																	{% endif %}
+																{% endfor %}
+
+																{% if size != 0 %}
+																	{% set avd = (avg / size) * 20 %}
+																	{% set avd =  avd | round %}
+																{% else %}
+																	{% set avd = 100 %}
+																{% endif %}
+
+																<span style="width:{{ avd }}%">
+																	<span>100%</span>
+																</span>
+															</div>
+														</div>
+														<div class="reviews-actions">
+															<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+																1
+																<span>Review</span>
+															</a>
+														</div>
+													</div>
+
+
+													<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
+														<span class="price-container price-final_price&#x20;tax&#x20;weee">
+															<span id="product-price-91" data-price-amount="900" data-price-type="finalPrice" class="price-wrapper ">
+
+
+																{% if produit.promoProd != 0 %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;">{{ produit.promoProd }}
+																		DT</span>
+																	&nbsp;
+																	<strike style="color : red ; ">
+																		<span class="price" style="font-size : 15px ; color : red ; ">{{ produit.prixProd }}
+																			DT</span>
+																	</strike>
+																{% else %}
+																	<span class="price" style="font-size : 17px ; font-weight : bold ;">{{ produit.prixProd }}
+																		DT</span>
+																{% endif %}
+
+
+															</span>
+														</span>
+													</div>
+												</div>
+											</div>
+										</li>
+										{% endif %}
+
+
+									{% endfor %}
+								</ol> 
+ 
+
+								<!-- =================================== ALI EXPRESS ========================================= -->
+							
+							{% elseif aliexpress is defined %}
+							 
+								<ol class="products list items product-items container-products-switch" data-view-mode="3" id="products_sort_name" style="display : block ; ">
+								
+										  
+										{% set items_page = 0 %}
+										{% set page_number = 1 %}
+
+										{% if app.request.get('p') is not null %}
+											{% set page_number = app.request.get('p') %}
+										{% endif %}
+
+
+										{% set start = (page_number -1) *12 %}
+										{% set finish = start + 12 %}
+								{% for produit in produits  %}
+
+										{% set items_page = items_page + 1 %}
+										{% if items_page in start..finish %}
+											<li class="item product product-item">
+												<div class="product-item-info" data-container="product-grid">
+													<div class="product-item-inner">
+														<div class="product actions product-item-actions">
+															<div data-role="add-to-links" class="actions-secondary visible-hover">
+
+																<a href="#" class="action towishlist" title="Add&#x20;to&#x20;Wish&#x20;List" aria-label="Add&#x20;to&#x20;Wish&#x20;List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' data-action="add-to-wishlist" role="button">
+
+																	<span>Wish List</span>
+																</a>
+
+																<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' role="button">
+
+																	<span>Add to Compare</span>
+																</a>
+															</div>
+
+															<div class="actions-primary visible-hover">
+																<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s/product/91/" method="post">
+
+																	<input type="hidden" name="product" value="91">
+																	<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOWhiR3d0WTJGMFpXZHZjbWxsY3k1b2RHMXMvcHJvZHVjdC85MS8,">
+																	<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>
+
+																	<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+																		<span>Add to Cart</span>
+																	</button>
+																</form>
+															</div>
+
+														</div>
+
+														<a href="https://www.aliexpress.com/item/{{produit.productId}}.html" target="_blank" class="product-photo photo product-item-photo product-list-image" tabindex="-1">
+
+
+															<span class="product-image-container product-image-container-911653110027">
+
+																<span class="product-image-wrapper">
+																	<img class="product-image-photo" src="{{ produit.image.imgUrl  }}" loading="lazy" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
+
+																</span>
+															</span>
+
+															<style>
+																.product-image-container-911653110027 {
+																	width: 500px
+																}
+																.product-image-container-911653110027 span.product-image-wrapper {
+																	padding-bottom: 100%
+																}
+															</style>
+															<script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027span.product-image-wrapper");for(varbounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var</body i="0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom=" 100%";} </script> </a> <div class=" product-label"></div>
+															</div>
+
+															<div style="background-color : #F0F0F0 ; padding : 8px ; " class="product details product-item-details">
+
+																<strong class="product name product-item-name">
+																	<a class="product-item-link" href="#">
+																		{{ produit.title.displayTitle }}
+																	</a>
+																</strong>
+																<div class="product-reviews-summary short">
+																	<div class="rating-summary">
+																		<span class="label">
+																			<span>Rating:</span>
+																		</span>
+																		<div class="rating-result" title="100%">
+
+
+																			 
+
+																			<span style="width:{{ 100 }}%">
+																				<span>100%</span>
+																			</span>
+																		</div>
+																	</div>
+																	<div class="reviews-actions">
+																		<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+																			1
+																			<span>Review</span>
+																		</a>
+																	</div>
+																</div>
+
+
+																<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
+																	<span class="price-container price-final_price&#x20;tax&#x20;weee">
+																		<span id="product-price-91" data-price-amount="900" data-price-type="finalPrice" class="price-wrapper ">
+
+
+																			 
+																				 
+																				<span class="price" style="font-size : 17px ; font-weight : bold ;"> {{produit.prices.salePrice.formattedPrice }}
+																					 </span>
+																			 
+
+
+																		</span>
+																	</span>
+																</div>
+															</div>
+														</div>
+													</li>
+												{% endif %}
+
+										{% endfor %}
+											 
+										</ol>
+									{% elseif amazon is defined %}
+
+
+										<ol class="products list items product-items container-products-switch" data-view-mode="3" id="products_sort_name" style="display : block ; ">
+
+
+											{% set items_page = 0 %}
+											{% set page_number = 1 %}
+
+											{% if app.request.get('p') is not null %}
+												{% set page_number = app.request.get('p') %}
+											{% endif %}
+
+
+											{% set start = (page_number -1) *12 %}
+											{% set finish = start + 12 %}
+											{% for produit in produits  %}
+
+												{% set items_page = items_page + 1 %}
+												{% if items_page in start..finish %}
+													<li class="item product product-item">
+														<div class="product-item-info" data-container="product-grid">
+															<div class="product-item-inner">
+																<div class="product actions product-item-actions">
+																	<div data-role="add-to-links" class="actions-secondary visible-hover">
+
+																		<a href="#" class="action towishlist" title="Add&#x20;to&#x20;Wish&#x20;List" aria-label="Add&#x20;to&#x20;Wish&#x20;List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' data-action="add-to-wishlist" role="button">
+
+																			<span>Wish List</span>
+																		</a>
+
+																		<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' role="button">
+
+																			<span>Add to Compare</span>
+																		</a>
+																	</div>
+
+																	<div class="actions-primary visible-hover">
+																		<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s/product/91/" method="post">
+
+																			<input type="hidden" name="product" value="91">
+																			<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOWhiR3d0WTJGMFpXZHZjbWxsY3k1b2RHMXMvcHJvZHVjdC85MS8,">
+																			<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>
+
+																			<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+																				<span>Add to Cart</span>
+																			</button>
+																		</form>
+																	</div>
+
+																</div>
+
+																<a href="{{produit.url}}" target="_blank" class="product-photo photo product-item-photo product-list-image" tabindex="-1">
+
+
+																	<span class="product-image-container product-image-container-911653110027">
+
+																		<span class="product-image-wrapper">
+																			<img class="product-image-photo" src="{{ produit.thumbnail }}" loading="lazy" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
+
+																		</span>
+																	</span>
+
+																	<style>
+																		.product-image-container-911653110027 {
+																			width: 500px
+																		}
+																		.product-image-container-911653110027 span.product-image-wrapper {
+																			padding-bottom: 100%
+																		}
+																	</style>
+																	<script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027span.product-image-wrapper");for(varbounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var</body i="0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom=" 100%";} </script> </a> <div class=" product-label"></div>
+																	</div>
+
+																	<div style="background-color : #F0F0F0 ; padding : 8px ; " class="product details product-item-details">
+
+																		<strong class="product name product-item-name">
+																			<a class="product-item-link" href="#">
+																				{{ produit.title }}
+																			</a>
+																		</strong>
+																		<div class="product-reviews-summary short">
+																			<div class="rating-summary">
+																				<span class="label">
+																					<span>Rating:</span>
+																				</span>
+																				<div class="rating-result" title="100%">
+
+
+																					<span style="width:{{ produit.reviews.rating * 20 }}%">
+																						<span>100%</span>
+																					</span>
+																				</div>
+																			</div>
+																			<div class="reviews-actions">
+																				<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+																					1
+																					<span>Review</span>
+																				</a>
+																			</div>
+																		</div>
+
+
+																		<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
+																			<span class="price-container price-final_price&#x20;tax&#x20;weee">
+																				<span id="product-price-91" data-price-amount="900" data-price-type="finalPrice" class="price-wrapper ">
+
+
+																					<span class="price" style="font-size : 17px ; font-weight : bold ;">
+																						{{produit.price.current_price }} USD
+																					</span>
+
+
+																				</span>
+																			</span>
+																		</div>
+																	</div>
+																</div>
+															</li>
+														{% endif %}
+
+													{% endfor %}
+
+												</ol>
+
+
+
+
+
+
+
+									{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<!-- ================ EMPTY PRODUITS ======================= -->
+								{% if produits is empty %}
+									<center style="  ">
+										<h3 style="width : 80% ;margin-top : 70px ;">
+											The searched product is either not existant or no longer available, 
+											unless you have a time travel machine.
+											 
+										</h3>
+
+										<img style="width : 300px ; height : 250px ; margin-top : 20px ; margin-bottom : 20px ; " src="/assets/images/timeMachine.png" >
+										<br>
+										<span>
+											<h4 style="margin-bottom : 10px ; ">
+												You may find similar products from our partners
+											</h4>
+
+											<br>
+											<a href="/amazon_products" style="margin-right : 5px ; " type="submit" title="Add&#x20;to&#x20;Cart" class="action primary tocart" id="product-addtocart-button">
+												<span>Amazon</span>
+											</a>
+											<a href="aliexpress_products" style="margin-left : 5px ; " type="submit" title="Add&#x20;to&#x20;Cart" class="action primary tocart" id="product-addtocart-button">
+												<span>Ali Express</span>
+											</a>
+											 
+										</span>
+										<br>
+
+									</center>
+
+								{% endif %}
+								
+
+
+
+
+						 
+
+
+																			
+													
+													
+													
+													
+													
+													
+			</div> 
+															
+
+<!-- ===================== filters =================== -->
+{% set id = app.request.attributes.get('id') %}
+
+<div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":{"mode":"product_list_mode","direction":"product_list_dir","order":"product_list_order","limit":"product_list_limit","modeDefault":"grid","directionDefault":"asc","orderDefault":"position","limitDefault":12,"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/all-categories.html","formKey":"vedeAn56iqjqPQd2","post":false}}'>
+	<div class="modes">
+		<strong class="modes-label" id="modes-label">View as</strong>
+		<strong title="Grid" class="modes-mode active mode-grid" data-value="grid">
+			<span>Grid</span>
+		</strong>
+		<a class="modes-mode mode-list" title="List" href="#" data-role="mode-switcher" data-value="list" id="mode-list" aria-labelledby="modes-label mode-list">
+			<span>List</span>
+		</a>
+	</div>
+	<p class="toolbar-amount" id="toolbar-amount">
+		Items
+		<span class="toolbar-number">1</span>-<span class="toolbar-number">12</span>
+		of
+		<span class="toolbar-number">14</span>
+	</p>
+	<div class="pages">
+		<strong class="label pages-label" id="paging-label">Page</strong>
+		<ul class="items pages-items" aria-labelledby="paging-label">
+
+			{% set length_table = (produits|length)/12 + 1 %}
+			{% if produits|length <= 12 %}
+				<li class="item current">
+					<strong class="page">
+						<span class="label">You re currently reading page</span>
+						<span>1</span>
+					</strong>
+				</li>
+			{% else %}
+				
+				{% for i in 1..length_table %}
+					<li class="item">
+						{% set page = path(app.request.attributes.get('_route'),{ 'p': i})   %}
+						<a href="{{ page }}" class="page">
+							<span class="label">Page</span>
+							<span>{{ i }}</span>
+						</a>
+					</li>
+				{% endfor %}
+			{% endif %}	 
+			
+			{% if app.request.get('p') <  length_table-1 and length_table >= 2 %}
+				<li class="item pages-item-next">
+					
+					<a class="action next" href="{{path(app.request.attributes.get('_route'),{'p': page_number+1, 
+						'id' : id
+					})}}" title="Next">
+						<span class="label">Page</span>
+						<span>Next</span>
+					</a>
+				</li>
+			{% endif %}
+
+
+		</ul>
+	</div>
+	<div class="grid-mode-show-type-products">
+		<a href="#" class="grid-mode-2" data-grid-mode="2">2</a>
+		<a href="#" class="grid-mode-3 actived" data-grid-mode="3">3</a>
+		<a href="#" class="grid-mode-4" data-grid-mode="4">4</a>
+		<a href="#" class="grid-mode-5" data-grid-mode="5">5</a>
+	</div>
+	<div class="field limiter">
+		<label class="label" for="limiter">
+			<span>Show</span>
+		</label>
+		<div class="control">
+			<select id="limiter" data-role="limiter" class="limiter-options">
+				<option value="12" selected="selected">
+					12
+				</option>
+				<option value="24">
+					24
+				</option>
+				<option value="36">
+					36
+				</option>
+			</select>
+		</div>
+		<span class="limiter-text">per page</span>
+	</div>
+	<div class="toolbar-sorter sorter">
+		<label class="sorter-label" for="sorter">Sort By</label>
+		<select id="sorter" data-role="sorter" class="sorter-options">
+			<option value="position" selected="selected">
+				Position
+			</option>
+			<option value="name">
+				Product Name
+			</option>
+			<option value="price">
+				Price
+			</option>
+			<option value="color">
+				Color
+			</option>
+		</select>
+		<a title="Set&#x20;Descending&#x20;Direction" href="#" class="action sorter-action sort-asc" data-role="direction-switcher" data-value="desc">
+			<span>Set Descending Direction</span>
+		</a>
+	</div>
+</div>
+<script type="text/x-magento-init">
+	{ "[data-role=tocart-form], .form.map.checkout": { "catalogAddToCart": { "product_sku": "CP13" } } }
+</script>
+<script type="text/x-magento-init">
+	{ "body": { "requireCookie": {"noCookieUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/cookie\/index\/noCookies\/","triggers":[".action.towishlist"],"isRedirectCmsPage":true} } }
+</script></div><div class="sidebar sidebar-main">
+<div class="block filter" id="layered-filter-block" data-mage-init=' { "collapsible": { "openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } } }'>
+	<div class="block-title filter-title" data-count="0">
+		<strong data-role="title">Shop By</strong>
+	</div>
+	<div class="block-content filter-content">
+		<strong role="heading" aria-level="2" class="block-subtitle filter-subtitle">Shopping Options</strong>
+		<div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init=' { "accordion": { "openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false } }'>
+			<div data-role="collapsible" class="filter-options-item">
+				<div data-role="title" class="filter-options-title">
+					<strong>Price</strong>
+				</div>
+				<div data-role="content" class="filter-options-content">
+					<ol class="items">
+						<li class="item">
+							<a href="{{path('produit_prices', {'id' : 1 })}}" rel="nofollow">
+								<span class="price">1 DT</span>
+								-
+								<span class="price">100 DT</span>
+								<span class="count">2
+									<span class="filter-count-label">
+										item</span>
+								</span>
+							</a>
+						</li>
+						<li class="item">
+							<a href="{{path('produit_prices', {'id' : 2 })}}" rel="nofollow">
+								<span class="price">101 DT</span>
+								-
+								<span class="price">500 DT</span>
+								<span class="count">2
+									<span class="filter-count-label">
+										item</span>
+								</span>
+							</a>
+						</li>
+						<li class="item">
+							<a href="{{path('produit_prices', {'id' : 3 })}}" rel="nofollow">
+								<span class="price">501 DT</span>
+								-
+								<span class="price">1000 DT</span>
+								<span class="count">2
+									<span class="filter-count-label">
+										item</span>
+								</span>
+							</a>
+						</li>
+						<li class="item">
+							<a href="{{path('produit_prices', {'id' : 4 })}}" rel="nofollow">
+								<span class="price">1001 DT</span>
+								-
+								<span class="price">2000 DT</span>
+								<span class="count">5
+									<span class="filter-count-label">
+										item</span>
+								</span>
+							</a>
+						</li>
+						<li class="item">
+							<a href="{{path('produit_prices', {'id' : 5 })}}" rel="nofollow">
+								<span class="price">+ 2001 DT </span>
+								and above
+								<span class="count">3
+									<span class="filter-count-label">
+										item</span>
+								</span>
+							</a>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div data-role="collapsible" class="filter-options-item">
+				<div data-role="title" class="filter-options-title">
+					<strong>Categories</strong>
+				</div>
+				<div data-role="content" class="filter-options-content">
+					<ol class="items">
+
+					<!-- ============== CATEGORIES ===============-->
+						{% for categorie in categories %}
+							<li class="item">
+								<a href="{{path('produit_categorie', {'id' : categorie.id})}}" rel="nofollow">
+									{{ categorie.nomCategorie }}
+									<span class="count">
+										{% set total=0 %}
+										{% for produit in produits_all %}
+											
+											{% if produit.categorieProd == categorie %}
+												{% set total = total + 1 %}		
+											{% endif %}
+										{% endfor %}	
+										{{total}}
+										<span class="filter-count-label">
+											item</span>
+									</span>
+								</a>
+							</li>
+						{% endfor %}
+					</ol>
+
+				</div>
+			</div>
+
+
+			<div data-role="collapsible" class="filter-options-item">
+				<div data-role="title" class="filter-options-title">
+					<strong>Brands</strong>
+				</div>
+				<div data-role="content" class="filter-options-content">
+					<ol class="items">
+
+					<!-- ============== SUB CATEGORIES ===============-->
+						{% for souscategorie in sous_categories %}
+							<li class="item">
+								<a href="{{path('produit_souscategorie', {'id' : souscategorie.id})}}" rel="nofollow">
+									{{ souscategorie.nomSousCateg  }}
+									<span class="count">
+										{% set total=0 %}
+										{% for produit in produits_all %}
+											
+											{% if produit.souscategProd == souscategorie %}
+												{% set total = total + 1 %}		
+											{% endif %}
+										{% endfor %}	
+										{{total}}
+										<span class="filter-count-label">
+											item</span>
+									</span>
+								</a>
+							</li>
+						{% endfor %}
+					</ol>
+
+				</div>
+			</div>
+
+
+
+			
+		</div>
+	</div>
+</div></div><div class="sidebar sidebar-additional">
+<div class="block block-compare" data-bind="scope: 'compareProducts'" data-role="compare-products-sidebar">
+	<div class="block-title">
+		<strong id="block-compare-heading" role="heading" aria-level="2">Compare Products</strong>
+		<span class="counter qty no-display" data-bind="text: compareProducts().countCaption, css: {'no-display': !compareProducts().count}"></span>
+	</div>
+	<!-- ko if: compareProducts().count -->
+	<div class="block-content no-display" aria-labelledby="block-compare-heading" data-bind="css: {'no-display': !compareProducts().count}">
+		<ol id="compare-items" class="product-items product-items-names" data-bind="foreach: compareProducts().items">
+			<li class="product-item">
+				<input type="hidden" class="compare-item-id" data-bind="value: id"/>
+				<strong class="product-item-name">
+					<a data-bind="attr: {href: product_url}, html: name" class="product-item-link"></a>
+				</strong>
+				<a href="#" data-bind="attr: {'data-post': remove_url}" title="Remove&#x20;This&#x20;Item" class="action delete">
+					<span>Remove This Item</span>
+				</a>
+			</li>
+		</ol>
+		<div class="actions-toolbar">
+			<div class="primary">
+				<a data-bind="attr: {'href': compareProducts().listUrl}" class="action compare primary">
+					<span>Compare</span>
+				</a>
+			</div>
+			<div class="secondary">
+				<a id="compare-clear-all" href="#" class="action clear" data-post="{&quot;action&quot;:&quot;https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/clear\/&quot;,&quot;data&quot;:{&quot;uenc&quot;:&quot;&quot;,&quot;confirmation&quot;:true,&quot;confirmationMessage&quot;:&quot;Are you sure you want to remove all items from your Compare Products list?&quot;}}">
+					<span>Clear All</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+	<!-- ko ifnot: compareProducts().count -->
+	<div class="empty">You have no items to compare.</div>
+	<!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+	{"[data-role=compare-products-sidebar]": {"Magento_Ui/js/core/app": {"components":{"compareProducts":{"component":"Magento_Catalog\/js\/view\/compare-products"}}}}}
+</script>
+<div class="block block-wishlist" data-bind="scope: 'wishlist'">
+	<div class="block-title">
+		<strong role="heading" aria-level="2">My Wish List</strong>
+		<!-- ko if: wishlist().counter -->
+		<span data-bind="text: wishlist().counter" class="counter"></span>
+		<!-- /ko -->
+	</div>
+	<div class="block-content">
+		<strong class="subtitle">Last Added Items</strong>
+		<!-- ko if: wishlist().counter -->
+		<ol class="product-items no-display" id="wishlist-sidebar" data-bind="foreach: wishlist().items, css: {'no-display': null}">
+			<li class="product-item">
+				<div class="product-item-info">
+					<a class="product-item-photo" data-bind="attr: { href: product_url, title: product_name }"><!-- ko template: {name: $data.image.template, data: $data.image} -->
+						<!-- /ko -->
+					</a>
+					<div class="product-item-details">
+						<strong class="product-item-name">
+							<a data-bind="attr: { href: product_url }" class="product-item-link">
+								<span data-bind="text: product_name"></span>
+							</a>
+						</strong>
+						<div data-bind="html: product_price"></div>
+						<div
+							class="product-item-actions">
+							<!-- ko if: product_is_saleable_and_visible -->
+							<div
+								class="actions-primary">
+								<!-- ko if: product_has_required_options -->
+								<a href="#" data-bind="attr: {'data-post': add_to_cart_params}" class="action tocart primary">
+									<span>Add to Cart</span>
+								</a>
+								<!-- /ko -->
+								<!-- ko ifnot: product_has_required_options -->
+								<button type="button" class="action tocart primary" data-bind="attr: {'data-post': add_to_cart_params}">
+									<span>Add to Cart</span>
+								</button>
+								<!-- /ko -->
+							</div>
+							<!-- /ko -->
+							<div class="actions-secondary">
+								<a href="#" data-bind="attr: {'data-post': delete_item_params}" title="Remove&#x20;This&#x20;Item" class="btn-remove action delete">
+									<span>Remove This Item</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ol>
+		<div class="actions-toolbar no-display" data-bind="css: {'no-display': null}">
+			<div class="primary">
+				<a class="action details" href="wishlist/index.html" title="Go&#x20;to&#x20;Wish&#x20;List">
+					<span>Go to Wish List</span>
+				</a>
+			</div>
+		</div>
+		<!-- /ko -->
+		<!-- ko ifnot: wishlist().counter -->
+		<div class="empty">You have no items in your wish list.</div>
+		<!-- /ko -->
+	</div>
+</div>
+<script type="text/x-magento-init">
+	{ "*": { "Magento_Ui/js/core/app": { "components": { "wishlist": { "component": "Magento_Wishlist/js/view/wishlist" } } } } }
+</script></div></div></main><footer class="page-footer"><div id="focus-area"></div><div id="back-top" class=""><i class="icon icon-chevrons-up"></i></div><div class="footer-container enable-mobile-menu layout-9"><div class="footer-top">
+<div class="footer content">
+	<div class="footer-static_link flex-layout space-between">
+		<div class="footer-links col-links">
+			<img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/rokanthemes/footerlogo/stores/15/xlogo11_1.png.pagespeed.ic.bSdxIDD9z_.png" alt=""/>
+			<p>
+				Since 2013 we’ve been creating industrial design, residential architecture, commercial interiors. Chase mice attack feet but rub face on everything cepteur sint occaecat cupidatat proident.
+			</p>
+			<h4 class="footer-title">Follow us</h4>
+			<ul class="social-link footer-contents">
+				<li>
+					<a href="#">
+						<span class="icon-facebook-f">
+							<span class="text">Facebook</span>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="icon-instagram">
+							<span class="text">instagram</span>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="icon-twitter">
+							<span class="text">twitter</span>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="icon-dribbble">
+							<span class="text">dribbble</span>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="icon-play-circle">
+							<span class="text">youtube</span>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-links col-links to_help">
+			<h4 class="footer-title">here to help</h4>
+			<div class="footer-contents">
+				<p>Have a question? You may find an answer in our FAQs. But you can also contact us:</p>
+				<div class="info_help">
+					<div class="info_content info_phone">
+						<span class="icon-phone-outgoing">
+							<span class="text">phone</span>
+						</span>
+						<h4>Order by phone</h4>
+						<p>Available everyday</p>
+						<p class="text_inner text_phone">+391 (0)35 2568</p>
+					</div>
+					<div class="info_content info_email">
+						<span class="icon-mail">
+							<span class="text">email</span>
+						</span>
+						<h4>Email Us</h4>
+						<p>Get in touch by email</p>
+						<p class="text_inner">support@ohey.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-links">
+			<h4 class="footer-title">Customer Service</h4>
+			<ul class="footer-contents">
+				<li>
+					<a href="#">Help & Contact Us</a>
+				</li>
+				<li>
+					<a href="#">COVID-19 information</a>
+				</li>
+				<li>
+					<a href="#">Orders & Shipping</a>
+				</li>
+				<li>
+					<a href="#">Payment & Pricing</a>
+				</li>
+				<li>
+					<a href="#">Returns & Refunds</a>
+				</li>
+				<li>
+					<a href="#">FAQs</a>
+				</li>
+				<li>
+					<a href="#">Terms & Conditions</a>
+				</li>
+				<li>
+					<a href="#">Privacy Policy</a>
+				</li>
+				<li>
+					<a href="#">Accessibility</a>
+				</li>
+				<li>
+					<a href="#">Contact Us</a>
+				</li>
+				<li>
+					<a href="#">Documentation</a>
+				</li>
+			</ul>
+		</div>
+		<div class="footer-links">
+			<h4 class="footer-title">About ohey</h4>
+			<ul class="footer-contents">
+				<li>
+					<a href="#">My Account</a>
+				</li>
+				<li>
+					<a href="#">Investors</a>
+				</li>
+				<li>
+					<a href="#">Boutique Partners</a>
+				</li>
+				<li>
+					<a href="#">Affiliate Programme</a>
+				</li>
+				<li>
+					<a href="#">Careers</a>
+				</li>
+				<li>
+					<a href="#">Customer Promise</a>
+				</li>
+				<li>
+					<a href="#">Ohey App</a>
+				</li>
+				<li>
+					<a href="#">Sitemap</a>
+				</li>
+				<li>
+					<a href="#">Positively Ohey</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div></div><div class="footer-bottom">
+<div class="container-inner border-top">
+	<div class="footer content flex-layout space-between center_vertical">
+		<small class="copyright">
+			<span>© Copyright Ohey Limited. All rights reserved.</span>
+		</small>
+		<div class="footer-payment">
+			<div class="flex-layout center_vertical">
+				<h4>Secure payments</h4>
+				<div class="img_payment"><img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/payment.png" alt=""/></div>
+			</div>
+		</div>
+	</div>
+</div></div></div><div class="fixed-bottom d-block d-md-none"><div class="link-on-bottom">
+<ul class="mobile-bottom-link flex-layout space-between list-unstyled no-wrap">
+	<li>
+		<a href="index.html">
+			<span class="icon icon-home"></span>Home</a>
+	</li>
+	<li>
+		<a href="customer/account/index.html">
+			<span class="icon icon-user-circle-o"></span>Account</a>
+	</li>
+	<li>
+		<a href="#" class="toggle-nav-footer">
+			<span class="icon icon-menu1"></span>Menu</a>
+	</li>
+	<li>
+		<a href="wishlist/index.html">
+			<span class="icon icon-favorite_border"></span>Wishlist</a>
+	</li>
+	<li>
+		<a href="checkout/cart/index.html">
+			<span class="icon icon-cart"></span>Cart</a>
+	</li>
+</ul></div></div></footer>
+
+
+<script>
+			function showProds(str) { 
+				 document.getElementById("products_list").style.display = "none" ; 
+				 document.getElementById("products_sort_price").style.display = "none" ; 
+				 document.getElementById("products_sort_name").style.display = "none" ;
+
+				 if (str=="price") {
+					 document.getElementById("products_sort_price").style.display = "block" ;
+				 } else if (str=="date") {
+					  document.getElementById("products_list").style.display = "block" ;
+				 } else if (str=="name") {
+					  document.getElementById("products_sort_name").style.display = "block" ;
+				 }
+				  
+				
+				 
+				//document.getElementById("products_list").contentWindow.location.reload(true);		
+				 
+
+
+
+			}
+
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/x-magento-init">{ "*": { "Magento_Ui/js/core/app": { "components": { "storage-manager": { "component": "Magento_Catalog/js/storage-manager", "appendTo": "", "storagesConfiguration" : {"recently_viewed_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"recently_compared_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"product_data_storage":{"updateRequestConfig":{"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/rest\/en11\/V1\/products-render-info"},"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"allowToSendRequest":null}} } } } } }</script><div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper"><a id="ajaxsuite-close" class="ajaxsuite-close"></a><div id="ajaxsuite-popup-content"></div></div><div class="quickview-popup-wrapper" id="quickview-popup-wrapper"><a id="quickview-close" class="quickview-close"></a><div id="quickview-popup-content"></div></div><div data-url="https://blueskytechmage.com/ohey/en11/themeoption/fakeorder/getitem/" id="purchase-fake-order" data-seconds-hide="5" data-seconds-displayed="10" class="purchase-order fadeInUp animated hidden-xs" style="display: none;"><a class="purchase-close" href="javascript:void(0);"></a><div class="product-purchase"></div></div></div><script>require(["jquery"], function ($) {
+require(["rokanthemes/lazyloadimg"], function (lazy) {
+$("img[data-src]").lazy({
+"bind": "event",
+"attribute": "data-src",
+visibleOnly: true,
+threshold: 0,
+enableThrottle: true,
+throttle: 500,
+afterLoad: function (element) {
+$(element).addClass("lazy-loaded");
+$(element).closest(".absolute-content-image").removeClass("lazyload-content");
+setTimeout(function () {
+$(element).addClass("transition");
+}, 1000);
+}
+});
+$(document).ready(function ($) {
+var win = $(window);
+$(".owl-carousel").on("translated.owl.carousel", function (event) {
+var bounds = $(this).offset();
+var viewport = {
+top: win.scrollTop(),
+left: win.scrollLeft()
+};
+viewport.bottom = viewport.top + win.height();
+if (viewport.bottom > " new_url="$(this).attr("data-src");
+$(this).attr("src", new_url);
+$(this).removeAttr("data-src");
+$(this).addClass("lazy-loaded");
+$(this).closest(".absolute-content-image").removeClass("lazyload-content");
+setTimeout(function () {
+$(this).addClass("transition");
+}, 1000);
+}
+});
+}, 1000);
+});});});</script>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
 

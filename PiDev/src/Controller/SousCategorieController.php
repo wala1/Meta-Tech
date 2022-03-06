@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\SousCategorieFormType ;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
 use App\Repository\SousCategorieRepository ;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class SousCategorieController extends AbstractController
 {
@@ -101,6 +102,93 @@ class SousCategorieController extends AbstractController
             'editMode' => $souscategorie->getId() !== null,
             'table' => 'souscategories'
         ]);
+    }
+
+
+
+
+
+
+
+
+    // =============================== JSON MOBILE ==================================
+    /**
+     * @Route("/AllSubCategories", name="AllSubCategories")
+     */
+    public function AllSubCategories(NormalizerInterface $Normalizer): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(SousCategorie::class) ; 
+        $subcategories = $repo->findAll() ; 
+
+        $jsonContent = $Normalizer->normalize($subcategories, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/AddSubCategory", name="AddSubCategory")
+     */
+    public function AddSubCategoryJSON(Request $request, NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ; 
+        $subcategorie = new SousCategorie() ; 
+
+         
+
+        $subcategorie->setNomSousCateg($request->get('nom')) ; 
+        
+        $em->persist($subcategorie) ; 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/AddSubCategory?nom=test
+        $jsonContent = $Normalizer->normalize($subcategorie, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/ModifySubCategory/{id}", name="ModifySubCategory")
+     */
+    public function ModifySubCategoryJSON(Request $request, NormalizerInterface $Normalizer, $id): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ;  
+        $souscategorie = $em->getRepository(SousCategorie::class)->find($id) ; 
+ 
+
+        if (($request->get('nom')!=null)) {
+            $souscategorie->setNomSousCateg($request->get('nom')) ; 
+        }
+ 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/ModifySubCategory/11?nom=ZZZZZ
+        $jsonContent = $Normalizer->normalize($souscategorie, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+     /**
+     * @Route("/DeleteSubCategory/{id}", name="DeleteSubCategory")
+     */
+    public function DeleteSubCategoryJSON(Request $request , $id , NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ;
+        $souscategorie = $em->getRepository(SousCategorie::class)->find($id) ; 
+        $em->remove($souscategorie) ; 
+        $em->flush() ;
+
+        // http://127.0.0.1:8000/DeleteSubCategory/11 
+        $jsonContent = $Normalizer->normalize($souscategorie, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
     }
 
 

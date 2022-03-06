@@ -19,7 +19,7 @@ class ReclamationController extends AbstractController
     /**
      * @Route("/reclamation", name="reclamation")
      */
-    public function index(Request $request, Reclamation $reclamation=null): Response
+    public function reclamation_send(Request $request, Reclamation $reclamation=null): Response
     {
         if (!$reclamation) {
             $reclamation = new Reclamation();
@@ -35,6 +35,9 @@ class ReclamationController extends AbstractController
             $em->flush() ; 
             return $this->redirectToRoute('reclamation',array('sent'=>1)) ; 
         }
+
+ 
+
         return $this->render('reclamation/contact-us.html.twig', [
             'form' => $form->createView() 
         ]);
@@ -165,5 +168,50 @@ class ReclamationController extends AbstractController
     }
 
 
+
+
+    // ==================== CRYPTO =================================
+    /**
+     * @Route("/crypto", name="crypto")
+     */
+    public function crypto(): Response
+    {   
+        // ================== API CURRENCIES CRYPTO ========================
+        $curl = curl_init(); 
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://crypto-price-feed.p.rapidapi.com/api/crypto-feed",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "x-rapidapi-host: crypto-price-feed.p.rapidapi.com",
+                "x-rapidapi-key: ffccef661fmsh65d228e6a669cf1p1aba63jsne6686937e077"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }  
+        $json = json_decode($response, true);
+        
+
+        
+        return $this->render('crypto/crypto.html.twig', [
+            'tables' => $json["result"] 
+        ]);
+    }
+
+
+    
+     
 
 }

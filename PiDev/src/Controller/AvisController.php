@@ -52,29 +52,67 @@ class AvisController extends AbstractController
         $test = $avis ; 
 
         $idProd = $avis->getIdProd() ; 
-        $id = $idProd->getId() ; 
-
-        $form = $this->createForm(AvisFormType::class, $avis) ; 
-         $form->add('Enregistrer', SubmitType::class,[
-                'attr' => [
-                    'class'=>'btn btn-success waves-effect waves-light'
-                ]
-            ]) ;
-        $form->handleRequest($request);
         
 
-        if ($form->isSubmitted() && $form->isValid()) {
-             
+        if (isset($_POST['submit'])) {
+
+            $desc = $_POST['detail'] ; 
+            $rating = $_POST['rating']-10 ;
+            $id = $_POST['prod'] ; 
+
+            $prod = $avis->getIdProd() ; 
+
+
+            // ======================== API INAPPROPRIATE WORDS =================================
+                $curl = curl_init(); 
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character=#",
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: text/plain",
+                    "apikey: L7P4JUb9Kv8d3VaIWJO85xKWMcPNXaQy"
+                ),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS =>  $desc
+                ));
+
+                $response = curl_exec($curl);
+
+                // important
+                $json = json_decode($response, true);
+
+                curl_close($curl); 
+
+                // ========================== END API ===============================
+
+            $avis->setIdProd($prod) ;
+            $avis->setRatingAvis($rating) ;
+            $avis->setDescAvis($json["censored_content"]) ;   
+
             $em->persist($avis) ;  
             $em->flush() ; 
             return $this->redirectToRoute('product_show', array('id'=>$id)) ; 
+
         }
 
+         
+
         $user = $this->security->getUser();
+
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $produits = $repo->findAll() ;
+ 
+       
         if (($user!=null)&&($user==$avis->getIdUser())) {
             return $this->render('avis/editAvis.html.twig', [
                 'avis' => $test,
-                'form' => $form->createView()     
+                //'form' => $form->createView(),
+                'produits'=>$produits    
             ]);
         } else {
              return $this->redirectToRoute('product_show', array('id'=>$id)) ; 
@@ -112,7 +150,7 @@ class AvisController extends AbstractController
      */
     public function showProds(): Response
     {   
-        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ;   
         $produits = $repo->findAll() ;  
         return $this->render('admin/gestionAvis.html.twig', [
             'produits' => $produits,
@@ -157,41 +195,92 @@ class AvisController extends AbstractController
 
 
 
-      
-    /* 
+    /**
+     * @Route("/ajouter/avis", name="ajouter_avis")
+     */    
     public function ajouterProd(): Response
     {
         
-            $desc = $_POST['detail'] ;
-            $prod = $_POST['prod'] ;
-            $rating = $_POST['rating']-10 ;
+            
             if (isset($_POST['submit'])) {
+                $desc = $_POST['detail'] ;
+                $prod = $_POST['prod'] ;
+                $rating = $_POST['rating']-10 ; 
+                $prod = $this->getDoctrine()->getRepository(Produit::class)->findOneBy(['id'=>$prod]) ;  
+                $user = $this->security->getUser();
 
-                $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
-                $produit = $repo->findById($prod) ; 
+                // ======================== API INAPPROPRIATE WORDS =================================
+                $curl = curl_init(); 
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character=#",
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: text/plain",
+                    "apikey: L7P4JUb9Kv8d3VaIWJO85xKWMcPNXaQy"
+                ),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS =>  $desc
+                ));
 
-                $repo1 = $this->getDoctrine()->getRepository(User::class) ; 
-                $user = $repo1->findById(103) ; 
+                $response = curl_exec($curl);
 
-                 
+                // important
+                $json = json_decode($response, true);
+
+                curl_close($curl); 
+
+                // ========================== END API ===============================
 
                 $avis = new Avis();
                 $avis->setIdProd($prod) ;
                 $avis->setRatingAvis($rating) ;
-                $avis->setDescAvis($desc) ; 
+                $avis->setDescAvis($json["censored_content"]) ; 
                 $avis->setIdUser($user) ; 
-
+                $avis->setTimeAvis(new \DateTime()) ;
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($avis) ; 
-                $em->flush() ;   
+                $em->flush() ;  
+                
+                
+
+
+                $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+                $produits = $repo->findById($prod) ;
+
+                $avis = $this->getDoctrine()->getRepository(Avis::class) ; 
+                $avis = $avis->findByidProd($prod) ;
+
+
+                // ================= RECOMMENDATION SYSTEM =====================
+                $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+                $produits2 = $repo->findAll() ; 
+                
+                $avis2 = $this->getDoctrine()->getRepository(Avis::class) ; 
+                $avis2 = $avis2->findByidUser($user) ;
+
+                $avis3 = $this->getDoctrine()->getRepository(Avis::class) ; 
+                $avis3 = $avis3->findAll() ;
+
+                return $this->render('produit/product.html.twig', [
+                    'produits' => $produits,
+                    'avis' => $avis,
+                    'user'=>$user,
+                    'produits_all' => $produits2,
+                    'avis_user' => $avis2,
+                    'avis_all' => $avis3
+                ]);
 
             } 
 
-            
- 
-            return $this->redirectToRoute("avise") ; 
+              
+             
     } 
-    */
+     
 
 }

@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
@@ -39,6 +42,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="this field is  required")
+     * @Groups("post:read")
      
      */
     private $username;

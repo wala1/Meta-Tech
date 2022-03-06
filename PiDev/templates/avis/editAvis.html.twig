@@ -13,27 +13,88 @@
 
         <div>
          
-             {{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
-
-                    {{ form_label(form.ratingAvis) }}
-                    {{ form_widget(form.ratingAvis) }}
-                    <div style="color : red">
-                        {{ form_errors(form.ratingAvis) }}
-                    </div>
-                    <br>
-                    
-                    {{ form_label(form.descAvis) }}
-                    {{ form_widget(form.descAvis) }}
-                    <div style="color:red">
-                        {{ form_errors(form.descAvis) }}
-                    </div>
-                    <br>
-            {{ form_end(form) }}
-                
+             
          
         </div>
      
- 
+        {% for produit in produits %}
+            {% if produit.id == avis.idProd.id %}
+            <form action="{{path('modifAvis',{'id' : avis.id })}}" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
+
+                <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>
+                <fieldset class="fieldset review-fieldset" data-hasrequired="&#x2A;&#x20;Required&#x20;Fields">
+                    <legend class="legend review-legend">
+                        <span>You&#039;re reviewing:</span>
+                        <strong>{{ produit.nomProd }}</strong>
+                    </legend><br/>
+                    <span id="input-message-box"></span>
+                    <fieldset class="field required review-field-ratings">
+                        <legend class="label">
+                            <span>Your Rating</span>
+                        </legend><br/>
+                        <div class="control">
+                            <div class="nested" id="product-review-table">
+                                <div class="field choice review-field-rating">
+                                    <label class="label" id="Price_rating_label" style="font-size : 20px ; color : black ; ">
+                                        <span>Rating</span>
+                                    </label>
+                                    <div class="control review-control-vote">
+
+                                        <input type="radio" name="rating" id="Price_1" value="11" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_1_label"/>
+                                        <label class="rating-1" for="Price_1" title="1&#x20;star" id="Price_1_label">
+                                            <span>1 star</span>
+                                        </label>
+
+                                        <input type="radio" name="rating" id="Price_2" value="12" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_2_label"/>
+                                        <label class="rating-2" for="Price_2" title="2&#x20;stars" id="Price_2_label">
+                                            <span>2 stars</span>
+                                        </label>
+
+                                        <input type="radio" name="rating" id="Price_3" value="13" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_3_label"/>
+                                        <label class="rating-3" for="Price_3" title="3&#x20;stars" id="Price_3_label">
+                                            <span>3 stars</span>
+                                        </label>
+
+                                        <input type="radio" name="rating" id="Price_4" value="14" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_4_label"/>
+                                        <label class="rating-4" for="Price_4" title="4&#x20;stars" id="Price_4_label">
+                                            <span>4 stars</span>
+                                        </label>
+
+                                        <input type="radio"   name="rating" id="Price_5" value="15" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_5_label"/>
+                                         
+                                        <label class="rating-5" for="Price_5" title="5&#x20;stars" id="Price_5_label">
+                                            <span>5 stars</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <input type="hidden" name="validate_rating" class="validate-rating" value=""/>
+                        <input type="hidden" name="prod" value="{{ produit.id }}"/>
+                    </div>
+                </fieldset>
+
+
+                <div class="field review-field-text required">
+                     
+                    <div class="control">
+                        <textarea name="detail" id="review_field" value="{{avis.descAvis}}" cols="5" rows="3" data-validate="{required:true}" data-bind="value: review().detail">{{avis.descAvis}}
+                        </textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar review-form-actions">
+                <div class="primary actions-primary">
+                    <button type="submit" name="submit" class="action submit primary">
+                        <span>Submit Review</span>
+                    </button>
+                </div>
+            </div></form>
+            {% endif %}
+
+{% endfor %}
 
  
 <!--========================= END Avis MODIF ========================================== -->
