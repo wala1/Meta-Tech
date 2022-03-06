@@ -1,5 +1,175 @@
 
-            
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	<title>Coupon</title>
+{% endblock %}
+
+{% block body %}
+
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Liste des Coupon</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);"></a></li>
+                                            <li class="breadcrumb-item active">Liste des Coupon</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <h5 class="card-title">Coupon <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                    <div>
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="apps-contacts-list.html" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="apps-contacts-grid.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+
+                                                <!--   BOTTOM ADD   -->
+                                        <a href="{{path('addC')}}" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                    </div>
+                                    
+                                    <div class="dropdown">
+                                        <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bx bx-dots-horizontal-rounded"></i>
+                                        </a>
+                                      
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+
+
+
+
+
+
+
+
+                        <div class="table-responsive mb-4">
+                            <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                                <thead>
+                                  <tr>
+                                    <th scope="col" style="width: 50px;">
+                                        <div class="form-check font-size-16">
+                                            <input type="checkbox" class="form-check-input" id="checkAll">
+                                            <label class="form-check-label" for="checkAll"></label>
+                                        </div>
+                                    </th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Code</th>
+
+
+                                    <th style="width: 80px; min-width: 80px;">Actions</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                               
+
+
+                                    
+
+                                      {% for coup in coupBack %}
+     
+
+   
+
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="form-check font-size-16">
+                                                <input type="checkbox" class="form-check-input" id="contacusercheck1">
+                                                <label class="form-check-label" for="contacusercheck1">     </label>
+                                            </div>
+                                        </th>
+
+
+
+                                        <td>
+                                           {{coup.id}}     
+                                        </td>
+                                        <td>{{coup.codeCoup}}</td>                                     
+                                
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="{{ path('modify', {'id': coup.id }) }}">Modify</a></li>
+                                                    <li><a class="dropdown-item" href="{{ path('deleteC', {'id': coup.id}) }}">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                {% else %}
+                                            <tr> 
+                                             <td colspan=5 > Il n'ya pas de Coupon </td>
+                                          </tr>
+                                       
+                                          {% endfor %}
+
+                                        </tr>
+
+
+
+                                </tbody>
+                            </table>
+                          
+                            <!-- end table -->
+                        </div>
+                        <!-- end table responsive -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+
+
+
+ {% endblock %}
+
+
+
+{# 
 <!doctype html>
 <html lang="en">
 
@@ -922,4 +1092,4 @@
     </body>
 
 <!-- Mirrored from themesbrand.com/minia/layouts/apps-contacts-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Feb 2022 22:48:44 GMT -->
-</html>
+</html> #}

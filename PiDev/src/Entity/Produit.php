@@ -41,6 +41,7 @@ class Produit
     public function __construct()
     {
         $this->panier = new ArrayCollection();
+        $this->pubBacks = new ArrayCollection();
     }
 
     /**
@@ -96,6 +97,11 @@ class Produit
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idProd")
      */
     private $avis;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PubBack::class, mappedBy="produit")
+     */
+    private $pubBacks;
 
      
 
@@ -239,6 +245,36 @@ class Produit
     public function setCategProd(?Categorie $categorie_prod): self
     {
         $this->categorie_prod = $categorie_prod;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PubBack[]
+     */
+    public function getPubBacks(): Collection
+    {
+        return $this->pubBacks;
+    }
+
+    public function addPubBack(PubBack $pubBack): self
+    {
+        if (!$this->pubBacks->contains($pubBack)) {
+            $this->pubBacks[] = $pubBack;
+            $pubBack->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removePubBack(PubBack $pubBack): self
+    {
+        if ($this->pubBacks->removeElement($pubBack)) {
+            // set the owning side to null (unless already changed)
+            if ($pubBack->getProduit() === $this) {
+                $pubBack->setProduit(null);
+            }
+        }
 
         return $this;
     }

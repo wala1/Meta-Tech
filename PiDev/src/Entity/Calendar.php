@@ -126,11 +126,17 @@ class Calendar
 
   
 
+    /**
+     * @ORM\OneToMany(targetEntity=PubBack::class, mappedBy="calender")
+     */
+    private $pubBacks;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
         $this->participant = new ArrayCollection();
         $this->participants = new ArrayCollection();
+        $this->pubBacks = new ArrayCollection();
     }
 
   
@@ -296,8 +302,37 @@ class Calendar
     {
         if ($this->participants->removeElement($participants)) {
             // set the owning side to null (unless already changed)
-            if ($participants->getEvent() === $this) {
-                $participants->setEvent(null);
+            if ($participant->getCalendar() === $this) {
+                $participant->setCalendar(null);
+            }
+        }
+
+        return $this;
+    }
+     /** 
+      * @return Collection|PubBack[]
+     */
+    public function getPubBacks(): Collection
+    {
+        return $this->pubBacks;
+    }
+
+    public function addPubBack(PubBack $pubBack): self
+    {
+        if (!$this->pubBacks->contains($pubBack)) {
+            $this->pubBacks[] = $pubBack;
+            $pubBack->setCalender($this);
+        }
+
+        return $this;
+    }
+
+    public function removePubBack(PubBack $pubBack): self
+    {
+        if ($this->pubBacks->removeElement($pubBack)) {
+            // set the owning side to null (unless already changed)
+            if ($pubBack->getCalender() === $this) {
+                $pubBack->setCalender(null);
             }
         }
 

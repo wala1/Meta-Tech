@@ -1,0 +1,55 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}  Dashboard {% endblock %} 
+
+
+{% block body %}<center>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<div class="container">
+    <h1>Statistiques</h1>
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+</div>
+
+<script>
+var xValues = ["Femme", "Homme"];
+var yValues = [30, 49];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797"
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: {{gender | raw}},
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Statistiques Gender 2022"
+    }
+  }
+});
+</script>
+
+
+</center>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
