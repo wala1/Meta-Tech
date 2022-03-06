@@ -1,0 +1,195 @@
+
+
+{% extends 'base.html.twig' %}
+
+   {% block title %}   
+           <title> Account </title>
+           {% endblock %}
+
+{% block body %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+<div class="container">
+
+<div class="row flex-lg-nowrap">
+ 
+  
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                   <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"> {{app.user.username}} </h4> 
+                     <p class="mb-0">{{app.user.email}}</p>
+                    <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                    <div class="mt-2">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fa fa-fw fa-camera"></i>
+                        <span>Change Photo</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <span class="badge badge-secondary">Client</span>
+                    <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="#" class="active nav-link">Settings</a></li>
+                
+              </ul>
+              
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                 
+                    <div class="row">
+                      <div class="col">
+
+
+
+                      {# {{form(passForm)}} #}
+
+
+{# 
+        {{form_start(passForm,{'attr':{'novalidate':'novalidate'}} )}}
+      
+        <div>
+        {{form_row(passForm.password,{'attr':{'placeholder':'.....'}})  }}
+        </div>
+        <div>
+        {{form_row(passForm.confirm_password,{'attr':{'placeholder':'....'}})  }}
+        </div>
+       
+{{form_end(passForm)}} #}
+     
+                         <form >  
+                        {# <div class="row">
+                  
+
+
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="oldPassword" >Current Password</label>
+                              <input class="form-control" type="password" name="oldPassword"  >
+                      
+                            </div>
+                          </div>
+                        </div> #}
+                        {% for message in app.flashes('message') %}
+ <div class="col-x54">
+  <div class="p-3 my-2 rounded-2 success">{{message}}  </div>
+  </div>
+               {% endfor %}         
+               <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                           
+                                
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"> Event Title</th>
+     <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">actions</th>
+
+     
+
+
+
+    </tr>
+  </thead>
+ {% set nb = 1 %}
+  {% for p in participants %}
+
+{% if app.user.id == p.user.id %}
+  <tbody>
+    <tr>
+    
+      <th scope="row">{{ nb }} </th>
+      <td> {{p.event.title}}</td>
+     <td> {{p.event.start ? p.event.start|date('Y-m-d H:i:s') : '' }}</td>
+     <td> {{p.event.end ? p.event.end|date('Y-m-d H:i:s') : '' }}</td>
+      <td> <div class="dropdown">
+                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="{{path('event_detail',{'id':p.event.id})}}">More Details</a></li>
+                                                    <li><a class="dropdown-item" href="#"> quit</a></li>
+                                                    
+                                                </ul>
+                                            </div>
+					</td>
+
+
+
+
+          {% set nb = nb + 1  %}
+
+     
+    </tr>
+  
+  </tbody>
+   {% endif %}
+{% endfor %}
+</table> 
+                              
+                   
+                            </div>
+                          </div>
+                        </div>
+                       
+                       
+                          </form> 
+                      </div>
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <a  href="{{path('account')}}">Go Back</a>
+                      </div>
+                    </div>
+                  
+                  
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<style type="text/css">
+body{
+    margin-top:20px;
+    background:#f8f8f8
+}
+</style>
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller;
+use  vendor\autoload;
+use Twilio\Rest\Client;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +22,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use App\Form\ResetPassType;
 use App\Repository\UserRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
@@ -30,19 +33,64 @@ class SecurityController extends AbstractController
     /**
      * @Route("/inscription",name="security_registration")
      */
-    public function registration(Request $request, EntityManagerInterface $EntityManager,UserPasswordEncoderInterface $encoder )
+    public function registration(Request $request, EntityManagerInterface $EntityManager,UserPasswordEncoderInterface $encoder , \Swift_Mailer $mailer)
     {
+        //,FlashyNotifier $flashy
         $user =new User();
+        $sid="AC2aec24735743905f9787c482c8ab8ad3";
+        $token="ad2834aada2b0863970aa5f4016a663f";
          $form=$this->createForm(RegistrationType::class,$user);
          $form->handleRequest($request);
          if($form->isSubmitted() && $form->isValid())
          {
-           
+
             $hash=$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($hash);
+            $user->setEtat(0);
+      
             $user->setRoles(["ROLE_CLIENT"]);
-             $EntityManager->persist($user);
-             $EntityManager->flush();
+           
+
+
+            //On genere le token d'activation
+
+            $user->setActivationToken(md5(uniqid()));
+            $EntityManager->persist($user);
+            $EntityManager->flush();
+            //////////    Envoi Mail d'activation ////////////////
+
+            $message=(new \Swift_Message('Activate account') )
+            ->setFrom('aalimi.wala@gmail.com')
+
+             ->setTo($user->getEmail())
+               ->setBody(
+                  $this->renderView(
+               'emails\activation.html.twig' ,['token' => $user->getActivationToken()]
+              ) ,
+               'text/html'
+
+               ) ;
+            $mailer->send($message);
+
+
+             //////Envoi sms/////////////
+           
+            //  $twilio_number = "+18623622028";
+            //  $client = new Client($sid, $token);
+            //   $client->messages->create(
+            //           // Where to send a text message (your cell phone?)
+            //              '++21622407863',
+            //                  array(
+            //                'from' => $twilio_number,
+            //               'body' => 'test'
+            //                     )
+            //                  );
+
+            $this->addFlash('message', 'you have successfully created your account , check your inbox to validate your email ');
+            // $request->getSession()->getFlash()  ;
+            //          $flashy->getSession()->success('Event created!', 'http://your-awesome-link.com');
+
+
              return $this->redirectToRoute('security_login');
             
             }
@@ -51,13 +99,45 @@ class SecurityController extends AbstractController
          ]);
 
     }
+        
+
+    
+ /**
+     * @Route("/activation/{token}", name="activation")
+     */
+    public function activation($token, UserRepository $usersRepo)
+    {
+      // On vérifie si un utilisateur a ce token
+      $user = $usersRepo->findOneBy(['activation_token' => $token]);
+
+      // Si aucun utilisateur n'existe avec ce token
+      if(!$user){
+          // Erreur 404
+          throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
+      }
+      // On supprime le token
+      $user->setActivationToken(null);
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($user);
+      $entityManager->flush();
+
+      // On envoie un message flash
+      $this->addFlash('message', 'Vous avez bien activé votre compte');
+
+      // On retoure à la page de connexion
+      return $this->redirectToRoute('security_login');
+
+    }
     
     /**
-     * @Route("/connexion",name="security_login")
+     * @Route("/login",name="security_login")
      */
     public function login(){
-       
+
+        // $this->addFlash('danger', 'you can\'t have  access to your account , you may be blocked or you didn\'t activate your account yet  ');
+      
         return $this->render('security\login.html.twig');
+ 
      
     }
     /**
@@ -110,6 +190,7 @@ class SecurityController extends AbstractController
            $mailer->send($message);
            //cree msg flash
            $this->addFlash('message', 'you will receive an email with a link to reset your password.');}
+           
            return $this->redirectToRoute('security_login'); 
            //
         

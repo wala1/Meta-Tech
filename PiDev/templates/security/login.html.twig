@@ -33,7 +33,7 @@
     <div class="alert alert-danger" role="alert">
         {{ message }}
     </div>
-{% endfor %}
+{% endfor %} 
     <div class="block-title">
         <strong id="block-customer-login-heading" role="heading" aria-level="2">Registered Customers</strong>
     </div>
@@ -75,6 +75,9 @@
                
            
             </fieldset>
+            <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+    <span>Login with facebook</span>
+</a>
   
     </div>
    

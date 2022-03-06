@@ -121,17 +121,27 @@
         
         {{form_start(form,{'attr':{'novalidate':'novalidate'}} )}}
         <div>
-        {{form_row(form.username,{'label' : 'Name','attr':{'placeholder':'....'}})  }}
+        {{form_row(form.username,{'label' : 'Name','attr':{'placeholder':'username'}})  }}
         </div>
         <div>
-        {{form_row(form.email,{'label' : 'Email','attr':{'placeholder':'....'}} )  }}
+        {{form_row(form.email,{'label' : 'Email','attr':{'placeholder':'username@example.example'}} )  }}
         </div>
         <div>
-        {{form_row(form.password,{'label' : 'Password','attr':{'placeholder':'.....'}})  }}
+        {{form_row(form.password,{'label' : 'Password','attr':{'placeholder':'****************'}})  }}
         </div>
         <div>
-        {{form_row(form.confirm_password,{'label' : 'Confirm Password','attr':{'placeholder':'....'}})  }}
+        {{form_row(form.confirm_password,{'label' : 'Confirm Password','attr':{'placeholder':'****************'}})  }}
         </div>
+        
+         {# <div>
+        {{form_row(form.phoneNumber,{'label' : 'Phone Number','attr':{'placeholder':'....'}})  }}
+        </div> #}
+         <div>
+         <br> 
+         {# <label for="ExampleFormControlInput1"> Are You a Robot </label>  #}
+        {{form_row(form.captchaCode,{'label' : 'Are You a Robot','attr':{'placeholder':'Enter the code'}})  }}
+        </div>
+        
         <button type="submit" class="btn btn-success"> create </button>
 {{form_end(form)}}
      

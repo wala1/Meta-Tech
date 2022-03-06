@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
@@ -22,6 +23,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -33,6 +35,8 @@ class User implements UserInterface
     public function __construct()
     {
         $this->panier = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
+        $this->participants = new ArrayCollection();
         
     }
 
@@ -48,6 +52,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(message = "The email '{{ value }}' is not a valid email.")
      * @Assert\NotNull(message="this field is  required")
+      * @Groups("post:read")
      
      */
     private $email;
@@ -55,6 +60,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="this field is  required")
+      * @Assert\Length(
+     *      min = 3,
+     *      max = 10,
+     *      minMessage = "Your username must be at least {{ limit }} characters long",
+     *      maxMessage = "Your username  cannot be longer than {{ limit }} characters"
+     * )
+      * @Groups("post:read")
+     
      
      */
     private $username;
@@ -63,6 +76,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8",minMessage="Your password must be at least 8 characters")
      * @Assert\NotNull(message="this field is  required")
+           * @Groups("post:read")
+
+    
+     
     
      */
     private $password;
@@ -81,6 +98,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
+      * @Groups("post:read")
      */
     private $Roles = [];
 
@@ -88,6 +106,54 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idUser")
      */
     private $avis;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Calendar::class, inversedBy="participant" ,  cascade={"remove"})
+     * @Groups("post:read")
+     */
+    private $calendar;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Participants::class, mappedBy="user" , cascade={"remove"})
+     */
+    private $participants;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $etat;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $activation_token;
+    protected $captchaCode;
+    /**
+     *  @ORM\column(type="string",length=255,nullable=true)
+     */
+    private $facebookID;
+       /**
+     *  @ORM\column(type="string",length=255,nullable=true)
+     */
+    private $facebookAccessToken;
+  
+  
+
+    // /**
+    //  * @ORM\Column(type="bigint")
+    //   * @Assert\Positive(message="Your phone number cannot be negative")
+    //     * @Assert\Length(
+    //  *      min = 8,
+    //  *      max=10,
+    //  *      minMessage = "The Phone Number should have exactly {{limit}}",
+    //  *      maxMessage = "The Event Title cannot be longer than {{ limit }} characters"
+    //  * )
+     
+
+    
+
+    //  */
+    // private $phoneNumber;
 
     /*public function __construct()
     {
@@ -97,6 +163,14 @@ class User implements UserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    
+    public function setId(int $id): self
+    {
+        $this->id=$id;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -127,10 +201,20 @@ class User implements UserInterface
     {
         return $this->password;
     }
+    public function getConfirm_password(): ?string
+    {
+        return $this->confirm_password;
+    }
 
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+    public function setConfirm_password(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
 
         return $this;
     }
@@ -195,4 +279,123 @@ class User implements UserInterface
         return $this;
     }
 
+    // public function getPhoneNumber(): ?string
+    // {
+    //     return $this->phoneNumber;
+    // }
+
+    // public function setPhoneNumber(string $phoneNumber): self
+    // {
+    //     $this->phoneNumber = $phoneNumber;
+
+    //     return $this;
+    // }
+
+    public function getCalendar(): ?Calendar
+    {
+        return $this->calendar;
+    }
+
+    public function setCalendar(?Calendar $calendar): self
+    {
+        $this->calendar = $calendar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participants[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participants $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $participant->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participants $participant): self
+    {
+        if ($this->participants->removeElement($participant)) {
+            // set the owning side to null (unless already changed)
+            if ($participant->getUser() === $this) {
+                $participant->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+         // return ['ROLE_USER'];
+         $etat = $this->etat;
+         // guarantee every user at least has ROLE_USER
+         $etat = 0;
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+  
+    public function setActivationToken(?string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
+    public function getCaptchaCode()
+    {
+      return $this->captchaCode;
+    }
+  
+    public function setCaptchaCode($captchaCode)
+    {
+      $this->captchaCode = $captchaCode;
+    }
+    public function getFacebookID(): ?string
+    {
+        return $this->facebookID;
+    }
+  // public function setUsername(string $username): self
+    // {
+    //     $this->username = $username;
+
+    //     return $this;
+    // }
+    public function setFacebookID(string $facebookID): self
+    {
+        $this->facebookID= $facebookID;
+        return $this;
+
+        
+    }
+    public function getFacebookAccessToken(): ?string
+    {
+        return $this->facebookAccessToken;
+    }
+
+    public function setFacebookAccessToken(string $facebookAccessToken): self
+    {
+        $this->facebookAccessToken= $facebookAccessToken;
+        return $this;
+
+    }
 }

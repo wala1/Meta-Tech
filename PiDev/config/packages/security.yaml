@@ -15,15 +15,39 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-            provider: in_database 
             
-            form_login:
+             anonymous: true
+             oauth:
+                 resource_owners: 
+                   facebook: "/login/check-facebook"
+                 use_forward: false
+                 login_path: /login
+                 failure_path: /login
+                 oauth_user_provider:
+                   service: my.oauth_aware.user_provider.service
+             provider: in_database 
+            
+             form_login:
                  login_path: security_login
                  check_path: security_login
-            logout:
+             logout:
                  path: security_logout
-                 target: pubFront
+                 target: security_login
+             user_checker: App\Security\UserChecker
+             
+            
+                
+                    
+            
+
+            
+              
+
+
+               
+
+
+                #target: pubFront
             #provider: users_in_memory
 
             # activate different ways to authenticate
@@ -35,8 +59,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+      - { path: ^/connexion , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/connect , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      
         #- { path: ^/admin, roles: ROLE_ADMIN }
         #- { path: ^/profile, roles: ROLE_USER }
+    
     
     role_hierarchy:
         ROLE_CLIENT: ROLE_USER
