@@ -1,48 +1,42 @@
-<!doctype html>
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	<title>Blog</title>
+{% endblock %}
+
+{% block body %}
 
     <div class="table-responsive mb-4">
         
-<body>
-    <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
-<thead>
-<tr>
-    <th >titrePubl</th>
-    <th>date et heure de la publication</th>
-    <th>image</th>
-    <th>Description</th>
-     
-    <th style="width: 80px; min-width: 80px;"></th> 
-</tr>
-</thead>
+        <tbody>
 
-<tbody>
-                          <tr>
-                            <section>
-                                   {#{% for publication in publications %}#}
-                                            <th>   <publication id="descripForm">
-                                                <h2>{{ publication.titrePubl }}</h2> 
-                                            </th> 
-                                            <th>   <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
-                                                    dans la categorie </div></th> 
-                                                    <th> <div class="content">
-                                                    <img src="{{ publication.imagepubl }}" width="300px" alt=""></th>
-                                            <th>  
-                                                        <p>      {{ publication.descriptionPubl }}  </p>
-                                                   
-                                             </th>
-                                                    
-                                                    
-                                                   
-                                                   
-                                            </div>
-                                    </publication>
-                                    
-                            </section>
+            <div class="main-content">
+            
+                    <div class="page-content">
+                            <div class="container-fluid">
+                                    <section>
+                                           {#{% for publication in publications %}#}
+                                            <publication id="descripForm">
+                                                    <h2>{{ publication.titrePubl }}</h2>
+                                                    <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
+                                                            dans la categorie </div>
+                                                    <div class="content">
+                                                            <img src="{{ publication.imagepubl }}" width="300px" alt="">
+                                                            <p>
+                                                                    {{ publication.descriptionPubl }}
+                                                            </p>
+                                                            
+                                                            <br>
+                                                            
+                                                            <br>
+                                                           
+                                                    </div>
+                                            </publication>
+                                            
+                                    </section>
+                            </div>
                     </div>
             </div>
-    </div>
-                            </tr>
-</tbody>
-</table>
-</body>
-    </html>
+            </tbody>
+
+    {% endblock %} 
