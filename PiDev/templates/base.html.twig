@@ -6,17 +6,14 @@
 	<meta
 	http-equiv="content-type" content="text/html;charset=UTF-8"/> <!-- /Added by HTTrack -->
 	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#">
-	     <!-- JAVASCRIPT -->
+	    
+		{% block stylesheets %}
+		<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+		{% endblock %}
+		 <!-- JAVASCRIPT -->
         <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
    
-       
-
-
-
-
-
-
-
+      
 		<script>
 			var BASE_URL = 'https.html\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002F';
 var require = {
@@ -975,18 +972,20 @@ return false;
            and uncomment the following Encore helpers to start using Symfony UX #}
 		   		 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+      
 
-        {# {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}
-        {% endblock %} #}
+      
     </head>
     <body>
-        {% block body %}
-			 
-		{% endblock %}
+        {% block body %}	{% endblock %}
+		   {# {% block javascripts %}
+		  <!-- Flashy depends on jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+          <!-- Load Flashy default JavaScript -->
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+        {% endblock %} 
+		 <!-- Include Flashy default partial -->
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}  #}
 	
     </body>
 		
@@ -1276,10 +1275,7 @@ $(this).addClass("transition");
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
    
-        {% block javascripts %}
-
-		
-		{% endblock %}
+    
 </body><!-- Mirrored from blueskytechmage.com/ohey/en11/anzo-led-headlights-gauge-kit.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 01 Feb 2022 19:00:33 GMT --></html>
 
 

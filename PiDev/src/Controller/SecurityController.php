@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use App\Form\ResetPassType;
 use App\Repository\UserRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
@@ -34,6 +35,7 @@ class SecurityController extends AbstractController
      */
     public function registration(Request $request, EntityManagerInterface $EntityManager,UserPasswordEncoderInterface $encoder , \Swift_Mailer $mailer)
     {
+        //,FlashyNotifier $flashy
         $user =new User();
         $sid="AC2aec24735743905f9787c482c8ab8ad3";
         $token="ad2834aada2b0863970aa5f4016a663f";
@@ -61,12 +63,6 @@ class SecurityController extends AbstractController
             ->setFrom('aalimi.wala@gmail.com')
 
              ->setTo($user->getEmail())
-             
-          
-            //  ->setBody(
-            //     "<p>Bonjour,</p><p>Une demande de réinitialisation de mot de passe a été effectuée . Veuillez cliquer sur le lien suivant :</p>",
-            //     'text/html' ) 
-            //     ;
                ->setBody(
                   $this->renderView(
                'emails\activation.html.twig' ,['token' => $user->getActivationToken()]
@@ -91,6 +87,8 @@ class SecurityController extends AbstractController
             //                  );
 
             $this->addFlash('message', 'you have successfully created your account , check your inbox to validate your email ');
+            // $request->getSession()->getFlash()  ;
+            //          $flashy->getSession()->success('Event created!', 'http://your-awesome-link.com');
 
 
              return $this->redirectToRoute('security_login');
