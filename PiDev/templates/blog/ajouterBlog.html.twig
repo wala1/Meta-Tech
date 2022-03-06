@@ -2,6 +2,14 @@
  
 
 {% block body %}
+
+{#{% for message in app.flashes('info')%}
+<div class="alert alert-success">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {{message}}
+</div>
+  {% endfor %}#}
+
      {{form(form)}}
     
 

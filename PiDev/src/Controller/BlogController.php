@@ -78,6 +78,10 @@ class BlogController extends AbstractController
             $em = $this->getDoctrine()->getManager();
            $em->persist($publication) ; 
             $em->flush() ; 
+           // $this->addFlash(
+           //     'info',
+           //  ' votre publication a été envoyer',  
+          //);
            return $this->redirectToRoute('blog') ; 
         }
         return $this->render('blog/ajouterBlog.html.twig', [
@@ -89,7 +93,7 @@ class BlogController extends AbstractController
 
     
         /**
-         * @Route("/back", name="back")
+         * @Route("/back_blog", name="back_blog")
          */
         public function back(): Response
         {
@@ -104,15 +108,15 @@ class BlogController extends AbstractController
 
 
         /**
-         * @Route("/back_consuler_publ", name="consuler_publ")
+         * @Route("/back_consulter_publ/{id}", name="consulter_publ")
          */
-        public function consulter_Publ_back(): Response
+        public function consulter_Publ_back(int $id): Response
         {
-            $repo = $this->getDoctrine()->getRepository(Publication::class) ; 
-        $publications = $repo->findAll() ; 
+            $publication = $this->getDoctrine()->getRepository(Publication::class)->find($id); 
+        //$publications = $repo->findAll() ; 
 
-        return $this->render('blog/blog.html.twig', [
-            'publications' => $publications
+        return $this->render('blog/consulterBlogback.html.twig', [
+            'publication' => $publication,
         ]);
             
         }
