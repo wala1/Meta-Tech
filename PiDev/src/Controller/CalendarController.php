@@ -325,7 +325,7 @@ public function RefuseEvent(Calendar $calendar)
         $em = $this->getDoctrine()->getManager();
         $em->persist($p);
         $em->flush() ; 
-        return $this->redirectToRoute('event_detail');
+        return $this->redirectToRoute('events_user');
 
     }
 

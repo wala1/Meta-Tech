@@ -29,7 +29,8 @@
                   </div>
                 </div>
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0" style="width: 100%;">
+                  
                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"> {{app.user.username}} </h4>
                     <p class="mb-0">{{app.user.email}}</p>
                     <div class="text-muted"><small>Last seen 2 hours ago</small></div>
@@ -40,7 +41,7 @@
                       </button>
                     </div>
                   </div>
-                  <div class="text-center text-sm-right">
+                <div class="text-center text-sm-right">
                     <span class="badge badge-secondary">Client</span>
                     <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
                   </div>
@@ -80,10 +81,11 @@
                           <div class="col">
                             <div class="form-group">
                               <label>Username</label>
-                              <input class="form-control" type="text" name="username"  value="{{app.user.username}}" disabled>
+                              <input class="form-control" type="text" style="width: 60%;" name="username"  value="{{app.user.username}}" disabled>
                       
                             </div>
-                          </div>
+                          </div> 
+                         
                         {# {# </div>
                          <div class="col">
                             <div class="form-group">
@@ -95,89 +97,75 @@
                         </div> 
                         <div class="row">
                           <div class="col">
+                          
                             <div class="form-group">
                               <label>Email</label>
-                              <input class="form-control" type="text"  value="{{app.user.email}} " disabled>
+                              <input class="form-control" type="text" style="width: 60%;"  value="{{app.user.email}} " disabled>
                             </div>
                           </div>
                         </div>
                       
-                        {# <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Date Of Birth</label>
-                               <input class="form-control" type="text" placeholder="/ / /"> 
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Phone Number</label>
-                              <input class="form-control" type="text" placeholder="+216......"> 
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col mb-3">
-                            <div class="form-group">
-                              <label>About</label>
-                              <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
-                            </div>
-                          </div>
-                        </div> #}
+                      <div class="row">
+                      
                       </div>
+                      </div>
+
+                       
+                      
                     </div>
-                    {# <div class="row">
-                      <div class="col-12 col-sm-6 mb-3">
-                        <div class="mb-2"><b>Change Password</b></div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Current Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>New Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col">
-                            <div class="form-group">
-                              <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                              <input class="form-control" type="password" placeholder="••••••"></div>
-                          </div>
-                        </div>
-                      </div> #}
-                      {# <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                        <div class="mb-2"><b>Keeping in Touch</b></div>
-                        <div class="row">
-                          <div class="col">
-                            <label>Email Notifications</label>
-                            <div class="custom-controls-stacked px-2">
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                                <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                              </div>
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                                <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                              </div>
-                              <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                                <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> #}
+<label>Events</label>  
+
+ <table class="table" style="width:60%;">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"> Event Title</th>
+     <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">actions</th>
+
+     
+
+
+
+    </tr>
+  </thead>
+ {% set nb = 1 %}
+  {% for p in participants %}
+
+{% if app.user.id == p.user.id %}
+  <tbody>
+    <tr>
+    
+      <th scope="row">{{ nb }} </th>
+      <td> {{p.event.title}}</td>
+     <td> {{p.event.start ? p.event.start|date('Y-m-d H:i:s') : '' }}</td>
+     <td> {{p.event.end ? p.event.end|date('Y-m-d H:i:s') : '' }}</td>
+      <td> <div class="dropdown">
+                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="{{path('event_detail',{'id':p.event.id})}}">More Details</a></li>
+                                                    <li><a class="dropdown-item" href="#"> quit</a></li>
+                                                    
+                                                </ul>
+                                            </div>
+					</td>
+
+
+
+
+          {% set nb = nb + 1  %}
+
+     
+    </tr>
+  
+  </tbody>
+   {% endif %}
+{% endfor %}
+</table> 
+                              
                     <div class="row">
                       <div class="col d-flex justify-content-end">
                         <a  href="{{path('edit_account')}}">Edit profile</a>
@@ -188,11 +176,11 @@
                         <a  href="{{path('change_pass')}}">change Password</a>
                       </div>
                     </div>
-                     <div class="col">
+                     {# <div class="col">
                       <div class="row d-flex justify-content-end">
                         <a  href="/eventUser">Events</a>
                       </div>
-                    </div>
+                    </div> #}
                   
 
                 </div>

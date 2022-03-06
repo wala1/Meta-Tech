@@ -60,35 +60,10 @@
                       <div class="col">
 
 
-
-                      {# {{form(passForm)}} #}
-
-
-{# 
-        {{form_start(passForm,{'attr':{'novalidate':'novalidate'}} )}}
-      
-        <div>
-        {{form_row(passForm.password,{'attr':{'placeholder':'.....'}})  }}
-        </div>
-        <div>
-        {{form_row(passForm.confirm_password,{'attr':{'placeholder':'....'}})  }}
-        </div>
-       
-{{form_end(passForm)}} #}
      
                          <form >  
-                        {# <div class="row">
-                  
-
-
-                          <div class="col">
-                            <div class="form-group">
-                              <label for="oldPassword" >Current Password</label>
-                              <input class="form-control" type="password" name="oldPassword"  >
                       
-                            </div>
-                          </div>
-                        </div> #}
+                      
                         {% for message in app.flashes('message') %}
  <div class="col-x54">
   <div class="p-3 my-2 rounded-2 success">{{message}}  </div>

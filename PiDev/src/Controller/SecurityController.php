@@ -75,16 +75,16 @@ class SecurityController extends AbstractController
 
              //////Envoi sms/////////////
            
-            //  $twilio_number = "+18623622028";
-            //  $client = new Client($sid, $token);
-            //   $client->messages->create(
-            //           // Where to send a text message (your cell phone?)
-            //              '++21622407863',
-            //                  array(
-            //                'from' => $twilio_number,
-            //               'body' => 'test'
-            //                     )
-            //                  );
+              $twilio_number = "+18623622028";
+              $client = new Client($sid, $token);
+               $client->messages->create(
+                       // Where to send a text message (your cell phone?)
+                         '++21622407863',
+                             array(
+                           'from' => $twilio_number,
+                          'body' => 'test'
+                                )
+                             );
 
             $this->addFlash('message', 'you have successfully created your account , check your inbox to validate your email ');
             // $request->getSession()->getFlash()  ;

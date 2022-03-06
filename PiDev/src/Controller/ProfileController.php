@@ -23,10 +23,12 @@ class ProfileController extends AbstractController
     /**
      * @Route("/account", name="account")
      */
-    public function index(): Response
+    public function index(ParticipantsRepository $participants): Response
     {
         return $this->render('profile/account.html.twig', [
             'controller_name' => 'ProfileController',
+            'participants' => $participants->findAll()
+
         ]);
     }
 
