@@ -1,658 +1,1550 @@
 {% extends 'base.html.twig' %}
-	
+
 
 {% block body %}
 
- 
-			
 
-<script>require(['jquery','rokanthemes/choose'],function($){'use strict';$("#choose_category").chosen();});</script>
-<script>require(['jquery'],function($){'use strict';$(document).ready(function(){$('.block-search .dropdown-toggle > .top-search').click(function(event){$('.block-search #search_mini_form').slideToggle();$('#search-input-autocomplate').focus();});});});</script>
+
+
+	<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_PageCache/js/form-key-provider": {}
+            }
+        }
+    </script>
+    </head>
+    <body data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader cms-bluesky_ohey_carparts_01 cms-index-index page-layout-1column">
+        <div class="enable-sticky-header"></div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_PageBuilder/js/widget-initializer": {
+                "config": {"[data-content-type=\"slider\"][data-appearance=\"default\"]":{"Magento_PageBuilder\/js\/content-type\/slider\/appearance\/default\/widget":false},"[data-content-type=\"map\"]":{"Magento_PageBuilder\/js\/content-type\/map\/appearance\/default\/widget":false},"[data-content-type=\"row\"]":{"Magento_PageBuilder\/js\/content-type\/row\/appearance\/default\/widget":false},"[data-content-type=\"tabs\"]":{"Magento_PageBuilder\/js\/content-type\/tabs\/appearance\/default\/widget":false},"[data-content-type=\"slide\"]":{"Magento_PageBuilder\/js\/content-type\/slide\/appearance\/default\/widget":{"buttonSelector":".pagebuilder-slide-button","showOverlay":"hover","dataRole":"slide"}},"[data-content-type=\"banner\"]":{"Magento_PageBuilder\/js\/content-type\/banner\/appearance\/default\/widget":{"buttonSelector":".pagebuilder-banner-button","showOverlay":"hover","dataRole":"banner"}},"[data-content-type=\"buttons\"]":{"Magento_PageBuilder\/js\/content-type\/buttons\/appearance\/inline\/widget":false},"[data-content-type=\"products\"][data-appearance=\"carousel\"]":{"Magento_PageBuilder\/js\/content-type\/products\/appearance\/carousel\/widget":false}},
+                "breakpoints": {"desktop":{"label":"Desktop","stage":true,"default":true,"class":"desktop-switcher","icon":"Magento_PageBuilder::css\/images\/switcher\/switcher-desktop.svg","conditions":{"min-width":"1024px"},"options":{"products":{"default":{"slidesToShow":"5"}}}},"tablet":{"conditions":{"max-width":"1024px","min-width":"768px"},"options":{"products":{"default":{"slidesToShow":"4"},"continuous":{"slidesToShow":"3"}}}},"mobile":{"label":"Mobile","stage":true,"class":"mobile-switcher","icon":"Magento_PageBuilder::css\/images\/switcher\/switcher-mobile.svg","media":"only screen and (max-width: 768px)","conditions":{"max-width":"768px","min-width":"640px"},"options":{"products":{"default":{"slidesToShow":"3"}}}},"mobile-small":{"conditions":{"max-width":"640px"},"options":{"products":{"default":{"slidesToShow":"2"},"continuous":{"slidesToShow":"1"}}}}}            }
+        }
+    }
+</script>
+<script>window.logoUrl='https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/logo.svg';window.backgroundUrl='';window.title='';window.description=null;</script>
 <script type="text/x-magento-init">
 {
     "*": {
-        "Magento_Ui/js/core/app": {
-            "components": {
-                "searchsuiteautocomplete_form": {
-                    "component": "MageWorx_SearchSuiteAutocomplete/js/autocomplete"
+        "rokanthemes/ajaxsuite"    : {
+                "loginUrl": "https://blueskytechmage.com/ohey/en11/customer/account/login/",
+                "customerId": "",
+                "ajaxCart" : {
+                    "enabled" : 1,
+                    "actionAfterSuccess" : "popup"
                 },
-                "searchsuiteautocompleteBindEvents": {
-                    "component": "MageWorx_SearchSuiteAutocomplete/js/bindEvents",
-                    "config": {
-                        "searchFormSelector": "#search_mini_form",
-                        "searchButtonSelector": "button.search",
-                        "inputSelector": "#search, #mobile_search, .minisearch .search input[type=\"text\"]",
-                        "searchDelay": "500"
+                "ajaxWishList" : {
+                    "enabled" : 1,
+                    "WishlistUrl": "https://blueskytechmage.com/ohey/en11/ajaxsuite/wishlist/add/"
+                },
+                "ajaxCompare" : {
+                    "enabled" : 1,
+                    "CompareUrl": "https://blueskytechmage.com/ohey/en11/ajaxsuite/compare/add/"
+                }
+            }
+    }
+}
+</script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "rokanthemes/quickview"    : {
+                "quickviewUrl": "https://blueskytechmage.com/ohey/en11/quickview/product/view/",
+                "buttonText": "Quick View",
+                "classInsertPosition": ".actions-secondary",
+                "actionInsert": "append",
+                "isEnabled": "1"
+            }
+    }
+}
+</script>
+
+<div class="cookie-status-message" id="cookie-status">
+    The store will not work correctly in the case when cookies are disabled.</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "cookieStatus": {}
+        }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "mage/cookies": {
+                "expires": null,
+                "path": "\u002Fohey",
+                "domain": ".blueskytechmage.com",
+                "secure": false,
+                "lifetime": "3600"
+            }
+        }
+    }
+</script>
+    <noscript>
+        <div class="message global noscript">
+            <div class="content">
+                <p>
+                    <strong>JavaScript seems to be disabled in your browser.</strong>
+                    <span>
+                        For the best experience on our site, be sure to turn on Javascript in your browser.                    </span>
+                </p>
+            </div>
+        </div>
+    </noscript>
+
+<script>window.cookiesConfig=window.cookiesConfig||{};window.cookiesConfig.secure=true;</script><script>require.config({map:{'*':{wysiwygAdapter:'mage/adminhtml/wysiwyg/tiny_mce/tinymce4Adapter'}}});</script><script>require.config({paths:{googleMaps:'https\u003A\u002F\u002Fmaps.googleapis.com\u002Fmaps\u002Fapi\u002Fjs\u003Fv\u003D3\u0026key\u003D'},config:{'Magento_PageBuilder/js/utils/map':{style:''},'Magento_PageBuilder/js/content-type/map/preview':{apiKey:'',apiKeyErrorMessage:'You\u0020must\u0020provide\u0020a\u0020valid\u0020\u003Ca\u0020href\u003D\u0027https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fadminhtml\u002Fsystem_config\u002Fedit\u002Fsection\u002Fcms\u002F\u0023cms_pagebuilder\u0027\u0020target\u003D\u0027_blank\u0027\u003EGoogle\u0020Maps\u0020API\u0020key\u003C\u002Fa\u003E\u0020to\u0020use\u0020a\u0020map.'},'Magento_PageBuilder/js/form/element/map':{apiKey:'',apiKeyErrorMessage:'You\u0020must\u0020provide\u0020a\u0020valid\u0020\u003Ca\u0020href\u003D\u0027https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fadminhtml\u002Fsystem_config\u002Fedit\u002Fsection\u002Fcms\u002F\u0023cms_pagebuilder\u0027\u0020target\u003D\u0027_blank\u0027\u003EGoogle\u0020Maps\u0020API\u0020key\u003C\u002Fa\u003E\u0020to\u0020use\u0020a\u0020map.'},}});</script>
+
+<script>require.config({shim:{'Magento_PageBuilder/js/utils/map':{deps:['googleMaps']}}});</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- all categorie  -->
+
+
+
+	<script>
+		require([
+'jquery', 'rokanthemes/choose'
+], function ($) {
+'use strict';
+$("#choose_category").chosen();
+});
+	</script>
+	<script>
+		require(['jquery'], function ($) {
+'use strict';
+$(document).ready(function () {
+$('.block-search .dropdown-toggle > .top-search').click(function (event) {
+$('.block-search #search_mini_form').slideToggle();
+$('#search-input-autocomplate').focus();
+});
+});
+});
+	</script>
+	<script type="text/x-magento-init">
+		{
+		    "*": {
+		        "Magento_Ui/js/core/app": {
+		            "components": {
+		                "searchsuiteautocomplete_form": {
+		                    "component": "MageWorx_SearchSuiteAutocomplete/js/autocomplete"
+		                },
+		                "searchsuiteautocompleteBindEvents": {
+		                    "component": "MageWorx_SearchSuiteAutocomplete/js/bindEvents",
+		                    "config": {
+		                        "searchFormSelector": "#search_mini_form",
+		                        "searchButtonSelector": "button.search",
+		                        "inputSelector": "#search, #mobile_search, .minisearch .search input[type=\"text\"]",
+		                        "searchDelay": "500"
+		                    }
+		                },
+		                "searchsuiteautocompleteDataProvider": {
+		                    "component": "MageWorx_SearchSuiteAutocomplete/js/dataProvider",
+		                    "config": {
+		                        "url": "https://blueskytechmage.com/ohey/en11/mageworx_searchsuiteautocomplete/ajax/index/"
+		                    }
+		                }
+		            }
+		        }
+		    }
+		}
+	</script>
+</div>
+
+
+
+
+
+
+
+<!-- popup -->
+
+
+
+
+
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                        "messages": {
+                            "component": "Magento_Theme/js/view/messages"
+                        }
                     }
-                },
-                "searchsuiteautocompleteDataProvider": {
-                    "component": "MageWorx_SearchSuiteAutocomplete/js/dataProvider",
-                    "config": {
-                        "url": "https://blueskytechmage.com/ohey/en11/mageworx_searchsuiteautocomplete/ajax/index/"
+                }
+            }
+    }
+</script>
+</div><div class="columns"><div class="column main"><input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
+        <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#authenticationPopup": {
+                "Magento_Ui/js/core/app": {"components":{"authenticationPopup":{"component":"Magento_Customer\/js\/view\/authentication-popup","children":{"messages":{"component":"Magento_Ui\/js\/view\/messages","displayArea":"messages"},"captcha":{"component":"Magento_Captcha\/js\/view\/checkout\/loginCaptcha","displayArea":"additional-login-form-fields","formId":"user_login","configSource":"checkout"},"amazon-button":{"component":"Amazon_Login\/js\/view\/login-button-wrapper","sortOrder":"0","displayArea":"additional-login-form-fields","config":{"tooltip":"Securely login to our website using your existing Amazon details.","componentDisabled":true}}}}}}            },
+            "*": {
+                "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
+            }
+        }
+    </script>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/section-config": {
+                "sections": {"stores\/store\/switch":["*"],"stores\/store\/switchrequest":["*"],"directory\/currency\/switch":["*"],"*":["messages"],"customer\/account\/logout":["*","recently_viewed_product","recently_compared_product","persistent"],"customer\/account\/loginpost":["*"],"customer\/account\/createpost":["*"],"customer\/account\/editpost":["*"],"customer\/ajax\/login":["checkout-data","cart","captcha"],"catalog\/product_compare\/add":["compare-products"],"catalog\/product_compare\/remove":["compare-products"],"catalog\/product_compare\/clear":["compare-products"],"sales\/guest\/reorder":["cart"],"sales\/order\/reorder":["cart"],"checkout\/cart\/add":["cart","directory-data"],"checkout\/cart\/delete":["cart"],"checkout\/cart\/updatepost":["cart"],"checkout\/cart\/updateitemoptions":["cart"],"checkout\/cart\/couponpost":["cart"],"checkout\/cart\/estimatepost":["cart"],"checkout\/cart\/estimateupdatepost":["cart"],"checkout\/onepage\/saveorder":["cart","checkout-data","last-ordered-items"],"checkout\/sidebar\/removeitem":["cart"],"checkout\/sidebar\/updateitemqty":["cart"],"rest\/*\/v1\/carts\/*\/payment-information":["cart","last-ordered-items","captcha","instant-purchase"],"rest\/*\/v1\/guest-carts\/*\/payment-information":["cart","captcha"],"rest\/*\/v1\/guest-carts\/*\/selected-payment-method":["cart","checkout-data"],"rest\/*\/v1\/carts\/*\/selected-payment-method":["cart","checkout-data","instant-purchase"],"customer\/address\/*":["instant-purchase"],"customer\/account\/*":["instant-purchase"],"vault\/cards\/deleteaction":["instant-purchase"],"multishipping\/checkout\/overviewpost":["cart"],"paypal\/express\/placeorder":["cart","checkout-data"],"paypal\/payflowexpress\/placeorder":["cart","checkout-data"],"paypal\/express\/onauthorization":["cart","checkout-data"],"persistent\/index\/unsetcookie":["persistent"],"review\/product\/post":["review"],"wishlist\/index\/add":["wishlist"],"wishlist\/index\/remove":["wishlist"],"wishlist\/index\/updateitemoptions":["wishlist"],"wishlist\/index\/update":["wishlist"],"wishlist\/index\/cart":["wishlist","cart"],"wishlist\/index\/fromcart":["wishlist","cart"],"wishlist\/index\/allcart":["wishlist","cart"],"wishlist\/shared\/allcart":["wishlist","cart"],"wishlist\/shared\/cart":["cart"],"braintree\/paypal\/placeorder":["cart","checkout-data"],"braintree\/googlepay\/placeorder":["cart","checkout-data"]},
+                "clientSideSections": ["checkout-data","cart-data","chatData"],
+                "baseUrls": ["https:\/\/blueskytechmage.com\/ohey\/en11\/"],
+                "sectionNames": ["messages","customer","compare-products","last-ordered-items","cart","directory-data","captcha","instant-purchase","loggedAsCustomer","persistent","review","wishlist","chatData","recently_viewed_product","recently_compared_product","product_data_storage","paypal-billing-agreement"]            }
+        }
+    }
+</script>
+
+
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/customer-data": {
+                "sectionLoadUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Fsection\u002Fload\u002F",
+                "expirableSectionLifetime": 60,
+                "expirableSectionNames": ["cart","persistent"],
+                "cookieLifeTime": "3600",
+                "updateSessionUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Faccount\u002FupdateSession\u002F"
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/invalidation-processor": {
+                "invalidationRules": {
+                    "website-rule": {
+                        "Magento_Customer/js/invalidation-rules/website-rule": {
+                            "scopeConfig": {
+                                "websiteId": "5"
+                            }
+                        }
                     }
                 }
             }
         }
     }
-}
-</script>                    </div>
+</script>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/","handles":["default","cms_index_index","cms_page_view","cms_index_index_id_bluesky_ohey_carparts_01"],"originalRequest":{"route":"cms","controller":"index","action":"index","uri":"\/ohey\/en11\/"},"versionCookieName":"private_content_version"}        }
+    }
+</script>
 
-
-
-
-
-
-              <!--  publicité 1 "ONLY PRICE -->
-
-
+<!--  publicité 1 "ONLY PRICE -->
 
 
 <div class=" section full-width position-top margin_bottom_0 ">
-<div class="container-fluid">
-<div class="row">
-<div class="col-top-left  col-auto"> 
- 
-<div class="navigation verticalmenu side-verticalmenu">
-	<h3 class="title-category-dropdown"><span class="icon icon-align-left"></span>All categories</h3>    <div class="verticalmenu-html">
-		<ul class="togge-menu list-category-dropdown verticalmenu-list menu" style="display: none;">  
-        <li class="menu-mobile-title d-block d-xl-none"><span class="level-top">All categories</span> <a href="#" id="close-vertical"></a></li>
-			<li class="ui-menu-item level0 classic parent "><div class="open-children-toggle"></div><a href="top-100-bestseller.html" class="level-top">Engine Systems</a><div class="level0 submenu"><div class="row"><ul class="subchildmenu "><li class="ui-menu-item level1 "><a href="top-100-bestseller/brake-discs.html"><span>Brake Discs</span></a></li><li class="ui-menu-item level1 "><a href="top-100-bestseller/door-handles.html"><span>Door Handles</span></a></li></ul></div></div></li><li class="ui-menu-item level0 fullwidth "><a href="interior.html" class="level-top">Interior</a></li><li class="ui-menu-item level0 fullwidth "><a href="performance.html" class="level-top">Performance</a></li><li class="ui-menu-item level0 fullwidth parent "><div class="open-children-toggle"></div><a href="shop.html" class="level-top">Shop</a><div class="level0 submenu"><div class="row"><ul class="subchildmenu col-sm-12 mega-columns columns3"><li class="ui-menu-item level1 parent parent-ul-cat-mega-menu"><div class="open-children-toggle"></div><a class="title-cat-mega-menu" href="shop/electronics.html"><span>Electronics</span></a><ul class="subchildmenu "><li class="ui-menu-item level2 "><a href="shop/electronics/amplifiers.html"><span>Amplifiers</span></a></li><li class="ui-menu-item level2 "><a href="shop/electronics/tools-garage.html"><span>Tools & Garage</span></a></li><li class="ui-menu-item level2 "><a href="shop/electronics/speakers.html"><span>Speakers</span></a></li><li class="ui-menu-item level2 "><a href="shop/electronics/stereos.html"><span>Stereos</span></a></li><li class="ui-menu-item level2 "><a href="shop/electronics/shocks.html"><span>Shocks</span></a></li><li class="ui-menu-item level2 "><a href="shop/electronics/struts.html"><span> Struts</span></a></li></ul></li><li class="ui-menu-item level1 parent parent-ul-cat-mega-menu"><div class="open-children-toggle"></div><a class="title-cat-mega-menu" href="shop/wheels-tires.html"><span>Wheels & Tires</span></a><ul class="subchildmenu "><li class="ui-menu-item level2 "><a href="shop/wheels-tires/amplifiers.html"><span>Amplifiers</span></a></li><li class="ui-menu-item level2 "><a href="shop/wheels-tires/installation-parts.html"><span>Installation Parts</span></a></li><li class="ui-menu-item level2 "><a href="shop/wheels-tires/speakers.html"><span>Speakers</span></a></li><li class="ui-menu-item level2 "><a href="shop/wheels-tires/stereo.html"><span>Stereo</span></a></li><li class="ui-menu-item level2 "><a href="shop/wheels-tires/fog-lights.html"><span>Fog Lights</span></a></li><li class="ui-menu-item level2 "><a href="shop/wheels-tires/headlights.html"><span>Headlights</span></a></li></ul></li><li class="ui-menu-item level1 parent parent-ul-cat-mega-menu"><div class="open-children-toggle"></div><a class="title-cat-mega-menu" href="shop/performace-parts.html"><span>Performace Parts</span></a><ul class="subchildmenu "><li class="ui-menu-item level2 "><a href="shop/performace-parts/air-intake-systems.html"><span>Air Intake Systems</span></a></li><li class="ui-menu-item level2 "><a href="shop/performace-parts/engine-components.html"><span>Engine Components</span></a></li><li class="ui-menu-item level2 "><a href="shop/performace-parts/exhaust-systems.html"><span>Exhaust Systems</span></a></li><li class="ui-menu-item level2 "><a href="shop/performace-parts/performance-chips.html"><span>Performance Chips</span></a></li><li class="ui-menu-item level2 "><a href="shop/performace-parts/components.html"><span>Components</span></a></li><li class="ui-menu-item level2 "><a href="shop/performace-parts/replacement-bulbs.html"><span>Replacement Bulbs</span></a></li></ul></li></ul></div></div></li><li class="ui-menu-item level0 fullwidth "><a href="lighting.html" class="level-top">Lighting</a></li><li class="ui-menu-item level0 fullwidth "><a href="wheels-tires.html" class="level-top">Wheels & Tires</a></li><li class="ui-menu-item level0 fullwidth "><a href="audios-electronic.html" class="level-top">Audios & Electronic</a></li><li class="ui-menu-item level0 fullwidth "><a href="oils-fluids.html" class="level-top">Oils & Fluids</a></li><li class="ui-menu-item level0 fullwidth "><a href="all-categories.html" class="level-top"> Brake Systems</a></li>			<li class="expand-category-link level0">
-				<a href="javascript:void(0);" class="level-top">More categories</a>
-			</li> 
-		</ul>
-	</div>
-</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-top-left  col-auto">
+
+				<div class="navigation verticalmenu side-verticalmenu">
+					<h3 class="title-category-dropdown">
+						<span class="icon icon-align-left"></span>All categories</h3>
+					<div class="verticalmenu-html">
+						<ul class="togge-menu list-category-dropdown verticalmenu-list menu" style="display: none;">
+							<li class="menu-mobile-title d-block d-xl-none">
+								<span class="level-top">All categories</span>
+								<a href="#" id="close-vertical"></a>
+							</li>
+							<li class="ui-menu-item level0 classic parent ">
+								<div class="open-children-toggle"></div>
+								<a href="top-100-bestseller.html" class="level-top">Engine Systems</a>
+								<div class="level0 submenu">
+									<div class="row">
+										<ul class="subchildmenu ">
+											<li class="ui-menu-item level1 ">
+												<a href="top-100-bestseller/brake-discs.html">
+													<span>Brake Discs</span>
+												</a>
+											</li>
+											<li class="ui-menu-item level1 ">
+												<a href="top-100-bestseller/door-handles.html">
+													<span>Door Handles</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="interior.html" class="level-top">Interior</a>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="performance.html" class="level-top">Performance</a>
+							</li>
+							<li class="ui-menu-item level0 fullwidth parent ">
+								<div class="open-children-toggle"></div>
+								<a href="shop.html" class="level-top">Shop</a>
+								<div class="level0 submenu">
+									<div class="row">
+										<ul class="subchildmenu col-sm-12 mega-columns columns3">
+											<li class="ui-menu-item level1 parent parent-ul-cat-mega-menu">
+												<div class="open-children-toggle"></div>
+												<a class="title-cat-mega-menu" href="shop/electronics.html">
+													<span>Electronics</span>
+												</a>
+												<ul class="subchildmenu ">
+													<li class="ui-menu-item level2 ">
+														<a href="shop/electronics/amplifiers.html">
+															<span>Amplifiers</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/electronics/tools-garage.html">
+															<span>Tools & Garage</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/electronics/speakers.html">
+															<span>Speakers</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/electronics/stereos.html">
+															<span>Stereos</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/electronics/shocks.html">
+															<span>Shocks</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/electronics/struts.html">
+															<span>
+																Struts</span>
+														</a>
+													</li>
+												</ul>
+											</li>
+											<li class="ui-menu-item level1 parent parent-ul-cat-mega-menu">
+												<div class="open-children-toggle"></div>
+												<a class="title-cat-mega-menu" href="shop/wheels-tires.html">
+													<span>Wheels & Tires</span>
+												</a>
+												<ul class="subchildmenu ">
+													<li class="ui-menu-item level2 ">
+														<a href="shop/wheels-tires/amplifiers.html">
+															<span>Amplifiers</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/wheels-tires/installation-parts.html">
+															<span>Installation Parts</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/wheels-tires/speakers.html">
+															<span>Speakers</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/wheels-tires/stereo.html">
+															<span>Stereo</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/wheels-tires/fog-lights.html">
+															<span>Fog Lights</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/wheels-tires/headlights.html">
+															<span>Headlights</span>
+														</a>
+													</li>
+												</ul>
+											</li>
+											<li class="ui-menu-item level1 parent parent-ul-cat-mega-menu">
+												<div class="open-children-toggle"></div>
+												<a class="title-cat-mega-menu" href="shop/performace-parts.html">
+													<span>Performace Parts</span>
+												</a>
+												<ul class="subchildmenu ">
+													<li class="ui-menu-item level2 ">
+														<a href="shop/performace-parts/air-intake-systems.html">
+															<span>Air Intake Systems</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/performace-parts/engine-components.html">
+															<span>Engine Components</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/performace-parts/exhaust-systems.html">
+															<span>Exhaust Systems</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/performace-parts/performance-chips.html">
+															<span>Performance Chips</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/performace-parts/components.html">
+															<span>Components</span>
+														</a>
+													</li>
+													<li class="ui-menu-item level2 ">
+														<a href="shop/performace-parts/replacement-bulbs.html">
+															<span>Replacement Bulbs</span>
+														</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="lighting.html" class="level-top">Lighting</a>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="wheels-tires.html" class="level-top">Wheels & Tires</a>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="audios-electronic.html" class="level-top">Audios & Electronic</a>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="oils-fluids.html" class="level-top">Oils & Fluids</a>
+							</li>
+							<li class="ui-menu-item level0 fullwidth ">
+								<a href="all-categories.html" class="level-top">
+									Brake Systems</a>
+							</li>
+							<li class="expand-category-link level0">
+								<a href="javascript:void(0);" class="level-top">More categories</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 
 
-
-
-
-
-
-
-
-
-<script>require(['jquery','rokanthemes/verticalmenu'],function($){$(".verticalmenu").VerticalMenu();$('.title-category-dropdown').click(function(event){$('.navigation.verticalmenu .togge-menu').slideToggle('slow');$(this).toggleClass('active');});$(document).ready(function(){var lenghtLi=$('.navigation.verticalmenu .ui-menu-item.level0').length;var limitItemShow=12;if(lenghtLi>limitItemShow){$('.navigation.verticalmenu .ui-menu-item.level0').each(function(index){if(index>(limitItemShow-1)){$(this).addClass('orther-link');$(this).hide();}});$('.navigation.verticalmenu .expand-category-link').show();$('.navigation.verticalmenu .expand-category-link').on("click",function(){$(this).toggleClass('expanding');$('.navigation.verticalmenu .ui-menu-item.level0.orther-link').slideToggle('slow');});}else{$('.expand-category-link').hide();}var screenWidth=$(window).width();if(screenWidth>1200){if(!$("html").hasClass("vertical-open")){$("html").addClass("vertical-before-open");$(".title-category-dropdown").addClass('active');$('.navigation.verticalmenu .togge-menu').show();setTimeout(function(){$("html").addClass("vertical-open");});}}});$(".title-category-dropdown").click(function(e){if(!$("html").hasClass("vertical-open")){$("html").addClass("vertical-before-open");setTimeout(function(){$("html").addClass("vertical-open");});}else{$("html").removeClass("vertical-open");setTimeout(function(){$("html").removeClass("vertical-before-open");});}});$("#close-vertical").click(function(e){if(!$("html").hasClass("vertical-open")){$("html").addClass("vertical-before-open");setTimeout(function(){$("html").addClass("vertical-open");});}else{$("html").removeClass("vertical-open");setTimeout(function(){$("html").removeClass("vertical-before-open");$("html").removeClass("vertical-open");});}});});</script>
-</div>
-
-
-
-
-<div class="col-top-right  col-auto">	
-
-<div class="section no-full-width slider-wrapper theme-default wrapper-the-blue-sky-slider">
-		<div id="rokanthemes-slidebanner-11">
-			<div class="nivoSlider-loading-page-still-unsuc">
-				<div class="nivoslider-show-loading-in-web d-none d-md-block" style="min-height: 400px;"></div>
-				<div class="nivoslider-show-loading-in-mobile d-block d-md-none" style="min-height: 300px;"></div>
-				<span></span>
+				<script>
+					require([
+'jquery', 'rokanthemes/verticalmenu'
+], function ($) {
+$(".verticalmenu").VerticalMenu();
+$('.title-category-dropdown').click(function (event) {
+$('.navigation.verticalmenu .togge-menu').slideToggle('slow');
+$(this).toggleClass('active');
+});
+$(document).ready(function () {
+var lenghtLi = $('.navigation.verticalmenu .ui-menu-item.level0').length;
+var limitItemShow = 12;
+if (lenghtLi > limitItemShow) {
+$('.navigation.verticalmenu .ui-menu-item.level0').each(function (index) {
+if (index > (limitItemShow - 1)) {
+$(this).addClass('orther-link');
+$(this).hide();
+}
+});
+$('.navigation.verticalmenu .expand-category-link').show();
+$('.navigation.verticalmenu .expand-category-link').on("click", function () {
+$(this).toggleClass('expanding');
+$('.navigation.verticalmenu .ui-menu-item.level0.orther-link').slideToggle('slow');
+});
+} else {
+$('.expand-category-link').hide();
+}
+var screenWidth = $(window).width();
+if (screenWidth > 1200) {
+if (! $("html").hasClass("vertical-open")) {
+$("html").addClass("vertical-before-open");
+$(".title-category-dropdown").addClass('active');
+$('.navigation.verticalmenu .togge-menu').show();
+setTimeout(function () {
+$("html").addClass("vertical-open");
+});
+}
+}
+});
+$(".title-category-dropdown").click(function (e) {
+if (! $("html").hasClass("vertical-open")) {
+$("html").addClass("vertical-before-open");
+setTimeout(function () {
+$("html").addClass("vertical-open");
+});
+} else {
+$("html").removeClass("vertical-open");
+setTimeout(function () {
+$("html").removeClass("vertical-before-open");
+});
+}
+});
+$("#close-vertical").click(function (e) {
+if (! $("html").hasClass("vertical-open")) {
+$("html").addClass("vertical-before-open");
+setTimeout(function () {
+$("html").addClass("vertical-open");
+});
+} else {
+$("html").removeClass("vertical-open");
+setTimeout(function () {
+$("html").removeClass("vertical-before-open");
+$("html").removeClass("vertical-open");
+});
+}
+});
+});
+				</script>
 			</div>
 
 
+			<div class="col-top-right  col-auto">
 
-
-			<div class="container-the-blue-sky-slider nivoSlider">
-                {# <img class="banner-nivo-slider-mobile-and-web no-lazy" title="#htmlcaption33" src="../media/slidebanner/s/l/1.png" alt="Ohey carparts 01"> #}
-<iframe style="min-height:450px;min-width:300px;width:100%;height:100%;" src="https://sketchfab.com/models/d1d8282c9916438091f11aeb28787b66/embed?autostart=1&amp;autospin=-0.1&amp;autostart=1&amp;camera=0&amp;double_click=0&amp;internal=1&amp;max_texture_size=1024&amp;preload=1&amp;scrollwheel=0&amp;sound_enable=0&amp;transparent=1&amp;ui_animations=0&amp;ui_annotations=0&amp;ui_ar=1&amp;ui_ar_help=0&amp;ui_color=white&amp;ui_fadeout=0&amp;ui_fullscreen=0&amp;ui_help=0&amp;ui_infos=0&amp;ui_inspector=0&amp;ui_settings=0&amp;ui_stop=0&amp;ui_theatre=0&amp;ui_theme=dark&amp;ui_vr=0&amp;ui_watermark=0" frameborder="0"    ></iframe>				{# <img class="banner-nivo-slider-mobile-and-web no-lazy" alt="Ohey carparts 01" title="#htmlcaption32" src="../media/slidebanner/s/l/huawei.jpg"/>					 #}
-					</div>
-
-
-						{# {% for pub in pubBack %}
-																					
-									  
-						<div class="container-the-blue-sky-banner-text nivo-html-caption nivo-caption" id="htmlcaption31">
-							<div class="timeline-loading-item" style="-webkit-animation: nivolodinglinetime 40000000ms ease-in-out; -moz-animation: nivolodinglinetime 40000000ms ease-in-out; -ms-animation: nivolodinglinetime 40000000ms ease-in-out; animation: nivolodinglinetime 40000000ms ease-in-out; ">
-							</div>
-							<div class="banner-postion-fixed the-blue-sky-banner-text left_center" >
-							<div class="container"  >
-								<h4 class="animate__animated animate__fadeInUp" style="color:#FFFFFF"> {{  pub.getNomPub()    }}</h4>
-								<h2 class="animate__animated animate__fadeInLeft" style="color:#EC5C0D"> {{  pub.getPromoPub()  }}</h2>
-								<h3 class="animate__animated animate__fadeInRight" style="color:#FFFFFF"> {{  pub.getDescPub()  }}</h3>
-								<p class="animate__animated animate__fadeInDown" style="color:#EC5C0D"> {{  pub.getPrixPub()    }}</p>
-								
-
-								<a href="#" title="Explore Now" class="btn button-style-nivo-slider animate__animated animate__zoomIn" style="color:#222222">Explore Now</a>					
-							</div> 
-						</div >
-						{% endfor %} #}
-
-						
-						{# <div class="container-the-blue-sky-banner-text nivo-html-caption nivo-caption" id="htmlcaption32">
-												<div class="timeline-loading-item" style="-webkit-animation: nivolodinglinetime 40000000ms ease-in-out; -moz-animation: nivolodinglinetime 40000000ms ease-in-out; -ms-animation: nivolodinglinetime 40000000ms ease-in-out; animation: nivolodinglinetime 40000000ms ease-in-out; "></div>
-												<div class="banner-postion-fixed the-blue-sky-banner-text left_center">
-							<div class="container" >
-								<h4 class="animate__animated animate__zoomIn" style="color:#ffffff"> {{ pub.nomPub }}  </h4>
-								<h2 class="animate__animated animate__fadeInLeft" style="color:#EC5C0D">{% if  pub.id == 8  %} {% set test = pub.prixPub %} {{  test    }}</h2>
-								{% endif %}
-								<h3 class="animate__animated animate__fadeInRight" style="color:#ffffff">{% if  pub.id == 8  %} {% set test = pub.descPub %} {{  test    }}</h3>
-								{% endif %}
-								<p class="animate__animated animate__fadeInDown" style="color:#ffffff">{% if  pub.id == 8  %} {{  pub.promoPub    }}</p>
-								{% endif %}
-
-								<a href="#" title="Explore Now" class="btn button-style-nivo-slider animate__animated animate__zoomIn" style="color:#222222">Explore Now</a>							</div> 
-						
-						 #}
-						
-						
+				<div class="section no-full-width slider-wrapper theme-default wrapper-the-blue-sky-slider">
+					<div id="rokanthemes-slidebanner-11">
+						<div class="nivoSlider-loading-page-still-unsuc">
+							<div class="nivoslider-show-loading-in-web d-none d-md-block" style="min-height: 400px;"></div>
+							<div class="nivoslider-show-loading-in-mobile d-block d-md-none" style="min-height: 300px;"></div>
+							<span></span>
 						</div>
-					</div>
 
-					</div>
 
-					
-					
-
-				
-																	
-					
-					
-					{# <div class="container-the-blue-sky-banner-text nivo-html-caption nivo-caption" id="htmlcaption33">
-							<div class="timeline-loading-item" style="-webkit-animation: nivolodinglinetime 40000000ms ease-in-out; -moz-animation: nivolodinglinetime 40000000ms ease-in-out; -ms-animation: nivolodinglinetime 40000000ms ease-in-out; animation: nivolodinglinetime 40000000ms ease-in-out; ">
-							</div>
-						<div class="banner-postion-fixed the-blue-sky-banner-text left_center">
-							<div class="container">
-								<p class="animate__animated animate__fadeInDown" style="color:#ffffff"></p>
-								<h2 class="animate__animated animate__fadeInLeft" style="color:#EC5C0D">3 699,000 DT</h2>
-								<h2 class="animate__animated animate__fadeInRight" style="color:#ffffff"> Samsung Galaxy Z Flip 3</h2>
-								<p class="animate__animated animate__fadeInUp" style="color:#ffffff">Exclusive Offer - 10% Off This Week</p>
-								<a href="#" title="Explore Now" class="btn button-style-nivo-slider animate__animated animate__zoomIn" style="color:#222222">Explore Now</a>	
-							</div> 
-						
+						<div
+							class="container-the-blue-sky-slider nivoSlider">
+							{# <img class="banner-nivo-slider-mobile-and-web no-lazy" title="#htmlcaption33" src="../media/slidebanner/s/l/1.png" alt="Ohey carparts 01"> #}
+							<iframe style="min-height:450px;min-width:300px;width:100%;height:100%;" src="https://sketchfab.com/models/d1d8282c9916438091f11aeb28787b66/embed?autostart=1&amp;autospin=-0.1&amp;autostart=1&amp;camera=0&amp;double_click=0&amp;internal=1&amp;max_texture_size=1024&amp;preload=1&amp;scrollwheel=0&amp;sound_enable=0&amp;transparent=1&amp;ui_animations=0&amp;ui_annotations=0&amp;ui_ar=1&amp;ui_ar_help=0&amp;ui_color=white&amp;ui_fadeout=0&amp;ui_fullscreen=0&amp;ui_help=0&amp;ui_infos=0&amp;ui_inspector=0&amp;ui_settings=0&amp;ui_stop=0&amp;ui_theatre=0&amp;ui_theme=dark&amp;ui_vr=0&amp;ui_watermark=0" frameborder="0"></iframe>
+							{# <img class="banner-nivo-slider-mobile-and-web no-lazy" alt="Ohey carparts 01" title="#htmlcaption32" src="../media/slidebanner/s/l/huawei.jpg"/>					 #}
 						</div>
-					</div> #}
-	</div>
+
+
+								</div>
 	</div>
 
 
-
-
-
-	<script>require(['jquery','rokanthemes/nivoSlider'],function($,nivoSlider){'use strict';$(document).ready(function(){$('#rokanthemes-slidebanner-11 .nivoSlider').nivoSlider({effect:'random',slices:15,boxCols:8,boxRows:4,animSpeed:500,pauseTime:40000000,startSlide:1,directionNav:false,controlNav:false,controlNavThumbs:false,pauseOnHover:false,manualAdvance:false,randomStart:false,beforeChange:function(){},afterChange:function(){},slideshowEnd:function(){},lastSlide:function(){},afterLoad:function(){$('#rokanthemes-slidebanner-11 .nivoSlider-loading-page-still-unsuc').css("display","none");}});});});</script>
+	<script>
+		require([
+'jquery', 'rokanthemes/nivoSlider'
+], function ($, nivoSlider) {
+'use strict';
+$(document).ready(function () {
+$('#rokanthemes-slidebanner-11 .nivoSlider').nivoSlider({
+effect: 'random',
+slices: 15,
+boxCols: 8,
+boxRows: 4,
+animSpeed: 500,
+pauseTime: 40000000,
+startSlide: 1,
+directionNav: false,
+controlNav: false,
+controlNavThumbs: false,
+pauseOnHover: false,
+manualAdvance: false,
+randomStart: false,
+beforeChange: function () {},
+afterChange: function () {},
+slideshowEnd: function () {},
+lastSlide: function () {},
+afterLoad: function () {
+$('#rokanthemes-slidebanner-11 .nivoSlider-loading-page-still-unsuc').css("display", "none");
+}
+});
+});
+});
+	</script>
 </div>
 
 
-	 	
+
+<!--         CHATBOT    -->
+
+
+<script>
+$(document).ready(function() {
+	$('.chat_icon').click(function() {
+		$('.chat_box').toggleClass('active');
+	});
+
+	$('.my-conv-form-wrapper').convform({selectInputStyle: 'disable'})
+});
+
+</script>
 
 
 
+<style>
+/*ChatBot*/
+.chat_icon{
+	position: fixed;
+	bottom: 0;
+	right: 100px;
+	z-index: 1000;
+	padding: 0;
+	font-size: 50px;
+	color: #fdb819;
+	cursor: pointer;
+}
+.chat_box{
+	width: 270px;
+	height: 50vh;
+	position: fixed;
+	bottom: 100px;
+	right: 30px;
+	border-radius: 20px 20px 10px 10px;
+	overflow:hidden;
+	scrollbar-width:none;
+	background:#d6d3ce;
+	z-index: 1000;
+	transition: all 0.3s ease-out;
+	transform: scaleY(0);
+}
+.chat_box.active{
+	transform: scaleY(1);
+}
+#messages{
+	padding: 30px;
+}
+.my-conv-form-wrapper textarea{
+	height: 30px;
+	overflow: hidden;
+	resize: none;
+}
+.hidden{
+	display: none !important;
+}
 
+.chat-container::-webkit-scrollbar {
+   display: none;
+}
+.chat-bar-input-block {
+   display: flex;
+   float: left;
+   box-sizing: border-box;
+   justify-content: space-between;
+   width: 95%;
+   align-items:center;
+   background-color:#faeb98;
+   border-radius: 5px 5px 5px 5px;
+   padding: 10px 10px 10px 10px;
+   margin-left : 5px
+}
+.outer-container {
+   min-height: 350px;
+   bottom: 0%;
+   position: relative;
+   }
+.chat-container {
+   max-height: 500px;
+   width: 100%;
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   scroll-behavior: smooth;
+   hyphens: auto;
+   }
+.chat-container::-webkit-scrollbar {
+    display:none;
+   }
+.chat-bar-icons {
+   display: flex;
+   justify-content: space-evenly;
+   box-sizing: border-box;
+   width: 20%;
+   float: right;
+   font-size: 20px;}
 
+#chat-icon:hover {
+    opacity: .7;
+	}
+#userInput {
+    width: 75%;
+}
+.input-box {
+   float: left;
+   border: none;
+   box-sizing: border-box;
+   width: 100%;
+   border-radius: 10px;
+   padding: 10px;
+   font-size: 26px;
+    color: #000;
+   background-color: white;
+   outline: none
+   }
+.userText {
+   color: white;
+   font-family: Helvetica;
+   font-size: 16px;
+   font-weight: normal;
+   text-align: right;
+   clear: both;}
+.userText span {
+    line-height: 1.5em;
+   display: inline-block;
+   background: #5ca6fa;
+    padding: 10px;
+   border-radius: 8px;
+   border-bottom-right-radius: 2px;
+   max-width: 80%;
+   margin-right: 10px;
+   animation: floatup .5s forwards}
+{# .title {
+    color: #000;
+    font-family: Helvetica;
+    font-weight: 40px;
+    font-size: 16px;
+    text-align: center;} #}
+.botText {
+    color: #000;
+    font-family: Helvetica;
+    font-weight: normal;
+    font-size: 16px;
+    text-align: left;}
+.botText span {
+    line-height: 1.5em;
+    display: inline-block;
+    background: #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    border-bottom-left-radius: 2px;
+    max-width: 80%;
+    margin-left: 10px;
+    animation: floatup .5s forwards}
+.chatLog {
+	margin-top:250px;
+}
+@keyframes floatup {
+    from {
+        transform: translateY(14px);
+        opacity: .0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+	}
+}
+@media screen and (max-width:600px)
+         {   .full-chat-block {
+                  width: 100%; 7.
+                   border-radius: 0px;}
+            .chat-bar-collapsible{
+                   position: fixed;
+                   bottom: 0;
+                   right: 0;
+                  width: 100%;}
+            .collapsible {
+                  width: 100%;
+                   border: Opx;
+                   border-top: 3px solid white;
+				   border-radius:0px;}}
 
+</style>
+<script>
+know = {
 
+	"Hello" : "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Hi ! Tell us how we can help you.",
+	"hello" : "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Hi ! Tell us how we can help you.",
+	"HELLO" : "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Hi ! Tell us how we can help you.",
+	"Who are you?" : "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp I am  me",
+	"How are you" : "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp I am Fine"
+};
 
+function talk(){
+	var user = document.getElementById("textInput").value;
+	document.getElementById("textInput").value= "";
+	document.getElementById("chatLog").innerHTML += user+"<br>";
+	if (user in know){
+		document.getElementById("chatLog").innerHTML += know[user] + "<br>" ;
+    } else {
+		document.getElementById("chatLog").innerHTML += "I don't understand.. <br>";
+	}
 
+}
+</script>
+<!-- ChatBot -->
+<div class="chat_icon">
+	<i class="fa fa-comments" aria-hidden="true"></i>
+</div>
 
+<div class="chat_box">
+<div id="chatLog"  class="outer-container">
+    <div class="chat-container">
+         <!-- Messages -->
+         <div id="chatbox">
+             <h5 id="chat-timestamp" ></h5>
+         </div>
+         <!-- User input box -->
+		       <center>      <h5 style="margin-bottom:250px ;background:#fdb819;color:#fff;padding:5px;">CHATBOT</h5></center> 
 
+<div> 
+<div class="chat-bar-input-block">
+		<p id="chatLog"></p>
+        <input id="textInput" class="input-box" type="text" name="msg"  placeholder="Tap 'Enter' to send a message"  onkeydown="if(event.keyCode == 13){talk()}">
+   <i id="chat-icon" style="color: crimson	;" class="fa fa-fw fa-heart"
+     onclick="heartButton()"></i>   <i id="chat-icon" style="color: #1b149c;" class="fa fa-fw fa-send"
+    onclick="sendButton()"></i></div>
+</div>
+	<div id="chat-bar-bottom">
+	<p></p>
+		</div>
 
-                                                     <!--  publicité 2  "CUSTOM WHEELS" -->
-
-
-
+	
+</div>	</div>
+        
  
+
+	
+</div> 
+
+
+
+	</div>
+</div>
+
+
+
+
+
+
+
+{# <select id="select_currency" onchange="myFunction(this.value)" >
+	<option value="TND">TND</option>
+	<option value="EUR">EUR</option>
+	<option value="USD">USD</option>
+</select>
+
+ #}
+
+<!--  publicité 2  "CUSTOM WHEELS" -->
+
+
 
 <div class="section full-width ">
 
-  <div class="container-fluid">
-     <div>
-      <div class="banner section carparts-banertop owl-carousel owl-theme" data-items="3" data-bigdesktop="3" data-smalldesktop="3" data-bigtablet="3" data-tablet="2" data-smalltablet="2" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
-		{# <div class="col-banner absolute-content-image lazyload-content   left center">
-				<div class="banner-img left center"><img  src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/bn3_2.jpg" alt="">
+	<div class="container-fluid">
+		<div>
+						<div class="rokan-title">
+									<h3 class="module-title"><span>New Products Coming Soon</span></h3>
+				 
+				 
+			</div> 
+		 
+			<div
+				class="banner section carparts-banertop owl-carousel owl-theme" data-items="3" data-bigdesktop="3" data-smalldesktop="3" data-bigtablet="3" data-tablet="2" data-smalltablet="2" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
+				{# <div class="col-banner absolute-content-image lazyload-content   left center">
+								<div class="banner-img left center"><img  src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/bn3_2.jpg" alt="">
+							</div>
+						  
+							<div class="content">
+							<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;"></h5>
+							<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;"></h4>
+				  	 	 <div class=" btn "><a class="size-14" style="color: #ffffff;" href="#"></a>
+				         </div>
+				        </div>
+				
+				</div> #}
+				{% for pub in pubBack %}
+					{% if pub.id == 4 or pub.id == 5 or pub.id == 6 %}
+
+						<div class="col-banner absolute-content-image lazyload-content   left center">
+							<div class="banner-img left center"><img src="" data-src="{{pub.getImagePub()}}" alt="">
+							</div>
+							<div class="content">
+								<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{  pub.getNomPub()    }}</h5>
+								 <h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;"> New Product</h4> 
+								{# <div class=" btn ">
+									<a class=" size-14" style="color: #ffffff;" href="#">{{  pub.getPrixPub()    }}</a>
+								</div> #}
+							</div>
+						</div>
+					{% endif %}
+
+				{% endfor %}
+
 			</div>
-		  
-			<div class="content">
-			<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;"></h5>
-			<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;"></h4>
-  	 	 <div class=" btn "><a class="size-14" style="color: #ffffff;" href="#"></a>
-         </div>
-        </div>
+		</div>
 
-</div> #}
+
+		<!--Best Deals  Of The Week! (Produits) -->
+
+
+		<div>
+			<div class="section hot-deal-tab-slider hot-deal-tab-slider-customcss section-product    ">
+				<div class="rokan-title">
+					<div class="supper-deal-title flex-layout center">
+						<h3 class="title-deal module-title">
+							<span>Best Deals  Of The Week!</span>
+						</h3>
+						<div class="right-deal flex-layout center_vertical no-wrap-desktop">
+							<span class="sub-title-deal hidden-xs">End in</span>
+							<div class="super-deal-countdown" data-date="03/13/2022"></div>
+						</div>
+					</div>
+				</div>
+				<div class="products wrapper grid products-grid">
+					<div class="products list items product-items owl-carousel owl-theme" data-rtl="false" data-items="4" data-bigdesktop="5" data-smalldesktop="4" data-bigtablet="4" data-tablet="3" data-smalltablet="2" data-mobile="2" data-margin="30" data-loop="true" data-center="false" data-mousedrag="true" data-touchdrag="true" data-stagepadding="1" data-nav="true" data-navnext="" data-navprev="" data-rewind="true" data-dots="false" data-autoplay="false" data-speed="500">
+
+
 						{% for pub in pubBack %}
+							{% if pub.produit != null 	%}
 
-<div class="col-banner absolute-content-image lazyload-content   left center">
-  <div class="banner-img left center"><img src="" data-src="{{pub.getImagePub()}}" alt="">
-  </div>
-    <div class="content">
-<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{  pub.getNomPub()    }}</h5>
-<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;">{{  pub.getPromoPub()    }}</h4>
-        <div class=" btn "><a class=" size-14" style="color: #ffffff;" href="#">{{  pub.getPrixPub()    }}</a>
-        </div>
-    </div>
-</div>
+								<div class="item-load group-rows-fixed-supper-deal item-row">
+									<div class="item product product-item">
+										<div class="product-item-info">
+											<div class="product-item-inner">
+												<a href="afe-bladerunner-turbocharger.html" class="product photo product-item-photo" tabindex="-1">
+													<span class="image0 image-switch product-image-container">
+														<img class="product-image" src="" data-src="{{pub.produit.imageProd}}" width="550" height="550" alt="AFe – BladeRunner Turbocharger">
+													</span>
+												</a>
+												<div class="product actions product-item-actions">
+													<div data-role="add-to-links" class="actions-secondary">
+														<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
+															<span>Wish List</span>
+														</a>
+														<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
+															<span>Add to Compare</span>
+														</a>
+													</div>
+													<div class="actions-primary">
+														<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/91/" method="post">
+															<input type="hidden" name="product" value="91">
+															<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkxLw,,">
+															<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>
+															<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
+																<span>Add to Cart</span>
+															</button>
+														</form>
+													</div>
+												</div>
+											</div>
+
+											<div class="product details product-item-details">
+												<strong class="product name product-item-name">
+													<a class="product-item-link" href="afe-bladerunner-turbocharger.html">
+														{{pub.produit.nom_prod}}
+													</a>
+												</strong>
+												<div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
+													<div class="rating-summary">
+														<span class="label">
+															<span>{{pub.produit.ratingProd}}</span>
+														</span>
+														<div class="rating-result" title="100%">
+															<span style="width:100%"></span>
+														</div>
+													</div>
+													<div class="reviews-actions">
+														<a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
+															<span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
+															<span>Review</span>
+														</a>
+														<a class="action add" href="afe-bladerunner-turbocharger.html#review-form">Add Your Review</a>
+													</div>
+												</div>
+
+												<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
+
+
+													<span class="price-container price-final_price&#x20;tax&#x20;weee">
+														<span data-price-amount="900" data-price-type="finalPrice" class="price-wrapper ">
+															<span class="price" id="currency">{{pub.produit.prix_prod}} DT </span>
+															{# <span style="display:none;" id="oldPrice">{{ pub.produit.prix_prod }}</span> #}
+														</span>
+													</span>
+
+												</div>
+												{# <div class="product-sold">
+													<div class="ruler-sold">
+														<div class="ruler-sold-count" style="width: 0.4%;"></div>
+													</div>
+													<div class="count-sold-available">
+														<div class="count-sold">
+															Promo:
+															<span>
+																{{pub.produit.promo_prod}}
+															</span>
+														</div>
+
+													</div>
+												</div> #}
+
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endif %}
 						{% endfor %}
 
-{# <div class="col-banner absolute-content-image lazyload-content   left center">
-<div class="banner-img left center"><img src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/xload_defaut.png.pagespeed.ic.KZZplq6wrg.png" data-src="https://blueskytechmage.com/ohey/media/wysiwyg/bn3_2.jpg" alt=""></div>
-<div class="content">
-<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Brake System</h5>
-<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;">Off 40% Today</h4>
-<div class=" btn "><a class=" size-14" style="color: #ffffff;" href="#">Shop Now</a>
-</div>
-</div>
-</div> #}
-</div>
-</div>
 
 
 
-<!--Best Deals  Of The Week! (Produits) -->
 
+						<div class="ruler-sold">
+							<div class="ruler-sold-count" style="width: 0.16666666666667%;"></div>
+						</div>
+						<div class="count-sold-available">
+							<div class="count-sold">
+								Sold:
+								<span>
+									1/599
+								</span>
+							</div>
 
-<div><div class="section hot-deal-tab-slider hot-deal-tab-slider-customcss section-product    ">
-			<div class="rokan-title">
-			<div class="supper-deal-title flex-layout center">
-				<h3 class="title-deal module-title"><span>Best Deals  Of The Week!</span></h3>	
-				    <div class="right-deal flex-layout center_vertical no-wrap-desktop">
-					<span class="sub-title-deal hidden-xs">End in</span>			
-					<div class="super-deal-countdown" data-date="02/23/2022"></div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
-		<div class="products wrapper grid products-grid">
-		<div class="products list items product-items owl-carousel owl-theme" data-rtl="false" data-items="4" data-bigdesktop="5" data-smalldesktop="4" data-bigtablet="4" data-tablet="3" data-smalltablet="2" data-mobile="2" data-margin="30" data-loop="true" data-center="false" data-mousedrag="true" data-touchdrag="true" data-stagepadding="1" data-nav="true" data-navnext="" data-navprev="" data-rewind="true" data-dots="false" data-autoplay="false" data-speed="500"> 
+	</div>
+</div></div></div><script>require([
+"jquery", 'mage/mage', 'rokanthemes/timecircles', "rokanthemes/owl"
+], function ($) {
+'use strict';
+$(document).ready(function () {
+if ($('.super-deal-countdown').length > 0) {
+$(".super-deal-countdown").TimeCircles({
+fg_width: 0.01,
+bg_width: 1.2,
+text_size: 0.07,
+circle_bg_color: "#ffffff",
+time: {
+Days: {
+show: true,
+text: "D",
+color: "#f9bc02"
+},
+Hours: {
+show: true,
+text: "H",
+color: "#f9bc02"
+},
+Minutes: {
+show: true,
+text: "M",
+color: "#f9bc02"
+},
+Seconds: {
+show: true,
+text: "S",
+color: "#f9bc02"
+}
+}
+});
+}
+});
+});</script></div><!-- Publicity and events --><div><div class="banner section banner-middle owl-carousel owl-theme" data-items="2" data-bigdesktop="2" data-smalldesktop="2" data-bigtablet="2" data-tablet="2" data-smalltablet="1" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">{# {% if pub.coupon1 != null and pub.coupon1.id == 1	%} #}{# <div class="col-banner absolute-content-image lazyload-content left center">
+	
+	<div class="banner-img left center"><img src="" data-src="" alt=""></div>
+	<div class="content">
+	<h5 class="size-14" style="color: #fdb819; text-transform: uppercase; font-weight: bold;">Buy From Us &amp; Get Your</h5>
+	<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Galaxy Z Fold 2</h4>
+	<h2 class="size-46" style="color: #ffffff; font-weight: bold;">Up To <span style="color: #fdb819;">-70%</span></h2>
+	<div class=" btn "><a href="#">Shop Now</a></div>
+	</div>
+	</div> #}
+
+{% for pub in pubBack %}
+	{% if pub.calender != null 	%}
+		<div class="col-banner absolute-content-image lazyload-content left center"> <div class="banner-img left center"><img src="" data-src="{{ pub.calender.imageEvent }}" alt=""></div>
+		<div class="content">
+			<h5 class="size-14" style="color: #ffffff; text-transform: uppercase; font-weight: bold;"></h5>
+			{# <h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{ pub.calender.title }}</h4> #}
+			<h2 class="size-46" style="color: #ffffff; font-weight: bold;">{{ pub.calender.description }}<span style="color: #ffffff;"></span>
+			</h2>
+			<div class=" btn ">
+				<a href="#">Participate Now</a>
+			</div>
+		</div>
+	</div>
+{% endif %}{% endfor %}</div></div></div></div>
 
 
 
 
+<div><div class="section wrapper_sub_category_tabs container_vertical_tab_postions onlyparent" id="category_thumb2118171699">
+<div class="category-thumb-section"><div class="rokan-title  ">
+<h3 class="module-title">
+<span>Shop More Deparments</span></h3></div>
 
-		{% for pub in pubBack %}
-		  {% if pub.produit != null 	%}  
-		
-		<div class="item-load group-rows-fixed-supper-deal item-row">			
-			<div class="item product product-item">
-					<div class="product-item-info">
-						<div class="product-item-inner">
-							<a href="afe-bladerunner-turbocharger.html" class="product photo product-item-photo" tabindex="-1">
-								<span class="image0 image-switch product-image-container">
-									<img class="product-image" src="" data-src="{{pub.produit.imageProd}}"  width="550" height="550" alt="AFe – BladeRunner Turbocharger">
-								</span>
-															</a>
-								<div class="product actions product-item-actions">
-								<div data-role="add-to-links" class="actions-secondary">
-								<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
-											<span>Wish List</span>
-										</a>
-									<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
-										<span>Add to Compare</span>
-									</a>
-								</div>
-								<div class="actions-primary">
-									<form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/91/" method="post">
-											<input type="hidden" name="product" value="91">
-											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkxLw,,">
-											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
-												<span>Add to Cart</span>
-											</button>
-										</form>
-								</div>
-							</div>
-						</div>
-					
-						<div class="product details product-item-details">	
-							<strong class="product name product-item-name">
-								<a class="product-item-link" href="afe-bladerunner-turbocharger.html">
-											{{pub.produit.nom_prod}}		</a>
-							</strong>	
-							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
-                <div class="rating-summary">
-             <span class="label"><span>{{pub.produit.ratingProd}}</span></span>
-             <div class="rating-result" title="100%">
-                 <span style="width:100%">
-                 </span>
-             </div>
-         </div>
-                <div class="reviews-actions">
-            <a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
-                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
-                <span>Review</span>
-            </a>
-            <a class="action add" href="afe-bladerunner-turbocharger.html#review-form">Add Your Review</a>
-        </div>
-    </div>
-							
-							<div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">
-    
-
-<span class="price-container price-final_price&#x20;tax&#x20;weee">
-        <span data-price-amount="900" data-price-type="finalPrice" class="price-wrapper "><span class="price">{{pub.produit.prix_prod}}</span></span>
-        </span>
-
-</div>														<div class="product-sold">
-																<div class="ruler-sold">
-									<div class="ruler-sold-count" style="width: 0.4%;">
-									</div>
-								</div>
-								<div class="count-sold-available">
-									<div class="count-sold">
-										Promo:										<span>
-										{{pub.produit.promo_prod}}								</span>
-									</div>
-									
-								</div>
-															</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>		
-{% endif %}
-{% endfor %}
-
-				{# <div class="item-load group-rows-fixed-supper-deal item-row">	
-							<div class="item product product-item">
-					<div class="product-item-info">
-						<div class="product-item-inner">
-							<a href="anzo-led-headlights-gauge-kit.html" class="product photo product-item-photo" tabindex="-1">
-								<span class="image0 image-switch product-image-container">
-									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/a/n/anzo_led_headlights_gauge_kit_1_1.jpg" width="550" height="550" alt="Anzo – LED Headlights Gauge Kit">
-								</span>
-															</a>
-														<div class="product-label">
-								<span class="onsale">
-									<span class="value">67%</span>
-								</span>
-							</div>
-														<div class="product actions product-item-actions">
-								<div data-role="add-to-links" class="actions-secondary">
-																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":92,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
-											<span>Wish List</span>
-										</a>
-																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"92","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
-										<span>Add to Compare</span>
-									</a>
-								</div>
-								<div class="actions-primary">
-																													<form data-role="tocart-form" data-product-sku="CP03" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/92/" method="post">
-											<input type="hidden" name="product" value="92">
-											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkyLw,,">
-											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
-												<span>Add to Cart</span>
-											</button>
-										</form>
-																	</div>
-							</div>
-						</div> 
-					
-
-						<div class="product details product-item-details">	
-							<strong class="product name product-item-name">
-								<a class="product-item-link" href="anzo-led-headlights-gauge-kit.html">
-									Anzo – LED Headlights Gauge Kit								</a>
-							</strong>	
-							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
-                <div class="rating-summary">
-             <span class="label"><span>Rating:</span></span>
-             <div class="rating-result" title="100%">
-                 <span style="width:100%">
-                 </span>
-             </div>
-         </div>
-                <div class="reviews-actions">
-            <a class="action view" href="anzo-led-headlights-gauge-kit.html#reviews">
-                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
-                <span>Review</span>
-            </a>
-            <a class="action add" href="anzo-led-headlights-gauge-kit.html#review-form">Add Your Review</a>
-        </div>
-    </div>
-							
-							<div class="price-box price-final_price" data-role="priceBox" data-product-id="92" data-price-box="product-id-92">
-    <span class="special-price">
-        
-
-<span class="price-container price-final_price&#x20;tax&#x20;weee">
-            <span class="price-label">Special Price</span>
-        <span data-price-amount="100" data-price-type="finalPrice" class="price-wrapper "><span class="price">$100.00</span></span>
-        </span>
-    </span>
-    <span class="old-price">
-        
-
-<span class="price-container price-final_price&#x20;tax&#x20;weee">
-            <span class="price-label">Regular Price</span>
-        <span data-price-amount="300" data-price-type="oldPrice" class="price-wrapper "><span class="price">$300.00</span></span>
-        </span>
-    </span>
-
-</div>														<div class="product-sold">
-																<div class="ruler-sold">
-									<div class="ruler-sold-count" style="width: 0.16666666666667%;">
-									</div>
-								</div>
-								<div class="count-sold-available">
-									<div class="count-sold">
-										Sold:										<span>
-											1/599										</span>
-									</div>
-									
-								</div>
-															</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>		
-			
-				<div class="item-load group-rows-fixed-supper-deal item-row">	
-							<div class="item product product-item">
-					<div class="product-item-info">
-						<div class="product-item-inner">
-							<a href="bosal-catalytic-converter-gauge-kit.html" class="product photo product-item-photo" tabindex="-1">
-								<span class="image0 image-switch product-image-container">
-									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/b/o/bosal_catalytic_converter_gauge_kit_1_1.jpg" width="550" height="550" alt="Bosal – Catalytic Converter Gauge Kit">
-								</span>
-															</a>
-														<div class="product actions product-item-actions">
-								<div data-role="add-to-links" class="actions-secondary">
-																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":93,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
-											<span>Wish List</span>
-										</a>
-																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"93","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
-										<span>Add to Compare</span>
-									</a>
-								</div>
-								<div class="actions-primary">
-																													<form data-role="tocart-form" data-product-sku="CP04" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/93/" method="post">
-											<input type="hidden" name="product" value="93">
-											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0LzkzLw,,">
-											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
-												<span>Add to Cart</span>
-											</button>
-										</form>
-																	</div>
-							</div>
-						</div>
-					
+<div class="widget-tabs">
+{# {% if pub.id == 8 or pub.id == 9 or pub.id == 7 %}  	  #}
+<ul>{% for pub in pubBack %}
+{% if pub.id == 7 or pub.id == 8 or pub.id == 9 or pub.id == 10 %}
+{# {% if pub.id == 10 %} #}
+		<li>	<a href="shop/wheels-tires/fog-lights.html" class="vertical absolute-content-image lazyload-content">
+<figure><img alt="" class="vertical" src="" data-src="{{ pub.getImagePub() }}"/></figure>
+<span class="thumb-infor">
+	<span class="cate-name cate-count">
+		<span class="cate_name">{{  pub.getNomPub()    }}</span>
+	</span>
+</span></a></li>
+														
+{% endif %}	{% endfor %}															
+	</ul></div></div></div></div>
+																
+																
+						<!-- Newwww Arrival -->
 						
-						<div class="product details product-item-details">	
-							<strong class="product name product-item-name">
-								<a class="product-item-link" href="bosal-catalytic-converter-gauge-kit.html">
-									Bosal – Catalytic Converter Gauge Kit								</a>
-							</strong>	
-							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
-                <div class="rating-summary">
-             <span class="label"><span>Rating:</span></span>
-             <div class="rating-result" title="100%">
-                 <span style="width:100%">
-                 </span>
-             </div>
-         </div>
-                <div class="reviews-actions">
-            <a class="action view" href="bosal-catalytic-converter-gauge-kit.html#reviews">
-                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
-                <span>Review</span>
-            </a>
-            <a class="action add" href="bosal-catalytic-converter-gauge-kit.html#review-form">Add Your Review</a>
-        </div>
-    </div>
-		<div class="price-box price-final_price" data-role="priceBox" data-product-id="93" data-price-box="product-id-93">
-    
+	
+<div class="section full-width ">
+<div class="rokan-title  ">
+			<h3 class="module-title"><span>New arrival</span></h3>					
+		    </div>
+	<div class="container-fluid">
+		<div>
+			<div
+				class="banner section carparts-banertop owl-carousel owl-theme" data-items="3" data-bigdesktop="3" data-smalldesktop="3" data-bigtablet="3" data-tablet="2" data-smalltablet="2" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
 
-<span class="price-container price-final_price&#x20;tax&#x20;weee">
-        <span data-price-amount="300" data-price-type="finalPrice" class="price-wrapper "><span class="price">$300.00</span></span>
-        </span>
+				
+				{% for pub in pubBack %}
+					{% if pub.id == 11 or pub.id == 12 or pub.id == 13 %}
 
-</div>														<div class="product-sold">
-																<div class="ruler-sold">
-									<div class="ruler-sold-count" style="width: 0.16666666666667%;">
-									</div>
-								</div>
-								<div class="count-sold-available">
-									<div class="count-sold">
-										Sold:										<span>
-											1/599										</span>
-									</div>
-									
-								</div>
-															</div>
-							
-						</div>
-					</div>
-				</div>
-			</div>		
-			
-				<div class="item-load group-rows-fixed-supper-deal item-row">	
-							<div class="item product product-item">
-					<div class="product-item-info">
-						<div class="product-item-inner">
-							<a href="braum-elite-x-sport-seats.html" class="product photo product-item-photo" tabindex="-1">
-								<span class="image0 image-switch product-image-container">
-									<img class="product-image" src="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/Rokanthemes_OptimizeSpeed/images/load_defaut.png" data-src="https://blueskytechmage.com/ohey/media/catalog/product/cache/5e88459b35ae20c16798fc8a6ca041ca/b/r/braum_elite-x_sport_seats_gauge_kit_1_1.jpg" width="550" height="550" alt="Braum – Elite-X Sport Seats ">
-								</span>
-															</a>
-														<div class="product-label">
-								<span class="onsale">
-									<span class="value">56%</span>
-								</span>
+						<div class="col-banner absolute-content-image lazyload-content   left center">
+							<div class="banner-img left center"><img src="" data-src="{{pub.getImagePub()}}" alt="">
 							</div>
-														<div class="product actions product-item-actions">
-								<div data-role="add-to-links" class="actions-secondary">
-																			<a href="#" class="action towishlist" title="" aria-label="Add to Wish List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":94,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' data-action="add-to-wishlist" role="button">
-											<span>Wish List</span>
-										</a>
-																											<a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"94","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8,"}}' role="button">
-										<span>Add to Compare</span>
-									</a>
-								</div>
-								<div class="actions-primary">
-																													<form data-role="tocart-form" data-product-sku="CP05" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS8%2C/product/94/" method="post">
-											<input type="hidden" name="product" value="94">
-											<input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOCUyQy9wcm9kdWN0Lzk0Lw,,">
-											<input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>											<button type="submit" title="Add&#x20;to&#x20;Cart" class="action tocart primary">
-												<span>Add to Cart</span>
-											</button>
-										</form>
-																	</div>
+							<div class="content">
+								<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{  pub.getNomPub()    }}</h5>
+								<h4 class="size-28 margin_0" style="color: #fdb819; text-transform: capitalize; font-weight: bold;">{{  pub.getPromoPub()    }}</h4>
+
 							</div>
 						</div>
+					{% endif %}
+
+				{% endfor %}
+
+			</div>
+		</div>
+
+
+
+ <div>	<div class="widget box-section block-recent-posts section">
+				<div class="rokan-title ">
+			<h3 class="module-title"><span>Latest Blog Posts</span></h3>
+			<div class="rokan-description blog-description">
+				<p></p>
+			</div>
+		</div>
+ 
+ 
+
+
+<div class="section full-width testimo_wrapper"><section class="testimo-slider" style="background-image: url(../media/bgtesti_1.jpg);">
+	<div class="container">
+					<div class="rokan-title">
+									<h3 class="module-title"><span>What Client Says</span></h3>
+				 
+				 
+			</div> 
+		 
+		<div class="pt-testimonial-container">
+				
+			<div class="owl-carousel owl-theme" data-rtl="false" data-items="1" data-bigdesktop="1" data-smalldesktop="1" data-bigtablet="1" data-tablet="1" data-smalltablet="1" data-mobile="1" data-margin="" data-loop="false" data-center="false" data-mousedrag="true" data-touchdrag="true" data-stagepadding="1" data-nav="false" data-navnext="" data-navprev="" data-rewind="true" data-dots="false" data-autoplay="true" data-speed="500"> 
 					
-
-						<div class="product details product-item-details">	
-							<strong class="product name product-item-name">
-								<a class="product-item-link" href="braum-elite-x-sport-seats.html">
-									Braum – Elite-X Sport Seats 								</a>
-							</strong>	
-							        <div class="product-reviews-summary" itemscope itemtype="http://schema.org/AggregateRating">
-                <div class="rating-summary">
-             <span class="label"><span>Rating:</span></span>
-             <div class="rating-result" title="100%">
-                 <span style="width:100%">
-                 </span>
-             </div>
-         </div>
-                <div class="reviews-actions">
-            <a class="action view" href="braum-elite-x-sport-seats.html#reviews">
-                <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
-                <span>Review</span>
-            </a>
-            <a class="action add" href="braum-elite-x-sport-seats.html#review-form">Add Your Review</a>
-        </div>
-    </div>
-							
-							<div class="price-box price-final_price" data-role="priceBox" data-product-id="94" data-price-box="product-id-94">
-    <span class="special-price">
-        
-
-<span class="price-container price-final_price&#x20;tax&#x20;weee">
-            <span class="price-label">Special Price</span>
-        <span data-price-amount="200" data-price-type="finalPrice" class="price-wrapper "><span class="price">$200.00</span></span>
-        </span>
-    </span>
-    <span class="old-price">
-        
-
-<span class="price-container price-final_price&#x20;tax&#x20;weee">
-            <span class="price-label">Regular Price</span>
-        <span data-price-amount="450" data-price-type="oldPrice" class="price-wrapper "><span class="price">$450.00</span></span>
-        </span>
-    </span>
-
-</div>														<div class="product-sold"> #}
-														
-														
-														
-			<div class="ruler-sold">
-			<div class="ruler-sold-count" style="width: 0.16666666666667%;">
-									</div>
-								</div>
-								<div class="count-sold-available">
-									<div class="count-sold">
-										Sold:										<span>
-											1/599										</span>
-									</div>
-									
-								</div>
-															</div>
-							
-						</div>
+								<div class="item-load group-rows-fixed-testimonial">				<div class="pt-testimonial">
+					<div class="content-tes flex-layout center_vertical center">			
+						<a href="testimonial/index.html" class="image"><img alt="Mayssa Mejri" src="../assets_pub/may.jpg"/></a>		
+						<div class="des">
+							A lot of companies have chosen to downsize, and maybe that was the right thing for them. We chose a different path. Our belief was that if we kept putting great products in front of customers, they would continue to open their wallets.''						</div> 
+						<div class="info"><a href="testimonial/index.html" class="name flex-layout center_vertical"><span class="name">Mayssa Mejri </span><span class="job"><span class="line">/</span>Developers</span></a></div>
 					</div>
+					
 				</div>
-			</div>		
-			</div>
-			</div>
+					</div>					
+								<div class="item-load group-rows-fixed-testimonial">				<div class="pt-testimonial">
+					<div class="content-tes flex-layout center_vertical center">			
+						<a href="testimonial/index.html" class="image"><img alt="Wala Alimi" src="../assets_pub/wala.png"/></a>		
+						<div class="des">
+							We've recently updated our entire product portfolio to give customers and partners the best products with the newest technology. Come see our expanded award-winning product line.''						</div> 
+						<div class="info"><a href="testimonial/index.html" class="name flex-layout center_vertical"><span class="name">Wala Alimi </span><span class="job"><span class="line">/</span>Developers</span></a></div>
+					</div>
+					
+				</div>
+					</div>	
+								<div class="item-load group-rows-fixed-testimonial">				<div class="pt-testimonial">
+					<div class="content-tes flex-layout center_vertical center">			
+						<a href="testimonial/index.html" class="image"><img alt="Oumaima Ayachi" src="../assets_pub/ouma.jpg"/></a>		
+						<div class="des">
+							
+						You can’t wait for customers to come to you. You have to figure out where they are, go there and bring them back to your store.''						</div> 
+						<div class="info"><a href="testimonial/index.html" class="name flex-layout center_vertical"><span class="name">Oumaima Ayachi </span><span class="job"><span class="line">/</span>Developers</span></a></div>
+					</div>
+					
+				</div>
+					</div>		
+								<div class="item-load group-rows-fixed-testimonial">				<div class="pt-testimonial">
+					<div class="content-tes flex-layout center_vertical center">			
+						<a href="testimonial/index.html" class="image"><img alt="Abdelaziz Makhlouf" src="../assets_pub/abdo.jpg"/></a>		
+						<div class="des">
+						You must be very patient, very persistent. The world isn’t going to shower gold coins on you just because you have a good idea. You’re going to have to work like crazy to bring that idea to the attention of people. They’re not going to buy it unless they know about it.''						</div> 
+						<div class="info"><a href="testimonial/index.html" class="name flex-layout center_vertical"><span class="name">Abdelaziz Makhlouf </span><span class="job"><span class="line">/</span>Developers</span></a></div>
+					</div>
+					
+				</div>
+					</div>						
+								<div class="item-load group-rows-fixed-testimonial">				<div class="pt-testimonial">
+					<div class="content-tes flex-layout center_vertical center">			
+						<a href="testimonial/index.html" class="image"><img alt="MohamedArbi Bacha" src="../assets_pub/bacha.jpg"/></a>		
+						<div class="des">
+							Our business is about technology, yes. But it’s also about operations and customer relationships.''						</div> 
+						<div class="info"><a href="testimonial/index.html" class="name flex-layout center_vertical"><span class="name">MohamedArbi Bacha</span><span class="job"><span class="line">/</span>Developers</span></a></div>
+					</div>
+					
+				</div>
+					</div>											</div>
+					</div>
+	</div>
+</section></div>
+ 
+ 
+
+
+			
+ <div class="section full-width">
+<div class="container">
+<div class="block-widget-rokanthemes-brand section">
+		<div class="block-content">
+		<div class="owl-carousel owl-theme" data-rtl="false" data-items="6" data-bigdesktop="6" data-smalldesktop="5" data-bigtablet="4" data-tablet="4" data-smalltablet="3" data-mobile="2" data-margin="30" data-loop="true" data-center="false" data-mousedrag="true" data-touchdrag="true" data-stagepadding="1" data-nav="false" data-navnext="" data-navprev="" data-rewind="true" data-dots="false" data-autoplay="true" data-speed="1200">
+								        
+							{% for pub in pubBack %}
+							{% if pub.sponsor != null 	%}	
+										    <div class="item-load item-row-slider-brand"> 
+	            					<div class="brand-item">
+						<div class="brand-image"><a href="#" title="Brand 1"><img src="{{pub.sponsor.LogoSponsor}}" alt="Brand 1"/></a></div>
+											</div>
+									            </div>
+	            					{% endif %}
+									{% endfor %}	
+	            								</div>
+	</div>
 </div>
-<script>require(["jquery",'mage/mage','rokanthemes/timecircles',"rokanthemes/owl"],function($){'use strict';$(document).ready(function(){if($('.super-deal-countdown').length>0){$(".super-deal-countdown").TimeCircles({fg_width:0.01,bg_width:1.2,text_size:0.07,circle_bg_color:"#ffffff",time:{Days:{show:true,text:"D",color:"#f9bc02"},Hours:{show:true,text:"H",color:"#f9bc02"},Minutes:{show:true,text:"M",color:"#f9bc02"},Seconds:{show:true,text:"S",color:"#f9bc02"}}});}});});</script>
-</div>
-
-
-         <!-- Publicity and events -->
-
-
-<div>
-  
-   <div class="banner section banner-middle owl-carousel owl-theme" data-items="2" data-bigdesktop="2" data-smalldesktop="2" data-bigtablet="2" data-tablet="2" data-smalltablet="1" data-mobile="1" data-margin="30" data-loop="true" data-center="false" data-stagepadding="" data-nav="false" data-navnext="" data-navprev="" data-dots="true" data-autoplay="false" data-mousedrag="false" data-touchdrag="true">
-
-   {# {% if pub.coupon1 != null and pub.coupon1.id == 1	%} #}
-{# <div class="col-banner absolute-content-image lazyload-content left center">
-
-<div class="banner-img left center"><img src="" data-src="" alt=""></div>
-<div class="content">
-<h5 class="size-14" style="color: #fdb819; text-transform: uppercase; font-weight: bold;">Buy From Us &amp; Get Your</h5>
-<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">Galaxy Z Fold 2</h4>
-<h2 class="size-46" style="color: #ffffff; font-weight: bold;">Up To <span style="color: #fdb819;">-70%</span></h2>
-<div class=" btn "><a href="#">Shop Now</a></div>
-</div>
-</div> #}
-
-{% for pub in pubBack %}  
- {% if pub.calender != null 	%}  
-<div class="col-banner absolute-content-image lazyload-content left center">
-<div class="banner-img left center"><img src="" data-src="{{ pub.calender.imageEvent }}" alt=""></div>
-<div class="content">
-<h5 class="size-14" style="color: #ffffff; text-transform: uppercase; font-weight: bold;"></h5>
-<h4 class="size-32" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{ pub.calender.title }}</h4>
-<h2 class="size-46" style="color: #ffffff; font-weight: bold;">{{ pub.calender.description }}<span style="color: #ffffff;"> </span></h2>
-<div class=" btn "><a href="#">Inscrit Now</a></div>
-</div>
-</div>
-{% endif %}
-{% endfor %}
-</div></div>
-</div>
 </div>
 
 
 
 
+{# 
+<script>
+	function myFunction(value) {
+		const settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "https://exchangerate-api.p.rapidapi.com/rapid/latest/TND",
+			"method": "GET",
+			"headers": {
+				"x-rapidapi-host": "exchangerate-api.p.rapidapi.com",
+				"x-rapidapi-key": "c739891e54msh628b9ee19abc52ep153420jsn9b386ba85875"
+			}
+		};
 
-{% endblock %}
+		$.ajax(settings).done(function (response) {
+			const x = document.getElementById('select_currency').value  ;
+			rate = response["rates"][x] ;
+			oldPrice = document.getElementById('oldPrice').innerHTML ; 
+			document.getElementById('currency').innerHTML = oldPrice*rate ; 
+			console.log(oldPrice*rate) ; 
+		});
+
+		 
+	}
+
+</script> #}
+{# 
+
+
+
+   <div class="popup">
+        <button id="close">&times;</button>
+        <h2>This Is The Title</h2>
+        <p style='color: #000000'>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+			<div class=" btn ">
+				<a href="#">Participate Now</a>
+			</div>    </div>
+    <!--Script-->
+    <script src="script.js"></script>
+
+<style>
+	
+
+.popup{
+    background-color: #ffffff;
+    width: 450px;
+	    height: 350px;
+
+    padding: 30px 40px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 20%;
+    top: 30%;
+    border-radius: 5px;
+    font-family: "Poppins",sans-serif;
+    display: none;
+    text-align: center;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+*    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup p{
+    font-size: 14px;
+    text-align: justify;
+    margin: 20px 0;
+    line-height: 25px;
+}
+
+	
+	</style>
+
+
+
+
+<script>
+window.addEventListener("load", function(){
+    setTimeout(
+        function open(event){
+            document.querySelector(".popup").style.display = "block";
+        },
+        1000
+    )
+});
+
+
+document.querySelector("#close").addEventListener("click", function(){
+    document.querySelector(".popup").style.display = "none";
+});
+
+
+
+</script> #}
+{# 
+
+<div class="popup-screen">
+      <div class="popup-box">
+        <i class="fas fa-times close-btn"></i>
+        <h2>Popup Box</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <a href="#" class="btn">Subscribe</a>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+    const popupScreen = document.querySelector(".popup-screen");
+    const popupBox = document.querySelector(".popup-box");
+    const closeBtn = document.querySelector(".close-btn");
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        popupScreen.classList.add("active");
+      }, 2000); //Popup the screen in 02 seconds after the page is loaded.
+    });
+
+    closeBtn.addEventListener("click", () => {
+      popupScreen.classList.remove("active"); //Close the popup screen on click the close button.
+      //Create a cookie for a day (to expire within a day) on click the close button.
+      document.cookie = "WebsiteName=testWebsite; max-age=" + 24 * 60 * 60; //1 day = 24 hours = 24*60*60
+    });
+
+    //Use the created cookie to hide or show the popup screen.
+    const WebsiteCookie = document.cookie.indexOf("WebsiteName=");
+
+    if(WebsiteCookie != -1){
+      popupScreen.style.display = "none"; //Hide the popup screen if the cookie is not expired.
+    }
+    else{
+      popupScreen.style.display = "flex"; //Show the popup screen if the cookie is expired.
+    }
+    </script>
+
+
+   <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+
+.popup-screen{
+  z-index: 999999;
+  position: fixed;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  transition: 0.5s ease;
+  transition-property: visibility;
+}
+
+.popup-screen.active{
+  visibility: visible;
+}
+
+.popup-box{
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  max-width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 5px 25px rgb(0 0 0 / 20%);
+  transform: scale(0);
+  transition: 0.5s ease;
+  transition-property: transform;
+}
+
+.popup-screen.active .popup-box{
+  transform: scale(1);
+}
+
+.popup-box h2{
+  font-size: 2.1em;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.popup-box p{
+  font-size: 1em;
+  margin-bottom: 30px;
+}
+
+.popup-box .btn{
+  color: #fff;
+  background: red;
+  font-size: 1.1em;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 7px 27px;
+  border-radius: 3px;
+}
+
+.close-btn{
+  position: absolute;
+  font-size: 1em;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s ease;
+  transition-property: opacity;
+}
+
+.close-btn:hover{
+  opacity: 1;
+}
+
+section{
+  padding: 50px 100px;
+}
+
+.home{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.info{
+  position: relative;
+  width: 52%;
+}
+
+.info h2{
+  font-size: 2em;
+  font-weight: 800;
+}
+
+.info p{
+  font-size: 1em;
+  text-align: justify;
+  margin-top: 10px;
+}
+
+@media (max-width: 990px){
+  section{
+    padding: 50px 30px;
+  }
+
+  .home{
+    display: block;
+  }
+
+  .info{
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+	</style> #}
+
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "storage-manager": {
+                            "component": "Magento_Catalog/js/storage-manager",
+                            "appendTo": "",
+                            "storagesConfiguration" : {"recently_viewed_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"recently_compared_product":{"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"lifetime":"1000","allowToSendRequest":null},"product_data_storage":{"updateRequestConfig":{"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/rest\/en11\/V1\/products-render-info"},"requestConfig":{"syncUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product\/frontend_action_synchronize\/"},"allowToSendRequest":null}}                        }
+                    }
+                }
+            }
+        }
+</script>
+<div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper">
+    <a id="ajaxsuite-close" class="ajaxsuite-close"></a>
+    <div id="ajaxsuite-popup-content"></div>
+</div>
+<div class="quickview-popup-wrapper" id="quickview-popup-wrapper">
+    <a id="quickview-close" class="quickview-close"></a>
+    <div id="quickview-popup-content"></div>
+</div>
+<div data-url="https://blueskytechmage.com/ohey/en11/themeoption/fakeorder/getitem/" id="purchase-fake-order" data-seconds-hide="5" data-seconds-displayed="10" class="purchase-order fadeInUp animated hidden-xs" style="display: none;">
+	<a class="purchase-close" href="javascript:void(0);"></a>
+	<div class="product-purchase"></div>
+</div>
+</div>    <script>require(["jquery"],function($){require(["rokanthemes/lazyloadimg"],function(lazy){$("img[data-src]").lazy({"bind":"event","attribute":"data-src",visibleOnly:true,threshold:0,enableThrottle:true,throttle:500,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});$(document).ready(function($){var win=$(window);$(".owl-carousel").on("translated.owl.carousel",function(event){var bounds=$(this).offset();var viewport={top:win.scrollTop(),left:win.scrollLeft()};viewport.bottom=viewport.top+win.height();if(viewport.bottom>bounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var new_url=$(this).attr("data-src");$(this).attr("src",new_url);$(this).removeAttr("data-src");$(this).addClass("lazy-loaded");$(this).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(this).addClass("transition");},1000);}});},1000);});});});</script></body>
+
+
+
+ {% endblock %}

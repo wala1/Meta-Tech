@@ -30,12 +30,21 @@ class AddUserType extends AbstractType
            
             ->add('confirm_password', PasswordType::class)
             // ->add('phoneNumber')
+            ->add('age')
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                  'Femme' => 'F',
+                  'Homme' => 'H'
+                    
+                ]
+            ])
             ->add('Add', SubmitType::class,[
                 'attr' => [
                     'class'=>'btn btn-success waves-effect waves-light'
                 ]
             ])
          
+
           
         ;
     }

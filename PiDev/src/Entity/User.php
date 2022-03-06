@@ -103,6 +103,17 @@ class User implements UserInterface
      */
     private $calendars;
 
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $age;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $gender;
+
     // /**
     //  * @ORM\Column(type="bigint")
     //   * @Assert\Positive(message="Your phone number cannot be negative")
@@ -174,6 +185,32 @@ class User implements UserInterface
 
         return $this;
     }
+
+
+    public function getAge(): ?string
+    {
+        return $this->age;
+    }
+
+    public function setAge(string $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(string $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
     public function eraseCredentials(){}
     public function getSalt(){}
     public function getRoles(): ?array 
@@ -204,6 +241,7 @@ class User implements UserInterface
 
         return $this;
     }
+    
 
     /**
      * @return Collection|Avis[]
@@ -273,5 +311,7 @@ class User implements UserInterface
 
         return $this;
     }
+
+
 
 }

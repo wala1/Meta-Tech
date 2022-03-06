@@ -96,4 +96,28 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('liste_utilisateurs');
        }
 
-    }
+   
+
+                      /*************   STATISTIQUE GENDER ***********/
+
+        /**
+     * @Route("/dashboard", name="dashboard")
+     */ 
+    public function  dashboard(UserRepository $user) {
+       
+       $users = $user ->findAll();
+       $gender =[];
+       $age = [];
+       
+       foreach($users as $user){
+        $gender[] = $user->getGender();
+        $age[] = $user->getAge();
+
+        return $this->render("admin/dashbaord.html.twig", [
+            'gender' => Json_encode($gender),
+            'age' => json_encode($gender),
+                ]);
+     
+     
+         }  }
+        }

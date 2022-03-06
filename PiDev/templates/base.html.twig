@@ -18,6 +18,32 @@ var require = {
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<meta name="format-detection" content="telephone=no"/>
 		<title>Anzo – LED Headlights Gauge Kit</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+<link rel=="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+
+{# <!-- ChatBot -->
+<link rel="stylesheet" type="text/css" href="css/jquery.convform.css">
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/pages/jquery.convform.js"></script>
+
+
+
+ #}
+
+
+
+
+
 		<link rel="stylesheet" type="text/css" media="all" href="../static/version1640184821/_cache/merged/A.2efa3b95489a4189897749220a92fce0.min.css.pagespeed.cf._5GLoYDEdJ.css"/>
 		<link rel="stylesheet" type="text/css" media="print" href="../static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/css/A.print.min.css.pagespeed.cf.vxbaswDj2V.css"/>
 		<script type="text/javascript" src="../static/version1640184821/_cache/merged/af9d47abda4bdb126168e1a73fa371ad.min.js"></script>
@@ -278,13 +304,14 @@ setCookie("shownewsletter", '0', 1)
 
 								
    {% for pub in pubBack %}  
-   {% if pub.coupon1 != null and pub.coupon1.id == 1	%}  
+    {% if pub.coupon1 != null 	%}   
 <div class="typewriter">
-		<p> -20% EN + Code :  {{ pub.coupon1.codeCoup }}</p>
-		
+		{# <p> -20% EN + Code :  {{random(pub.coupon1.codeCoup)}}</p> #}
+		<p> -20% EN + Code :  {{random (['MM004', '123MM', 'Livai28', 'mika33', 'FJRH415', 'Wala22', 'Ouma54']) }}</p>
+
 		
 </div>	
-{% endif %} 
+ {% endif %} 
  {% endfor %}    
 <style>
 .typewriter p {
@@ -327,14 +354,14 @@ p {
   text-align: center;
   font-size: 20px;
   margin-top: 0px;
-  color:#fdb819;
+  color:#ffffff;
 }
 </style>
 	<p id="demo"></p>
 
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Feb 23, 2022").getTime();
+var countDownDate = new Date("Mars 09, 2022").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -366,7 +393,7 @@ var x = setInterval(function() {
 
 									<div class="col-right flex-layout center_vertical">
 										<div class="contact-store hidden-sm">
-											<a href="store-locator.html">
+											<a href="{{path('storelocator')}}">
 												Find a Store</a>
 										</div>
 										<div class="language-currency">
@@ -768,7 +795,7 @@ $('#search-input-autocomplate').focus();
 														<div class="row">
 															<ul class="subchildmenu ">
 																<li class="ui-menu-item level2 ">
-																	<a href="store-locator/index.html">Store Locator</a>
+																	<a href="#">Store Locator</a>
 																</li> 
 															</ul>
 														</div>
@@ -783,7 +810,9 @@ $('#search-input-autocomplate').focus();
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="about-us/index.html">About us</a>
 												</li>
-
+												<li class="ui-menu-item level0 classic ">
+													<a class="level-top" href="{{path('news')}}">News</a>
+												</li>
 												<li class="my_account_link_custom ui-menu-item level0 classic">
 													<a href="customer/account/index.html" title="My Account" class="level-top">My Account</a>
 												</li>
