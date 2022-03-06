@@ -16,6 +16,10 @@
 <link rel="canonical" href="/eventFront"/>
 <link rel="icon" type="image/x-icon" href="../media/favicon/stores/15/xThumbnail.png.pagespeed.ic.HrbBfqaLqh.png"/>
 <link rel="shortcut icon" type="image/x-icon" href="../media/favicon/stores/15/xThumbnail.png.pagespeed.ic.HrbBfqaLqh.png"/>
+<link rel="stylesheet" href="bootstrap.css" />
+
+
+
         <link rel="stylesheet" type="text/css" media="all" href="../media/rokanthemes/theme_option/A.custom_en11.css%2cqv%3d1630588925.pagespeed.cf.jzGk9q1GFf.css">    <script type="text/x-magento-init">
         {
             "*": {
@@ -23,6 +27,7 @@
             }
         }
     </script>
+
       		 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
 
         {% block stylesheets %}
@@ -36,6 +41,7 @@
     </head>
     <body data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader blog-page blog-page-list blog-index-index page-layout-2columns-left">
         <div class="enable-sticky-header"></div>
+
 
 <script type="text/x-magento-init">
     {
@@ -749,6 +755,10 @@
             "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/","handles":["default","blog_index_index","blog_index_index_id_"],"originalRequest":{"route":"blog","controller":"index","action":"index","uri":"\/ohey\/en11\/blog"},"versionCookieName":"private_content_version"}        }
     }
 </script>
+        {# <!-- Include bootstrap & jQuery -->
+<link rel="stylesheet" href="bootstrap.css" />
+<script src="jquery-3.3.1.min.js"></script>
+<script src="bootstrap.js"></script> #}
 
         <div class="post-list-wrapper">
                 <ul class="blog-list-post">
@@ -793,16 +803,15 @@
 					
 				</div>
 			</div>
-            <div class="post-bottom">
-				<div class="flex-layout center">
-					<a class="post-read-more btn" href="#" title="#">
-						Read more					</a>
-					
-				</div>
+            <div >
+				  <button class = "btn btn-primary" onclick="loadData(this.getAttribute('data-id'));" data-id="{{cal.id}} ">
+                Details
+            </button>
 			</div>
 		</div>
 	</div>
-</li>      
+</li>   
+
 {% endif %}
    {% endfor %}                     
 
@@ -945,7 +954,42 @@
             </div>
 </div>
 
-</div></div></main><footer class="page-footer"><div id="focus-area"></div>
+</div></div></main>
+// <!-- Modal -->
+// <div class = "modal fade" id = "myModal" tabindex = "-1" role = "dialog" aria-hidden = "true">
+    
+//    <div class = "modal-dialog">
+//       <div class = "modal-content">
+          
+//          <div class = "modal-header">
+//             <h4 class = "modal-title">
+//                Customer Detail
+//             </h4>
+ 
+//             <button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">
+//                ×
+//             </button>
+//          </div>
+          
+//          <div id = "modal-body">
+//             Press ESC button to exit.
+//          </div>
+          
+//          <div class = "modal-footer">
+//             <button type = "button" class = "btn btn-default" data-dismiss = "modal">
+//                OK
+//             </button>
+//          </div>
+          
+//       </div><!-- /.modal-content -->
+//    </div><!-- /.modal-dialog -->
+    
+// </div><!-- /.modal -->   
+
+
+
+
+<footer class="page-footer"><div id="focus-area"></div>
 <div id="back-top" class=""><i class="icon icon-chevrons-up"></i></div>
 <div class="footer-container enable-mobile-menu layout-9">
 	<div class="footer-top">
@@ -1059,6 +1103,9 @@ But you can also contact us:</p>
             }
         }
 </script>
+<!-- Include bootstrap & jQuery -->
+<script src="jquery-3.3.1.min.js"></script>
+<script src="bootstrap.js"></script>
 <div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper">
     <a id="ajaxsuite-close" class="ajaxsuite-close"></a>
     <div id="ajaxsuite-popup-content"></div>

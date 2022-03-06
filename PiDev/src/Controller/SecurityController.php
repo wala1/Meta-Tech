@@ -90,6 +90,8 @@ class SecurityController extends AbstractController
             //                     )
             //                  );
 
+            $this->addFlash('message', 'you have successfully created your account , check your inbox to validate your email ');
+
 
              return $this->redirectToRoute('security_login');
             
@@ -133,6 +135,8 @@ class SecurityController extends AbstractController
      * @Route("/login",name="security_login")
      */
     public function login(){
+
+        // $this->addFlash('danger', 'you can\'t have  access to your account , you may be blocked or you didn\'t activate your account yet  ');
       
         return $this->render('security\login.html.twig');
  

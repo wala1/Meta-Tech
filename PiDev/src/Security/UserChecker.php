@@ -3,6 +3,8 @@
 
 
 namespace App\Security ;
+// namespace Symfony\Component\Security\Core\Exception;
+
 use App\Entity\User as AppUser;
 
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
@@ -17,19 +19,23 @@ class UserChecker implements UserCheckerInterface
  {
 public function checkPreAuth(UserInterface $user)
 {
-  if(!$user instanceof AppUser){
-      return;
-  }
- if ( $user->getEtat() ==1 )
- {
-//    throw new CustomUserMessageAuthenticationException("Your account is not activated yet , check your email to activate your account");
- throw new \Exception("Your account is blocked");
+    if(!$user instanceof AppUser){
+        return;
+    }
+   if ( $user->getEtat() ==1 )
+   {
+    //throw new CustomUserMessageAccountStatusException("Your account is not activated yet , check your email to activate your account");
 
- }
- if ( $user->getActivationToken()!=NULL)
- {
-//    throw new CustomUserMessageAuthenticationException("you did not activate your account yet");
-     throw new \Exception("Your account is not activated yet , check your email to activate your account");
+     throw new CustomUserMessageAuthenticationException("Your account is not activated yet , check your email to activate your account");
+   //throw new \Exception("Your account is blocked");
+  
+   }
+   if ( $user->getActivationToken()!=NULL)
+   {
+   // throw new CustomUserMessageAccountStatusException("you did not activate your account yet");
+
+   throw new CustomUserMessageAuthenticationException("you did not activate your account yet");
+      // throw new \Exception("Your account is not activated yet , check your email to activate your account");
 
  }
 
