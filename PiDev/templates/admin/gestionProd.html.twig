@@ -1,10 +1,21 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block title %}
-	<title>Ajouter Produit</title>
+
+    {% if table=="produits" %}
+        <title>Products</title>
+    {% elseif table=="categories" %}
+        <title>Categories</title>
+    {% elseif table=="souscategories" %}
+        <title>SubCategories</title>
+    {% endif %}
+	
 {% endblock %}
 
 {% block body %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 
 
             
@@ -26,6 +37,7 @@
     
                         <!-- =========================== TABLE PRODUITS =====================================-->
                         {% if table=="produits" %}
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -34,6 +46,15 @@
                                             <a href="{{ path('ajouter_produit')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
                                                 Add Product
                                             </a>
+                                            <a href="{{ path('produit_pdf')}} " type="button" class="btn btn-success waves-effect  waves-light" style="background-color : green ; border  : green ; "> 
+                                                <span>
+                                                    <i class="mdi mdi-download   font-size-14"></i> &nbsp; 
+                                                        Download PDF
+                                                </span>
+                                            </a>
+
+ 
+
                                             <!--a href="{{ path('admin_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
                                                 Categories
                                             </a>
@@ -41,14 +62,29 @@
                                                 Sous Categories
                                             </a-->
 
-                                        <p class="card-title-desc"> 
-                                        </p>
+                                            <center>
+                                                <table style="margin : 30px ; ">
+                                                    <tr>
+                                                        <td>
+                                                            <center>
+                                                                <canvas id="myChartSub" style="width:100%; width:500px ;"></canvas>
+                                                            </center>
+                                                        </td>
+                                                        <td>
+                                                            <center>
+                                                                <canvas id="myChart" style="width:100%;max-width:200px"></canvas>
+                                                            </center>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </center>
+
                                     </div>
                                     <div class="card-body">
 
 
 
-                                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                                             <thead>
                                             <tr style="font-size : 16px">
                                                 <th>Image</th>
@@ -70,7 +106,7 @@
                                             
                                             {% for produit in produits %}
                                             <tr style="font-weight:bold ; color : black ">
-                                                <td><img style="width:100px ; height:100px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" src="{{produit.imageProd}}"></td>
+                                                <td><img style="width:80px ; height:80px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" src="{{produit.imageProd}}"></td>
                                                 <td >{{ produit.nomProd }}</td>
                                                 <td>{{ produit.descProd }}</td>
                                                 <td>{{ produit.prixProd }}</td>
@@ -134,7 +170,7 @@
 
                                         <center>
                                         <div style="width : 60% ; ">
-                                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100" >
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap w-100" >
                                             <thead>
                                                 <tr style="font-size : 16px">
                                                     <th>ID</th> 
@@ -215,7 +251,7 @@
 
                                         <center>
                                         <div style="width : 60% ; ">    
-                                            <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                            <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                                                 <thead>
                                                 <tr style="font-size : 16px">
                                                     <th>ID</th>
@@ -280,18 +316,180 @@
 
 
 
+
+
+
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
 
 
-
-
-
  
 
-<div class='sk-ww-twitch-live-videos' data-embed-id='74211'></div>
-<script src='https://widgets.sociablekit.com/twitch-live-videos/widget.js' async defer></script>
+
+<!-- ===================== CATEGORIES ============================-->
+{% if categories is defined and sous_categories is defined %}
+    {% set categ_table = [] %}
+    {% for categorie in categories %}
+        {% set categ_table = categ_table|merge([categorie.nomCategorie]) %}
+        
+    {% endfor %}
+    
+
+    {% set categ_count = [] %}
+    {% for s in categories %}
+        {% set number = 0 %}
+        {% for produit in produits %}
+
+            
+            {% if produit.categorie_prod  == s %}
+                {% set number = number + 1 %}        
+            {% endif %}
+            
+
+        {% endfor %}
+        {% set categ_count = categ_count|merge([number]) %}
+    {% endfor %}
+
+    {% set categ_count = categ_count|merge([0]) %}
+
+
+    <div style="display:none" id="tab_test" > 
+        {{ categ_table|json_encode() }}
+    </div>
+
+    <div style="display:none" id="tab_count">
+
+        {{ categ_count|json_encode() }}
+    </div>
+
+
+    <!-- ===================== CATEGORIES ============================-->
+
+    {% set sub_table = [] %}
+    {% for sous_categorie in sous_categories %} 
+        {% set sub_table = sub_table|merge([sous_categorie.nomSousCateg]) %} 
+    {% endfor %}
+
+
+    {% set sub_count = [] %}
+    {% for s in sous_categories %}
+        {% set number = 0 %}
+        {% for produit in produits %}
+
+
+            {% if produit.sousCategProd  == s %}
+                {% set number = number + 1 %}
+            {% endif %}
+
+
+        {% endfor %}
+        {% set sub_count = sub_count|merge([number]) %}
+    {% endfor %}
+
+    {% set sub_count = sub_count|merge([0]) %}
+
+
+
+    <div style="display:none" id="sub_table">
+        {{ sub_table|json_encode() }}
+    </div>
+
+    <div style="display:none" id="sub_count">
+
+        {{ sub_count|json_encode() }}
+    </div>
+
+{% endif %}
+
+<!-- ============================ END CHARTS ============================= -->
+
+
+    
+ 
+
+<div style="margin-bottom : 100px ; "></div>
+
+
+
+
+
+<script>
+  
+obj = JSON.parse(document.getElementById("tab_test").innerHTML) ; 
+y = JSON.parse(document.getElementById("tab_count").innerHTML) ;
+
+obj_sub = JSON.parse(document.getElementById("sub_table").innerHTML) ; 
+y_sub = JSON.parse(document.getElementById("sub_count").innerHTML) ;
+
+var xValues =  obj ; 
+var yValues = y;
+
+var xValues_sub =  obj_sub ; 
+var yValues_sub = y_sub ;
+
+var size = obj_sub.length ; 
+
+if (obj.length > obj_sub.length ) {
+    size = obj.length ; 
+}
+ 
+var rgb = []; 
+for(var i = 0; i < xValues_sub.length ; i++) {
+    rgb.push('#'+ Math.floor(Math.random() * 19777215).toString(16));   
+}
+var barColors =  rgb  ;
+
+
+
+new Chart("myChart", {
+                        type: "pie",
+                        data: {
+                            labels: xValues,
+                            datasets: [
+                                {
+                                backgroundColor: barColors,
+                                data: yValues
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: {
+                            display: false
+                            },
+                        title: {
+                            display: true,
+                            text: "Products per Category"
+                            }
+                        }
+                        });
+
+
+new Chart("myChartSub", {
+                        type: "bar",
+                        data: {
+                            labels: xValues_sub,
+                            datasets: [
+                                {
+                                backgroundColor: barColors,
+                                data: yValues_sub
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: {
+                            display: false
+                            },
+                        title: {
+                            display: true,
+                            text: "Products per Brand"
+                            }
+                        }
+                        });
+</script>
+
+
+
 
 
 

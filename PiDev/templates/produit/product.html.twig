@@ -7,6 +7,154 @@
     </title>
 
 {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.min.js"></script>
+
+ 
+<style>
+    body {
+  background: aliceblue;
+}
+
+.gtco-testimonials {
+  position: relative;
+  margin-top: 30px;
+
+  h2 {
+    font-size: 30px;
+    text-align: center;
+    color: #333333;
+    margin-bottom: 50px;
+  }
+
+  .owl-stage-outer {
+    padding: 30px 0;
+  }
+
+  .owl-nav {
+    display: none;
+  }
+
+  .owl-dots {
+    text-align: center;
+
+    span {
+      position: relative;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      display: block;
+      background: #fff;
+      border: 2px solid #01b0f8;
+      margin: 0 5px;
+    }
+
+    .active {
+      box-shadow: none;
+
+      span {
+        background: #01b0f8;
+        box-shadow: none;
+        height: 12px;
+        width: 12px;
+        margin-bottom: -1px;
+      }
+    }
+  }
+
+  .card {
+    background: #fff;
+    box-shadow: 0 8px 30px -7px #c9dff0;
+    margin: 0 20px;
+    padding: 0 10px;
+    border-radius: 20px;
+    border: 0;
+
+    .card-img-top {
+      max-width: 100px;
+      border-radius: 50%;
+      margin: 15px auto 0;
+      box-shadow: 0 8px 20px -4px #95abbb;
+      width: 100px;
+      height: 100px;
+    }
+
+    h5 {
+      color: #01b0f8;
+      font-size: 21px;
+      line-height: 1.3;
+
+      span {
+        font-size: 18px;
+        color: #666666;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      padding-bottom: 15px;
+    }
+  }
+
+  .active {
+    opacity: 0.5;
+    transition: all 0.3s;
+  }
+
+  .center {
+    opacity: 1;
+
+    h5 {
+      font-size: 24px;
+
+      span {
+        font-size: 20px;
+      }
+    }
+
+    .card-img-top {
+      max-width: 100%;
+      height: 120px;
+      width: 120px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .gtco-testimonials {
+    margin-top: 20px;
+  }
+}
+
+.owl-carousel {
+  .owl-nav button {
+    &.owl-next, &.owl-prev {
+      outline: 0;
+    }
+  }
+
+  button.owl-dot {
+    outline: 0;
+  }
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+ 
+
+
+{% endblock %}
+     
 
 {% block body %}
 
@@ -14,14 +162,65 @@
 <body>
 
 
+<style>
+.img_producto {
+     
+    background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.img_producto_container { 
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+  margin-top : -20px ; 
+}
+
+</style>
+ 
+
 {% for produit in produits %}
 <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
     {% if produit.modelProd %}
         {{produit.modelProd | raw   }}
     {% else %}
-        <img alt="main product photo" class="gallery-placeholder__image" src="{{produit.imageProd}}"/>
+        <div class="img_producto_container" data-scale="1.6">
+            <img alt="main product photo" class="gallery-placeholder__image img_producto" src="{{produit.imageProd}}"/>
+        </div>
     {% endif %}
 </div>
+
+
+
+<script>
+$(".img_producto_container")
+  // tile mouse actions
+  .on("mouseover", function() {
+    $(this)
+      .children(".img_producto")
+      .css({ transform: "scale(" + $(this).attr("data-scale") + ")" });
+  })
+  .on("mouseout", function() {
+    $(this)
+      .children(".img_producto")
+      .css({ transform: "scale(1)" });
+  })
+  .on("mousemove", function(e) {
+    $(this)
+      .children(".img_producto")
+      .css({
+        "transform-origin":
+          ((e.pageX - $(this).offset().left) / $(this).width()) * 100 +
+          "% " +
+          ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +
+          "%"
+      });
+  });
+
+
+</script>
 
 <script type="text/x-magento-init">
     {
@@ -63,9 +262,13 @@
 
 
 
+
+
+
+
 <div class="page-title-wrapper&#x20;product">
 
-    <h1 class="page-title">
+    <h1 class="page-title">  
         <span class="base" data-ui-id="page-title-wrapper" itemprop="name">
          
             {{ produit.nomProd }}
@@ -78,17 +281,27 @@
             <div class="rating-summary">
                 <span class="label"><span>Rating:</span></span>
                 <div class="rating-result" title="100%">
-                    <span style="width:100%">
+                    {% if avis|length != 0 %}
+                        {% set avg = 0 %}
+                        {% for avi in avis %}
+                            {% set avg = avg + avi.ratingAvis %}
+                        {% endfor %}
+                        {% set avd = avg / (avis|length) * 20 %}
+                        {% set avd =  avd | round %}
+                    {% else %}
+                        {% set avd = 100 %}
+                    {% endif %}
+                    <span style="width:{{ avd }}%">
                     </span>
                 </div>
             </div>
             
             <div class="reviews-actions">
                 <a class="action view" href="anzo-led-headlights-gauge-kit.html#reviews">
-                    <span itemscope itemtype="https://schema.org/reviewCount">1</span>&nbsp;
-                    <span>Review</span>
+                    <span itemscope itemtype="https://schema.org/reviewCount">{{avis|length}}</span>&nbsp;
+                    <span>Reviews</span>
                 </a>
-                <a class="action add" href="anzo-led-headlights-gauge-kit.html#review-form">Add Your Review</a>
+                <a class="action add" href="#review-form">Add Your Review</a>
              </div>
         </div>
         
@@ -98,13 +311,53 @@
                     <span class="price-container price-final_price&#x20;tax&#x20;weee">
                         <span class="price-label">Special Price</span>
                             <span id="product-price-92" data-price-amount="100" data-price-type="finalPrice" class="price-wrapper ">
-                                <span class="price">
-                                    {% if produit.promoProd != 0 %}
-                                        {{produit.promoProd}} DT
+                                <span class="price" >
+
+                                {% if  produit.categorieProd.nomCategorie != "Crypto" %}    
+                                    {% if produit.promoProd > 0 %}
+                                    <span style="display:none ; " id="price_old">{{produit.promoProd}}</span>
+                                        <h3>
+                                            <span id="price_conversion">
+                                                {{produit.promoProd}}  
+                                            </span> 
+                                            <span id="currency_abrev"> TND</span>
+                                        </h3>
+                                        
                                     {% else %}
-                                        {{produit.prixProd}} DT
+                                    <span style="display:none ; " id="price_old">{{produit.prixProd}}</span>
+                                         <h3>
+                                            <span id="price_conversion">
+                                                {{produit.prixProd}}  
+                                            </span> 
+                                            <span id="currency_abrev"> TND</span>
+                                        </h3> 
                                     {% endif %}
-                                    </span></span>
+                                    </span>
+                                {% else %}
+                                    {% if produit.promoProd > 0 %}
+                                    <span style="display:none ; " id="price_old">{{produit.promoProd}}</span>
+                                        <h3>
+                                            <span id="price_conversion">
+                                                {{produit.promoProd}}  
+                                            </span> 
+                                            <span id="currency_abrev"> ETH</span>
+                                        </h3>
+                                        
+                                    {% else %}
+                                    <span style="display:none ; " id="price_old">{{produit.prixProd}}</span>
+                                         <h3>
+                                            <span id="price_conversion">
+                                                {{produit.prixProd}}  
+                                            </span> 
+                                            <span id="currency_abrev"> ETH</span>
+                                        </h3>
+                                    
+                                    {% endif %}
+                                    </span>
+
+
+                                {% endif %}  
+                                </span>
 
                             </span>
                         </span>
@@ -113,17 +366,47 @@
                                 <span class="price-label">Regular Price</span>
                             <span id="old-price-92" data-price-amount="300" data-price-type="oldPrice" class="price-wrapper ">
                                 <span class="price">
-                                    {% if produit.promoProd != 0 %}
-                                            {{produit.prixProd}} DT
-                                    {% endif %} 
+                                    {% if  produit.categorieProd.nomCategorie != "Crypto" %} 
+                                        {% if produit.promoProd > 0 %}
+                                               {{produit.prixProd}} DT 
+                                        {% endif %} 
+                                    {% else %}
+                                        {% if produit.promoProd > 0 %}
+                                                {{produit.prixProd}} ETH 
+                                        {% endif %} 
+                                    {% endif %}
                                 </span></span>
                             </span>
                         </span>
 
             </div>
+
+            <span>
+                <span style="margin-right : 10px; " id="real_test">
+                    Convert Price : 
+                </span>
+                <select id="currency_name" style="margin-bottom : 10px ; width : 100px ;" >
+                    {% if  produit.categorieProd.nomCategorie != "Crypto" %}
+                        <option value="tnd">TND</option>
+                    {% else %}
+                        <option value="eth">ETH</option>
+                    {% endif %}
+                    <option value="usd">USD</option>
+                    {% if  produit.categorieProd.nomCategorie != "Crypto" %}
+                        <option value="eur">EUR</option>
+                        <option value="cad">CAD</option>
+                    {% endif %} ; 
+                </select>
+            </span>
+
+            
+
+
+
+
             </div>            
                 <div class="stock available" title="Availability">
-                    <span>In stock</span>
+                    <span> {{produit.stockProd}} In stock</span>
                 </div>
             <div class="product-info-stock-sku">
                 <div class="product attribute sku">
@@ -141,27 +424,55 @@
 
 
 <div class="product-add-form">
-    <form data-product-sku="CP03" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s/product/92/" method="post" id="product_addtocart_form">
+    <form data-product-sku="CP03"  action="#" method="post" id="product_addtocart_form">
         <input type="hidden" name="product" value="92"/>
         <input type="hidden" name="selected_configurable_option" value=""/>
         <input type="hidden" name="related_product" id="related-products-field" value=""/>
         <input type="hidden" name="item" value="92"/>
         <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>                            <div class="box-tocart">
     <div class="fieldset">
-                  <div class="field qty up-down flex-layout no-wrap">
-				<div class="control">
-					<input type="number" name="qty" id="qty" maxlength="12" value="1" title="Quantity" class="input-text qty" data-validate="{&quot;required-number&quot;:true,&quot;validate-item-quantity&quot;:{&quot;minAllowed&quot;:1,&quot;maxAllowed&quot;:10000}}"/>
-				</div>
+
+            {% if  produit.categorieProd.nomCategorie != "Crypto" %}
+                <div class="field qty up-down flex-layout no-wrap"> 
+                <div class="control">
+                    <input type="number" name="qty" id="qty" maxlength="12" value="1" title="Quantity" class="input-text qty" data-validate="{&quot;required-number&quot;:true,&quot;validate-item-quantity&quot;:{&quot;minAllowed&quot;:1,&quot;maxAllowed&quot;:10000}}"/>
+                </div> 
 				<div class="click-up-down flex-layout no-wrap column">
 					<a class="qty-up-fixed-onclick qty-up" href="#"><span class="icon-chevron-up"></span></a> 
 					<a class="qty-down-fixed-onclick qty-down" href="#"><span class="icon-chevron-down"></span></a> 
 				</div>
 			</div>
+            {% endif %}
+
                 <div class="actions">
-            <button type="submit" title="Add&#x20;to&#x20;Cart" class="action primary tocart" id="product-addtocart-button">
-                <span>Add to Cart</span>
-            </button>
             
+            {% if  produit.categorieProd.nomCategorie != "Crypto" %}
+                <button type="submit" title="Add&#x20;to&#x20;Cart" class="action primary tocart" id="product-addtocart-button">
+                    <span>Add to Cart</span>
+                </button>
+            {% else %}
+                <span id="pay-but" style="display : none ; ">
+                    {% if produit.promoProd == 0 %}
+                        {{produit.prixProd}}
+                    {% else %}
+                        {{produit.promoProd}}
+                    {% endif %}
+                </span>
+                <button class="pay-button"  >Buy Now</button>
+                <div id="status"></div>
+
+            {% endif %}
+ 
+
+            
+                {% if  produit.categorieProd.nomCategorie == "Crypto" %}
+                    <span id="crypto" style="display:none ; ">yes</span>
+                {% else %}
+                    <span id="crypto" style="display:none ; ">no</span>
+                {% endif %} 
+
+
+
 <div id="instant-purchase" data-bind="scope:'instant-purchase'">
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
@@ -210,9 +521,9 @@
 		<a href="#" onclick=" window.open( 'https://plus.google.com/share?url='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-google"><span class="text">Google</span></span></a>
 	</div>
 </div>
-</div><div class="product-category"><label>Categories: </label><a href="catalog/category/view/s/carparts/id/127/index.html">Carparts</a>, <a href="shop.html">Shop</a>, <a href="top-100-bestseller.html">Engine Systems</a></div>	<div class="product-page-brand-common-view">
+</div> 	<div class="product-page-brand-common-view">
 	<span class="brand-label">Brands:  </span>	<ul class="product-brands">			<li class="brand-item">
-												<a href="brand/brand-3.html" title="Brand-3">Brand-3</a>
+												{{ produit.sousCategProd.nomSousCateg }}
 							</li>
 			</ul>	</div>
 </div></div>    
@@ -245,7 +556,8 @@
 
 
 
-<form action="https://blueskytechmage.com/ohey/en11/review/product/post/id/92/" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
+<form action="/ajouter/avis" class="review-form" method="post" id="review-form" data-role="product-review-form" data-bind="scope: 'review-form'">
+
     <input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/>        <fieldset class="fieldset review-fieldset" data-hasrequired="&#x2A;&#x20;Required&#x20;Fields">
         <legend class="legend review-legend"><span>You&#039;re reviewing:</span><strong>{{ produit.nomProd }}</strong></legend><br/>
                 <span id="input-message-box"></span>
@@ -256,23 +568,28 @@
                                             <div class="field choice review-field-rating">
                             <label class="label" id="Price_rating_label" style="font-size : 20px ; color : black ; "><span>Rating</span></label>
                             <div class="control review-control-vote">
-                                                                                        <input type="radio" name="ratings[3]" id="Price_1" value="11" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_1_label"/>
+                                
+                                <input type="radio" name="rating" id="Price_1" value="11" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_1_label"/>
                                 <label class="rating-1" for="Price_1" title="1&#x20;star" id="Price_1_label">
                                     <span>1 star</span>
                                 </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_2" value="12" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_2_label"/>
+
+                                <input type="radio" name="rating" id="Price_2" value="12" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_2_label"/>
                                 <label class="rating-2" for="Price_2" title="2&#x20;stars" id="Price_2_label">
                                     <span>2 stars</span>
                                 </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_3" value="13" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_3_label"/>
+                                
+                                <input type="radio" name="rating" id="Price_3" value="13" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_3_label"/>
                                 <label class="rating-3" for="Price_3" title="3&#x20;stars" id="Price_3_label">
                                     <span>3 stars</span>
                                 </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_4" value="14" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_4_label"/>
+
+                                <input type="radio" name="rating" id="Price_4" value="14" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_4_label"/>
                                 <label class="rating-4" for="Price_4" title="4&#x20;stars" id="Price_4_label">
                                     <span>4 stars</span>
                                 </label>
-                                                                                            <input type="radio" name="ratings[3]" id="Price_5" value="15" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_5_label"/>
+
+                                <input type="radio" name="rating" id="Price_5" value="15" class="radio" data-validate="{'rating-required':true}" aria-labelledby="Price_rating_label Price_5_label"/>
                                 <label class="rating-5" for="Price_5" title="5&#x20;stars" id="Price_5_label">
                                     <span>5 stars</span>
                                 </label>
@@ -286,7 +603,8 @@
                                            
                         </div>
                                     </div>
-                <input type="hidden" name="validate_rating" class="validate-rating" value=""/>
+                <input type="hidden"  name="validate_rating" class="validate-rating" value=""/>
+                <input type="hidden"  name="prod"  value="{{ produit.id }}"/>
             </div>
         </fieldset>
              
@@ -300,29 +618,305 @@
     </fieldset>
     <div class="actions-toolbar review-form-actions">
         <div class="primary actions-primary">
-            <button type="submit" class="action submit primary"><span>Submit Review</span></button>
+            <button type="submit" name="submit" class="action submit primary"><span>Submit Review</span></button>
         </div>
     </div>
 </form>
+
+
+
+
+ 
+
+
+ 
+
+
+
+
+
 
 
 <center>
 
 
 
-
-
-{% for avi in avis %}
-	<div class="item">
-		<div class="img-box"><img src="/examples/images/clients/1.jpg" alt=""></div>
-		<p class="testimonial">{{ avi.descAvis  }}</p>
-		<p class="overview">
-			<b>{{ avi.idUser.username }}</b>
-			{{ avi.timeAvis | date("m/d/Y")}}</p>
-	</div>
-{% endfor %}
+ 
 
         
+<style>
+    .flags {
+        width : 34px; 
+        height : 22px ; 
+        margin : 2px ;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 11px;
+        transition: all 0.2s ; 
+    }
+    .flags:hover {
+        transform : scale(1.2) ; 
+    }
+
+    .buttonRemove {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
+    .buttonRemove:hover {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    } 
+</style>
+
+
+
+
+
+        <div class="gtco-testimonials" style="margin-top: 200px">
+            <h2>Testimonials</h2>
+            <span>
+                <button value="de" onclick="translate_lg(this.value)" class="buttonRemove"> 
+                    <img class="flags "    src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1200px-Flag_of_Germany.svg.png" >
+                </button>    
+
+                <button value="fr" onclick="translate_lg(this.value)" class="buttonRemove"> 
+                    <img class="flags " value="fr" onclick="translate_lg(this.value)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/2560px-Flag_of_France.svg.png" >
+                </button> 
+
+                <button value="us" onclick="translate_lg(this.value)" class="buttonRemove"> 
+                    <img class="flags " value="en" onclick="translate_lg(this.value)"  src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" >
+                </button> 
+
+            </span>
+            
+            <div class="owl-carousel owl-carousel1 owl-theme" style="margin-top : 60px !important ; ">
+                {% if avis is empty %}
+                    This product, currently, has no reviews.
+                 
+                {% endif %}
+                
+                
+                {% set number = 1000 %}
+                {% for avi in avis %}
+                <div class="card text-center"  ><img class="card-img-top"  src="https://images.unsplash.com/photo-1588361035994-295e21daa761?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=50&w=301" alt="">
+                    <div class="card-body">
+                        <h5>{{ avi.idUser.username }}<br />
+                            <span style="color : #fdb819;" >
+                                {% for i in range(1,avi.ratingAvis) %}
+                                    <span style="color : orange" class="fa fa-star checked"></span>
+                                {% endfor %}
+                            
+                               
+                                </span>
+                        </h5>
+
+                        {% set number = number + 1 %}
+                        <p class="card-text" id="{{number}}" >“ {{ avi.descAvis  }} ” , {{ avi.timeAvis | date("m/d/Y")}}</p>
+                    </div>
+
+
+                     
+                        {% if user is not null  %}
+                            {% if avi.idUser.id == user.id  %}
+                                <span style="margin-top : 30px; margin-bottom : 25px ; ">
+                                    <a href="{{path('modifAvis' , {'id' : avi.id })}}" style="color : green ; ">
+                                        <i class='far fa-edit' style='font-size:18px'></i> Edit    
+                                    </a>
+                                    
+                                    <span style="margin-left:50px ; "></span>
+
+                                    <a href="{{path('delete_avis' , {'id' : avi.id })}}" style="color : red ; ">
+                                        <i class="fa fa-remove" style="font-size:18px"></i> Delete
+                                    </a>
+                                </span>
+                            {% endif %}
+                        {% endif %}
+                     
+
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+<p style="display : none ; " type="hidden" id="avis_length">{{number}}</p>
+
+
+<script>
+    function translate_lg(language) {
+        var length = document.getElementById('avis_length').innerHTML ; 
+        console.log(length) ; 
+         
+        var all_text = "" ; 
+
+        if (length >1000) {
+            for (let step = 1001; step <= length ; step++) {
+                text = document.getElementById(step).innerHTML ; 
+                console.log(text) ; 
+                all_text = (all_text.concat(text, '--'))  ; 
+            } 
+            console.log(all_text) ; 
+               
+
+                const settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://google-translate1.p.rapidapi.com/language/translate/v2",
+                    "method": "POST",
+                    "headers": {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "accept-encoding": "application/gzip",
+                        "x-rapidapi-host": "google-translate1.p.rapidapi.com",
+                        "x-rapidapi-key": "00e51753fdmsh46a123f2dcdb845p11cfa3jsne4d1e50a77ee"
+                    },
+                    "data": {
+                        "q": all_text ,
+                        "target": language ,
+                        "source": "en"
+                    }
+                };
+
+                     
+                
+                $.ajax(settings).done(function (response) {
+                    texts = response["data"]["translations"][0]["translatedText"].split('--');
+                    console.log(texts) ; 
+                    for (let step = 1001; step <= length ; step++) {
+                        const st = step - 1001 ;
+                        console.log("STEP : "+ texts[st]) ;  
+                        document.getElementById(step).innerHTML = texts[st] ;
+                    }
+                });    
+
+
+
+
+
+             
+        } 
+
+    }
+
+</script>
+
+
+
+<!-- ============= RECOMMENDATION ==================== -->
+
+
+		 
+
+
+{% set items = [] %}
+
+		{% for avis in avis_user %}
+            {% if (avis.ratingAvis == 4 or avis.ratingAvis == 5)    %}
+
+                {% for prod in produits_all  %}
+                    
+                        {% if prod == avis.idProd %}
+                            {% if prod.categorieProd not in items %}
+                                {% if prod.categorieProd.nomCategorie not in items %} 
+                                    {% set items = items |merge([prod.categorieProd.nomCategorie]) %}    
+                                {% endif %}
+                            {% endif %} 
+                        {% endif %}     
+                {% endfor %} 
+            {% endif %}
+		{% endfor %}
+
+ 
+
+
+<div class="gtco-testimonials" style="margin-top: 200px">
+	<h2 style="margin-bottom : 80px ; ">Recommended Products</h2>
+	<div class="owl-carousel owl-carousel1 owl-theme">
+         
+        {% for i in  items  %}
+        {% set number = 0 %}
+
+        {% for prods in produits_all %}
+            
+            {% if ((prods.categorieProd.nomCategorie == i ) and (prods != produit) and (number < 2)) %}
+
+                {% set number = number + 1 %}
+
+                <div class="card text-center"><a href="{{path('product_show',{'id' : prods.id })}}"><img class="card-img-top" src="{{prods.imageProd}}" alt=""></a>
+                    <div class="card-body">
+                        <h5>
+                            <br/>
+                            <span style="color : #fdb819;">
+                                {% set avg = 0 %}
+                                {% set avd = 0 %}
+                                {% set size = 0 %}
+                                {% for avi in avis_all %}
+                                    {% if avi.idProd.id == prods.id %}
+                                        {% set avg = avg + avi.ratingAvis %}
+                                        {% set size = size + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if size != 0 %}
+                                    {% set avd = (avg / size)   %}
+                                    {% set avd =  avd | round %}
+                                {% else %}
+                                    {% set avd = 5 %}
+                                {% endif %}
+
+                                {% for i in range(1,avd) %}
+                                    <span style="color : orange" class="fa fa-star checked"></span>
+                                {% endfor %}
+
+
+                            </span>
+                        </h5>
+                        <p class="card-text">
+                            <h4> {{prods.nomProd}} </h4>
+                        </p>
+                    </div>
+
+
+                     
+                    {% if prods.promoProd != 0 %} 
+                        <span style="  margin-bottom : 25px ; ">
+                            <a href="{{path('product_show',{'id' : prods.id })}}" style="color : green ;  ">
+                                <h4> {{prods.promoProd}} DT 
+                            </a>
+
+                            <span style="margin-left:20px ; "></span>
+
+                            <a href="{{path('product_show',{'id' : prods.id })}}" style="color : red ; ">
+                                <strike> {{prods.prixProd}} DT</strike></h4>
+                            </a>
+                        </span>
+                    {% else %}
+                        <span style="  margin-bottom : 25px ; ">
+                            <a href="{{path('product_show',{'id' : prods.id })}}" style="color : green ;  ">
+                                <h4> {{prods.prixProd}} DT 
+                            </a> 
+                        </span>
+
+                    {% endif %}
+                     
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+	</div>
+</div>
+
              
         
 
@@ -443,6 +1037,190 @@
         }
     }
 </script>
+
+
+
+<script>
+	(function () {
+"use strict";
+
+var carousels = function () {
+$(".owl-carousel1").owlCarousel({
+loop: true,
+center: true,
+margin: 0,
+responsiveClass: true,
+nav: false,
+responsive: {
+0: {
+items: 1,
+nav: false
+},
+680: {
+items: 2,
+nav: false,
+loop: false
+},
+1000: {
+items: 3,
+nav: true
+}
+}
+});
+};
+
+(function ($) {
+carousels();
+})(jQuery);
+})();
+</script>
+
+<!-- ====================== API CURRENCY CONVERSION =================== -->
+<script>
+document.getElementById('currency_name').addEventListener('change', function() {
+
+    console.log("dd") ; 
+    var value = this.value  ;
+
+    if (document.getElementById("crypto").innerHTML == "no") {
+        console.log("NOOO") ; 
+        
+        const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://exchangerate-api.p.rapidapi.com/rapid/latest/TND",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "exchangerate-api.p.rapidapi.com",
+            "x-rapidapi-key": "0df9a64d4dmshef637b6555ab817p197c06jsn23b1172de7c8"
+        }
+        };
+
+        $.ajax(settings).done(function (response) {
+            if ( value == "usd") {
+                var old =   document.getElementById("price_old").innerHTML  ;
+                document.getElementById("currency_abrev").innerHTML = "USD" ; 
+                document.getElementById("price_conversion").innerHTML= (response["rates"]["USD"]*old).toFixed(2)   ;
+
+
+
+            } else if ( value == "eur") {
+                var old =   document.getElementById("price_old").innerHTML  ;
+                document.getElementById("currency_abrev").innerHTML = "EUR" ; 
+                document.getElementById("price_conversion").innerHTML=  (response["rates"]["EUR"]*old).toFixed(2)   ;
+
+
+            } else if ( value == "tnd") {
+                var old =   document.getElementById("price_old").innerHTML  ;
+                document.getElementById("currency_abrev").innerHTML = "TND" ;
+                document.getElementById("price_conversion").innerHTML=  (response["rates"]["TND"]*old).toFixed(2)   ;
+
+
+            } else if ( value == "cad") {
+                var old =   document.getElementById("price_old").innerHTML  ;
+                document.getElementById("currency_abrev").innerHTML = "CAD" ;
+                document.getElementById("price_conversion").innerHTML=  (response["rates"]["CAD"]*old).toFixed(2)   ;
+
+
+            }
+        });
+
+    } else {
+
+        const settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://crypto-price-feed.p.rapidapi.com/api/crypto-feed",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "crypto-price-feed.p.rapidapi.com",
+                "x-rapidapi-key": "00e51753fdmsh46a123f2dcdb845p11cfa3jsne4d1e50a77ee"
+            }
+        };
+
+        console.log("YESS") ; 
+
+        $.ajax(settings).done(function (response) {
+            var price = response["result"][1]["price"] ; 
+            console.log(price);
+            price_new =price.substring(1) ; 
+            var price_last = price_new.replace(',','') ;
+            console.log(price_last) ; 
+
+            if ( value == "usd") {
+                var old =   document.getElementById("price_old").innerHTML  ;
+                document.getElementById("currency_abrev").innerHTML = "USD" ; 
+                document.getElementById("price_conversion").innerHTML= (price_last*old).toFixed(2)   ; 
+            } else if ( value == "eth") {
+                var old =   document.getElementById("price_old").innerHTML  ;
+                document.getElementById("currency_abrev").innerHTML = "ETH" ; 
+                document.getElementById("price_conversion").innerHTML= old   ; 
+            }
+        });
+ 
+
+
+    }
+
+
+    
+});
+</script>
+<!-- ======================  END API CURRENCY CONVERSION =================== -->
+
+
+<script type="text/javascript">
+	window.addEventListener('load', async () => {
+        if (window.ethereum) {
+            window.web3 = new Web3(ethereum);
+            try {
+                await ethereum.enable();
+                initPayButton()
+            } catch (err) {
+                $('#status').html('User denied account access', err)
+            }
+        } else if (window.web3) {
+            window.web3 = new Web3(web3.currentProvider)
+            initPayButton()
+        } else {
+            $('#status').html('No Metamask (or other Web3 Provider) installed')
+        }
+    })
+
+const initPayButton = () => {
+    $('.pay-button').click(() => { // paymentAddress is where funds will be send to
+        const paymentAddress = '0x5179169031b8fCdC3FF4798C982484BfA943034D'
+        const ammount =  document.getElementById("pay-but").innerHTML 
+        console.log(ammount)
+        const amountEth = ammount
+
+        web3.eth.sendTransaction({
+            to: paymentAddress,
+            value: web3.toWei(amountEth, 'ether')
+        }, (err, transactionId) => {
+            if (err) {
+                console.log('Payment failed', err)
+                $('#status').html('Payment failed')
+            } else {
+                console.log('Payment successful', transactionId)
+                $('#status').html('Payment successful')
+            }
+        })
+    })
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}"/>
+
 
 
 </div></div></main>

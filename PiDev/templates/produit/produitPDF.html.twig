@@ -1,0 +1,31 @@
+<center>
+    <h1 style="color : green ; ">Products List</h1>
+    <h4> Date : {{ 'now'|date('d-m-Y') }} </h4>
+</center>
+
+<center>
+    <table border=2 style="margin-top : 40px ; ">
+        <tr>
+            <th> Name </th>
+            <th> Price </th>
+            <th> Discount </th>
+            <th> Quantity </th>
+            <th> Category </th>
+            <th> Brand </th>
+        </tr>
+
+        {% for p in produits %}
+        <tr>
+            <td>{{p.nomProd}}</td>
+            <td>{{p.prixProd}}</td>
+            <td>{{p.promoProd}}</td>
+            <td>{{p.stockProd}}</td>
+            <td>{{p.categorieProd.nomCategorie}}</td>
+            <td>{{p.sousCategProd.nomSousCateg}}</td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+</center>

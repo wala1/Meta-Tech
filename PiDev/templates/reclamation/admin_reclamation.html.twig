@@ -1,0 +1,167 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	<title>Ajouter Produit</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block body %}
+
+
+	<!-- ============================================================== -->
+	<!-- Start right Content here -->
+	<!-- ============================================================== -->
+		<div class="main-content"> <div class="page-content">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header"> 
+								<h2 class="card-title" style="font-size : 20px ; ">
+                                    <a href="{{ path('admin_reclamation')}} " style="margin-right : 20px ; " type="button" class="btn btn-primary waves-effect waves-light"> 
+                                        Back
+                                    </a>
+                                    Reports
+								</h2>
+
+							</div>
+							<div class="card-body">
+
+                                {% if details == null %}
+
+									<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+										<thead>
+											<tr style="font-size : 16px">
+												<th>Name</th>
+												<th>Description</th>
+                                                <th>Treated</th>
+												<th>Edit</th>
+
+											</tr>
+										</thead>
+
+
+										<tbody style="font-weight:bold ; color : black ">
+
+											{% for reclamation in reclamations %}
+                                                {% if reclamation.traiteReclamation == 1 %}
+                                                    <tr style="background-color : #AACCAA ; ">
+                                                {% else %}
+                                                    <tr style="background-color : #F9CBB6  ; ">
+                                                {% endif %}
+												
+													<td>
+														 {{ reclamation.nameReclamation }}
+													</td>
+
+													<td>
+                                                        {% if reclamation.descReclamation|length >60  %}
+														    {{ reclamation.descReclamation[:60]~"..." }}
+                                                            <a href="{{path('reclamation_id',{'id':reclamation.id })}}" style="margin-left : 10px ; "> Read More. </a>
+                                                        {% else %}
+                                                            {{ reclamation.descReclamation  }}
+                                                        {% endif %}
+													</td>
+                                                    
+                                                    <td>
+                                                        {% if reclamation.traiteReclamation == 1 %}
+                                                            <div > True </div>
+                                                        {% else %}
+                                                            False
+                                                        {% endif %}
+                                                    </td>
+													
+                                                    <td>
+														 <div class="dropdown">
+                                                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bx bx-dots-horizontal-rounded"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end">  
+                                                                <li><a class="dropdown-item" href="{{path('reclamation_id',{'id':reclamation.id })}}"> Details</a></li>
+                                                                <li><a class="dropdown-item" href="{{path('delete_reclamation',{'id':reclamation.id })}}"> Delete</a></li>  
+                                                            </ul>
+                                                        </div>
+													</td>
+												</tr>
+											{% endfor %}
+
+										</tbody>
+									</table>
+
+
+									<!-- ================== TABLE AVIS ====================== -->
+                                {% elseif details == "reclamation" %}
+                                    {% for reclamation in reclamations %}
+
+                                        <div>
+                                            <h5>Name : </h5>
+                                             {{ reclamation.nameReclamation }}
+                                        </div>
+                                        <br>    
+                                        <div>
+                                            <h5>Email : </h5>
+                                             {{ reclamation.emailReclamation }}
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <h5>Description : </h5>
+                                             {{ reclamation.descReclamation }}
+                                        </div>
+                                        <br>
+                                            {% if reclamation.traiteReclamation == 0 %}
+                                                <a href="{{ path('reclamation_traite', {'id' : reclamation.id})}}" type="button" class="btn btn-success waves-effect waves-light">
+                                                    <i class="bx bx-check-double font-size-16 align-middle me-2"></i> Mark As Treated
+                                                </a>
+                                            {% else %}
+                                                <div style="color : green ; font-weight : bold ; font-size : 18px ;  ">You have already treated this report. </div>
+                                            {% endif %}
+                                        <hr>
+                                        <br>
+                                        <center>
+                                            <H5> Reply To this Report </H5>
+                                            <p> Note : Your reply will be sent automatically to the reporter's email. </p>
+                                            
+                                            {% if mail_sent == 1 %}
+                                                 
+                                                <p style="color : green ; font-weight : bold ; font-size : 16px ; ">
+                                                    Your email has been successfully sent to {{reclamation.emailReclamation }}.
+                                                </p>
+
+                                            {% endif %}
+                                            
+                                            <form action="{{path('mail_reclamation', {'id' : reclamation.id})}}" method="POST">
+
+                                                <input type="hidden" name="address" value="{{reclamation.emailReclamation}}">
+                                                <input type="hidden" name="name" value="{{reclamation.nameReclamation}}">
+
+
+                                                <textarea style="width : 80%; height : 250px ; " name="reply"></textarea>
+                                                
+                                                <br>
+                                                <br>
+
+                                                <input class="btn btn-info" type="submit" value="Send Reply"  > 
+                                                     
+                                            </form>
+                                        <center>
+                                    {% endfor %}
+                                 {% endif %}
+
+							</div>
+						</div>
+						<!-- end cardaa -->
+					</div>
+					<!-- end col -->
+				</div>
+				<!-- end row -->
+
+
+			</div>
+			<!-- container-fluid -->
+		</div>
+		<!-- End Page-content -->
+
+
+	{% endblock %}
+

@@ -1,7 +1,27 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block title %}
-	<title>Ajouter Produit</title>
+	{% if table=="produits" %}
+		{% if editMode %}
+			<title>Edit Product</title>
+		{% else %}
+			<title>Add Product</title>
+		{% endif %}
+
+	{% elseif table=="categories" %}
+		{% if editMode %}
+			<title>Edit Category</title>
+		{% else %}
+			<title>Add Category</title>
+		{% endif %}
+	
+	{% elseif table=="souscategories" %}
+		{% if editMode %}
+			<title>Edit SubCategory</title>
+		{% else %}
+			<title>Add SubCategory</title>
+		{% endif %}
+	{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -15,15 +35,15 @@
                     <div class="container-fluid">
 						{% if table=="produits" %}
 							<a href="{{ path('admin_product')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
-								Retour
+								Back
 							</a> 
 						{% elseif table=="categories" %}
 							<a href="{{ path('admin_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
-								Retour
+								Back
 							</a>
 						{% elseif table=="souscategories" %}
 							<a href="{{ path('admin_souscategorie')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
-								Retour
+								Back
 							</a>
 						{% endif %}
 						
@@ -35,9 +55,9 @@
 						{% if table=="produits" %}
 
 							{% if editMode %}
-								Modifier Produit
+								Edit Product
 							{% else %}
-								Ajouter Produit
+								Add Product
 
 							{% endif %}</h2>
 
@@ -77,9 +97,11 @@
 										<br>
 
 										<td style="padding:1%">
-											{{ form_label(form.nom_prod,"Nom ") }}
+											{{ form_label(form.nom_prod,"Name ") }}
 											{{ form_widget(form.nom_prod) }}
-											{{ form_errors(form.nom_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.nom_prod) }}
+											</div>
 										 
 
 											<br> 
@@ -87,14 +109,26 @@
 										 
 											{{ form_label(form.desc_prod,"Description ") }}
 											{{ form_widget(form.desc_prod) }} 
-											{{ form_errors(form.desc_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.desc_prod) }}
+											</div>
 										 
 
 											<br>
 
 											{{ form_label(form.image_prod,"Image ") }}
 											{{ form_widget(form.image_prod) }}
-											{{ form_errors(form.image_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.image_prod) }}
+											</div>
+
+											<br>
+
+											{{ form_label(form.stockProd,"Quantity ") }}
+											{{ form_widget(form.stockProd) }}
+											<div style="color : red">
+												{{ form_errors(form.stockProd) }}
+											</div>
 
 										 
 											
@@ -105,36 +139,44 @@
 
 									<tr>
 										<td style="padding:1%">
-											{{ form_label(form.prix_prod,"Prix ") }}
+											{{ form_label(form.prix_prod,"Price ") }}
 											{{ form_widget(form.prix_prod) }}
-											{{ form_errors(form.prix_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.prix_prod) }}
+											</div>
 											<br>
 
 											{{ form_label(form.promo_prod,"Promotion ") }}
 											{{ form_widget(form.promo_prod) }}
-											{{ form_errors(form.promo_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.promo_prod) }}
+											</div>
 											<br> 
 										</td>   
 										
 											
 										<td style="padding:1%">
-											{{ form_label(form.sousCategProd,"Sous Catégorie ") }}
+											{{ form_label(form.sousCategProd,"Sub Category ") }}
 											{{ form_widget(form.sousCategProd) }}
-											{{ form_errors(form.sousCategProd) }}
-											<br> 
+											<div style="color : red">
+												{{ form_errors(form.sousCategProd) }}
+											</div> 
 										
-											{{ form_label(form.categorie_prod,"Catégorie ") }}
+											{{ form_label(form.categorie_prod,"Category ") }}
 											{{ form_widget(form.categorie_prod) }}
-											{{ form_errors(form.categorie_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.categorie_prod) }}
+											</div>
 											<br> 
 										</td>
 										
 									<tr >
 										<td colspan="2" style="padding:1%">
-											{{ form_label(form.model_prod,"Modele 3D") }}
-												{{ form_widget(form.model_prod) }}
-												{{ form_errors(form.model_prod) }}
-												<br>  
+											{{ form_label(form.model_prod,"3D Model (Optional) ") }}
+											{{ form_widget(form.model_prod) }}
+											{{ form_errors(form.model_prod) }}
+											
+											<br>  
 										</td>
 									</tr>
 
@@ -157,18 +199,23 @@
 
 						
 							{% if editMode %}
-								Modifier Categorie
+								Edit Category
 							{% else %}
-								Ajouter Categorie
+								Add Category
 
-							{% endif %}</h2><div style="width : 60%">
+							{% endif %}
+							
+							</h2>
+							<br>
+							<div style="width : 60%">
 
 							{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 
 							{{ form_label(form.nom_categorie,"Nom ") }} 
 							{{ form_widget(form.nom_categorie) }}
-							{{ form_errors(form.nom_categorie) }}
-
+							<div style="color : red">
+								{{ form_errors(form.nom_categorie) }}
+							</div>
 
 							<br>
 							 
@@ -177,18 +224,23 @@
 						<!-- =================== AJOUTER SOUS CATEGORIE ====================== -->
 						{% elseif table=="souscategories" %}
 							{% if editMode %}
-								Modifier Sous Categorie
+								Edit Sub Category
 							{% else %}
-								Ajouter Sous Categorie
+								Add Sub Category
 
-							{% endif %}</h2><div style="width : 60%">
+							{% endif %}
+							
+							</h2>
+							<br>
+							<div style="width : 60%">
 
 							{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 
 							{{ form_label(form.nomSousCateg,"Nom Sous Categorie ") }} 
 							{{ form_widget(form.nomSousCateg) }}
-							{{ form_errors(form.nomSousCateg) }}
-
+							<div style="color : red">
+								{{ form_errors(form.nomSousCateg) }}
+							</div>
 
 							<br>
 							 

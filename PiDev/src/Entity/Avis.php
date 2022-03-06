@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType ;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AvisRepository::class)
@@ -14,34 +17,48 @@ class Avis
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="avis")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false) 
      */
     private $idProd;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="avis")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("post:read")
      */
     private $idUser;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 1,
+     *      max = 5,
+     *      notInRangeMessage = "Please insert a rating between 1 and 5.",
+     * )
+     * @Assert\NotBlank(message="Please add a rating.")
+     * @Assert\Type(type="numeric", message="Rating should be an integer.")
+     * @Groups("post:read")
      */
     private $ratingAvis;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Make sure to add your review.")
+     * @Groups("post:read")
      */
     private $descAvis;
 
     /**
      * @ORM\Column(type="datetime")
-     */
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups("post:read")
+     */ 
     private $timeAvis;
 
     public function getId(): ?int

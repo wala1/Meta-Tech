@@ -10,6 +10,8 @@ use App\Entity\Categorie ;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\CategorieFormType ;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
 
 class CategorieController extends AbstractController
 {
@@ -101,6 +103,91 @@ class CategorieController extends AbstractController
             'editMode' => $categorie->getId() !== null,
             'table' => 'categories'
         ]);
+    }
+
+
+
+
+
+    // =============================== JSON MOBILE ==================================
+    /**
+     * @Route("/AllCategories", name="AllCategories")
+     */
+    public function AllCategories(NormalizerInterface $Normalizer): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Categorie::class) ; 
+        $categories = $repo->findAll() ; 
+
+        $jsonContent = $Normalizer->normalize($categories, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/AddCategory", name="AddCategory")
+     */
+    public function AddCategoryJSON(Request $request, NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ; 
+        $categorie = new categorie() ; 
+
+         
+
+        $categorie->setNomCategorie($request->get('nom')) ; 
+        
+        $em->persist($categorie) ; 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/AddCategory?nom=test
+        $jsonContent = $Normalizer->normalize($categorie, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+     /**
+     * @Route("/ModifyCategory/{id}", name="ModifyCategory")
+     */
+    public function ModifyCategoryJSON(Request $request, NormalizerInterface $Normalizer, $id): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ;  
+        $categorie = $em->getRepository(Categorie::class)->find($id) ; 
+ 
+
+        if (($request->get('nom')!=null)) {
+            $categorie->setNomCategorie($request->get('nom')) ; 
+        }
+ 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/ModifyCategory/11?nom=ZZZZZ
+        $jsonContent = $Normalizer->normalize($categorie, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+     /**
+     * @Route("/DeleteCategory/{id}", name="DeleteCategory")
+     */
+    public function DeleteCategoryJSON(Request $request , $id , NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ;
+        $categorie = $em->getRepository(Categorie::class)->find($id) ; 
+        $em->remove($categorie) ; 
+        $em->flush() ;
+
+        // http://127.0.0.1:8000/DeleteCategory/11 
+        $jsonContent = $Normalizer->normalize($categorie, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
     }
 
 

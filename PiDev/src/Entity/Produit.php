@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
@@ -18,48 +18,37 @@ class Produit
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
-
+ 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Product Name is required")
+     * @Groups("post:read")
      */
     public $nom_prod;
 
     /**
      * @ORM\Column(type="string", length=600)
      * @Assert\NotBlank(message="Product Description is required")
+     * @Groups("post:read")
      */
     public $desc_prod;
 
     /**
-     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="produit_panier")
-    */
-    private $panier;
-
-    public function __construct()
-    {
-        $this->panier = new ArrayCollection();
-        $this->pubBacks = new ArrayCollection();
-    }
-
-    /**
-     * @return Collection|Panier[]
-    */
-    public function getPanier()
-    {
-        return $this->panier;
-    }
-
-    /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
+     * @Groups("post:read")
      */
     public $categorie_prod;
 
     /**
      * @ORM\Column(type="string", length=400)
      * @Assert\NotBlank(message="Product Image is required")
+     * @Assert\Url(
+     * message = "The image must has an URL format.", 
+     * )
+     * @Groups("post:read")
      */
     public $image_prod;
 
@@ -67,13 +56,16 @@ class Produit
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Product Price is  required")
      * @Assert\Type(type="double", message="Product discount must be float.")
+     * @Assert\Positive(message="Price should be a positive value.")
+     * @Groups("post:read")
      */
     public $prix_prod;
 
     /**
      * @ORM\Column(type="float")
      * @Assert\NotBlank(message="Please make sure to enter 0 if the product has no discount.")
-     * @Assert\Type(type="float",message="Product discount must be float.")
+     * @Assert\Type(type="float",message="Product discount must be float.") 
+     * @Groups("post:read")
      */
     public $promo_prod;
 
@@ -83,18 +75,20 @@ class Produit
     public $ratingProd;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=1500, nullable=true)
      */
     public $model_prod;
 
     /**
      * @ORM\ManyToOne(targetEntity=SousCategorie::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("post:read")
      */
     public $sousCategProd;
 
-    /**
+    /**  
      * @ORM\OneToMany(targetEntity=Avis::class, mappedBy="idProd")
+     * @Groups("post:read")
      */
     private $avis;
 
@@ -103,9 +97,20 @@ class Produit
      */
     private $pubBacks;
 
-     
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive(message="Quantity should be a positive value.")
+     * @Assert\NotBlank(message="Please make sure to enter the quantity of your product.")
+     * @Groups("post:read")
+     */
+    private $stockProd;
 
-     
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
+
+      
 
      
 
@@ -140,10 +145,26 @@ class Produit
         return $this;
     }
 
+    public function getCategorieProd(): ?Categorie
+    {
+        return $this->categorie_prod;
+    }
+
+    public function setCategorieProd(?Categorie $categorie_prod): self
+    {
+        $this->categorie_prod = $categorie_prod;
+
+        return $this;
+    }
+
+   
+
     public function getImageProd(): ?string
     {
         return $this->image_prod;
     }
+
+   
 
     public function setImageProd(string $image_prod): self
     {
@@ -242,12 +263,19 @@ class Produit
         return $this;
     }
 
-    public function setCategProd(?Categorie $categorie_prod): self
+    public function getStockProd(): ?int
     {
-        $this->categorie_prod = $categorie_prod;
+        return $this->stockProd;
+    }
+
+    public function setStockProd(?int $stockProd): self
+    {
+        $this->stockProd = $stockProd;
 
         return $this;
     }
+
+
 
     /**
      * @return Collection|PubBack[]

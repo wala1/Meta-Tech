@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
@@ -27,10 +29,7 @@ class User implements UserInterface
      */
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="user_panier")
-     */
-    private $panier;
+     
 
     public function __construct()
     {
@@ -435,5 +434,7 @@ class User implements UserInterface
         $this->facebookAccessToken= $facebookAccessToken;
         return $this;
 
-    }
+
+
+}
 }
