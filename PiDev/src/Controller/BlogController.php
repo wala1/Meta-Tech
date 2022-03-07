@@ -237,10 +237,10 @@ class BlogController extends AbstractController
             $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character=*",
+  CURLOPT_URL => "https://api.apilayer.com/bad_words",
   CURLOPT_HTTPHEADER => array(
     "Content-Type: text/plain",
-    "apikey: 0LhZ1FgHcJf5SkoUkzMYoD9LV8HdCyaX"
+    "apikey: zd7MoNVNwgUZjU3FwoZlk88vMBapI2ZW"
   ),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
@@ -255,8 +255,11 @@ curl_setopt_array($curl, array(
 $response = json_decode(curl_exec($curl) , true );
 
 curl_close($curl);
-
+    if( isset($response['censored_content']))
             $desc = $response['censored_content'] ;
+            else $desc = "api key expired" ;
+
+            
             if($idCommentaire != null )//modifier
             {
                 $em = $this->getDoctrine()->getManager();

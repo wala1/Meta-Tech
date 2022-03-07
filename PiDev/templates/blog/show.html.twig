@@ -50,10 +50,14 @@
                                                 {% endfor %}
                                                 <br>
                                                 {% if app.user %}
+
                                                 <form method="post" class="row"
                                                         action="{{ path('commenter_blog', {'id' : publication.id }) }}">
                                                         <div class="col-8">
                                                                 <input id="descrip" type="text" name="description" />
+                                                        </div>
+                                                        <div class="col-8" style="display:none">
+                                                                <input id="idCommentaire" type="text" name="idCommentaire" />
                                                         </div>
                                                         <div class="col-2">
                                                                 <button type="submit" value="ajouter">commenter</button>
@@ -61,7 +65,7 @@
                                                        
                                                         <div class="col-2" style="font-size:50px">
 	                       
-			<ul class="mobile-bottom-link flex-layout space-between list-unstyled no-wrap">
+			                                <ul class="mobile-bottom-link flex-layout space-between list-unstyled no-wrap">
 
 
 					<a    {% if  publication.likes.contains(app.user) == false %} href=" {{ path('aimer_blog', {'id' : publication.id }) }}" {% endif %} >
