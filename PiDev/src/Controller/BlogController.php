@@ -228,8 +228,35 @@ class BlogController extends AbstractController
      
         if($id != null) 
         {
+
+
             $desc = $request->get('description');
             $idCommentaire = $request->get('idCommentaire');
+
+            
+            $curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character={censor_character}",
+  CURLOPT_HTTPHEADER => array(
+    "Content-Type: text/plain",
+    "apikey: zd7MoNVNwgUZjU3FwoZlk88vMBapI2ZW"
+  ),
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS =>  $desc
+));
+
+$response = json_decode(curl_exec($curl) , true );
+
+curl_close($curl);
+
+            $desc = $response['censored_content'] ;
             if($idCommentaire != null )//modifier
             {
                 $em = $this->getDoctrine()->getManager();
