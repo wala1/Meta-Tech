@@ -9,11 +9,14 @@ use App\Repository\CalendarRepository ;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ParticipantsRepository;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use App\Repository\PubBackRepository;
 
 use App\Form\CalendarType ;
 use App\Entity\Calendar;
 use App\Entity\User;
 use App\Entity\Coupon;
+use App\Entity\PubBack;
+
 use App\Repository\CouponRepository;
 
 
@@ -222,9 +225,13 @@ public function RefuseEvent(Calendar $calendar)
     {
         $repo = $this->getDoctrine()->getRepository(Calendar::class) ; 
         $calendar = $repo->findAll() ; 
+          
+        $repo1 = $this->getDoctrine()->getRepository(PubBack::class) ; 
+        $pubBack = $repo1->findAll() ;
 
         return $this->render('calendar/eventFront1.html.twig', [
-            'calendar' => $calendar
+            'calendar' => $calendar,
+            'pubBack' => $pubBack
         ]);
     }
 
@@ -255,7 +262,9 @@ public function RefuseEvent(Calendar $calendar)
      * @Route("/CalendarUser", name="calendar_user")
      */
     public function calendarUser(CalendarRepository $calendar): Response
-    {
+    {     
+         $repo = $this->getDoctrine()->getRepository(PubBack::class) ; 
+         $pubBack = $repo->findAll() ;
         $events=$calendar->findAll();
         $rdvs= [];
         foreach($events as $event)
