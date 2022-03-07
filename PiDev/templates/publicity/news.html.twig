@@ -60,10 +60,10 @@ div.container {
    <center>      
    <span>
       Source : {{item.source}}
-            <a  target = "_blank" href="{{ item.source }}"  style="  text-align: center; color: #B0E0E6;font-size: 20px;"> Read More </a> 
+            <a  target = "_blank" href="{{ item.source }}"  style="  text-align: center; color: #B0E0E6;font-size: 20px;"> </a> 
         <div > 
              {% set n=n+1 %}
-           <a target="_blank" href="{{item.url }}"><button class="button button1">Shop Now</button><a/>
+           <a target="_blank" href="{{item.url }}"><button class="button button1">Read More</button><a/>
         </div >
          
       </span></div >
@@ -74,69 +74,7 @@ div.container {
    </center>   {% endif %}
 {% endfor %}	
 	</div></div></div></div>
-
-{# 
-
-
-<script>
-
-const settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://gaming-news.p.rapidapi.com/news",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "gaming-news.p.rapidapi.com",
-		"x-rapidapi-key": "c739891e54msh628b9ee19abc52ep153420jsn9b386ba85875"
-	}
-};
-
-$.ajax(settings).done(function (response) {
-item1 = response [0]["title"];
-document.getElementById('currency').innerHTML = item1 ; 
-console.log(response);
-});
-</script> #}
-
-
-
-
-{# 
-
-<style>
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-    border: 1px solid #ddd; /* Gray */
-  transition: background-color .3s;
-
-}
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-</style>
-</head>
-<body>
-
-
-<div class="pagination">
-<a href="#">Previous</a>
-  <a href="#">1</a>
-  <a href="#">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">Next</a>
-
-</div> #}
-
-    {# {{ knp_pagination_render(pub) }} #}
+ 
 
 
 
