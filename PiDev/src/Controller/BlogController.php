@@ -237,10 +237,10 @@ class BlogController extends AbstractController
             $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character={censor_character}",
+  CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character=*",
   CURLOPT_HTTPHEADER => array(
     "Content-Type: text/plain",
-    "apikey: zd7MoNVNwgUZjU3FwoZlk88vMBapI2ZW"
+    "apikey: 0LhZ1FgHcJf5SkoUkzMYoD9LV8HdCyaX"
   ),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
