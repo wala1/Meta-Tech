@@ -12,6 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Form\RegistrationType;
 
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\PubBack;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +36,8 @@ class SecurityController extends AbstractController
      */
     public function registration(Request $request, EntityManagerInterface $EntityManager,UserPasswordEncoderInterface $encoder , \Swift_Mailer $mailer)
     {
+        $repo = $this->getDoctrine()->getRepository(PubBack::class) ; 
+        $pubBack = $repo->findAll() ;
         //,FlashyNotifier $flashy
         $user =new User();
         $sid="AC2aec24735743905f9787c482c8ab8ad3";
@@ -96,7 +99,8 @@ class SecurityController extends AbstractController
             
             }
          return $this->render('security/registration.html.twig' , [
-             'form' => $form->createView()
+             'form' => $form->createView(),
+             'pubBack' => $pubBack
          ]);
 
     }
@@ -136,8 +140,13 @@ class SecurityController extends AbstractController
     public function login(){
 
         // $this->addFlash('danger', 'you can\'t have  access to your account , you may be blocked or you didn\'t activate your account yet  ');
-      
-        return $this->render('security\login.html.twig');
+
+        $repo = $this->getDoctrine()->getRepository(PubBack::class) ; 
+        $pubBack = $repo->findAll() ;
+        return $this->render('security\login.html.twig' , [
+           
+             'pubBack' => $pubBack
+         ]);
  
      
     }

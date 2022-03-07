@@ -242,9 +242,12 @@ public function RefuseEvent(Calendar $calendar)
     {
         $repo = $this->getDoctrine()->getRepository(Calendar::class) ; 
         $calendar = $repo->findById($id) ; 
+        $repo1 = $this->getDoctrine()->getRepository(PubBack::class) ; 
+        $pubBack = $repo1->findAll() ;
 
       
         return $this->render('calendar/eventShow.html.twig', [
+            'pubBack'=>$pubBack,
             'calendar' => $calendar,
             'participants' => $participants->findAll()
 
