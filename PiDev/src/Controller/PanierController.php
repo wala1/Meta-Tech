@@ -512,4 +512,45 @@ class PanierController extends AbstractController
        ]);
    }
 
+
+
+
+
+
+
+    /**
+     * @Route("/add_to_cart_new", name="add_to_cart_new") 
+     */
+    public function ajouterProduitPanier2(): Response
+    {
+        if (isset($_GET['submit'])) {
+            $idProd = $_GET['idProd'] ;
+            $qty = $_GET['quantityProd'] ;
+            $produit = $this->getDoctrine()->getRepository(Produit::class)->find($idProd);
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            
+            //$idUser = $user->getId();
+
+            $panier = new Panier() ; 
+            $panier->setQuantite($qty) ;
+            $panier->setUserPanier($user) ;
+            $panier->setProduitPanier($produit) ; 
+            
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($panier) ; 
+            $em->flush() ;
+
+            return $this->redirectToRoute('showCart') ; 
+            
+        } else {
+            echo "NOOOOOOOOOO" ; 
+        }
+        
+        
+
+    }
+
+
+
 }
