@@ -1,0 +1,143 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	<title>Blog</title>
+{% endblock %}
+
+{% block body %}
+
+            
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h1 class="mb-sm-0 font-size-18">Blog</h1>
+                                    
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">LISTE DES CLIENTS</a></li>
+                                            <li class="breadcrumb-item active">LISTE DES PUBL</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <h2 class="card-title">les listes de Publications <span class="text-muted fw-normal ms-2">(834)</span></h2>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                    <div>
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="apps-contacts-list.html" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="apps-contacts-grid.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                    </div>
+                                    
+                                    <div class="dropdown">
+                                        <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bx bx-dots-horizontal-rounded"></i>
+                                        </a>
+                                      
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                    
+
+
+
+                        <div class="table-responsive mb-4">
+                            <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+
+                 <thead>
+                    <tr>
+                        <th >id</th>
+                        <th>nom utilisateur</th>
+
+                        <th> 
+                        <a href="#" class="text-body">titre de la publication</a>
+                        </th>
+                       
+                        <th>Image</th>
+                        <th >date et heure de la publication</th>  
+                        <th style="width: 80px; min-width: 80px;"></th> 
+                    </tr>
+                </thead>
+
+
+
+
+           <tbody>
+             {%  for publication in  publications  %}
+         <tr>
+            <td  scope="col">{{ publication.id }} </td>
+            <td  scope="col">{{publication.utilisateur.username}}
+            </td>
+        
+                <td scope="col">{{publication.titrePubl}}</td>
+                
+                <td scope="col"> <img src="{{publication.imagePubl}}" width="100px" ></td>
+                <td scope="col">{{publication.tempsPubl | date }}</td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bx bx-dots-horizontal-rounded"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            
+                            <li><a class="dropdown-item" href=" {{ path('delete_publ_back', {'id' : publication.id }) }} ">Supprimer Publication</a></li>
+                            <li><a class="dropdown-item" href=" {{ path('consulter_publ', {'id' : publication.id }) }} ">Consulter Publication</a></li>
+                        </ul>
+                    </div>
+                </td>
+                                                                
+                                                            
+                                   
+                                  </tr>
+                                  {%  endfor %}
+                                </tbody>
+
+                                
+                            </table>
+                            <!-- end table -->
+                        </div>
+                        <!-- end table responsive -->
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+                
+                {% endblock %} 
