@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
@@ -31,21 +33,58 @@ class User implements UserInterface
 
      
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user_commande")
+     */
+    private $commande;
+
+
     public function __construct()
     {
         $this->panier = new ArrayCollection();
         $this->calendars = new ArrayCollection();
         $this->participants = new ArrayCollection();
         
+        $this->commande = new ArrayCollection();
     }
 
     /**
      * @return Collection|Panier[]
      */
-    public function getPanier()
+    public function getPanier(): Collection
     {
         return $this->panier;
     }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommande(): Collection
+    {
+        return $this->commande;
+    }
+
+    public function addPanier(Panier $panier): self
+    {
+        if (!$this->panier->contains($panier)) {
+            $this->panier[] = $panier;
+            $panier->setUserPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->panier->removeElement($panier)) {
+            if ($panier->getUserPanier() === $this) {
+                $panier->setUserPanier(null);
+            }
+        }
+
+        return $this;
+    }
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -416,6 +455,8 @@ class User implements UserInterface
         return $this;
 
 
+
+  
 
 }
 }

@@ -23,7 +23,7 @@
         }
     </script>
     </head>
-    <body data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader page-with-filter page-products categorypath-all-categories category-all-categories catalog-category-view page-layout-2columns-left">
+    <body  style="font-family: Mark\ Pro,sans-serif;"  data-container="body" data-mage-init='{"loaderAjax": {}, "loader": { "icon": "https://blueskytechmage.com/ohey/static/version1640184821/frontend/bluesky/bluesky_ohey_carparts_01/en_US/images/loader-2.gif"}}' id="html-body" class="bluesky-page-preloader page-with-filter page-products categorypath-all-categories category-all-categories catalog-category-view page-layout-2columns-left">
         <div class="enable-sticky-header"></div>
 
 <script type="text/x-magento-init">
@@ -101,7 +101,8 @@
                 <p>
                     <strong>JavaScript seems to be disabled in your browser.</strong>
                     <span>
-                        For the best experience on our site, be sure to turn on Javascript in your browser.                    </span>
+                        For the best experience on our site, be sure to turn on Javascript in your browser.                    
+                    </span>
                 </p>
             </div>
         </div>
@@ -119,7 +120,8 @@
 			<div class="content">
 								<h2>Get Our Email Letter</h2>
 <p>Subscribe to the Ohey mailing list to receive updates on new arrivals, special offers and other discount information.</p>			</div>
-			<form class="form subscribe" novalidate action="https://blueskytechmage.com/ohey/en11/newsletter/subscriber/new/" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="newsletter-validate-popup">
+			<form class="form subscribe" novalidate action="" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="newsletter-validate-popup">
+				<form class="form subscribe" novalidate action="https://blueskytechmage.com/ohey/en11/newsletter/subscriber/new/" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="newsletter-validate-popup">
 				<div class="field newsletter">
 					<div class="control">
 						<input name="email" type="email" id="newsletter-popup" placeholder="Enter your email address" data-validate="{required:true, 'validate-email':true}"/>
@@ -319,24 +321,13 @@
 <div data-block="minicart" class="minicart-wrapper">
     <a class="action showcart" href="checkout/cart/index.html" data-bind="scope: 'minicart_content'">
 		<span class="counter qty empty" data-bind="css: { empty: !!getCartParam('summary_count') == false }, blockLoader: isLoading">
-				<!-- <span class="icon-cart-header"><i class="menu-icon  icon flaticon-shopping-cart6">&nbsp;</i></span> -->
 				<span class="total-mini-cart-item">
-				<!-- ko if: getCartParam('summary_count') -->
-					<!-- ko text: getCartParam('summary_count') --><!-- /ko -->
-				<!-- /ko -->
-				<!-- ko if: !getCartParam('summary_count') -->
-					0
-				<!-- /ko -->
 				</span>
 		</span>
 		<span class="mini-cart-text"> 
 			<span class="content-cart hidden-xs">
-				<!-- ko if: getCartParam('subtotal') -->
 				<span class="total-mini-cart-price" data-bind="html: getCartParam('subtotal')"></span>
-				<!-- /ko -->
-				<!-- ko if: !getCartParam('subtotal') -->
-					<span class="total-mini-cart-price"><span class="price">$0.00</span></span>
-				<!-- /ko -->
+					<span class="total-mini-cart-price"><span class="price">$0.000</span></span>
 			</span>
 		</span>
     </a>
@@ -604,219 +595,59 @@
     <span>
         Skip to Content    </span>
 </a>
-</div></div></header><div class="category-view-breadcrumbs-banner"><div class="page-title-wrapper">
-    <h1 class="page-title" id="page-title-heading" aria-labelledby="page-title-heading&#x20;toolbar-amount">
-        <span class="base" data-ui-id="page-title-wrapper">Events</span>    </h1>
-    </div>
-<div class="breadcrumbs">
-    <ul class="items">
-                    <li class="item home">
-                            <a href="index.html" title="Go to Home Page">
-                    Home                </a>
-                        </li>
-                    <li class="item category168">
-                            <strong>  Our Events</strong>
-                        </li>
-            </ul>
-</div>
-</div><main id="maincontent" class="page-main"><a id="contentarea" tabindex="-1"></a>
-<div class="page messages"><div data-placeholder="messages"></div>
-<div data-bind="scope: 'messages'">
-    <!-- ko if: cookieMessages && cookieMessages.length > 0 -->
-    <div aria-atomic="true" role="alert" data-bind="foreach: { data: cookieMessages, as: 'message' }" class="messages">
-        <div data-bind="attr: {
-            class: 'message-' + message.type + ' ' + message.type + ' message',
-            'data-ui-id': 'message-' + message.type
-        }">
-            <div data-bind="html: $parent.prepareMessageForHtml(message.text)"></div>
+</div></div></header>
+
+        <center>
+        <div style="width: 10cm; margin-top: 0cm; margin-bottom: -2cm; margin-left: 2.2cm;">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
         </div>
-    </div>
-    <!-- /ko -->
+        </center>
 
-    <!-- ko if: messages().messages && messages().messages.length > 0 -->
-    <div aria-atomic="true" role="alert" class="messages" data-bind="foreach: {
-        data: messages().messages, as: 'message'
-    }">
-        <div data-bind="attr: {
-            class: 'message-' + message.type + ' ' + message.type + ' message',
-            'data-ui-id': 'message-' + message.type
-        }">
-            <div data-bind="html: $parent.prepareMessageForHtml(message.text)"></div>
+<main id="maincontent" class="page-main">
+
+
+{% set panierExiste = false %}
+{% set userId = user.getId() %}
+{% for Panier in panier %}
+    {% if Panier.getUserPanier().getId() == userId%}
+        {% set panierExiste = true %}
+    {%endif%}
+{% endfor%}
+
+
+
+
+                            <!-- ============================================================== -->
+                            <!-- mode == "cart" -->
+                            <!-- ============================================================== -->
+
+
+
+
+
+
+        <a id="contentarea" tabindex="-1"></a>
+        <div class="page-title-wrapper" style="position: relative; width: 100%; height: auto; margin-top: 5rem; ">
+            <h1 class="page-title" style="font-size: 5rem; line-height: 1; margin-bottom: 0; font-weight: 500;">
+                <span class="base" data-ui-id="page-title-wrapper" style="font-size: 5rem; line-height: 1; margin-bottom: 0; font-weight: 500;">
+                    {% if mode == "store" %}
+                        Express Checkout
+                    {% else %}
+                        <center style="marging-left:12.6cm;"> Shopping Cart </center>
+                    {% endif %}
+                </span>   
+            </h1>
         </div>
-    </div>
-    <!-- /ko -->
-</div>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                        "messages": {
-                            "component": "Magento_Theme/js/view/messages"
-                        }
-                    }
-                }
-            }
-    }
-</script>
-</div><div class="columns"><div class="column main"><input name="form_key" type="hidden" value="vedeAn56iqjqPQd2"/><div id="authenticationPopup" data-bind="scope:'authenticationPopup', style: {display: 'none'}">
-        <script>window.authenticationPopup={"autocomplete":"off","customerRegisterUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/create\/","customerForgotPasswordUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/customer\/account\/forgotpassword\/","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script>    <!-- ko template: getTemplate() --><!-- /ko -->
-    <script type="text/x-magento-init">
-        {
-            "#authenticationPopup": {
-                "Magento_Ui/js/core/app": {"components":{"authenticationPopup":{"component":"Magento_Customer\/js\/view\/authentication-popup","children":{"messages":{"component":"Magento_Ui\/js\/view\/messages","displayArea":"messages"},"captcha":{"component":"Magento_Captcha\/js\/view\/checkout\/loginCaptcha","displayArea":"additional-login-form-fields","formId":"user_login","configSource":"checkout"},"amazon-button":{"component":"Amazon_Login\/js\/view\/login-button-wrapper","sortOrder":"0","displayArea":"additional-login-form-fields","config":{"tooltip":"Securely login to our website using your existing Amazon details.","componentDisabled":true}}}}}}            },
-            "*": {
-                "Magento_Ui/js/block-loader": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fstatic\u002Fversion1640184821\u002Ffrontend\u002Fbluesky\u002Fbluesky_ohey_carparts_01\u002Fen_US\u002Fimages\u002Floader\u002D1.gif"
-            }
-        }
-    </script>
-</div>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/section-config": {
-                "sections": {"stores\/store\/switch":["*"],"stores\/store\/switchrequest":["*"],"directory\/currency\/switch":["*"],"*":["messages"],"customer\/account\/logout":["*","recently_viewed_product","recently_compared_product","persistent"],"customer\/account\/loginpost":["*"],"customer\/account\/createpost":["*"],"customer\/account\/editpost":["*"],"customer\/ajax\/login":["checkout-data","cart","captcha"],"catalog\/product_compare\/add":["compare-products"],"catalog\/product_compare\/remove":["compare-products"],"catalog\/product_compare\/clear":["compare-products"],"sales\/guest\/reorder":["cart"],"sales\/order\/reorder":["cart"],"checkout\/cart\/add":["cart","directory-data"],"checkout\/cart\/delete":["cart"],"checkout\/cart\/updatepost":["cart"],"checkout\/cart\/updateitemoptions":["cart"],"checkout\/cart\/couponpost":["cart"],"checkout\/cart\/estimatepost":["cart"],"checkout\/cart\/estimateupdatepost":["cart"],"checkout\/onepage\/saveorder":["cart","checkout-data","last-ordered-items"],"checkout\/sidebar\/removeitem":["cart"],"checkout\/sidebar\/updateitemqty":["cart"],"rest\/*\/v1\/carts\/*\/payment-information":["cart","last-ordered-items","captcha","instant-purchase"],"rest\/*\/v1\/guest-carts\/*\/payment-information":["cart","captcha"],"rest\/*\/v1\/guest-carts\/*\/selected-payment-method":["cart","checkout-data"],"rest\/*\/v1\/carts\/*\/selected-payment-method":["cart","checkout-data","instant-purchase"],"customer\/address\/*":["instant-purchase"],"customer\/account\/*":["instant-purchase"],"vault\/cards\/deleteaction":["instant-purchase"],"multishipping\/checkout\/overviewpost":["cart"],"paypal\/express\/placeorder":["cart","checkout-data"],"paypal\/payflowexpress\/placeorder":["cart","checkout-data"],"paypal\/express\/onauthorization":["cart","checkout-data"],"persistent\/index\/unsetcookie":["persistent"],"review\/product\/post":["review"],"wishlist\/index\/add":["wishlist"],"wishlist\/index\/remove":["wishlist"],"wishlist\/index\/updateitemoptions":["wishlist"],"wishlist\/index\/update":["wishlist"],"wishlist\/index\/cart":["wishlist","cart"],"wishlist\/index\/fromcart":["wishlist","cart"],"wishlist\/index\/allcart":["wishlist","cart"],"wishlist\/shared\/allcart":["wishlist","cart"],"wishlist\/shared\/cart":["cart"],"braintree\/paypal\/placeorder":["cart","checkout-data"],"braintree\/googlepay\/placeorder":["cart","checkout-data"]},
-                "clientSideSections": ["checkout-data","cart-data","chatData"],
-                "baseUrls": ["https:\/\/blueskytechmage.com\/ohey\/en11\/"],
-                "sectionNames": ["messages","customer","compare-products","last-ordered-items","cart","directory-data","captcha","instant-purchase","loggedAsCustomer","persistent","review","wishlist","chatData","recently_viewed_product","recently_compared_product","product_data_storage","paypal-billing-agreement"]            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/customer-data": {
-                "sectionLoadUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Fsection\u002Fload\u002F",
-                "expirableSectionLifetime": 60,
-                "expirableSectionNames": ["cart","persistent"],
-                "cookieLifeTime": "3600",
-                "updateSessionUrl": "https\u003A\u002F\u002Fblueskytechmage.com\u002Fohey\u002Fen11\u002Fcustomer\u002Faccount\u002FupdateSession\u002F"
-            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Customer/js/invalidation-processor": {
-                "invalidationRules": {
-                    "website-rule": {
-                        "Magento_Customer/js/invalidation-rules/website-rule": {
-                            "scopeConfig": {
-                                "websiteId": "5"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-</script>
-<script type="text/x-magento-init">
-    {
-        "body": {
-            "pageCache": {"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/page_cache\/block\/render\/id\/168\/","handles":["default","catalog_category_view","catalog_category_view_type_layered","catalog_category_view_type_layered_without_children","catalog_category_view_displaymode_products","catalog_category_view_id_168"],"originalRequest":{"route":"catalog","controller":"category","action":"view","uri":"\/ohey\/en11\/all-categories.html"},"versionCookieName":"private_content_version"}        }
-    }
-</script>
 
-                <div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":{"mode":"product_list_mode","direction":"product_list_dir","order":"product_list_order","limit":"product_list_limit","modeDefault":"grid","directionDefault":"asc","orderDefault":"position","limitDefault":12,"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/all-categories.html","formKey":"vedeAn56iqjqPQd2","post":false}}'>
-                        <div class="modes">
-                            <strong class="modes-label" id="modes-label">View as</strong>
-                                                <strong title="Grid" class="modes-mode active mode-grid" data-value="grid">
-                        <span>Grid</span>
-                    </strong>
-                                                                <a class="modes-mode mode-list" title="List" href="#" data-role="mode-switcher" data-value="list" id="mode-list" aria-labelledby="modes-label mode-list">
-                        <span>List</span>
-                    </a>
-                                        </div>
-        
-        <p class="toolbar-amount" id="toolbar-amount">
-            Items <span class="toolbar-number">1</span>-<span class="toolbar-number">12</span> of <span class="toolbar-number">14</span>    </p>
 
-        
-    
-        
-                <div class="pages">
-            <strong class="label pages-label" id="paging-label">Page</strong>
-            <ul class="items pages-items" aria-labelledby="paging-label">
-            
-            
-            
-                                                <li class="item current">
-                        <strong class="page">
-                            <span class="label">You&#039;re currently reading page</span>
-                            <span>1</span>
-                        </strong>
-                    </li>
-                                                                <li class="item">
-                        <a href="all-categories905b.html?p=2" class="page">
-                            <span class="label">Page</span>
-                            <span>2</span>
-                        </a>
-                    </li>
-                            
-            
-            
-                            <li class="item pages-item-next">
-                                        <a class="action  next" href="all-categories905b.html?p=2" title="Next">
-                        <span class="label">Page</span>
-                        <span>Next</span>
-                    </a>
-                </li>
-                        </ul>
-        </div>
-        
-    
-    
-		<div class="grid-mode-show-type-products">
-			<a href="#" class="grid-mode-2" data-grid-mode="2">2</a>
-			<a href="#" class="grid-mode-3 actived" data-grid-mode="3">3</a>
-			<a href="#" class="grid-mode-4" data-grid-mode="4">4</a>
-			<a href="#" class="grid-mode-5" data-grid-mode="5">5</a>
-		</div>
-        <div class="field limiter">
-    <label class="label" for="limiter">
-        <span>Show</span>
-    </label>
-    <div class="control">
-        <select id="limiter" data-role="limiter" class="limiter-options">
-                            <option value="12" selected="selected">
-                    12                </option>
-                            <option value="24">
-                    24                </option>
-                            <option value="36">
-                    36                </option>
-                    </select>
-    </div>
-    <span class="limiter-text">per page</span>
-</div>
 
-                    <div class="toolbar-sorter sorter">
-    <label class="sorter-label" for="sorter">Sort By</label>
-    <select id="sorter" data-role="sorter" class="sorter-options">
-                    <option value="position" selected="selected">
-                Position            </option>
-                    <option value="name">
-                Product Name            </option>
-                    <option value="price">
-                Price            </option>
-                    <option value="color">
-                Color            </option>
-            </select>
-            <a title="Set&#x20;Descending&#x20;Direction" href="#" class="action sorter-action sort-asc" data-role="direction-switcher" data-value="desc">
-            <span>Set Descending Direction</span>
-        </a>
-    </div>
-            </div>
-    <script type="text/x-magento-init">
-    {
-        "body": {
-            "addToWishlist": {"productType":["simple","virtual","downloadable","bundle","grouped","configurable"]}        }
-    }
-</script>
 
-<div class="products wrapper grid products-grid">
-<ol class="products list items product-items container-products-switch" data-view-mode="3">
+
 
 
     <!-- ===============PRODUITS======================= -->
@@ -827,19 +658,66 @@
     			<div class="product actions product-item-actions">
     			     <div data-role="add-to-links" class="actions-secondary visible-hover">
 
-    				    <a href="#" class="action towishlist" title="Add&#x20;to&#x20;Wish&#x20;List" aria-label="Add&#x20;to&#x20;Wish&#x20;List" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/wishlist\/index\/add\/","data":{"product":91,"uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' data-action="add-to-wishlist" role="button">
+{% if panierExiste == true %}
 
                         <span>Wish List</span>
                         </a>
 
-                        <a href="#" class="action tocompare" title="Add to Compare" aria-label="Add to Compare" data-post='{"action":"https:\/\/blueskytechmage.com\/ohey\/en11\/catalog\/product_compare\/add\/","data":{"product":"91","uenc":"aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s"}}' role="button">
 
-                        <span>Add to Compare</span>
-                        </a>
-    				</div>
+{% if mode == "cart" %}
 
-                    <div class="actions-primary visible-hover">
-                        <form data-role="tocart-form" data-product-sku="CP02" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbGwtY2F0ZWdvcmllcy5odG1s/product/91/" method="post">
+        
+        
+{%endif%}
+
+
+        <div class="cart table-wrapper" style="width: 33cm; margin-left: 1cm;">
+
+
+                                    <!-- ============================================================== -->
+                                    <!-- Cart table start from here -->
+                                    <!-- ============================================================== -->
+
+
+                        {% if mode == "cart" %}
+
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>Item</span></th>
+                                                                <th><span>Price</span></th>
+                                                                <th><span>Qty</span></th>
+                                                                <th><span>Subtotal</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% set panierId = "" %}
+                                                        {% for Panier in panier %}
+                                                            {% if Panier.getUserPanier().getId() == userId %}
+                                                            {% for produit in produits%}
+                                                                {% if Panier.getProduitPanier().getId() == produit.getId()%}
+                                                                {% set panierId = "#{Panier.getId()},#{panierId}" %}
+                                                                <tr>
+                                                                    <td>
+                                                                            <a href="product_show/{{produit.id}}" title="{{produit.nom_prod}}">
+                                                                            <span>
+                                                                                <span >
+                                                                                    <img src="{{produit.image_prod}}" width="100" height="100" alt="{{produit.nom_prod}}"/>
+                                                                                </span>
+                                                                            </span>
+                                                                            <div>
+                                                                                <strong>
+                                                                                    <a href="product_show/{{produit.id}}">{{produit.nom_prod}}</a>
+                                                                                </strong>
+                                                                            </div>
+                                                                    </td>
+
+                                                                    <th>
+                                                                        <span classe="price" id="Price1">{{produit.prix_prod}} $</span>
+                                                                    </th>
+                                                                    <th>{{Panier.quantite}}</th>
+                                                                    <th>{{produit.prix_prod * Panier.quantite}}</th>
+                                                                </tr>
 
         	               <input type="hidden" name="product" value="91">
         	               <input type="hidden" name="uenc" value="aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jaGVja291dC9jYXJ0L2FkZC91ZW5jL2FIUjBjSE02THk5aWJIVmxjMnQ1ZEdWamFHMWhaMlV1WTI5dEwyOW9aWGt2Wlc0eE1TOWhiR3d0WTJGMFpXZHZjbWxsY3k1b2RHMXMvcHJvZHVjdC85MS8,">
@@ -855,51 +733,67 @@
     				
             <a href="# "   class="product-photo photo product-item-photo product-list-image" tabindex="-1">
 
-    			
-                    <span class="product-image-container product-image-container-911653110027" >
+                                                            <tr class="item-actions">
+                                                                <td colspan="4">
+                                                                    <div class="actions-toolbar">
+                                                                        <div id="gift-options-cart-item-871" class="gift-options-cart-item">
+                                                                        </div>
+                                                                        <a href="update_produit_panier/{{Panier.id}}" title="Update item">
+                                                                            <span> Update item </span>
+                                                                        </a>
+                                                                        <a href="remove_produit_panier/{{Panier.id}}" title="Remove item">
+                                                                            <span> Remove item </span>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
 
-                        <span class="product-image-wrapper">
-                            <img    class="product-image-photo" src="{{ cal.imageEvent }}" loading="lazy" alt="AFe&#x20;&#x2013;&#x20;BladeRunner&#x20;Turbocharger"/>
 
-                        </span>
-                    </span>
+                                                            {% endif %}
+                                                            {% endfor %}
+                                                            {% endif %}
+                                                        {%endfor%}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
-                    <style>.product-image-container-911653110027{width:500px}.product-image-container-911653110027 span.product-image-wrapper{padding-bottom:100%}</style><script type="text&#x2F;javascript">prodImageContainers=document.querySelectorAll(".product-image-container-911653110027");for(var i=0;i<prodImageContainers.length;i++){prodImageContainers[i].style.width="500px";}prodImageContainersWrappers=document.querySelectorAll(".product-image-container-911653110027  span.product-image-wrapper");for(var i=0;i<prodImageContainersWrappers.length;i++){prodImageContainersWrappers[i].style.paddingBottom="100%";}
-                    </script>														
-
-                     
-
-    						
-                </a>
-    					<div class="product-label">															
-                        </div>
-    		</div>
-            
-            <div class="product details product-item-details">												 
-                <strong class="product name product-item-name">
-                    <a class="product-item-link" href="#">
+                                    <div>
+                                        <a href="/">
+                                            <button type="button">
+                                                <span>Continue Shopping</span>
+                                            </button>
+                                        </a>
+                                        <div style="position: relative; left: 22cm; top: -1.4cm;">
+                                            <a href="cart_clear">
+                                                <button type="button" name="update_cart_action" data-cart-empty="" value="empty_cart" title="Clear Shopping Cart" class="action clear" id="empty_cart_button">
+                                                    <span>Clear Shopping Cart</span>
+                                                </button>
+                                            </a>
+                                            <a href="command/{{userId}}">
+                                                <button type="button" data-role="proceed-to-checkout" title="Proceed&#x20;to&#x20;Checkout" class="action primary checkout">
+                                                    <span>Proceed to Checkout</span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
 
                         {{ cal.title }}
 
 
-                    </a>					
-                </strong>
-    			
-                <div class="product-reviews-summary short">
-                        <div class="rating-summary">
-                            <span class="label"><span>Rating:</span></span>
-                            <div class="rating-result" title="100%">
-                            <span style="width:100%"><span>100%</span></span>
-                        </div>
-                    </div>
-                    
-                    <div class="reviews-actions">
-                    <a class="action view" href="afe-bladerunner-turbocharger.html#reviews">
-                        1 <span>Review</span></a>
-                    </div>
-                </div>
-    			
-                <div class="price-box price-final_price" data-role="priceBox" data-product-id="91" data-price-box="product-id-91">    
+                                    </form>
+                                            <div id="gift-options-cart" data-bind="scope:'giftOptionsCart'">
+                                                    <!-- ko template: getTemplate() --><!-- /ko -->
+                                                    <script type="text/x-magento-init">
+                                                        {
+                                                            "#gift-options-cart": {
+                                                                "Magento_Ui/js/core/app": {"types":[],"components":{"giftOptionsCart":{"component":"Magento_GiftMessage\/js\/view\/gift-message","config":{"template":"Magento_GiftMessage\/gift-message","formTemplate":"Magento_GiftMessage\/gift-message-form"}}}}            }
+                                                        }
+                                                    </script>
+                                                    <script>window.giftOptionsConfig={"giftMessage":{"itemLevel":{"871":[]}},"isItemLevelGiftOptionsEnabled":false,"priceFormat":{"pattern":"$%s","precision":2,"requiredPrecision":2,"decimalSymbol":".","groupSymbol":",","groupLength":3,"integerRequired":false},"storeCode":"en11","isCustomerLoggedIn":false,"formKey":"e3ulpvJtGh654MxM","baseUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/"}</script></div>
+                                                    <script>require(['jquery','mage/mage'],function($){'use strict';var number_click=1;$(".qty-down-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('.control.qty .input-text.qty').val();val_input=parseInt(val_input);if(val_input<=number_click){val_input=number_click;}else{val_input=val_input-number_click;}$(this).closest('div.field').find('.control.qty .input-text.qty').val(val_input);return false;});$(".qty-up-fixed-onclick").click(function(){var val_input=$(this).closest('div.field').find('.control.qty .input-text.qty').val();val_input=parseInt(val_input);val_input=val_input+number_click;$(this).closest('div.field').find('.control.qty .input-text.qty').val(val_input);return false;});});</script>
+                                                </div>
+                                            </div>
+                                        </div>
 
                     <span class="price-container price-final_price&#x20;tax&#x20;weee">
                     <span id="product-price-91" data-price-amount="900" data-price-type="finalPrice" class="price-wrapper "><span class="price">{{ cal.description }}</span>
@@ -918,326 +812,280 @@
 </div>
     
 
+                                        
+                                        <!-- ============================================================== -->
+                                        <!-- mode == "store" -->
+                                        <!-- ============================================================== -->
 
 
+                    {% elseif mode =="store" %}
 
-
-
-            <div class="toolbar toolbar-products" data-mage-init='{"productListToolbarForm":{"mode":"product_list_mode","direction":"product_list_dir","order":"product_list_order","limit":"product_list_limit","modeDefault":"grid","directionDefault":"asc","orderDefault":"position","limitDefault":12,"url":"https:\/\/blueskytechmage.com\/ohey\/en11\/all-categories.html","formKey":"vedeAn56iqjqPQd2","post":false}}'>
-                        <div class="modes">
-                            <strong class="modes-label" id="modes-label">View as</strong>
-                                                <strong title="Grid" class="modes-mode active mode-grid" data-value="grid">
-                        <span>Grid</span>
-                    </strong>
-                                                                <a class="modes-mode mode-list" title="List" href="#" data-role="mode-switcher" data-value="list" id="mode-list" aria-labelledby="modes-label mode-list">
-                        <span>List</span>
-                    </a>
+                            <div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
+                                <div class="container">
+                                <div class="row align-items-start">
+                                    <div class="col" style="width: 10cm;margin-left: -1.1cm;margin-right: -5cm;">
+                                    <div class="card border-light mb-3" style="max-width: 10cm;">
+                                            <center><div class="card-header" style="background: #fffdfd;width: 9cm;"><h5 style="margin-left:-5cm;" class="card-title border-light mb-3">Shipping Address</h5></div>
+                                            </center>
+                                            <div class="card-body">
+                                                <div id="checkout-step-shipping" class="step-content" data-role="content">
+                                                <form class="form form-login" data-role="email-width-possible-login" data-bind="submit:login" method="post" style="display: block;">
+                                                    ***************************
+                                                </form>
+                                                <form class="form form-shipping-address" id="co-shipping-form" data-bind="afterRender: autoFillAddress, attr: {'data-hasrequired': $t('* Required Fields')}" data-hasrequired="* Required Fields" style="display: block;">
+                                                    ****************************
+                                                </form>
+                                            </div>
                                         </div>
-        
-        <p class="toolbar-amount" id="toolbar-amount">
-            Items <span class="toolbar-number">1</span>-<span class="toolbar-number">12</span> of <span class="toolbar-number">14</span>    </p>
+                                        </div>
+                                    </div>
 
-        
-    
-        
-                <div class="pages">
-            <strong class="label pages-label" id="paging-label">Page</strong>
-            <ul class="items pages-items" aria-labelledby="paging-label">
-            
-            
-            
-                                                <li class="item current">
-                        <strong class="page">
-                            <span class="label">You&#039;re currently reading page</span>
-                            <span>1</span>
-                        </strong>
-                    </li>
-                                                                <li class="item">
-                        <a href="all-categories905b.html?p=2" class="page">
-                            <span class="label">Page</span>
-                            <span>2</span>
-                        </a>
-                    </li>
-                            
-            
-            
-                            <li class="item pages-item-next">
-                                        <a class="action  next" href="all-categories905b.html?p=2" title="Next">
-                        <span class="label">Page</span>
-                        <span>Next</span>
-                    </a>
-                </li>
-                        </ul>
-        </div>
-        
-    
-    
-		<div class="grid-mode-show-type-products">
-			<a href="#" class="grid-mode-2" data-grid-mode="2">2</a>
-			<a href="#" class="grid-mode-3 actived" data-grid-mode="3">3</a>
-			<a href="#" class="grid-mode-4" data-grid-mode="4">4</a>
-			<a href="#" class="grid-mode-5" data-grid-mode="5">5</a>
-		</div>
-        <div class="field limiter">
-    <label class="label" for="limiter">
-        <span>Show</span>
-    </label>
-    <div class="control">
-        <select id="limiter" data-role="limiter" class="limiter-options">
-                            <option value="12" selected="selected">
-                    12                </option>
-                            <option value="24">
-                    24                </option>
-                            <option value="36">
-                    36                </option>
-                    </select>
-    </div>
-    <span class="limiter-text">per page</span>
-</div>
 
-                    <div class="toolbar-sorter sorter">
-    <label class="sorter-label" for="sorter">Sort By</label>
-    <select id="sorter" data-role="sorter" class="sorter-options">
-                    <option value="position" selected="selected">
-                Position            </option>
-                    <option value="name">
-                Product Name            </option>
-                    <option value="price">
-                Price            </option>
-                    <option value="color">
-                Color            </option>
-            </select>
-            <a title="Set&#x20;Descending&#x20;Direction" href="#" class="action sorter-action sort-asc" data-role="direction-switcher" data-value="desc">
-            <span>Set Descending Direction</span>
-        </a>
-    </div>
-            </div>
-            <script type="text/x-magento-init">
-        {
-            "[data-role=tocart-form], .form.map.checkout": {
-                "catalogAddToCart": {
-                    "product_sku": "CP13"
-                }
-            }
-        }
-        </script>
-    <script type="text/x-magento-init">
-    {
-        "body": {
-            "requireCookie": {"noCookieUrl":"https:\/\/blueskytechmage.com\/ohey\/en11\/cookie\/index\/noCookies\/","triggers":[".action.towishlist"],"isRedirectCmsPage":true}        }
-    }
-</script>
-</div><div class="sidebar sidebar-main">
-    <div class="block filter" id="layered-filter-block" data-mage-init='
-    {
-        "collapsible":
-        {
-            "openedState": "active",
-            "collapsible": true,
-            "active": false,
-            "collateral":
-            {
-                "openedState": "filter-active",
-                "element": "body"
-            }
-        }
-    }'>
-                <div class="block-title filter-title" data-count="0">
-            <strong data-role="title">Shop By</strong>
-        </div>
-        <div class="block-content filter-content">
-            
-                                                                                                                            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle">Events Options</strong>
-                        <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='
-                        {
-                            "accordion":
-                            {
-                                "openedState": "active",
-                                "collapsible": true,
-                                "active": false,
-                                "multipleCollapsible": false
-                            }
-                        }'>
-                                            <div data-role="collapsible" class="filter-options-item">
-                        <div data-role="title" class="filter-options-title"><strong>Events</strong></div>
-                        <div data-role="content" class="filter-options-content">
-<ol class="items">
-    		        {# <li class="item">
-                            <a href="all-categoriesf5d2.html?price=100-200" rel="nofollow">
-                    <span class="price">$100.00</span> - <span class="price">$199.99</span>											<span class="count">2							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categoriesd3cd.html?price=200-300" rel="nofollow">
-                    <span class="price">$200.00</span> - <span class="price">$299.99</span>											<span class="count">2							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categoriesb8cb.html?price=300-400" rel="nofollow">
-                    <span class="price">$300.00</span> - <span class="price">$399.99</span>											<span class="count">2							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categories4528.html?price=400-500" rel="nofollow">
-                    <span class="price">$400.00</span> - <span class="price">$499.99</span>											<span class="count">5							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categories7ab6.html?price=900-1000" rel="nofollow">
-                    <span class="price">$900.00</span> and above											<span class="count">3							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li> #}
-    </ol>
-</div>
-                    </div>
-                                                                                                                                            <div data-role="collapsible" class="filter-options-item">
-                        <div data-role="title" class="filter-options-title"><strong>Events Type</strong></div>
-                        <div data-role="content" class="filter-options-content">
-<ol class="items">
-    		        {# <li class="item">
-                            <a href="all-categoriese34f.html?product_brand=1" rel="nofollow">
-                    Brand 1											<span class="count">3							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categories2206.html?product_brand=2" rel="nofollow">
-                    Brand-2											<span class="count">3							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categoriesa540.html?product_brand=3" rel="nofollow">
-                    Brand-3											<span class="count">3							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categoriesf9fd.html?product_brand=4" rel="nofollow">
-                    Brand-4											<span class="count">1							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categories4fe2.html?product_brand=5" rel="nofollow">
-                    Brand-5											<span class="count">3							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li>
-    		        <li class="item">
-                            <a href="all-categoriesf83d.html?product_brand=6" rel="nofollow">
-                    Brand-6											<span class="count">1							  <span class="filter-count-label">
-								 item</span></span>
-					                </a>
-                    </li> #}
-    </ol>
-</div>
-                    </div>
+                                    <div class="col" style="margin-right: -5cm;">
+                                    <div class="col-6 col-sm-4" style="width: 11cm">
+                                        <div class="card border-light mb-3" style="max-width: 11cm;">
+                                        <center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h5 style="margin-left:-4.5cm;" class="card-title">Payment Method</h5></div>
+                                        </center>
+                                        <div class="card-body">
+                                        <div id="checkout-step-payment" class="step-content" data-role="content" role="tabpanel" aria-hidden="false">
+                                                <form id="co-payment-form" class="form payments" novalidate="novalidate" >
+                                                    ****************************
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="col-6 col-sm-4"  style="width: 11cm">
+                                        <div class="card border-light mb-3" style="max-width: 11cm;">
+                                        <center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h5 style="margin-left:-4.5cm;" class="card-title">Shipping Method</h5></div>
+                                        </center>
+                                        <div class="card-body">
+                                        <div class="checkout-shipping-method" >
+                                            <form style="-webkit-tap-highlight-color: rgba(0,0,0,0)" id="co-shipping-method-form" class="form methods-shipping" novalidate="novalidate" data-bind="submit: setShippingInformation" >
+                                                **************************
+
+                                            </form>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+
+                                        <div class="col" style="margin-right: -5cm;">
+                                            <div class="col-6 col-sm-4" style="width: 11cm">
+                                                <div class="card border-light mb-3" style="max-width: 10cm;">
+                                                    <center>
+                                                        <div class="card-header" style="background: #fffdfd;width: 8cm;">
+                                                            <h5 style="margin-left:-4.5cm;" class="card-title" style="font-weight: 700;font-family: Mark\ Pro,sans-serif;">
+                                                                Order Summary
+                                                            </h5>
                                                         </div>
-                    </div>
-    </div>
-</div><div class="sidebar sidebar-additional"><div class="block block-compare" data-bind="scope: 'compareProducts'" data-role="compare-products-sidebar">
-    
-    <!-- ko if: compareProducts().count -->
-    <div class="block-content no-display" aria-labelledby="block-compare-heading" data-bind="css: {'no-display': !compareProducts().count}">
-        <ol id="compare-items" class="product-items product-items-names" data-bind="foreach: compareProducts().items">
-                <li class="product-item">
-                    <input type="hidden" class="compare-item-id" data-bind="value: id"/>
-                    <strong class="product-item-name">
-                        <a data-bind="attr: {href: product_url}, html: name" class="product-item-link"></a>
-                    </strong>
-                   
-                </li>
-        </ol>
-       
-    </div>
-    <!-- /ko -->
-    <!-- ko ifnot: compareProducts().count -->
-    <!-- /ko -->
-</div>
-<script type="text/x-magento-init">
-{"[data-role=compare-products-sidebar]": {"Magento_Ui/js/core/app": {"components":{"compareProducts":{"component":"Magento_Catalog\/js\/view\/compare-products"}}}}}
-</script>
-    <div class="block block-wishlist" data-bind="scope: 'wishlist'">
-        <div class="block-title">
-            <strong role="heading" aria-level="2">My Wish List</strong>
-            <!-- ko if: wishlist().counter -->
-            <span data-bind="text: wishlist().counter" class="counter"></span>
-            <!-- /ko -->
+                                                    </center>
+                                                    <div class="card-body">
+                                                        <div class="opc-block-summary" data-bind="blockLoader: isLoading" style="background: #fffdfd; padding: 24px 2px; margin: 0 0 24px;">
+                                                            <div class="block items-in-cart" data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': isItemsBlockExpanded()}}" data-collapsible="true" role="tablist">
+                                                                <div class="title" data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0">
+                                                                    {% set len = 0 %}
+                                                                    {% for Panier in panier %}
+                                                                        {% if Panier.getUserPanier().getId() == userId %}
+                                                                            {% set len = len +1 %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+
+                                                                    <strong role="heading" aria-level="1">
+                                                                        <span data-bind="text: getCartSummaryItemsCount()">{{ len }}</span>
+                                                                        <span>Item in Cart</span>
+                                                                        
+                                                                    </strong>
+                                                                </div>
+                                                                <div class="content minicart-items" data-role="content" role="tabpanel" aria-hidden="true" style="display: block;">
+                                                                    <div class="minicart-items-wrapper">
+                                                                        <ol class="minicart-items">
+                                                                            {% set panierId = "" %}
+                                                                            {% for Panier in panier %}
+                                                                                {% if Panier.getUserPanier().getId() == userId %}
+                                                                                {% set len = len +1 %}
+                                                                                    {% for produit in produits%}
+                                                                                        {% if Panier.getProduitPanier().getId() == produit.getId()%}
+                                                                                            {% set panierId = "#{Panier.getId()},#{panierId}" %}
+                                                                                                <li class="product-item">
+                                                                                                    <div class="product">
+                                                                                                        <span class="product-image-container" data-bind="attr: {'style': 'height: ' + getHeight($parents[1])/2 + 'px; width: ' + getWidth($parents[1])/2 + 'px;' }" style="height: 70px; width: 70px;" >
+                                                                                                            <span class="product-image-wrapper">
+                                                                                                                <img src="{{produit.image_prod}}" width="140" height="140" alt="Bosal – Catalytic Converter Gauge Kit" title="Bosal – Catalytic Converter Gauge Kit">
+                                                                                                            </span>
+                                                                                                        </span>
+                                                                                                        <div class="product-item-details">
+                                                                                                            <div class="product-item-inner">
+                                                                                                                <div class="product-item-name-block">
+                                                                                                                    <strong class="product-item-name"><a href="http://127.0.0.1:8000/product_show/{{produit.id}}" >{{produit.nom_prod}}</a></strong>
+                                                                                                                    <div class="details-qty">
+                                                                                                                        <span class="label">
+                                                                                                                            <span>Qty</span>
+                                                                                                                        </span>
+                                                                                                                        <input type="number" title="Qty" value="{{Panier.quantite}}" min="1" max="3">
+                                                                                                                        <span class="qty-button">
+                                                                                                                            <span class="increase" data-bind="attr: {action: 'increase', itemId: $parent.item_id}, click: updateQtyButton" action="increase" itemid="884">
+                                                                                                                                "&nbsp;"
+                                                                                                                            </span>
+                                                                                                                            <span class="decrease" data-bind="attr: {action: 'decrease', itemId: $parent.item_id}, click: updateQtyButton" action="decrease" itemid="884">
+                                                                                                                                "&nbsp;"
+                                                                                                                            </span>
+                                                                                                                        </span>
+                                                                                                                        <span class="error-message"></span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                                <div class="subtotal">
+                                                                                                                    <span class="price-excluding-tax" data-bind="attr:{'data-label': $t('Excl. Tax')}" data-label="Excl. Tax">
+                                                                                                                        <span class="cart-price">
+                                                                                                                            <span >${{produit.prix_prod}}</span>
+                                                                                                                        </span>
+                                                                                                                    </span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                        {% endif %}
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+
+                                                                        </ol>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <table class="data table table-totals">
+                                                                <caption></caption>
+                                                                <tbody>
+                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                                        <th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">Cart Subtotal</th>
+                                                                        <td class="amount" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                            {% set total = 0 %}
+                                                                            {% for Panier in panier %}
+                                                                                {% if Panier.getUserPanier().getId() == userId %}
+                                                                                    {% for produit in produits %}
+                                                                                        {% if produit.id == Panier.getProduitPanier().getId() %}
+                                                                                            {% set total = total + produit.prix_prod*Panier.quantite %}
+                                                                                        {% endif %}
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                            <span class="price" >${{ total}}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                                        <th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">
+                                                                            <span class="label" data-bind="i18n: title" style="margin: 0 0 8px; display: inline-block;">Shipping</span>
+                                                                            <span style="color: #999; display: block;font-style: italic; font-family: Mark Pro,sans-serif,'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; font-weight: 400;">
+                                                                                Flat Rate - Fixed
+                                                                            </span>
+                                                                        </th>
+                                                                        <td class="amount" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                            <span class="price" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">$5.00</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+                                                                        <th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">Order Total</th>
+                                                                        <td class="amount" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                            <span class="price" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">${{total + 5.00}}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                        <div class="order-comment-block" style="margin-top:-1cm">
+                                                            <label class="label" value="">
+                                                                <span data-bind="i18n: 'Order comment'">Order comment</span>    
+                                                            </label>
+                                                            <div class="control"> 
+                                                            <textarea maxlength="50" class="admin__control-textarea" data-bind=" value: value, valueUpdate: valueUpdate, hasFocus: focused, attr: { name: inputName, cols: cols, rows: rows, 'aria-describedby': noticeId, placeholder: placeholder, id: uid, disabled: disabled }" name="" cols="15" rows="2" aria-describedby="notice-C092642" id="C092642">
+                                                            </textarea> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="choice field" style="margin-top:0.5cm;margin-bottom:0.5cm;" >
+                                                            <input type="checkbox" class="checkbox" data-bind="
+                                                                checked: value,
+                                                                attr: {
+                                                                        id: uid,
+                                                                        disabled: disabled,
+                                                                        name: inputName,
+                                                                        'aria-describedby': getDescriptionId(),
+                                                                        'aria-required': required,
+                                                                        'aria-invalid': error() ? true : 'false'
+                                                                        },
+                                                                hasFocus: focused" id="AQ9AL4G" name="" aria-invalid="false">
+
+                                                            <label class="label" data-bind="checked: value, attr: { for: uid }" for="AQ9AL4G">
+                                                                <span data-bind="text: description || label">Check To Subscribe Order Newsletter</span>
+                                                            </label>
+                                                        </div>
+
+                                                        <div class="payment-option opc-payment-additional discount-code">
+                                                            <div class="payment-option-content" data-role="content">
+                                                            <div data-role="checkout-messages" class="messages" data-bind="visible: isVisible(), click: removeAll" style="display: none;">
+                                                                <div aria-atomic="true" role="alert" class="message message-error error">
+                                                                    <div data-ui-id="checkout-cart-validationmessages-message-error" data-bind="text: $data">"email" is required. Enter and try again.</div>
+                                                                </div>
+                                                            </div>
+                                                                <form class="form form-discount" id="discount-form" method="post" action="ajouterCommande()">
+                                                                    *************************
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <div class="actions-toolbar" style="margin-top:0.4cm;">
+                                                            <div class="primary">
+                                                                <button style="width:9.2cm;" class="action primary checkout btn-placeorder" type="submit" data-bind="
+                                                                        enable: isPlaceOrderActionAllowed(),
+                                                                        click: placeOrder,
+                                                                        attr: {
+                                                                            title: placeOrderLabel()
+                                                                        },
+                                                                        css: {disabled: !isPlaceOrderActionAllowed()},
+                                                                        fadeVisible: isVisible
+                                                                        " title="Place Order">
+                                                                    <span data-bind="text: placeOrderLabel()">Place Order</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                    {% endif %}
+
+            </div>
         </div>
-        <div class="block-content">
-            <strong class="subtitle">Last Added Items</strong>
-            <!-- ko if: wishlist().counter -->
-                <ol class="product-items no-display" id="wishlist-sidebar" data-bind="foreach: wishlist().items, css: {'no-display': null}">
-                    <li class="product-item">
-                        <div class="product-item-info">
-                            <a class="product-item-photo" data-bind="attr: { href: product_url, title: product_name }">
-                                <!-- ko template: {name: $data.image.template, data: $data.image} --><!-- /ko -->
-                            </a>
-                            <div class="product-item-details">
-                                <strong class="product-item-name">
-                                    <a data-bind="attr: { href: product_url }" class="product-item-link">
-                                        <span data-bind="text: product_name"></span>
-                                    </a>
-                                </strong>
-                                <div data-bind="html: product_price"></div>
-                                <div class="product-item-actions">
-                                    <!-- ko if: product_is_saleable_and_visible -->
-                                    <div class="actions-primary">
-                                        <!-- ko if: product_has_required_options -->
-                                        <a href="#" data-bind="attr: {'data-post': add_to_cart_params}" class="action tocart primary">
-                                            <span>Add to Cart</span>
-                                        </a>
-                                        <!-- /ko -->
-                                        <!-- ko ifnot: product_has_required_options -->
-                                            <button type="button" class="action tocart primary" data-bind="attr: {'data-post': add_to_cart_params}">
-                                                <span>Add to Cart</span>
-                                            </button>
-                                        <!-- /ko -->
-                                    </div>
-                                    <!-- /ko -->
-                                    <div class="actions-secondary">
-                                        <a href="#" data-bind="attr: {'data-post': delete_item_params}" title="Remove&#x20;This&#x20;Item" class="btn-remove action delete">
-                                            <span>Remove This Item</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
-                <div class="actions-toolbar no-display" data-bind="css: {'no-display': null}">
-                    <div class="primary">
-                        <a class="action details" href="wishlist/index.html" title="Go&#x20;to&#x20;Wish&#x20;List">
-                            <span>Go to Wish List</span>
-                        </a>
-                    </div>
-                </div>
-            <!-- /ko -->
-            <!-- ko ifnot: wishlist().counter -->
-                <div class="empty">You have no items in your wish list.</div>
-            <!-- /ko -->
-        </div>
-    </div>
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                    "wishlist": {
-                        "component": "Magento_Wishlist/js/view/wishlist"
-                    }
-                }
-            }
-        }
-    }
-</script>
-</div></div></main><footer class="page-footer"><div id="focus-area"></div>
+        
+                <!-- ============================================================== -->
+                <!-- Cart Vide -->
+                <!-- ============================================================== -->
+
+
+
+    {% elseif panierExiste == false %}
+            <div class="cart-empty">
+                <p>You have no items in your shopping cart.</p>
+                <p>Click <a href="/">here</a> to continue shopping.    </p>
+            </div>
+    {% else %}
+            /**************erreurs****************/
+    {% endif%}
+
+</main>
+
+
+
+
+
+
+
+<footer class="page-footer"><div id="focus-area"></div>
 <div id="back-top" class=""><i class="icon icon-chevrons-up"></i></div>
 <div class="footer-container enable-mobile-menu layout-9">
 	<div class="footer-top">
@@ -1351,6 +1199,10 @@ But you can also contact us:</p>
             }
         }
 </script>
+
+
+
+
 <div class="ajaxsuite-popup-wrapper" id="ajaxsuite-popup-wrapper">
     <a id="ajaxsuite-close" class="ajaxsuite-close"></a>
     <div id="ajaxsuite-popup-content"></div>
@@ -1358,10 +1210,6 @@ But you can also contact us:</p>
 <div class="quickview-popup-wrapper" id="quickview-popup-wrapper">
     <a id="quickview-close" class="quickview-close"></a>
     <div id="quickview-popup-content"></div>
-</div>
-<div data-url="https://blueskytechmage.com/ohey/en11/themeoption/fakeorder/getitem/" id="purchase-fake-order" data-seconds-hide="5" data-seconds-displayed="10" class="purchase-order fadeInUp animated hidden-xs" style="display: none;">
-	<a class="purchase-close" href="javascript:void(0);"></a>
-	<div class="product-purchase"></div>
 </div>
 </div>    <script>require(["jquery"],function($){require(["rokanthemes/lazyloadimg"],function(lazy){$("img[data-src]").lazy({"bind":"event","attribute":"data-src",visibleOnly:true,threshold:0,enableThrottle:true,throttle:500,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});$(document).ready(function($){var win=$(window);$(".owl-carousel").on("translated.owl.carousel",function(event){var bounds=$(this).offset();var viewport={top:win.scrollTop(),left:win.scrollLeft()};viewport.bottom=viewport.top+win.height();if(viewport.bottom>bounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var new_url=$(this).attr("data-src");$(this).attr("src",new_url);$(this).removeAttr("data-src");$(this).addClass("lazy-loaded");$(this).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(this).addClass("transition");},1000);}});},1000);});});});</script></body>
 
