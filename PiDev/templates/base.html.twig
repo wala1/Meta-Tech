@@ -496,8 +496,8 @@ var x = setInterval(function() {
 															<div class="field-by-cat-search hidden-xs">
 																<select name="cat" id="choose_category">
 																	<option value="">All Categories</option>
-																	<option value="157">Engine Systems</option> 
-																	<option value="168">Brake Systems</option>
+																	{# <option value="157">Engine Systems</option> 
+																	<option value="168">Brake Systems</option> #}
 																</select>
 															</div>
 															<div class="field search">
@@ -819,7 +819,7 @@ $('#search-input-autocomplate').focus();
 														<div class="row">
 															<ul class="subchildmenu ">
 																<li class="ui-menu-item level2 ">
-																	<a href="#">Store Locator</a>
+																	<a href="{{path('storelocator')}}">Store Locator</a>
 																</li> 
 															</ul>
 														</div>
