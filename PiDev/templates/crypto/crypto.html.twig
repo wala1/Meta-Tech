@@ -1006,6 +1006,7 @@ $('#search-input-autocomplate').focus();
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="/">Home</a>
 												</li>
+												
 												<li class="ui-menu-item level0  classic menu-item-has-children parent">
 													<a class="level-top">Page</a>
 													<div class="open-children-toggle">&nbsp;</div>
@@ -1013,38 +1014,58 @@ $('#search-input-autocomplate').focus();
 														<div class="row">
 															<ul class="subchildmenu ">
 																<li class="ui-menu-item level2 ">
-																	<a href="../store-locator/index.html">Store Locator</a>
-																</li>
-																<li class="ui-menu-item level2 ">
-																	<a href="../rokanthemes-brand.html">Shop by brand</a>
-																</li>
-																<li class="ui-menu-item level2 ">
-																	<a href="../rokanfaq.html">Faq</a>
-																</li>
-																<li class="ui-menu-item level2 ">
-																	<a href="../404/index.html">404 page</a>
-																</li>
+																	<a href="#">Store Locator</a>
+																</li> 
 															</ul>
 														</div>
 													</div>
 												</li>
+												<li class="ui-menu-item level0">
+													<a class="level-top" href="{{path('blog')}}">Blog</a>
+												</li>
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="{{path('produit')}}">Products</a>
 												</li>
-												<li class="ui-menu-item level0 classic ">
-													<a class="level-top" href="/blog">Blog</a>
+												{# <li class="ui-menu-item level0 classic ">
+													<a class="level-top" href="{{path('event_front')}}">Events</a>
+												</li> #}
+												<li class="ui-menu-item level0  classic menu-item-has-children parent">
+													<a class="level-top">Events</a>
+													<div class="open-children-toggle">&nbsp;</div>
+													<div class="level0 submenu">
+														<div class="row">
+															<ul class="subchildmenu ">
+																<li class="ui-menu-item level2 ">
+																	<a href="{{path('event_front')}}">Events List</a>
+																</li>
+																<li class="ui-menu-item level2 ">
+																	<a href="{{path('calendar_user')}}">Calendar</a>
+																</li>
+																
+															</ul>
+														</div>
+													</div>
 												</li>
 												<li class="ui-menu-item level0 classic ">
 													<a class="level-top" href="{{path('reclamation')}}">Contact us</a>
 												</li>
 
 												<li class="ui-menu-item level0 classic ">
-													<a class="level-top" href="../about-us/index.html">About us</a>
+													<a class="level-top" href="about-us/index.html">About us</a>
+												</li>
+												<li class="ui-menu-item level0 classic ">
+													<a class="level-top" href="{{path('news')}}">News</a>
+												</li>
+
+												<li class="ui-menu-item level0 classic ">
+													<a class="level-top" href="{{path('crypto')}}">Crypto</a>
 												</li>
 
 												<li class="my_account_link_custom ui-menu-item level0 classic">
-													<a href="../customer/account/index.html" title="My Account" class="level-top">My Account</a>
+													<a href="customer/account/index.html" title="My Account" class="level-top">My Account</a>
 												</li>
+
+
 											</ul>
 										</div>
 									</div>
@@ -1069,16 +1090,30 @@ return false;
 										<ul class="flex-layout action-header center_vertical ">
 											<li>
 												<ul class="header links">
+													{% if not app.user %}
 													<li class="link authorization-link" data-label="or">
-														<a href="../customer/account/login/referer/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9jb250YWN0Lw%2c%2c/index.html">Sign In</a>
-													</li>
-													<li>
-														<a href="../customer/account/create/index.html" id="idrb6hAk8J">Create an Account</a>
-													</li>
+												
+														<a href="{{ path('security_login') }}">Sign In</a>
+													
+
+										
+													    {% else %}
+													
+														<li class="link authorization-link" data-label="or">
+														<a href="{{ path('security_logout') }}">Sign Out</a>
+															</li>
+												
+														  {% endif %}
 												</ul>
 											</li>
 											<li class="link wishlist" data-bind="scope: 'wishlist'">
-												<a href="../wishlist/index.html"></a>
+												{% if is_granted('ROLE_ADMIN') %}
+													<li> <a href="{{path('liste_utilisateurs')}}">Admin</a> </li>
+													
+											{% endif %}
+									  		{% if is_granted('ROLE_CLIENT') %}
+													<li> <a href="{{path('account')}}">Account</a> </li>
+											{% endif %}
 											</li>
 											<script type="text/x-magento-init">
 												{

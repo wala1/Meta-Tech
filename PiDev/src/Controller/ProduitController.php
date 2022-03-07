@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Avis ;
 use App\Entity\User ; 
+use App\Entity\PubBack ; 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit ;
@@ -15,6 +16,8 @@ use App\Form\AvisFormType ;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
 use App\Repository\ProduitRepository ; 
+use App\Repository\PubBackRepository ; 
+
 use App\Repository\AvisRepository ; 
 use Symfony\Component\Validator\Constraints\DateTime ; 
 use Symfony\Component\Security\Core\Security;
@@ -44,6 +47,9 @@ class ProduitController extends AbstractController
      */
     public function index(): Response
     {
+        $pubBack = $this->getDoctrine()->getRepository(PubBack::class) ; 
+        $pubBack = $pubBack->findAll() ;
+
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findAll() ; 
 
@@ -57,6 +63,7 @@ class ProduitController extends AbstractController
         $sous_categories = $repo->findAll() ;
 
         return $this->render('produit/all-categories.html.twig', [
+            'pubBack'=>$pubBack,
             'produits' => $produits,
             'produits_all' => $produits,
             'avis' => $avis,
@@ -183,11 +190,15 @@ class ProduitController extends AbstractController
 
         $avis3 = $this->getDoctrine()->getRepository(Avis::class) ; 
         $avis3 = $avis3->findAll() ;
+        
+        $pubBack = $this->getDoctrine()->getRepository(PubBack::class) ; 
+        $pubBack = $pubBack->findAll() ;
 
          
                   
 
         return $this->render('produit/product.html.twig', [
+            'pubBack'=>$pubBack,
             'produits' => $produits,
             'produits_all' => $produits2,
             'avis' => $avis,
