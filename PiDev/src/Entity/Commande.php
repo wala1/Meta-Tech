@@ -6,7 +6,6 @@ use App\Repository\CommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -20,6 +19,8 @@ class Commande
      * @ORM\Column(type="integer")
      */
     private $id;
+
+ 
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -83,7 +84,7 @@ class Commande
     public $date;
     
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     public $delivery_comment;
 
@@ -92,20 +93,52 @@ class Commande
      */
     public $newsletter;
     
-        /**
-     * @ORM\Column(type="string", length=500)
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     public $order_comment;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=500, nullable=true)
+     * @ORM\OneToOne(targetEntity=Coupon::class, inversedBy="commande")
      */
-    public $code_Coupon;
+    public $codeCoup;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+    */
+    public $etat;
+
+    /**
+     * @ORM\Column(type="float", length=20)
+    */
+    public $subtotal;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commande")
+     */
+    protected $user_commande;
+
+    public function getUserCommande(): ?User
+    {
+        return $this->user_commande;
+    }
+
+    public function setUserCommande(?User $user_commande): self
+    {
+        $this->user_commande = $user_commande;
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+
 
     public function getPayementMethod(): ?string
     {
@@ -121,12 +154,12 @@ class Commande
 
     public function getCodeCoupon(): ?string
     {
-        return $this->code_Coupon;
+        return $this->codeCoup;
     }
 
-    public function setCodeCoupon(?string $code_Coupon): self
+    public function setCodeCoupon(?string $codeCoup): self
     {
-        $this->code_Coupon = $code_Coupon;
+        $this->codeCoup = $codeCoup;
 
         return $this;
     }
@@ -170,6 +203,16 @@ class Commande
     public function getStreetAdress(): ?string
     {
         return $this->street_Adress;
+    }   
+    
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function getSubtotal(): ?float
+    {
+        return $this->subtotal;
     }
 
     public function setStreetAdress(string $street_Adress): self
@@ -217,6 +260,18 @@ class Commande
     public function setOrder_comment(string $order_comment): self
     {
         $this->order_comment = $order_comment;
+        return $this;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+        return $this;
+    }
+    
+    public function setSubtotal(float $subtotal): self
+    {
+        $this->subtotal = $subtotal;
         return $this;
     }
 

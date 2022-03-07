@@ -30,10 +30,16 @@ class User implements UserInterface
      */
     private $panier;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user_commande")
+     */
+    private $commande;
+
+
     public function __construct()
     {
         $this->panier = new ArrayCollection();
-        
+        $this->commande = new ArrayCollection();
     }
 
     /**
@@ -44,7 +50,15 @@ class User implements UserInterface
         return $this->panier;
     }
 
-    public function addPanier(Panier $produipaniert): self
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommande(): Collection
+    {
+        return $this->commande;
+    }
+
+    public function addPanier(Panier $panier): self
     {
         if (!$this->panier->contains($panier)) {
             $this->panier[] = $panier;
@@ -176,5 +190,7 @@ class User implements UserInterface
 
         return $this;
     }
+
+  
 
 }

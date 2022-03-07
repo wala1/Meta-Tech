@@ -22,6 +22,11 @@ class Coupon
      */
     private $codeCoup;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Commande::class, mappedBy="codeCoup")
+     */
+    private $commande;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,5 +42,10 @@ class Coupon
         $this->codeCoup = $codeCoup;
 
         return $this;
+    }
+
+    public function getCommande(): ?string
+    {
+        return $this->commande;
     }
 }

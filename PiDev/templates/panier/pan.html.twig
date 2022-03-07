@@ -1179,15 +1179,13 @@ return false;
 									Order Summary</h5></div>
 							</center>
 								<div class="card-body">
-								<table class="data table table-totals">
-                                                                <caption></caption>
-                                                                <tbody>
-                                                                    <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
-																		<th> {{panier | length }} Item In Cart </th>
-																	</tr>
-
-																{% for Panier in panier %}
-																	{% for Produit in produits %}
+													<table class="data table table-totals">
+                                                        <tbody>
+                                                            <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
+																<th> {{panier | length }} Item In Cart </th>
+															</tr>
+															{% for Panier in panier %}
+																{% for Produit in produits %}
 																		{% if Produit.getId() == Panier.getProduitPanier().getId() %}
 																			<tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
 																				<td class="amount" style="font-family: cursive;padding-top: 5px; padding-bottom: 5px;">
@@ -1204,9 +1202,9 @@ return false;
 																				</td>
 																			</tr>
 																		{% endif %}
-																	{% endfor %}
 																{% endfor %}
-																
+															{% endfor %}
+
                                                                     <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
 																		<th data-bind="i18n: title" style="border-left:-1cm;text-align: left;">Cart Subtotal</th>
                                                                         <td></td>
@@ -1242,7 +1240,11 @@ return false;
                                                                         <td></td>
 																		<td class="amount" style="float:right;font-family: cursive;padding-top: 5px; padding-bottom: 5px;">
                                                                             <span class="price" id="Price1" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">{{total + 5.00}}</span>
-                                                                        </td>
+																		</td>
+																		<td >
+																			{{ form_label(form.subtotal,"Subtotal") }}
+																			{{ form_widget( form.subtotal, { 'attr':{'value':total + 5.00 }}) }}
+																		</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -1271,11 +1273,11 @@ return false;
 										</tr>
 										<tr>
 											<td >
-												{{ form_label(form.code_Coupon,"Code Coupon ") }}
-												{{ form_widget(form.code_Coupon) }}
-												{% if form_errors(form.code_Coupon) %}
+												{{ form_label(form.codeCoup,"Code Coupon ") }}
+												{{ form_widget(form.codeCoup) }}
+												{% if form_errors(form.codeCoup) %}
 													<div class="alert alert-danger" role="alert">
-														{{ form_errors(form.code_Coupon) }}
+														{{ form_errors(form.codeCoup) }}
 													</div>
 												{% endif %}
 											</td>

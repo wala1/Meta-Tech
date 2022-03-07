@@ -241,9 +241,10 @@ class PanierController extends AbstractController
         $form1->add('Place Order',SubmitType::class,[
             'attr' => [
                 'class'=>'btn btn-success waves-effect waves-light',
-                'style' => 'width:9.5cm',
+                'style' => 'width:9.2cm;margin-left: 13px;',
             ]
         ]) ;
+        $form1->get('etat')->setData("en cours");
         $form1->handleRequest($request);
         if($form1->isSubmitted() && $form1->isValid())
         {
@@ -289,6 +290,8 @@ class PanierController extends AbstractController
         $panier = $this->getDoctrine()->getRepository(Panier::class)->findAll();
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
+        $commande->setEtat("en cours");
+        $commande->setUserCommande($user);
         $form = $this->createForm(CommandeFormType::class, $commande);
         $form->add('Place Order',SubmitType::class,[
             'attr' => [
@@ -320,7 +323,9 @@ class PanierController extends AbstractController
      */
     public function showCommandAdmin(){
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findAll();
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findBy(
+            ['etat' => 'en cours']
+        );
         return $this->render("panier/gestionCommande.html.twig", [
             "commandes" => $commandes,
             "user" => $user,
@@ -335,23 +340,37 @@ class PanierController extends AbstractController
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
+        $commande->setEtat("en cours");
+        $commande->setUserCommande($user);
         $form = $this->createForm(CommandeFormType::class, $commande);
         $form->add('Place Order',SubmitType::class,[
             'attr' => [
                 'class'=>'btn btn-primary waves-effect waves-light',
-                'style' => 'width:9.5cm',
+                'style' => 'width: 9.25cm;margin-top: 10px;'
             ]
         ]) ;
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($commande);
-            $em->flush();
-            if ($form->isSubmitted() && $form->isValid()) {
-                $this->addFlash('success', 'Command Created successfuly!');
-            }
-            return $this->redirectToRoute("showCommandAdmin");
+            /*
+            $commands = $this->getDoctrine()->getRepository(Command::class)->findAll();
+            $codeCoupon = $this->getDoctrine()->getRepository(Coupon::class)->findAll();            
+            $codeCoup = $form->getData('codeCoup');
+            if($codeCoup IN $codeCoupon ){
+                if($codeCoup NOT IN $commands->getCodeCoup())  {*/
+                    $em->persist($commande);
+                    $em->flush();
+                    if ($form->isSubmitted() && $form->isValid()) {
+                        $this->addFlash('success', 'Command Created successfuly!');
+                    }
+                    return $this->redirectToRoute("showCommandAdmin");
+                /*}else{
+                    $this->addFlash('success', 'Code coupon used !!!');
+                }
+            }else{
+                $this->addFlash('danger', 'Code coupon does not exist!!!');
+            }*/
         }
         return $this->render("panier/addCommande.html.twig", [
             "form"=> $form->createView(),
@@ -392,17 +411,96 @@ class PanierController extends AbstractController
         return $this->redirectToRoute("showCommandAdmin");
     }
 
-
-    ///** 
-    //* @Route("/changeStatus/{status}/{id}" , name="updateCommand")
-    //*/
-
-    /*
-     function changeStatus($status, $id): Response
-    {
-        return $this->render('panier/updatepanier.html.twig', [
-            'formA' => $form->createView(),
+    /**
+     * @Route("/command_delivered_admin_show", name="showCommandDeliveredAdmin");
+     */
+    public function showCommandDeliveredAdmin(){
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findBy(
+            ['etat' => 'delivered']
+        );
+        return $this->render("panier/deliveredCommand.html.twig", [
+            "commandes" => $commandes,
+            "user" => $user,
+            "message" => null,
         ]);
-    }*/
+    }
+
+    /**
+     * @Route("/changeStatusDelivered/{id}", name="changeStatusDelivered");
+     */
+    public function changeStatusDelivered(Request $request,$id): Response
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $commande = $this->getDoctrine()->getRepository(Commande::class)->find($id);
+        $commande->setEtat("delivered");
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($commande);
+        $em->flush();
+        $this->addFlash('success', 'Order Delivered Successfuly!');
+        return $this->redirectToRoute("showCommandDeliveredAdmin");
+    }
+
+
+    /**
+     * @Route("/command_canceled_admin_show", name="showCommandCanceledAdmin");
+    */
+    public function showCommandCanceledAdmin(){
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findBy(
+            ['etat' => 'canceled']
+        );
+        return $this->render("panier/canceledCommand.html.twig", [
+            "commandes" => $commandes,
+            "user" => $user,
+            "message" => null,
+        ]);
+    }
+
+    /**
+     * @Route("/changeStatusCancel/{id}", name="changeStatusCancel");
+     */
+    public function changeStatusCancel(Request $request,$id): Response
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $commande = $this->getDoctrine()->getRepository(Commande::class)->find($id);
+        $commande->setEtat("canceled");
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($commande);
+        $em->flush();
+        $this->addFlash('success', 'Order Canceled Successfuly!');
+        return $this->redirectToRoute("showCommandCanceledAdmin");
+    }
+
+        
+    /** 
+    * @Route("/updateCommand/{id}" , name="updateCommand")
+    */
+   public function updateCommand(Request $request,$id): Response
+   {
+       $em=$this->getDoctrine()->getManager();
+       $commande = $em->getRepository(Commande::class)->find($id); 
+       
+       $form = $this->createForm(CommandeFormType::class, $commande) ; 
+        $form->add('Update Changes', SubmitType::class,[
+               'attr' => [
+                   'class'=>'btn btn-success waves-effect waves-light'
+               ]
+           ]) ;
+       $form->handleRequest($request);
+       if ($form->isSubmitted() && $form->isValid()) {
+           $em->persist($commande) ;  
+           $em->flush() ;
+       }
+       return $this->render("panier/addCommande.html.twig", [
+           "form"=> $form->createView(),
+           "user" => $user,
+           "produits"=> $produits
+       ]);
+   }
 
 }

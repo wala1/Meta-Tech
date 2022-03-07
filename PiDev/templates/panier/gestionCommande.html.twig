@@ -1,7 +1,9 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-
+<style>
+.font-size-16 { font-size: 13px!important; }
+</style>
 <center>
 <div style="width: 10cm; margin-top: 2cm; margin-bottom: -2cm; margin-left: 2.2cm;">
     {% for message in app.flashes('success') %}
@@ -24,12 +26,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">MANAGE LIST STORE</h4>
+                                    <h4 class="mb-sm-0 font-size-18">ORDER LIST</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Order</a></li>
-                                            <li class="breadcrumb-item active">MANAGE LIST STORE</li>
+                                            <li class="breadcrumb-item active">ORDER LIST</li>
                                         </ol>
                                     </div>
 
@@ -94,9 +96,9 @@
                                                                                 <h5 class="font-size-16 mb-0">Payment</h5>
                                                                             </div>
                                                                         </th>
-                                                                        <th style="font-size : 16px">
+                                                                        <th style="font-size : 16px;width:3cm;">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">Code</h5>
+                                                                                <h5 class="font-size-16 mb-0">Place</h5>
                                                                             </div>
                                                                         </th>
                                                                         <th style="font-size : 16px">
@@ -114,14 +116,9 @@
                                                                                 <h5 class="font-size-16 mb-0">Order Comment</h5>
                                                                             </div>
                                                                         </th>
-                                                                        <th style="font-size : 16px">
+                                                                        <th style="font-size : 16px;">
                                                                             <div class="py-3">
                                                                                 <h5 class="font-size-16 mb-0">Action</h5>
-                                                                            </div>
-                                                                        </th>
-                                                                        <th style="font-size : 16px">
-                                                                            <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">Place</h5>
                                                                             </div>
                                                                         </th>
                                                                         <th style="font-size : 16px">
@@ -136,7 +133,7 @@
                                                                         </th>
                                                                         <th style="font-size : 16px">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">Newsletters</h5>
+                                                                                <h5 class="font-size-16 mb-0">Code</h5>
                                                                             </div>
                                                                         </th>
                                                                         <th style="font-size : 16px">
@@ -163,18 +160,18 @@
                                                                             <div class="py-3">
                                                                                 <h5 class="font-size-16 mb-0">
                                                                                     {% if commande.payement_method == "cash" %}
-                                                                                        <img src="{{asset('cash.png')}}" style="width:70px;height:70px;">
+                                                                                        <img src="{{asset('cash.png')}}" style="width:50px;height:50px;">
                                                                                     {% elseif commande.payement_method == "bank" %}
-                                                                                        <img src="{{asset('bank.png')}}" style="width:70px;height:70px;">
+                                                                                        <img src="{{asset('bank.png')}}" style="width:50px;height:50px;">
                                                                                     {% elseif commande.payement_method == "check" %}
-                                                                                        <img src="{{asset('paypal.png')}}"style="width:70px;height:70px;">
+                                                                                        <img src="{{asset('paypal.png')}}"style="width:50px;height:50px;">
                                                                                     {% endif %}
                                                                                 </h5>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="font-size : 16px">
+                                                                        <td style="font-size : 16px;width:2cm;">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">{{commande.code_Coupon}}</h5>
+                                                                                <h5 class="font-size-16 mb-0"><p> {{commande.company}}. {{commande.country}}<br> {{commande.city}}<br> {{commande.street_Adress}}<br> {{commande.zip_PostalCode}}</p></h5>
                                                                             </div>
                                                                         </td>
                                                                         <td style="font-size : 16px">
@@ -182,14 +179,14 @@
                                                                                 <h5 class="font-size-16 mb-0">{{ commande.date|date("m/d/Y") }}</h5>
                                                                             </div>
                                                                         </td>
-                                                                        <td style="font-size : 16px">
+                                                                        <td style="font-size : 16px;">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">{{commande.delivery_comment}}</h5>
+                                                                                <h5 class="font-size-16 mb-0"><p style="max-width: 200px;">{{commande.delivery_comment}}</p></h5>
                                                                             </div>
                                                                         </td>
                                                                         <td style="font-size : 16px">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">{{commande.order_comment}}</h5>
+                                                                                <h5 class="font-size-16 mb-0"><p style="max-width: 200px;">{{commande.order_comment}}</p></h5>
                                                                             </div>
                                                                         </td>
                                                                         <td style="font-size : 16px">
@@ -198,16 +195,13 @@
                                                                                     <i class="bx bx-dots-horizontal-rounded"></i>
                                                                                 </button>
                                                                                 <ul class="dropdown-menu dropdown-menu-end">
-                                                                                    <li><a class="dropdown-item" href="changeStatus/Delivered/{{commande.id}}">Delivered</a></li>
-                                                                                    <li><a class="dropdown-item" href="changeStatus/Cancel/{{commande.id}}">Cancel order</a></li>
+                                                                                    <li><a class="dropdown-item" href="changeStatusDelivered/{{commande.id}}">Delivered</a></li>
+                                                                                    <li><a class="dropdown-item" href="changeStatusCancel/{{commande.id}}">Cancel order</a></li>
+                                                                                    <li><a class="dropdown-item" href="updateCommand/{{commande.id}}">Change order</a></li>
+                                                                                    <div class="dropdown-divider"></div>
                                                                                     <li><a class="dropdown-item" href="command_admin_clear/{{commande.id}}">Remove order</a></li>
                                                                                     
                                                                                 </ul>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="font-size : 16px">
-                                                                            <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">{{commande.street_Adress}}, {{commande.city}}, {{commande.zip_PostalCode}}, {{commande.country}}, {{commande.company}}</h5>
                                                                             </div>
                                                                         </td>
                                                                         <td style="font-size : 16px">
@@ -222,7 +216,7 @@
                                                                         </td>
                                                                         <td style="font-size : 16px">
                                                                             <div class="py-3">
-                                                                                <h5 class="font-size-16 mb-0">{{commande.newsletter}}</h5>
+                                                                                <h5 class="font-size-16 mb-0">{{commande.getCodeCoupon()}}</h5>
                                                                             </div>
                                                                         </td>
                                                                         <td scope="row"> 

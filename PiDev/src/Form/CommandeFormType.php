@@ -66,7 +66,7 @@ class CommandeFormType extends AbstractType
             ->add('payement_method', ChoiceType::class, [
                 'choices' => [
                     'Check / Money order' => 'check',
-                    'Bank Transfer Payment' => 'bank',
+                    'Bank transfer payment' => 'bank',
                     'Cash On Delivery' => 'cash',
                 ],
                 'attr' => [
@@ -95,7 +95,8 @@ class CommandeFormType extends AbstractType
                 'attr' => [
                     'class'=>'form-control',
                     'style' => 'width: 350px; height: 70px; font-size: 16px; font-family: cursive;',
-                ]
+                ],
+                'required' => false,
             ])
             ->add('newsletter', CheckboxType::class, [
                 'label_attr' => [
@@ -108,12 +109,32 @@ class CommandeFormType extends AbstractType
                 'attr' => [
                     'class'=>'form-control',
                     'style' => 'width: 350px; height: 70px; font-size: 16px; font-family: cursive;',
-                ]
+                ],
+                'required' => false,
             ])
-            ->add('code_Coupon', TextType::class,[
+            ->add('codeCoup', TextType::class,[
                 'attr' => [
                     'class'=>'form-control'
-                ]
+                ],
+                'required' => false,
+            ])
+            ->add('etat', TextAreaType::class,[
+                'attr' => [
+                    'class'=>'form-control',
+                    'style' => 'display: none;',
+                ],
+                'label_attr' => [
+                    'style' => 'display: none;'
+                ],
+            ])
+            ->add('subtotal', TextType::class,[
+                'attr' => [
+                    'class'=>'form-control',
+                    'style' => 'display: none;',
+                ],
+                'label_attr' => [
+                    'style' => 'display: none;'
+                ],
             ])
 
         ;
