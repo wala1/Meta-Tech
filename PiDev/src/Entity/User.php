@@ -138,12 +138,6 @@ class User implements UserInterface
   
   
 
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $age;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -225,19 +219,6 @@ class User implements UserInterface
     public function setConfirm_password(string $confirm_password): self
     {
         $this->confirm_password = $confirm_password;
-
-        return $this;
-    }
-
-
-    public function getAge(): ?string
-    {
-        return $this->age;
-    }
-
-    public function setAge(string $age): self
-    {
-        $this->age = $age;
 
         return $this;
     }

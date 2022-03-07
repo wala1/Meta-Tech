@@ -243,15 +243,15 @@ public function activerUser(User $user)
        
        $users = $user ->findAll();
        $gender =[];
-       $age = [];
+      
        
        foreach($users as $user){
         $gender[] = $user->getGender();
-        $age[] = $user->getAge();
+        // $age[] = $user->getAge();
        }
         return $this->render("admin/dashbaord.html.twig", [
             'gender' => Json_encode($gender),
-            'age' => json_encode($gender),
+            // 'age' => json_encode($gender),
                 ]);
      
             

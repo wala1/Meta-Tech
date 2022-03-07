@@ -30,7 +30,7 @@ class AddUserType extends AbstractType
            
             ->add('confirm_password', PasswordType::class)
             // ->add('phoneNumber')
-            ->add('age')
+            // ->add('age')
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                   'Femme' => 'F',

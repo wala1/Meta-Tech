@@ -47,7 +47,8 @@ class SecurityController extends AbstractController
             $hash=$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($hash);
             $user->setEtat(0);
-      
+            $user->setGender("femme");
+
             $user->setRoles(["ROLE_CLIENT"]);
            
 
