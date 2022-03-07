@@ -122,61 +122,25 @@
 									<table style="margin-left: -8cm; margin-right: -8cm; width: 9cm;">
 										<tr>
 
-											<td >
-												{{ form_widget(form.payement_method, {'attr':{'style':'font-size: 15px; line-height: 2.5; width: 184px;border: 0px solid #ced4da;'}}) }}
+											<td>
+												{{ form_widget(form.payement_method, {'attr':{'style':'display:none;'}}) }}
 												{% if form_errors(form.payement_method) %}
                                                 <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
 														{{ form_errors(form.payement_method) }}
 													</div>
 												{% endif %}
 												<br>
-
-												<div id="smart-button-container">
-													<div style="text-align: center;">
-														<div id="paypal-button-container"></div>
-													</div>
-												</div>
-												<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
-												<script>
-													function initPayPalButton() {
-													paypal.Buttons({
-														style: {
-														shape: 'rect',
-														color: 'gold',
-														layout: 'vertical',
-														label: 'paypal',
-														
-														},
-
-														createOrder: function(data, actions) {
-														return actions.order.create({
-															purchase_units: [{"amount":{"currency_code":"EUR","value":214,"breakdown":{"item_total":{"currency_code":"EUR","value":200},"shipping":{"currency_code":"EUR","value":0},"tax_total":{"currency_code":"EUR","value":14}}}}]
-														});
-														},
-
-														onApprove: function(data, actions) {
-														return actions.order.capture().then(function(orderData) {
-															
-															// Full available details
-															console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-
-															// Show a success message within this page, e.g.
-															const element = document.getElementById('paypal-button-container');
-															element.innerHTML = '';
-															element.innerHTML = '<h3>Thank you for your payment!</h3>';
-
-															// Or go to another URL:  actions.redirect('thank_you.html');
-															
-														});
-														},
-
-														onError: function(err) {
-														console.log(err);
-														}
-													}).render('#paypal-button-container');
-													}
-													initPayPalButton();
-												</script>
+												<input id="search" type="bottom" placeholder="Recherche">
+													<tr>
+														<td>
+															{{ form_widget(form.produits) }}
+															{% if form_errors(form.produits) %}
+																<div class="alert alert-danger" role="alert">
+																	{{ form_errors(form.produits) }}
+																</div>
+															{% endif %}
+														</td>
+													</tr>
 											</td>
 										</tr>
 									</table>
@@ -247,7 +211,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td >
+											<td>
 												{{ form_label(form.codeCoup,"Code Coupon ") }}
 												{{ form_widget(form.codeCoup) }}
 												{% if form_errors(form.codeCoup) %}
@@ -256,7 +220,7 @@
 													</div>
 												{% endif %}
 											</td>
-											<td >
+											<td>
 											{% set total = 620 %}
 												{{ form_label(form.subtotal,"Subtotal") }}
 												{{ form_widget( form.subtotal, { 'attr':{'value':total + 5.00 }}) }}
@@ -264,6 +228,16 @@
 										</tr>
 									</table>
 				{{ form_end(form) }}
+
+	<div id="datatable-buttons_filter" class="dataTables_filter">
+		<label>
+			Search:
+			<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable-buttons">
+		</label>
+	</div>
 </center>
+
+
+	
 
 {% endblock %}
