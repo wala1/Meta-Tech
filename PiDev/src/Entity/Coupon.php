@@ -108,6 +108,7 @@ class Coupon
         }
 
         return $this;
+    }
     public function getCommande(): ?string
     {
         return $this->commande;
