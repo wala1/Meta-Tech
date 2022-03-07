@@ -130,15 +130,13 @@
 													</div>
 												{% endif %}
 												<br>
-												<input id="search" type="bottom" placeholder="Recherche">
+												<input id="search" onkeyup="mySearch()" type="bottom" placeholder="Recherche">
 													<tr>
 														<td>
-															{{ form_widget(form.produits) }}
-															{% if form_errors(form.produits) %}
-																<div class="alert alert-danger" role="alert">
-																	{{ form_errors(form.produits) }}
-																</div>
-															{% endif %}
+															{% set tab = [ form_widget(form.produits)] %}
+															{% for t in tab %}
+																{{t|raw}}<br>
+															{% endfor %}
 														</td>
 													</tr>
 											</td>
@@ -229,15 +227,22 @@
 									</table>
 				{{ form_end(form) }}
 
-	<div id="datatable-buttons_filter" class="dataTables_filter">
-		<label>
-			Search:
-			<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatable-buttons">
-		</label>
-	</div>
 </center>
 
 
-	
+<script>
+        function mySearch()
+        {
+            var v1 = document.getElementById("search").value;
+
+            if( v1>='a' && v1<='z' )
+            {
+                document.getElementById("lettre").style.color="green";
+            }
+            else{
+                document.getElementById("lettre").style.color="red";
+            }
+        }
+</script>
 
 {% endblock %}
