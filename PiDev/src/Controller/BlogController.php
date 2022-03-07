@@ -78,11 +78,11 @@ class BlogController extends AbstractController
             $em = $this->getDoctrine()->getManager();
            $em->persist($publication) ; 
             $em->flush() ; 
-           // $this->addFlash(
-           //     'info',
-           //  ' votre publication a été envoyer',  
-          //);
-           return $this->redirectToRoute('blog') ; 
+            $this->addFlash(
+                'info',
+             ' votre publication a été envoyer',  
+          );
+           //return $this->redirectToRoute('blog') ; 
         }
         return $this->render('blog/ajouterBlog.html.twig', [
            'form' => $form->createView(),
