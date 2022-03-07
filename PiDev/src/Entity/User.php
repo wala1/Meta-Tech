@@ -39,9 +39,8 @@ class User implements UserInterface
     public function __construct()
     {
         $this->panier = new ArrayCollection();
-        $this->calendars = new ArrayCollection();
         $this->participants = new ArrayCollection();
-        
+        $this->publications = new ArrayCollection();
         $this->commande = new ArrayCollection();
     }
 
@@ -195,6 +194,17 @@ class User implements UserInterface
     //  */
     // private $phoneNumber;
 
+
+    
+      /** 
+      * @ORM\OneToMany(targetEntity=Publication::class, mappedBy="utilisateur")
+     */
+    private $publications;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur")
+     */
+
     /*public function __construct()
     {
         $this->avis = new ArrayCollection();
@@ -333,17 +343,11 @@ class User implements UserInterface
         return $this;
     }
 
-    // public function getPhoneNumber(): ?string
-    // {
-    //     return $this->phoneNumber;
-    // }
-
     // public function setPhoneNumber(string $phoneNumber): self
     // {
     //     $this->phoneNumber = $phoneNumber;
-
     //     return $this;
-    // }
+    
 
     public function getCalendar(): ?Calendar
     {
@@ -375,17 +379,19 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeParticipant(Participants $participant): self
-    {
-        if ($this->participants->removeElement($participant)) {
-            // set the owning side to null (unless already changed)
-            if ($participant->getUser() === $this) {
-                $participant->setUser(null);
-            }
+public function removeParticipant(Participants $participant): self
+{
+    if ($this->participants->removeElement($participant)) {
+        // set the owning side to null (unless already changed)
+        if ($participant->getUser() === $this) {
+            $participant->setUser(null);
         }
-
-        return $this;
     }
+
+    return $this;
+}
+
+ 
 
     public function getEtat(): ?int
     {
@@ -411,11 +417,19 @@ class User implements UserInterface
     public function setActivationToken(?string $activation_token): self
     {
         $this->activation_token = $activation_token;
-
-        return $this;
+    }
+    
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
     }
 
-    public function getCaptchaCode()
+   
+    public function getCaptchaCode($captchaCode)
+
     {
       return $this->captchaCode;
     }
@@ -428,12 +442,7 @@ class User implements UserInterface
     {
         return $this->facebookID;
     }
-  // public function setUsername(string $username): self
-    // {
-    //     $this->username = $username;
-
-    //     return $this;
-    // }
+ 
     public function setFacebookID(string $facebookID): self
     {
         $this->facebookID= $facebookID;
@@ -450,10 +459,61 @@ class User implements UserInterface
     {
         $this->facebookAccessToken= $facebookAccessToken;
         return $this;
+    }
+
+     /**
+     * @return Collection<int, Publication>
+     */
+    public function getPublications(): Collection
+    {
+        return $this->publications;
+    }
+
+    public function addPublication(Publication $publication): self
+    {
+        if (!$this->publications->contains($publication)) {
+            $this->publications[] = $publication;
+            $publication->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublication(Publication $publication): self
+    {
+        if ($this->publications->removeElement($publication)) {
+            // set the owning side to null (unless already changed)
+            if ($publication->getUtilisateur() === $this) {
+                $publication->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 
-  
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setUtilisateur($this);
+        }
 
-}
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getUtilisateur() === $this) {
+                $commentaire->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
