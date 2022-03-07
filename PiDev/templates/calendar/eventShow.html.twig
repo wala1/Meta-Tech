@@ -231,7 +231,7 @@
 <div class="product attribute description">
         <div class="value">
 
-
+{# 
 
  <table class="table">
   <thead>
@@ -260,7 +260,51 @@
    {% endif %}
 {% endfor %}
 </table> 
+ #}
+	<center style="margin-top : 80px ; ">
+				<H3>Participants</H3>
+				<H5>- {{cal.title}} -</H5>
+				<div class="limiter" style="width : 84% ; margin-top : 50px ; padding : 20px ; background-color : #F6F4E8; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; ">
 
+					 
+					<table style="   ">
+						<thead>
+							<tr class="table100-head">
+								<th class="column1"> </th>
+								<th class="column2">Name</th>
+								<th class="column3">Email</th>
+						
+							</tr>
+						</thead>
+						<tbody>
+                          {% set nb = 1 %}
+						{% for p in participants %}
+                        {% if cal.id == p.event.id %}
+
+							<tr>
+								<td class="column1">{{nb}} </td>
+								<td class="column2">{{p.user.username}}</td>
+								<td class="column3">{{p.user.email}}</td>
+                                  {% set nb = nb + 1  %}
+
+						
+
+
+							</tr>
+                             {% endif %}
+						{% endfor %}
+							 
+						</tbody>
+					</table>
+							 
+				</div>
+
+
+				
+
+
+
+				</center>
 
 
 </div>
@@ -268,7 +312,6 @@
                 </div>
                                                     
 {% endfor %}
-<!--========================= END PRODUIT ========================================== -->
 
 
 <script type="text/x-magento-init">
