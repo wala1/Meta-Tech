@@ -1198,7 +1198,7 @@ return false;
 																					</span>
 																				</th>
 																				<td class="amount" style="float:right;font-family: cursive;padding-top: 5px; padding-bottom: 5px;">
-																					<span>${{ Produit.prix_prod}}</span>
+																					<span>{{ Produit.prix_prod}}DT</span>
 																				</td>
 																			</tr>
 																		{% endif %}
@@ -1219,7 +1219,7 @@ return false;
                                                                                     {% endfor %}
                                                                                 {% endif %}
                                                                             {% endfor %}
-                                                                            <span>${{ total}}</span>
+                                                                            <span>{{ total}}DT</span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
@@ -1231,7 +1231,7 @@ return false;
                                                                         </th>
 																		<td></td>
                                                                         <td class="amount" style="float:right;font-family: cursive;padding-top: 5px; padding-bottom: 5px;">
-                                                                            <span class="price" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">$5.00</span>
+                                                                            <span class="price" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">5.00DT</span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr class="totals sub" style="display: table-row; vertical-align: inherit; border-color: inherit;">
@@ -1240,6 +1240,7 @@ return false;
                                                                         <td></td>
 																		<td class="amount" style="float:right;font-family: cursive;padding-top: 5px; padding-bottom: 5px;">
                                                                             <span class="price" id="Price1" data-bind="text: getValue(), attr: {'data-th': title}" data-th="Cart Subtotal">{{total + 5.00}}</span>
+																			<span style="display:none" id="old">{{total + 5.00}}</span>
 																		</td>
 																		<td >
 																			{{ form_label(form.subtotal,"Subtotal") }}
@@ -1283,6 +1284,11 @@ return false;
 											</td>
 										</tr>
 										<tr>
+										<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+										<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+										<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+										<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+										
 											<select id="mySelect" onchange="myFunction()">
 												<option value="TND">TND</option>
 												<option value="USD">USD</option>
@@ -1298,6 +1304,7 @@ return false;
 {% endif %}
 
 
+                                    
 
 <script>
 function myFunction() {
@@ -1313,52 +1320,15 @@ function myFunction() {
     };
     $.ajax(settings).done(function (response) {
         var x = document.getElementById("mySelect").value;
-        var Price1 = document.getElementById("Price1").innerHTML;
-        document.getElementById("Price1").innerHTML = (response["rates"][x] * Price1).toFixed(2);
-		console.log(Price1);
+        var old = document.getElementById("old").innerHTML;
+        document.getElementById("Price1").innerHTML = (response["rates"][x] * old).toFixed(2);
+		
     });
 }
 
 </script>
 
-	
-				
 
-
-
-
-
-
-
-
-<script type="text/javascript">
-       
-        function verifier_taille_ficher()
-        {
-            var maximal = document.getElementById("maxim").value;
-            var fichiers=document.getElementById("fichiers");
-            var somme = 0 ; 
-            for(var i=0 ; i<fichiers.files.length ; i++)
-            {
-                somme = somme+fichiers.files[i].size;
-            }
-            if(somme > maximal )
-            {
-                alert("le fichier ( ou bien l'ensemble de fichiers ) ne doit(vent)pas dépasser " + parseInt(maximal)/1000 + " kbit");
-                var x = document.createElement("INPUT");
-                x.setAttribute("type", "file");
-                x.setAttribute("multiple","true");
-                x.setAttribute("id","fichiers");
-                x.setAttribute("onchange","return verifier_taille_ficher()");
-                fichiers.parentNode.replaceChild(x,fichiers);
-
-                return false;
-            }
-            return true;
-        }
-
-
-        </script>
 
 
 {% endblock %}
