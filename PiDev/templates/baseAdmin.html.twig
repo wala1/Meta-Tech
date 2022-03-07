@@ -33,7 +33,7 @@
         <!-- App Css-->
         <link href="../assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}    {% endblock %}
     </head>
     <body>
 
@@ -293,10 +293,10 @@
                                 <i data-feather="briefcase"></i>
                                 <span data-key="t-components">Cart</span>
                                 </a>
-                                <ul class="sub-menu" aria-expanded="false">
+                                {# <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ path('showCommandAdmin') }}" data-key="t-apex-charts">Order list</a></li>
                                     <li><a href="#" data-key="t-e-charts">Charts</a></li>
-                                </ul>
+                                </ul> #}
                             </li>
 
 
@@ -369,7 +369,7 @@
                                     <span data-key="t-pages">Coupon</span>
                                 </a>
                             </li>
-                            <li>
+                            {# <li>
                                 <a href="/Events" class="has-arrow">
                                     <i data-feather="map"></i>
                                     <span data-key="t-maps">Events</span>
@@ -388,10 +388,38 @@
                                   
                                 </ul>
                                
-                            </li>
+                            </li> #}
+                            
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow">
+                                    <i data-feather="grid"></i>
+                                    <span data-key="t-apps">Events</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                  <li>
+                                        <a href="/Events ">
+                                            <span data-key="t-calendar">Events</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Calendar ">
+                                            <span data-key="t-calendar">Calendar</span>
+                                        </a>
+                                    </li>
+                                     
+                                    <li>
+                                        <a href="/Requests">
+                                            <span data-key="t-calendar">Requests</span>
+                                        </a>
+                                    </li>
+                                       
+                                    <li>
+                                        <a href="{{ path('participants_events')}}">
+                                            <span data-key="t-calendar">Participants</span>
+                                        </a>
+                                    </li>
 
-
-
+                                   </ul>
                             <li>
                                 <a href="{{ path('admin_reclamation') }}">
                                     <i data-feather="file-text"></i>

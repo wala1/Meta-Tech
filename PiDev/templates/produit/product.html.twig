@@ -1,12 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-
-    <title>
-        test
-    </title>
-
-{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -23,29 +16,23 @@
     body {
   background: aliceblue;
 }
-
 .gtco-testimonials {
   position: relative;
   margin-top: 30px;
-
   h2 {
     font-size: 30px;
     text-align: center;
     color: #333333;
     margin-bottom: 50px;
   }
-
   .owl-stage-outer {
     padding: 30px 0;
   }
-
   .owl-nav {
     display: none;
   }
-
   .owl-dots {
     text-align: center;
-
     span {
       position: relative;
       height: 10px;
@@ -56,10 +43,8 @@
       border: 2px solid #01b0f8;
       margin: 0 5px;
     }
-
     .active {
       box-shadow: none;
-
       span {
         background: #01b0f8;
         box-shadow: none;
@@ -69,7 +54,6 @@
       }
     }
   }
-
   .card {
     background: #fff;
     box-shadow: 0 8px 30px -7px #c9dff0;
@@ -77,7 +61,6 @@
     padding: 0 10px;
     border-radius: 20px;
     border: 0;
-
     .card-img-top {
       max-width: 100px;
       border-radius: 50%;
@@ -86,41 +69,33 @@
       width: 100px;
       height: 100px;
     }
-
     h5 {
       color: #01b0f8;
       font-size: 21px;
       line-height: 1.3;
-
       span {
         font-size: 18px;
         color: #666666;
       }
     }
-
     p {
       font-size: 18px;
       color: #555;
       padding-bottom: 15px;
     }
   }
-
   .active {
     opacity: 0.5;
     transition: all 0.3s;
   }
-
   .center {
     opacity: 1;
-
     h5 {
       font-size: 24px;
-
       span {
         font-size: 20px;
       }
     }
-
     .card-img-top {
       max-width: 100%;
       height: 120px;
@@ -128,25 +103,21 @@
     }
   }
 }
-
 @media (max-width: 767px) {
   .gtco-testimonials {
     margin-top: 20px;
   }
 }
-
 .owl-carousel {
   .owl-nav button {
     &.owl-next, &.owl-prev {
       outline: 0;
     }
   }
-
   button.owl-dot {
     outline: 0;
   }
 }
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -170,14 +141,12 @@
   background-size: cover;
   transition: transform 0.5s ease-out;
 }
-
 .img_producto_container { 
   position: relative;
   overflow: hidden;
   cursor: zoom-in;
   margin-top : -20px ; 
 }
-
 </style>
  
 
@@ -218,8 +187,6 @@ $(".img_producto_container")
           "%"
       });
   });
-
-
 </script>
 
 <script type="text/x-magento-init">
@@ -655,7 +622,6 @@ $(".img_producto_container")
     .flags:hover {
         transform : scale(1.2) ; 
     }
-
     .buttonRemove {
         background: none;
         color: inherit;
@@ -756,7 +722,6 @@ $(".img_producto_container")
         console.log(length) ; 
          
         var all_text = "" ; 
-
         if (length >1000) {
             for (let step = 1001; step <= length ; step++) {
                 text = document.getElementById(step).innerHTML ; 
@@ -765,7 +730,6 @@ $(".img_producto_container")
             } 
             console.log(all_text) ; 
                
-
                 const settings = {
                     "async": true,
                     "crossDomain": true,
@@ -783,7 +747,6 @@ $(".img_producto_container")
                         "source": "en"
                     }
                 };
-
                      
                 
                 $.ajax(settings).done(function (response) {
@@ -795,16 +758,9 @@ $(".img_producto_container")
                         document.getElementById(step).innerHTML = texts[st] ;
                     }
                 });    
-
-
-
-
-
              
         } 
-
     }
-
 </script>
 
 
@@ -1037,13 +993,9 @@ $(".img_producto_container")
         }
     }
 </script>
-
-
-
 <script>
 	(function () {
 "use strict";
-
 var carousels = function () {
 $(".owl-carousel1").owlCarousel({
 loop: true,
@@ -1068,20 +1020,16 @@ nav: true
 }
 });
 };
-
 (function ($) {
 carousels();
 })(jQuery);
 })();
 </script>
-
 <!-- ====================== API CURRENCY CONVERSION =================== -->
 <script>
 document.getElementById('currency_name').addEventListener('change', function() {
-
     console.log("dd") ; 
     var value = this.value  ;
-
     if (document.getElementById("crypto").innerHTML == "no") {
         console.log("NOOO") ; 
         
@@ -1095,38 +1043,26 @@ document.getElementById('currency_name').addEventListener('change', function() {
             "x-rapidapi-key": "0df9a64d4dmshef637b6555ab817p197c06jsn23b1172de7c8"
         }
         };
-
         $.ajax(settings).done(function (response) {
             if ( value == "usd") {
                 var old =   document.getElementById("price_old").innerHTML  ;
                 document.getElementById("currency_abrev").innerHTML = "USD" ; 
                 document.getElementById("price_conversion").innerHTML= (response["rates"]["USD"]*old).toFixed(2)   ;
-
-
-
             } else if ( value == "eur") {
                 var old =   document.getElementById("price_old").innerHTML  ;
                 document.getElementById("currency_abrev").innerHTML = "EUR" ; 
                 document.getElementById("price_conversion").innerHTML=  (response["rates"]["EUR"]*old).toFixed(2)   ;
-
-
             } else if ( value == "tnd") {
                 var old =   document.getElementById("price_old").innerHTML  ;
                 document.getElementById("currency_abrev").innerHTML = "TND" ;
                 document.getElementById("price_conversion").innerHTML=  (response["rates"]["TND"]*old).toFixed(2)   ;
-
-
             } else if ( value == "cad") {
                 var old =   document.getElementById("price_old").innerHTML  ;
                 document.getElementById("currency_abrev").innerHTML = "CAD" ;
                 document.getElementById("price_conversion").innerHTML=  (response["rates"]["CAD"]*old).toFixed(2)   ;
-
-
             }
         });
-
     } else {
-
         const settings = {
             "async": true,
             "crossDomain": true,
@@ -1137,16 +1073,13 @@ document.getElementById('currency_name').addEventListener('change', function() {
                 "x-rapidapi-key": "00e51753fdmsh46a123f2dcdb845p11cfa3jsne4d1e50a77ee"
             }
         };
-
         console.log("YESS") ; 
-
         $.ajax(settings).done(function (response) {
             var price = response["result"][1]["price"] ; 
             console.log(price);
             price_new =price.substring(1) ; 
             var price_last = price_new.replace(',','') ;
             console.log(price_last) ; 
-
             if ( value == "usd") {
                 var old =   document.getElementById("price_old").innerHTML  ;
                 document.getElementById("currency_abrev").innerHTML = "USD" ; 
@@ -1158,17 +1091,11 @@ document.getElementById('currency_name').addEventListener('change', function() {
             }
         });
  
-
-
     }
-
-
     
 });
 </script>
 <!-- ======================  END API CURRENCY CONVERSION =================== -->
-
-
 <script type="text/javascript">
 	window.addEventListener('load', async () => {
         if (window.ethereum) {
@@ -1186,14 +1113,12 @@ document.getElementById('currency_name').addEventListener('change', function() {
             $('#status').html('No Metamask (or other Web3 Provider) installed')
         }
     })
-
 const initPayButton = () => {
     $('.pay-button').click(() => { // paymentAddress is where funds will be send to
         const paymentAddress = '0x5179169031b8fCdC3FF4798C982484BfA943034D'
         const ammount =  document.getElementById("pay-but").innerHTML 
         console.log(ammount)
         const amountEth = ammount
-
         web3.eth.sendTransaction({
             to: paymentAddress,
             value: web3.toWei(amountEth, 'ether')
@@ -1209,25 +1134,9 @@ const initPayButton = () => {
     })
 }
 </script>
-
-
-
-
-
-
-
-
-
-
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}"/>
-
-
-
 </div></div></main>
-
 </body>
-
  
-
   
 {% endblock %}
