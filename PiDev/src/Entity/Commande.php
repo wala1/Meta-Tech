@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -23,6 +24,7 @@ class Commande
 
     /**
      * @ORM\ManyToMany(targetEntity=Produit::class, inversedBy="commands")
+     * @ORM\JoinTable(name="commande_produit")
      */
     public $produits;
 

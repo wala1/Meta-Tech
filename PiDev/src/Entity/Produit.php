@@ -35,6 +35,7 @@ class Produit
 
     /**
      * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="produits")
+     * @ORM\JoinTable(name="commande_produit")
      */
     public $commands;
 

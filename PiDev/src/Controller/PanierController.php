@@ -292,6 +292,15 @@ class PanierController extends AbstractController
         $commande = new Commande();
         $commande->setEtat("en cours");
         $commande->setUserCommande($user);
+
+        $paniers = $this->getDoctrine()->getRepository(Panier::class)->findBy(
+            ["user" => $user]
+        );
+        foreach($Paniers as $paniers){
+            $produit = $Paniers->getProduitPanier();
+            $commande->addProduit($produit);
+        }
+
         $form = $this->createForm(CommandeFormType::class, $commande);
         $form->add('Place Order',SubmitType::class,[
             'attr' => [
