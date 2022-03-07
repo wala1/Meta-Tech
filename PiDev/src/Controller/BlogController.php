@@ -240,7 +240,7 @@ curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.apilayer.com/bad_words",
   CURLOPT_HTTPHEADER => array(
     "Content-Type: text/plain",
-    "apikey: zd7MoNVNwgUZjU3FwoZlk88vMBapI2ZW"
+    "apikey: 1yxBT3jISREfTiMjaM449P9S5xsPWhEi"
   ),
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
