@@ -34,6 +34,31 @@ class Produit
     public $desc_prod;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="produits")
+     */
+    public $commands;
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+    public function addCommands(Commande $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+        }
+        return $this;
+    }
+    public function removeCommande(Commande $command): self
+    {
+        $this->commands->removeElement($command);
+        return $this;
+    }
+
+    /**
      * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="produit_panier")
     */
     private $panier;
@@ -41,6 +66,7 @@ class Produit
     public function __construct()
     {
         $this->panier = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
 
     /**
@@ -50,8 +76,6 @@ class Produit
     {
         return $this->panier;
     }
-
-
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")

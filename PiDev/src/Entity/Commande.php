@@ -20,7 +20,35 @@ class Commande
      */
     private $id;
 
- 
+    /**
+     * @ORM\ManyToMany(targetEntity=Produit::class, inversedBy="commands")
+     */
+    public $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+        }
+        return $this;
+    }
+    public function removeProduit(Produit $produit): self
+    {
+        $this->produits->removeElement($produit);
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)
