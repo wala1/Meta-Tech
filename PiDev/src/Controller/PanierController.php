@@ -237,7 +237,6 @@ class PanierController extends AbstractController
         );
         $produits = $this->getDoctrine()->getRepository(Produit::class)->findAll();
         $commande = new Commande();
-        $form = $this->createForm(PanierProdFormType::class, $commande);
         $form1 = $this->createForm(CommandeFormType::class, $commande);
         $form1->add('Place Order',SubmitType::class,[
             'attr' => [
