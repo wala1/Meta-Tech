@@ -1,0 +1,264 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+
+<style>
+.font-size-16 { font-size: 13px!important; }
+</style>
+<center>
+<div style="width: 10cm; margin-top: 2cm; margin-bottom: -2cm; margin-left: 2.2cm;">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+</div>
+</center>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">CANCELED ORDER</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Order</a></li>
+                                            <li class="breadcrumb-item active">CANCELED ORDER</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    {% set len = commandes |length %}
+                        <!-- end page title -->
+
+                                                <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <h5 class="card-title">Products ordered<span class="text-muted fw-normal ms-2">({{commandes | length}})</span></h5>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                    <div>
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" href="apps-contacts-list.html" data-bs-toggle="tooltip" data-bs-placement="top" title="List"><i class="bx bx-list-ul"></i></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="apps-contacts-grid.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Grid"><i class="bx bx-grid-alt"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <a href="command_admin_add" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+
+
+                    {% if len != 0 %}
+                                                <!--  Table order -->
+                                                
+                                                            <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                                                <thead style="font-family: sans-serif;">
+                                                                    <tr>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">User</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Number</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Payment</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Place</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Date</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Delivery Comment</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Order Comment</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Action</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Code</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">First Name</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Last Name</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">Product</h5>
+                                                                            </div>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    {% for commande in commandes%}
+                                                                    <tr>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0"></h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{commande.phone_Number}}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">
+                                                                                    {% if commande.payement_method == "cash" %}
+                                                                                        <img src="{{asset('cash.png')}}" style="width:50px;height:50px;">
+                                                                                    {% elseif commande.payement_method == "bank" %}
+                                                                                        <img src="{{asset('bank.png')}}" style="width:50px;height:50px;">
+                                                                                    {% elseif commande.payement_method == "check" %}
+                                                                                        <img src="{{asset('paypal.png')}}"style="width:50px;height:50px;">
+                                                                                    {% endif %}
+                                                                                </h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px;width:4cm;">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0"><p> {{commande.company}}. {{commande.country}}<br> {{commande.city}}<br> {{commande.street_Adress}}<br> {{commande.zip_PostalCode}}</p></h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{ commande.date|date("m/d/Y") }}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{commande.delivery_comment}}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{commande.order_comment}}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="dropdown">
+                                                                                <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                    <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                                </button>
+                                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                                    <li><a class="dropdown-item" href="changeStatusDelivered/{{commande.id}}">Delivered</a></li>
+                                                                                    <li><a class="dropdown-item" href="command_admin_clear/{{commande.id}}">Remove order</a></li>
+                                                                                    
+                                                                                </ul>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{commande.getCodeCoupon()}}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{commande.firstName}}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="font-size : 16px">
+                                                                            <div class="py-3">
+                                                                                <h5 class="font-size-16 mb-0">{{commande.lastName}}</h5>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td scope="row"> 
+                                                                            <a href="http://127.0.0.1:8000/admin/produit">
+                                                                                <img width="70" height="70" src="{{ asset('desktop-computer-png-transparent.png') }}" alt="produit name"/>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endfor%}
+                                                                </tbody>
+                                                            </table>
+                                                            <br>
+                                                             <a href="command_admin_clear"><button type="button" class="btn btn-outline-primary waves-effect waves-light">Clear Order list</button></a>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end card body -->
+                                            </div>
+                                            <!-- end card -->
+                                        </div>
+                                        <!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+                                </div>
+
+
+                        {% elseif len == 0 %}
+                                <div class="cart-empty">
+                                    <center style="margin-top:3cm;">
+                                        <h5>You have no commands in your order list.</h5>
+                                        <p>Click <a href="command_admin_add">here</a> to add commands.</p>
+                                    </center>
+                                </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+
+
+
+{% endblock %}

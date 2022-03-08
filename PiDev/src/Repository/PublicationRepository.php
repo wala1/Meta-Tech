@@ -19,32 +19,37 @@ class PublicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Publication::class);
     }
 
-    // /**
-    //  * @return Publication[] Returns an array of Publication objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Publication[] Returns an array of Publication objects
+      */
+    
+    public function findOtherPublications($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.utilisateur != :val or p.utilisateur is NULL' )
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Publication
+   
+    public function findlLikeIfExist($value , $idPub) 
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+        return $this->createQueryBuilder('p')->select('p.likes')
+            ->andWhere('p.likes = :val' )
+            ->andWhere('p.id = :id' )
             ->setParameter('val', $value)
+            ->setParameter('id', $idPub)
+            ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
+    
+
+    
+
+    
 }

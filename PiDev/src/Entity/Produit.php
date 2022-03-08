@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
 
+
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
  */
@@ -35,6 +36,52 @@ class Produit
      * @Groups("post:read")
      */
     public $desc_prod;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="produits")
+     * @ORM\JoinTable(name="commande_produit")
+     */
+    public $commands;
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+    public function addCommands(Commande $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+        }
+        return $this;
+    }
+    public function removeCommande(Commande $command): self
+    {
+        $this->commands->removeElement($command);
+        return $this;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity=Panier::class, mappedBy="produit_panier")
+    */
+    private $panier;
+
+    public function __construct()
+    {
+        $this->panier = new ArrayCollection();
+        $this->commands = new ArrayCollection();
+        $this->avis = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Panier[]
+    */
+    public function getPanier(): Collection
+    {
+        return $this->panier;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="produits")
@@ -80,6 +127,15 @@ class Produit
     public $model_prod;
 
     /**
+     * @ORM\Column(type="integer", length=255, nullable=true)
+     */
+    public $inStock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    public $quantite_prod;
+    /**
      * @ORM\ManyToOne(targetEntity=SousCategorie::class, inversedBy="produits")
      * @ORM\JoinColumn(nullable=false)
      * @Groups("post:read")
@@ -105,10 +161,6 @@ class Produit
      */
     private $stockProd;
 
-    public function __construct()
-    {
-        $this->avis = new ArrayCollection();
-    }
 
       
 
@@ -219,6 +271,30 @@ class Produit
         $this->model_prod = $model_prod;
 
         return $this;
+    }    
+
+    public function getInStock(): ?int
+    {
+        return $this->inStock;
+    }
+
+    public function setInStock(?int $inStock): self
+    {
+        $this->inStock = $inStock;
+
+        return $this;
+    }
+
+    public function getQuantiteProd(): ?int
+    {
+        return $this->quantite_prod;
+    }
+
+    public function setQuantiteProd(?int $quantite_prod): self
+    {
+        $this->quantite_prod = $quantite_prod;
+
+        return $this;
     }
 
     public function getSousCategProd(): ?SousCategorie
@@ -301,6 +377,28 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($pubBack->getProduit() === $this) {
                 $pubBack->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+    public function addPanier(Panier $produipaniert): self
+    {
+        if (!$this->panier->contains($panier)) {
+            $this->panier[] = $panier;
+            $panier->setProduitPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Panier $panier): self
+    {
+        if ($this->panier->removeElement($panier)) {
+            if ($panier->getProduitPanier() === $this) {
+                $panier->setProduitPanier(null);
             }
         }
 

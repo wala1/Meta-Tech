@@ -1,0 +1,42 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	<title>Blog</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="table-responsive mb-4">
+        
+        <tbody>
+
+            <div class="main-content">
+            
+                    <div class="page-content">
+                            <div class="container-fluid">
+                                    <section>
+                                           {#{% for publication in publications %}#}
+                                            <publication id="descripForm">
+                                                    <h2>{{ publication.titrePubl }}</h2>
+                                                    <div class="metadata">Ecrit le {{ publication.tempsPubl | date }}
+                                                            dans la categorie </div>
+                                                    <div class="content">
+                                                            <img src="{{ publication.imagepubl }}" width="300px" alt="">
+                                                            <p>
+                                                                    {{ publication.descriptionPubl }}
+                                                            </p>
+                                                            
+                                                            <br>
+                                                            
+                                                            <br>
+                                                           
+                                                    </div>
+                                            </publication>
+                                            
+                                    </section>
+                            </div>
+                    </div>
+            </div>
+            </tbody>
+
+    {% endblock %} 

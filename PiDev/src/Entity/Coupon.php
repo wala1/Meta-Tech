@@ -46,6 +46,10 @@ class Coupon
     {
         $this->pubBack1 = new ArrayCollection();
     }
+    /**
+     * @ORM\OneToOne(targetEntity=Commande::class, mappedBy="codeCoup")
+     */
+    private $commande;
 
     public function getId(): ?int
     {
@@ -104,5 +108,9 @@ class Coupon
         }
 
         return $this;
+    }
+    public function getCommande(): ?string
+    {
+        return $this->commande;
     }
 }

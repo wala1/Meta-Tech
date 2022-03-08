@@ -1,0 +1,674 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body%}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js">
+    </script>
+</head>
+<body>
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <h4 class="mb-sm-0 font-size-18">DASHBOARD</h4>
+                            <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                <li class="breadcrumb-item active">DASHBOARD</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+          <div class="row" style="margin-left: 10px; margin-right: 3px;margin-top:-57px;">
+            <div class="col-sm-6" style="width:313px;">
+					    <div class="card">
+                <div class="card-body">
+                    <div class="col-6">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">My Wallet</span>
+                        {% set total = 0 %}
+                        {% for commande in commandes %}
+                            {% set total = total + commande.subtotal%}
+                        {% endfor %}
+                        <h4 class="mb-3">
+                            $<span class="counter-value" data-target="{{total}}"></span>k
+                        </h4>
+                    </div>
+                    <span class="badge bg-soft-success text-success">+$20.9k</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span>
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-6" style="width:313px;">
+					    <div class="card">
+                <div class="card-body">
+                    <div class="col-6">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Number of Trades</span>
+                        <h4 class="mb-3">
+                        <span class="counter-value" data-target="6258">6258</span>
+                        </h4>
+                    </div>
+                    <span class="badge bg-soft-danger text-danger">-29 Trades</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6" style="width:313px;">
+					    <div class="card">
+                <div class="card-body">
+                   <div class="col-6">
+                      <span class="text-muted mb-3 lh-1 d-block text-truncate">Invested Amount</span>
+                      <h4 class="mb-3">
+                        $<span class="counter-value" data-target="4.32">4.32</span>M
+                      </h4>
+                    </div>
+                    <span class="badge bg-soft-success text-success">+$20.9k</span>
+                    <span class="ms-1 text-muted font-size-13">Since last week</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6" style="width:313px;">
+					    <div class="card">
+                <div class="card-body">
+                  <div class="col-6">
+                      <span class="text-muted mb-3 lh-1 d-block text-truncate">Profit Ration</span>
+                      <h4 class="mb-3">
+                          <span class="counter-value" data-target="12.57">12.57</span>%
+                      </h4>
+                  </div>
+                  <span class="badge bg-soft-success text-success">+$20.9k</span>
+                  <span class="ms-1 text-muted font-size-13">Since last week</span>
+                </div>
+              </div>
+            </div> 
+                                          
+                                          <!--========== PART TWO =========-->
+
+
+              <div class="col-sm-6" style="width:11cm;">
+                <div class="card">
+                  <center><div class="card-header" style="background: #fffdfd;width: 10cm;"><h4 style="margin-left: -5.5cm;font-size: 17px;font-family: monospace;margin-bottom: -13px;" class="card-title">Delivered Order</h5></div>
+                  </center>
+                  <div class="card-body">
+                        <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6" style="width:11cm;">
+                <div class="card">
+                  <center><div class="card-header" style="background: #fffdfd;width: 10cm;"><h4 style="margin-left: -5.5cm;font-size: 17px;font-family: monospace;margin-bottom: -13px;" class="card-title">Dominated Place</h5></div>
+                  </center>
+                  <div class="card-body">
+                      <canvas id="barChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-sm-6" style="width:11cm;margin-bottom: 63px;">
+                <div class="card">
+                  <div class="card-body">
+                  <div class="card-header align-items-center d-flex">
+                                        <h4 class="card-title mb-0 flex-grow-1">Transactions</h4>
+                                        <div class="flex-shrink-0">
+                                            <ul class="nav justify-content-end nav-tabs-custom rounded card-header-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#transactions-all-tab" role="tab" aria-selected="false">
+                                                        All 
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#transactions-buy-tab" role="tab" aria-selected="false">
+                                                        Buy 
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#transactions-sell-tab" role="tab" aria-selected="true">
+                                                        Sell  
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <!-- end nav tabs -->
+                                        </div>
+                                    </div>
+                        <div class="card-body px-0">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="transactions-all-tab" role="tabpanel">
+                                                <div class="table-responsive px-3" data-simplebar="init" style="max-height: 352px;"><div class="simplebar-wrapper" style="margin: 0px -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: -17px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px 16px;">
+                                                    <table class="table align-middle table-nowrap table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="font-size-22 text-danger">
+                                                                        <i class="bx bx-up-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 456px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 271px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></div>
+                                            </div>
+                                            <!-- end tab pane -->
+                                            <div class="tab-pane" id="transactions-buy-tab" role="tabpanel">
+                                                <div class="table-responsive px-3" data-simplebar="init" style="max-height: 352px;"><div class="simplebar-wrapper" style="margin: 0px -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px 16px;">
+                                                    <table class="table align-middle table-nowrap table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                             <tr>
+                                                                <td>
+                                                                    <div class="font-size-22 text-success">
+                                                                        <i class="bx bx-down-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Buy BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">18 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.018 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$145.80</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div></div>
+                                            </div>
+                                            <!-- end tab pane -->
+                                            <div class="tab-pane" id="transactions-sell-tab" role="tabpanel">
+                                                <div class="table-responsive px-3" data-simplebar="init" style="max-height: 352px;"><div class="simplebar-wrapper" style="margin: 0px -16px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px 16px;">
+                                                    <table class="table align-middle table-nowrap table-borderless">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="font-size-22 text-danger">
+                                                                        <i class="bx bx-up-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Sell ETH</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">15 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.56 ETH</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$112.34</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td style="width: 50px;">
+                                                                    <div class="font-size-22 text-danger">
+                                                                        <i class="bx bx-up-arrow-circle d-block"></i>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div>
+                                                                        <h5 class="font-size-14 mb-1">Sell BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">14 Mar, 2021</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 mb-0">0.016 BTC</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Coin Value</p>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td>
+                                                                    <div class="text-end">
+                                                                        <h5 class="font-size-14 text-muted mb-0">$125.20</h5>
+                                                                        <p class="text-muted mb-0 font-size-12">Amount</p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div></div>
+                                            </div>
+                                            <!-- end tab pane -->
+                                        </div>
+                                        <!-- end tab content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                                          <!--========== PART THREE =========-->
+
+
+                     
+              <div class="col-sm-6" style="width:11cm;margin-top: -7.5cm;">
+                <div class="card">
+                  <div class="card-body">
+                      <div class="d-flex flex-wrap align-items-center mb-4">
+                                                    <h5 class="card-title me-2">Invested Overview</h5>
+                                                    <div class="ms-auto">
+                                                        <select class="form-select form-select-sm">
+                                                            <option value="MAY" selected="">May</option>
+                                                            <option value="AP">April</option>
+                                                            <option value="MA">March</option>
+                                                            <option value="FE">February</option>
+                                                            <option value="JA">January</option>
+                                                            <option value="DE">December</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                      <canvas id="radarChart"></canvas>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+</body>
+</html>
+
+
+{% set ch = "" %}
+{% set tab = [] %}
+{% for commande in commandes %}
+    {% set ch = "#{ch}, #{commande.subtotal}"%}
+    {% set tab = tab | merge([commande.subtotal]) %}
+{% endfor %}
+
+<p id="ch" style="display:none;">{% set len = commandes | length %}{% for i in tab %}{{i}}{% endfor %}</p>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var ch = document.getElementById('ch').innerHTML;
+  var tab = [];
+  tab = [ch];
+  console.log(ch);
+  console.log(tab);
+
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Delivered Order',
+      backgroundColor: 'rgb(168, 170, 218)',
+      borderColor: 'rgb(81, 86, 190)',
+      data: ch,
+    }]
+  };
+
+  const config ={
+      type: 'line',
+      data: data,
+      options: {}
+  };
+
+  const labels2 = [
+    'Axe',
+    'Ariana',
+    'Nabeul',
+    'Monastir',
+    'Kairouan',
+    'Mahdia',
+    'Sousse',
+    'Djerba',
+  ];
+
+  const data2 = {
+    labels: labels2,
+    datasets: [{
+      label: 'Dominated Place',
+      backgroundColor: 'rgb(217, 242, 233)',
+      borderColor: 'rgb(52, 195, 143)',
+      data: [0, 35, 20, 10, 20, 5, 20, 30],
+    }]
+  };
+  
+   const data3 = {
+    labels: [
+    'Ariana',
+    'Nabeul',
+    'Monastir',
+    'Kairouan',
+    'Mahdia',
+    'Sousse',
+    'Djerba',
+    ],
+    datasets: [{
+      label: 'Dominated Place',
+      backgroundColor: 'rgb(168, 170, 218)',
+      borderColor: 'rgb(81, 86, 190)',
+      data: [0, 35, 20, 10, 20, 5, 20, 30],
+    }]
+  };
+
+  const config2 ={
+      type: 'radar',
+      data: data2,
+      options: {}
+  };
+
+  const config3 ={
+      type: 'bar',
+      data: data3,
+      options: {}
+  };
+
+const data4 = {
+  labels: [
+    'Ariana',
+    'Nabeul',
+    'Monastir',
+    'Kairouan',
+    'Mahdia',
+    'Sousse',
+    'Djerba'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(81, 86, 190)',
+      'rgb(75, 166, 239)',
+      'rgb(55, 195, 145)'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+    const config4 ={
+      type: 'doughnut',
+      data: data4
+    };
+    
+
+
+</script>
+
+<script>
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+  const radarChart = new Chart(
+    document.getElementById('radarChart'),
+    config2
+  );
+  const barChart = new Chart(
+    document.getElementById('barChart'),
+    config3
+  );
+  const scatter = new Chart(
+    document.getElementById('scatter'),
+    config4
+  );
+
+</script>
+
+
+
+
+{% endblock %}
