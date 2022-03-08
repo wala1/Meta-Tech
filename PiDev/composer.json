@@ -17,6 +17,7 @@
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.25",
         "phpdocumentor/reflection-docblock": "^5.3",
+        "phpoffice/phpspreadsheet": "^1.22",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
         "symfony/cache": "4.4.*",
