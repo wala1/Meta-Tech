@@ -49,6 +49,7 @@ class SecurityController extends AbstractController
 
             $hash=$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($hash);
+            $user->setGender("homme");
             $user->setEtat(0);
             $user->setRoles(["ROLE_CLIENT"]);
            
@@ -78,13 +79,14 @@ class SecurityController extends AbstractController
              //////Envoi sms/////////////
            
               $twilio_number = "+18623622028";
+              $client_number='++216'.$user->getPhoneNumber();
               $client = new Client($sid, $token);
                $client->messages->create(
                        // Where to send a text message (your cell phone?)
-                         '++21622407863',
+                       $client_number,
                              array(
                            'from' => $twilio_number,
-                          'body' => 'test'
+                          'body' => 'Thank you for choosing Meta-Tech'
                                 )
                              );
 
