@@ -236,8 +236,7 @@ class PubBackController extends AbstractController
    /**
      * @Route("/delete/{id}", name="delete")
      */ 
-
-    public function delete(PubBack $pubBack){
+    public function delete(Request $request, $id){
         $em =$this->getDoctrine()->getManager();
          $em->remove($pubBack);
          $em->flush();

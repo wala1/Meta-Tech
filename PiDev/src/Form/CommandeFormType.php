@@ -3,9 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Commande;
-use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType ;
@@ -137,15 +135,6 @@ class CommandeFormType extends AbstractType
                 'label_attr' => [
                     'style' => 'display: none;'
                 ],
-            ])
-            ->add('produits', EntityType::class, [
-                'class'=>Produit::class,
-                'choice_label'=>'nom_prod',
-                'attr' => [
-                    'class'=>'form-control'
-                ],
-                'expanded' => true,
-                'multiple' => true,
             ])
         ;
     }

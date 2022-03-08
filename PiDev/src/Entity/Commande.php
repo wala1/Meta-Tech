@@ -169,7 +169,35 @@ class Commande
         return $this->id;
     }
 
+    public function getZip_PostalCode(): ?int
+    {
+        return $this->zip_PostalCode;
+    }
 
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function getCompany(): ?string
+    {
+        return $this->company;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
 
     public function getPayementMethod(): ?string
     {
@@ -195,14 +223,19 @@ class Commande
         return $this;
     }
 
-    public function getComment(): ?string
+    public function getDelivery_comment(): ?string
     {
-        return $this->comment;
+        return $this->delivery_comment;
     }
 
-    public function setComment(?string $comment): self
+    public function getOrder_comment(): ?string
     {
-        $this->comment = $comment;
+        return $this->order_comment;
+    }
+
+    public function setDelivery_comment(?string $delivery_comment): self
+    {
+        $this->delivery_comment = $delivery_comment;
 
         return $this;
     }
@@ -276,11 +309,6 @@ class Commande
         return $this;
     }
 
-    public function setDelivery_comment(string $delivery_comment): self
-    {
-        $this->delivery_comment = $delivery_comment;
-        return $this;
-    }
 
     public function setNewsletter(string $newsletter): self
     {

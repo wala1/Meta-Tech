@@ -17,6 +17,11 @@ use App\Entity\Commande;
 use App\Controller\EntityManager;
 use App\Repository\PanierRepository;
 use App\Form\CommandeFormType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class PanierController extends AbstractController
 {
@@ -546,9 +551,119 @@ class PanierController extends AbstractController
         } else {
             echo "NOOOOOOOOOO" ; 
         }
+    }
+
+
+    /**
+     * @Route("/commande_execel", name="commande_execel")
+     */
+    public function excel()
+    {
         
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findAll();
+
+        
+        /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
         
 
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle("All Command");
+        $sheet->setCellValue('A1', 'All Command')->mergeCells('A1:M3');
+        $columnNames = [
+            'First Name',
+            'Last Name',
+            'Number',
+            'Payment',
+            'Company',
+            'Country',
+            'City',
+            'street Adress',
+            'zip/PostalCode',
+            'Code',
+            'Date',
+            'Etat',
+            'Subtotal',
+        ];
+        $columnLetter = 'A';
+        foreach ($columnNames as $columnName) {
+            $sheet->setCellValue($columnLetter.'4', $columnName);
+            $columnLetter++;
+        }
+        $columnValues = [];
+        foreach ($commandes as $commande) {
+            $tab = [ 
+                $commande->getFirstName(),
+                $commande->getLastName(),
+                $commande->getPhoneNumber(),
+                $commande->getPayementMethod(),
+                $commande->getCompany(),
+                $commande->getCountry(),
+                $commande->getCity(),
+                $commande->getStreetAdress(),
+                $commande->getZip_PostalCode(),
+                $commande->getCodeCoupon(),
+                $commande->getDate(),
+                $commande->getEtat(),
+                $commande->getSubtotal(),
+            ];
+            
+            array_push($columnValues,$tab);
+        }
+        $i = 5; // Beginning row for active sheet
+        $total = 0;
+        foreach ($columnValues as $columnValue) {
+            $columnLetter = 'A';
+            foreach ($columnValue as $value) {
+                $sheet->setCellValue($columnLetter.$i, $value);
+                $columnLetter++;
+            }
+            $i++;
+            $total = ((float)$total + (float)$value);
+        }
+        
+
+
+
+        $sheet->setCellValue('A'.$i,'Subtotal')->mergeCells('A'.$i.':L'.$i);
+        $sheet->setCellValue('M'.$i,$total);
+        $sheet->getStyle('A'.$i)->getFont()->setBold(true);
+        $sheet->getStyle('M'.$i)->getFont()->setBold(true);
+        $j = $i +1 ;
+        $k = $j + 20;
+        $sheet->setCellValue('A'.$k,'')->mergeCells('A'.$j.':M'.$k);
+    
+
+        $columnLetter = 'A';
+        foreach ($columnNames as $columnName) {
+            // Center text
+            $sheet->getStyle($columnLetter.'4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle($columnLetter.'1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle($columnLetter.'2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle($columnLetter.'1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+            $sheet->getStyle($columnLetter.'2')->getAlignment()->setVertical(Alignment::HORIZONTAL_CENTER);
+            // Text in bold
+            $sheet->getStyle($columnLetter.'4')->getFont()->setBold(true);
+            $sheet->getStyle($columnLetter.'1')->getFont()->setBold(true);
+            $sheet->getStyle($columnLetter.'2')->getFont()->setBold(true);
+            // Autosize column
+            $sheet->getColumnDimension($columnLetter)->setAutoSize(true);
+            $columnLetter++;
+        }
+        
+
+        // Create your Office 2007 Excel (XLSX Format)
+        $writer = new Xlsx($spreadsheet);
+        
+        // Create a Temporary file in the system
+        $fileName = 'my_first_excel_symfony4.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+        
+        // Create the excel file in the tmp directory of the system
+        $writer->save($temp_file);
+        
+        // Return the excel file as an attachment
+        return  $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
     }
 
 

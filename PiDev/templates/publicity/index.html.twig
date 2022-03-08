@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
+
+
+
 {% block body %}
 	
+
+
 
 	<script type="text/x-magento-init">
         {
@@ -429,6 +434,15 @@ $('#rokanthemes-slidebanner-11 .nivoSlider-loading-page-still-unsuc').css("displ
 
  #}
 
+
+
+
+
+
+
+
+
+
 <!--  publicité 2  "CUSTOM WHEELS" -->
 
 
@@ -450,7 +464,7 @@ $('#rokanthemes-slidebanner-11 .nivoSlider-loading-page-still-unsuc').css("displ
 					{% if pub.id == 4 or pub.id == 5 or pub.id == 6 %}
 
 						<div class="col-banner absolute-content-image lazyload-content   left center">
-							<div class="banner-img left center"><img src="" data-src="{{pub.getImagePub()}}" alt="">
+							<div class="banner-img left center"><img src="" data-src="{{pub.getImageName()}}" alt="">
 							</div>
 							<div class="content">
 								<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{  pub.getNomPub()    }}</h5>
@@ -676,7 +690,7 @@ color: "#f9bc02"
 <ul>{% for pub in pubBack %}
 {% if pub.id == 7 or pub.id == 8 or pub.id == 9 or pub.id == 10 %}
 <li>	<a href="{{path('produit_categorie', {'id' : 2 } )}}" class="vertical absolute-content-image lazyload-content">
-<figure><img alt="" class="vertical" src="" data-src="{{ pub.getImagePub() }}"/></figure>
+<figure><img alt="" class="vertical" src="" data-src="{{ pub.getImageName() }}"/></figure>
 <span class="thumb-infor">
 	<span class="cate-name cate-count">
 		<span class="cate_name">{{  pub.getNomPub()    }}</span>
@@ -704,7 +718,7 @@ color: "#f9bc02"
 					{% if pub.id == 11 or pub.id == 12 or pub.id == 13 %}
 
 						<div class="col-banner absolute-content-image lazyload-content   left center">
-							<div class="banner-img left center"><img src="" data-src="{{pub.getImagePub()}}" alt="">
+							<div class="banner-img left center"><img src="" data-src="{{pub.getImageName()}}" alt="">
 							</div>
 							<div class="content">
 								<h5 class="size-20" style="color: #ffffff; text-transform: capitalize; font-weight: bold;">{{  pub.getNomPub()    }}</h5>
@@ -721,15 +735,6 @@ color: "#f9bc02"
 
 
 
- <div>	<div class="widget box-section block-recent-posts section">
-				<div class="rokan-title ">
-			<h3 class="module-title"><span>Latest Blog Posts</span></h3>
-			<div class="rokan-description blog-description">
-				<p></p>
-			</div>
-		</div>
- 
- 
 
 
 <div class="section full-width testimo_wrapper"><section class="testimo-slider" style="background-image: url(../media/bgtesti_1.jpg);">
@@ -825,6 +830,12 @@ color: "#f9bc02"
 
 
 
+
+
+
+
+
+
 <script type="text/x-magento-init">
         {
             "*": {
@@ -853,6 +864,8 @@ color: "#f9bc02"
 </div>
 </div> 
 <script>require(["jquery"],function($){require(["rokanthemes/lazyloadimg"],function(lazy){$("img[data-src]").lazy({"bind":"event","attribute":"data-src",visibleOnly:true,threshold:0,enableThrottle:true,throttle:500,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});$(document).ready(function($){var win=$(window);$(".owl-carousel").on("translated.owl.carousel",function(event){var bounds=$(this).offset();var viewport={top:win.scrollTop(),left:win.scrollLeft()};viewport.bottom=viewport.top+win.height();if(viewport.bottom>bounds.top){$(this).find("img[data-src]").lazy({"bind":"event",delay:0,afterLoad:function(element){$(element).addClass("lazy-loaded");$(element).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(element).addClass("transition");},1000);}});}});setTimeout(function(){$("img[data-src]").each(function(){if($(this).is(":hidden")){var new_url=$(this).attr("data-src");$(this).attr("src",new_url);$(this).removeAttr("data-src");$(this).addClass("lazy-loaded");$(this).closest(".absolute-content-image").removeClass("lazyload-content");setTimeout(function(){$(this).addClass("transition");},1000);}});},1000);});});});</script></body>
+
+
 
 
 
