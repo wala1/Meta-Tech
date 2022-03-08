@@ -560,32 +560,16 @@ class PanierController extends AbstractController
     public function excel()
     {
         
-        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findBy(
-            ['etat' => 'en cours']
-        );
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findAll();
 
         
         /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
-        /*
-        $sheet->setCellValue('A1', 'First Name');
-        $sheet->setCellValue('B1', 'Last Name');
-        $sheet->setCellValue('C1', 'Number');
-        $sheet->setCellValue('D1', 'Payment');
-        $sheet->setCellValue('E1', 'Company');
-        $sheet->setCellValue('F1', 'Country');
-        $sheet->setCellValue('G1', 'City');
-        $sheet->setCellValue('H1', 'street Adress');
-        $sheet->setCellValue('I1', 'zip/PostalCode');
-        $sheet->setCellValue('J1', 'Code');
-        $sheet->setCellValue('K1', 'Date');
-        $sheet->setCellValue('L1', 'Delivery Comment');
-        $sheet->setCellValue('M1', 'Order Comment');
-        */
+        
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setTitle("Delivered Command");
-        $sheet->setCellValue('A1', 'Delivered Command')->mergeCells('A1:O3');
+        $sheet->setTitle("All Command");
+        $sheet->setCellValue('A1', 'All Command')->mergeCells('A1:M3');
         $columnNames = [
             'First Name',
             'Last Name',
@@ -598,8 +582,6 @@ class PanierController extends AbstractController
             'zip/PostalCode',
             'Code',
             'Date',
-            'Delivery Comment',
-            'Order Comment',
             'Etat',
             'Subtotal',
         ];
@@ -622,8 +604,6 @@ class PanierController extends AbstractController
                 $commande->getZip_PostalCode(),
                 $commande->getCodeCoupon(),
                 $commande->getDate(),
-                $commande->getDelivery_comment(),
-                $commande->getOrder_comment(),
                 $commande->getEtat(),
                 $commande->getSubtotal(),
             ];
@@ -645,11 +625,13 @@ class PanierController extends AbstractController
 
 
 
-        $sheet->setCellValue('H'.$i,'Subtotal');
-        $sheet->setCellValue('I'.$i,$total);
-        $sheet->getStyle('H'.$i)->getFont()->setBold(true);
-        $sheet->getStyle('I'.$i)->getFont()->setBold(true);
-        
+        $sheet->setCellValue('A'.$i,'Subtotal')->mergeCells('A'.$i.':L'.$i);
+        $sheet->setCellValue('M'.$i,$total);
+        $sheet->getStyle('A'.$i)->getFont()->setBold(true);
+        $sheet->getStyle('M'.$i)->getFont()->setBold(true);
+        $j = $i +1 ;
+        $k = $j + 20;
+        $sheet->setCellValue('A'.$k,'')->mergeCells('A'.$j.':M'.$k);
     
 
         $columnLetter = 'A';

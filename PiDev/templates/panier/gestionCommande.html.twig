@@ -77,9 +77,13 @@
 
                     {% if len != 0 %}
                                                 <!--  Table order -->
-                                                            <a href="{{path('commande_execel')}}"><button>Excel</button></a>
+                                                            <a href="{{path('commande_execel')}}">
+                                                                <button class=""btn btn-success waves-effect waves-light">
+                                                                    <span>Excel</span>
+                                                                </button>
+                                                            </a>
                                                 
-                                                            <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                                            <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                                                                 <thead style="font-family: sans-serif;">
                                                                     <tr>
                                                                         <th style="font-size : 16px">
