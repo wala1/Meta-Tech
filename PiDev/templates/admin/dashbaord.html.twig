@@ -12,7 +12,7 @@
 </div>
 
 <script>
-var xValues = ["Femme", "Homme"];
+var xValues = ["Homme","Femme"];
 var yValues = [30, 49];
 var barColors = [
   "#1FB8F0",
@@ -21,7 +21,7 @@ var barColors = [
 new Chart("myChart", {
   type: "pie",
   data: {
-    labels: {{gender | raw}},
+    labels: {{ gender | raw}},
     datasets: [{
       backgroundColor: barColors,
       data: yValues
