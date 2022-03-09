@@ -1,0 +1,175 @@
+
+       {%  extends 'baseAdmin.html.twig'   %}
+           
+           
+           {% block title %}   
+           <title> Add User </title>
+           {% endblock %}
+
+           {%  block body  %}
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">Add New User</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">User</a></li>
+                                            <li class="breadcrumb-item active">Add User</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+
+
+
+                        
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+               
+{# {{ form_row(userAddForm.username,{ 'attr': {'placeholder': "Nom ..."  }}) }}
+{{ form_row(userAddForm.email,{ 'attr': {'placeholder': " email  "  }}) }}
+{{form_row(userAddForm.password,{'label' : 'Password','attr':{'placeholder':'.....','novalidate':'novalidate'}})  }}
+{{form_row(userAddForm.confirm_password,{'label' : 'Confirm Password','attr':{'placeholder':'....','novalidate':'novalidate'}})  }} #}
+                 <div style="margin-left : 90px  ">
+
+
+ {{ form_start(userAddForm,{'attr':{'novalidate':'novalidate'}}) }}
+                        <table  style="width : 80%">
+                                   
+                                          <tr> 
+                                     
+                                       	<br>
+										<td style="padding:1%">
+                                           
+											{{ form_label(userAddForm.username,"Username ") }}
+											{{ form_widget(userAddForm.username) }}
+											{{ form_errors(userAddForm.username) }}
+
+											<br> 
+
+										 
+											
+											{{ form_label(userAddForm.email,"Email ") }}
+											{{ form_widget(userAddForm.email) }} 
+											{{ form_errors(userAddForm.email) }}
+										 
+
+										 
+											
+										</td>
+										<br>
+                                       
+                                       </tr>
+                                        
+                                       <tr>
+										<td style="padding:1%">
+											{{ form_label(userAddForm.password,"Password ") }}
+											{{ form_widget(userAddForm.password) }}
+											{{ form_errors(userAddForm.password) }} 
+											<br>
+										</td>   
+										
+											
+										<td style="padding:1%">
+											
+											{{ form_label(userAddForm.confirm_password,"Confirm Password ") }}
+											{{ form_widget(userAddForm.confirm_password) }}
+											{{ form_errors(userAddForm.confirm_password) }} 
+                                            	<br>
+
+										
+											
+											
+										</td>
+                                        
+										
+											
+											
+										</td>
+                                        </tr>
+                                     
+{# 
+                            <tr> 
+                                     
+                                       	<br>
+										<td style="padding:1%">
+                                           
+											
+
+										 
+											
+		                      	{{ form_label(userAddForm.phoneNumber,"Phone Number ") }}
+											{{ form_widget(userAddForm.phoneNumber) }} 
+											{{ form_errors(userAddForm.phoneNumber) }}
+										 <br>
+
+										 
+											
+										</td>
+										<br>
+                                       
+                                       </tr> #}
+                                     
+										{# <td style="padding:1%">
+                                           
+											{{ form_label(userAddForm.username,"Username ") }}
+											{{ form_widget(userAddForm.username) }}
+											{{ form_errors(userAddForm.username) }}
+										 
+
+											<br> 
+
+										 
+											{{ form_label(userAddForm.email,"Email ") }}
+											{{ form_widget(userAddForm.email) }} 
+											{{ form_errors(userAddForm.email) }}
+										 
+
+											 <br>
+
+											{{ form_label(userAddForm.password,"Password ") }}
+											{{ form_widget(userAddForm.password) }}
+											{{ form_errors(userAddForm.password) }} 
+                                            
+											 <br>
+
+											{{ form_label(userAddForm.confirm_password,"Confirm Password ") }}
+											{{ form_widget(userAddForm.confirm_password) }}
+											{{ form_errors(userAddForm.confirm_password) }} 
+
+										 
+											
+										</td>
+										 #}
+                         </table>
+
+
+{{ form_end(userAddForm) }} 
+</div>
+         {% endblock  %}
+
+
+
+
+
+
+
+
+

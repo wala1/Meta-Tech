@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+			<div class="main-content"> 
+                <div class="page-content">
+                    <div class="container-fluid">
+						<h2>
+                        <div>
+							{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+								<table  style="width : 25%">
+									{% for Panier in panier %}
+                                        {% if Panier.getUserPanier().getId() == userId %}
+                                            {% for produit in produits%}
+                                                {% if Panier.getProduitPanier().getId() == produit.getId() %}
+													<tr>
+														<td style="padding:1%">
+
+															{{ form_label(form.quantite,"Quantite") }}
+															{{ form_widget(form.quantite) }}
+															{{ form_errors(form.quantite) }}
+														</td>   
+													</tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {%endfor%}
+                                </table>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+{% endblock %}

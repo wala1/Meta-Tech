@@ -1,0 +1,286 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block body %}
+
+<center style="margin-top: 5cm; margin-left: 7cm;">
+    <div style="width: 10cm; margin-top: 2cm; margin-bottom: -2cm; margin-left: 2.2cm;">
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <div class="row" style="margin-left:3px;margin-right:3px;">
+                <div class="col-sm-6" style="width:11cm;">
+                    <div class="card">
+                    <center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h4 style="margin-left:-3.5cm;font-size: 22px;" class="card-title">Shipping Address</h5></div>
+                    </center>
+                        <div class="card-body">
+					            <table style="margin-left: -8cm; margin-right: -8cm; width: 9cm;">
+									<tr>
+										<td >
+											{{ form_label(form.firstName,"First Name ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.firstName) }}
+                                            {% if form_errors(form.firstName) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.firstName) }}
+                                                </div>
+                                            {% endif %}
+
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.lastName,"Last Name ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.lastName) }}
+                                            {% if form_errors(form.lastName) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.lastName) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.street_Adress,"Street Adress ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.street_Adress) }}
+                                            {% if form_errors(form.street_Adress) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.street_Adress) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.city,"City ") }}
+											{{ form_widget(form.city) }}
+                                            {% if form_errors(form.city) %}
+                                                <div class="alert alert-danger" role="alert" style="width5cm:; height:2cm; margin-top:0.2cm; ">
+                                                    {{ form_errors(form.city) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.zip_PostalCode,"Zip PostalCode ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.zip_PostalCode) }}
+                                            {% if form_errors(form.zip_PostalCode) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.zip_PostalCode) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.country,"Country ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.country) }}
+                                            {% if form_errors(form.country) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.country) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.company,"Company ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.company) }}
+                                            {% if form_errors(form.company) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.company) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                    <tr>
+										<td >
+											{{ form_label(form.phone_Number,"Phone Number ") }} <span style="color:red;">*</span>
+											{{ form_widget(form.phone_Number) }}
+                                            {% if form_errors(form.phone_Number) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+                                                    {{ form_errors(form.phone_Number) }}
+                                                </div>
+                                            {% endif %}
+										</td>
+									</tr>
+                                </table>
+							</div>
+						</div>
+					</div>	
+
+					<div class="col-sm-6" style="width:11cm;">
+						<div class="card">
+						<center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h4 style="margin-left:-3.5cm;font-size: 22px;" class="card-title">Payment Method</h5></div>
+						</center>
+							<div class="card-body">
+									<table style="margin-left: -8cm; margin-right: -8cm; width: 9cm;">
+										<tr>
+
+											<td >
+												{{ form_widget(form.payement_method,  {'attr':{'style':'font-size: 15px; line-height: 2.5; width: 184px;border: 0px solid #ced4da;'}}) }}
+												{% if form_errors(form.payement_method) %}
+                                                <div class="alert alert-danger" role="alert" style="width:9cm;height:1cm;">
+														{{ form_errors(form.payement_method) }}
+													</div>
+												{% endif %}
+												<br>
+
+												<div id="smart-button-container">
+													<div style="text-align: center;">
+														<div id="paypal-button-container"></div>
+													</div>
+												</div>
+												<script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
+												<script>
+													function initPayPalButton() {
+													paypal.Buttons({
+														style: {
+														shape: 'rect',
+														color: 'gold',
+														layout: 'vertical',
+														label: 'paypal',
+														
+														},
+
+														createOrder: function(data, actions) {
+														return actions.order.create({
+															purchase_units: [{"amount":{"currency_code":"EUR","value":214,"breakdown":{"item_total":{"currency_code":"EUR","value":200},"shipping":{"currency_code":"EUR","value":0},"tax_total":{"currency_code":"EUR","value":14}}}}]
+														});
+														},
+
+														onApprove: function(data, actions) {
+														return actions.order.capture().then(function(orderData) {
+															
+															// Full available details
+															console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+															// Show a success message within this page, e.g.
+															const element = document.getElementById('paypal-button-container');
+															element.innerHTML = '';
+															element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+															// Or go to another URL:  actions.redirect('thank_you.html');
+															
+														});
+														},
+
+														onError: function(err) {
+														console.log(err);
+														}
+													}).render('#paypal-button-container');
+													}
+													initPayPalButton();
+												</script>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+										
+						<div class="card" style="margin-top:1cm;">
+							<center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h4 style="font-size: 22px;margin-left:-3.5cm;" class="card-title">Shipping Methods</h4></div>
+							</center>
+								<div class="card-body">
+									<table>
+										<tr>
+
+											<td >
+												{{ form_label(form.date,"Shipping Delivery Date") }}
+												{{ form_widget(form.date) }}
+												{% if form_errors(form.date) %}
+													<div class="alert alert-danger" role="alert">
+														{{ form_errors(form.date) }}
+													</div>
+												{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td >
+												{{ form_label(form.delivery_comment,"Shipping Delivery Comment") }}
+												{{ form_widget(form.delivery_comment) }}
+												{% if form_errors(form.delivery_comment) %}
+													<div class="alert alert-danger" role="alert">
+														{{ form_errors(form.delivery_comment) }}
+													</div>
+												{% endif %}
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>	
+
+					<div class="col-sm-6" style="width:11cm;">
+						<div class="card">
+							<center><div class="card-header" style="background: #fffdfd;width: 8cm;"><h4 style="font-size: 22px;margin-left:-3.5cm;" class="card-title" style="font-weight: 700;font-family: Mark\ Pro,sans-serif;">
+									Order Summary</h5></div>
+							</center>
+								<div class="card-body">
+								<table class="data table table-totals">
+									<table >
+										<tr>
+											<td >
+												{{ form_label(form.order_comment,"Order Comment ") }}
+												{{ form_widget(form.order_comment) }}
+												{% if form_errors(form.order_comment) %}
+													<div class="alert alert-danger" role="alert">
+														{{ form_errors(form.order_comment) }}
+													</div>
+												{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td >
+												{{ form_label(form.newsletter,"Check To Subscribe Order Newsletter") }}
+												{{ form_widget(form.newsletter) }}
+												{% if form_errors(form.newsletter) %}
+													<div class="alert alert-danger" role="alert">
+														{{ form_errors(form.newsletter) }}
+													</div>
+												{% endif %}
+											</td>
+										</tr>
+										<tr>
+											<td>
+												{{ form_label(form.codeCoup,"Code Coupon ") }}
+												{{ form_widget(form.codeCoup) }}
+												{% if form_errors(form.codeCoup) %}
+													<div class="alert alert-danger" role="alert">
+														{{ form_errors(form.codeCoup) }}
+													</div>
+												{% endif %}
+											</td>
+											<td>
+											{% set total = 620 %}
+												{{ form_label(form.subtotal,"Subtotal") }}
+												{{ form_widget( form.subtotal, { 'attr':{'value':total + 5.00 }}) }}
+											</td>
+										</tr>
+									</table>
+				{{ form_end(form) }}
+
+</center>
+
+
+<script>
+        function mySearch()
+        {
+            var v1 = document.getElementById("search").value;
+
+            if( v1>='a' && v1<='z' )
+            {
+                document.getElementById("lettre").style.color="green";
+            }
+            else{
+                document.getElementById("lettre").style.color="red";
+            }
+        }
+</script>
+
+{% endblock %}

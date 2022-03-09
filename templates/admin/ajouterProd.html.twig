@@ -1,0 +1,269 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	{% if table=="produits" %}
+		{% if editMode %}
+			<title>Edit Product</title>
+		{% else %}
+			<title>Add Product</title>
+		{% endif %}
+
+	{% elseif table=="categories" %}
+		{% if editMode %}
+			<title>Edit Category</title>
+		{% else %}
+			<title>Add Category</title>
+		{% endif %}
+	
+	{% elseif table=="souscategories" %}
+		{% if editMode %}
+			<title>Edit SubCategory</title>
+		{% else %}
+			<title>Add SubCategory</title>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+
+
+			<!-- ============================================================== -->
+			<!-- Start right Content here -->
+			<!-- ============================================================== -->
+            <div class="main-content"> 
+                <div class="page-content">
+                    <div class="container-fluid">
+						{% if table=="produits" %}
+							<a href="{{ path('admin_product')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
+								Back
+							</a> 
+						{% elseif table=="categories" %}
+							<a href="{{ path('admin_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
+								Back
+							</a>
+						{% elseif table=="souscategories" %}
+							<a href="{{ path('admin_souscategorie')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
+								Back
+							</a>
+						{% endif %}
+						
+						<center>
+						<h2>
+						
+
+					<!-- =================== AJOUTER PRODUIT ====================== -->
+						{% if table=="produits" %}
+
+							{% if editMode %}
+								Edit Product
+							{% else %}
+								Add Product
+
+							{% endif %}</h2>
+
+
+							<div>
+							{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+								<table  style="width : 80%">
+									<tr>
+										<td rowspan="1" style="padding:1%">
+											{% if produit_details is defined %}	
+												{% for prod in produit_details %}				
+													{% if prod.id == id %}
+														{% if prod.modelProd != "" %}
+															{{prod.modelProd | raw }}
+														{% else %}
+															<center>
+																<img style="width : 20rem" alt="main product photo" class="gallery-placeholder__image" src="{{prod.imageProd}}"/>
+
+
+
+															</center>
+														{% endif %}
+													{% endif %}
+												{% endfor %}
+											{% else %}
+												<center>
+													<div style="border : 1px solid gray ; height : 200px ; width: 200px ;      ">
+														<div style="padding : 2% ; padding-top : 35% ;  ">
+														Insert an image or a 3D model.
+														<div>
+													</div>
+												</center>
+											{% endif %}
+										</td>
+
+										<br>
+
+										<td style="padding:1%">
+											{{ form_label(form.nom_prod,"Name ") }}
+											{{ form_widget(form.nom_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.nom_prod) }}
+											</div>
+										 
+
+											<br> 
+
+										 
+											{{ form_label(form.desc_prod,"Description ") }}
+											{{ form_widget(form.desc_prod) }} 
+											<div style="color : red">
+												{{ form_errors(form.desc_prod) }}
+											</div>
+										 
+
+											<br>
+
+											{{ form_label(form.image_prod,"Image ") }}
+											{{ form_widget(form.image_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.image_prod) }}
+											</div>
+
+											<br>
+
+											{{ form_label(form.stockProd,"Quantity ") }}
+											{{ form_widget(form.stockProd) }}
+											<div style="color : red">
+												{{ form_errors(form.stockProd) }}
+											</div>
+
+										 
+											
+										</td>
+
+										<br>
+									</tr>
+
+									<tr>
+										<td style="padding:1%">
+											{{ form_label(form.prix_prod,"Price ") }}
+											{{ form_widget(form.prix_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.prix_prod) }}
+											</div>
+											<br>
+
+											{{ form_label(form.promo_prod,"Promotion ") }}
+											{{ form_widget(form.promo_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.promo_prod) }}
+											</div>
+											<br> 
+										</td>   
+										
+											
+										<td style="padding:1%">
+											{{ form_label(form.sousCategProd,"Sub Category ") }}
+											{{ form_widget(form.sousCategProd) }}
+											<div style="color : red">
+												{{ form_errors(form.sousCategProd) }}
+											</div> 
+										
+											{{ form_label(form.categorie_prod,"Category ") }}
+											{{ form_widget(form.categorie_prod) }}
+											<div style="color : red">
+												{{ form_errors(form.categorie_prod) }}
+											</div>
+											<br> 
+										</td>
+										
+									<tr >
+										<td colspan="2" style="padding:1%">
+											{{ form_label(form.model_prod,"3D Model (Optional) ") }}
+											{{ form_widget(form.model_prod) }}
+											{{ form_errors(form.model_prod) }}
+											
+											<br>  
+										</td>
+									</tr>
+
+
+									</tr>
+								</table>
+								
+								 
+
+
+
+								{{ form_end(form) }}
+							</div>
+
+
+
+
+						<!-- =================== AJOUTER CATEGORIE ====================== -->
+						{% elseif table=="categories" %}
+
+						
+							{% if editMode %}
+								Edit Category
+							{% else %}
+								Add Category
+
+							{% endif %}
+							
+							</h2>
+							<br>
+							<div style="width : 60%">
+
+							{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+							{{ form_label(form.nom_categorie,"Nom ") }} 
+							{{ form_widget(form.nom_categorie) }}
+							<div style="color : red">
+								{{ form_errors(form.nom_categorie) }}
+							</div>
+
+							<br>
+							 
+							{{ form_end(form) }}</div>
+						
+						<!-- =================== AJOUTER SOUS CATEGORIE ====================== -->
+						{% elseif table=="souscategories" %}
+							{% if editMode %}
+								Edit Sub Category
+							{% else %}
+								Add Sub Category
+
+							{% endif %}
+							
+							</h2>
+							<br>
+							<div style="width : 60%">
+
+							{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+							{{ form_label(form.nomSousCateg,"Nom Sous Categorie ") }} 
+							{{ form_widget(form.nomSousCateg) }}
+							<div style="color : red">
+								{{ form_errors(form.nomSousCateg) }}
+							</div>
+
+							<br>
+							 
+							{{ form_end(form) }}</div>
+
+
+						{% endif %}
+
+						</center>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+ 
+

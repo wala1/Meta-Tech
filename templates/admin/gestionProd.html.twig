@@ -1,0 +1,499 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+
+    {% if table=="produits" %}
+        <title>Products</title>
+    {% elseif table=="categories" %}
+        <title>Categories</title>
+    {% elseif table=="souscategories" %}
+        <title>SubCategories</title>
+    {% endif %}
+	
+{% endblock %}
+
+{% block body %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+
+            
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        
+
+
+
+
+
+    
+                        <!-- =========================== TABLE PRODUITS =====================================-->
+                        {% if table=="produits" %}
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h2 class="card-title" style="font-size : 20px ; ">Products</h2>
+                                            <a href="{{ path('ajouter_produit')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
+                                                Add Product
+                                            </a>
+                                            <a href="{{ path('produit_pdf')}} " type="button" class="btn btn-success waves-effect  waves-light" style="background-color : green ; border  : green ; "> 
+                                                <span>
+                                                    <i class="mdi mdi-download   font-size-14"></i> &nbsp; 
+                                                        Download PDF
+                                                </span>
+                                            </a>
+
+ 
+
+                                            <!--a href="{{ path('admin_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
+                                                Categories
+                                            </a>
+                                            <a href="{{ path('admin_souscategorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
+                                                Sous Categories
+                                            </a-->
+
+                                            <center>
+                                                <table style="margin : 30px ; ">
+                                                    <tr>
+                                                        <td>
+                                                            <center>
+                                                                <canvas id="myChartSub" style="width:100%; width:500px ;"></canvas>
+                                                            </center>
+                                                        </td>
+                                                        <td>
+                                                            <center>
+                                                                <canvas id="myChart" style="width:100%;max-width:200px"></canvas>
+                                                            </center>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </center>
+
+                                    </div>
+                                    <div class="card-body">
+
+
+
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                                            <thead>
+                                            <tr style="font-size : 16px">
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                                <th>Promo</th>
+                                                <th>Category</th>
+                                                <th>Sub Categ.</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                            </thead>
+        
+        
+                                            <tbody>
+ 
+
+                                            
+                                            {% for produit in produits %}
+                                            <tr style="font-weight:bold ; color : black ">
+                                                <td><img style="width:80px ; height:80px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;" src="{{produit.imageProd}}"></td>
+                                                <td >{{ produit.nomProd }}</td>
+                                                <td>{{ produit.descProd }}</td>
+                                                <td>{{ produit.prixProd }}</td>
+                                                <td>{{ produit.promoProd }}</td>
+                                                <td>{{ produit.categorie_prod.nomCategorie }}</td>
+                                                <td>{{ produit.sousCategProd.nomSousCateg }}</td>
+                                                <td>
+                                                    <!--a href="{{path('modif',{'id':produit.id})}}" type="button" class="btn btn-success waves-effect waves-light  ">
+
+
+                                                        <i class="mdi mdi-pencil d-block font-size-16"></i>
+                                                        Edit
+                                                    </a>
+
+                                                    <a href="{{path('delete_prod',{'id':produit.id})}}" type="button" class="btn btn-danger waves-effect waves-light ">
+                                                        <i class="mdi mdi-trash-can d-block font-size-16"></i>
+                                                        Delete
+                                                    </a-->
+
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bx bx-dots-horizontal-rounded"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end">
+                                                            <li><a class="dropdown-item" href="{{path('modif',{'id':produit.id})}}">Modify</a></li>
+                                                            <li><a class="dropdown-item" href="{{path('delete_prod',{'id':produit.id})}}"> Delete</a></li>
+                                                            
+                                                        </ul>
+                                                    </div>
+
+
+                                                </td>
+
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- end cardaa -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+
+                    <!-- =========================== TABLE CATEGORIES =====================================-->
+                        {% elseif table=="categories" %}
+                        <div class="row" >
+                            <div class="col-12" >
+                                <div class="card" >
+                                    
+                                    <div class="card-header">
+                                        <h2 class="card-title" style="font-size : 20px ; ">Category</h2>
+                                        <a href="{{ path('ajouter_categorie')}} " type="button" class="btn btn-primary waves-effect waves-light">
+                                            Add Category
+                                        </a>
+ 
+
+                                        <p class="card-title-desc"></p>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <center>
+                                        <div style="width : 60% ; ">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap w-100" >
+                                            <thead>
+                                                <tr style="font-size : 16px">
+                                                    <th>ID</th> 
+                                                    <th>Name</th> 
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+
+
+                                                {% for categorie in categories %}
+                                                    <tr style="font-weight:bold ; color : black ">
+                                                        
+                                                        <td>{{ categorie.id }}</td>
+                                                        <td>{{ categorie.nomCategorie }}</td>
+                                                         
+                                                        <td>
+                                                            <center>
+                                                            
+
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <i class="bx bx-dots-horizontal-rounded"></i>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                                        <li><a class="dropdown-item" href="{{path('modifCateg',{'id':categorie.id})}}">Modify</a></li>
+                                                                        <li><a class="dropdown-item" href="{{path('delete_categ',{'id':categorie.id})}}"> Delete</a></li>
+                                                                        
+                                                                    </ul>
+                                                                </div>
+                                                            </center>
+
+                                                        </td>
+
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        </center>
+
+                                    </div>
+                                         
+
+
+
+                                </div>
+                                <!-- end cardaa -->
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+ 
+
+
+
+
+                        {% elseif table=="souscategories" %}
+                        <!-- =========================== TABLE SOUS CATEGORIES =====================================-->
+                         
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h2 class="card-title" style="font-size : 20px ; ">Sub Category</h2>
+                                            <a href="{{ path('ajouter_souscategorie')}} " type="button" class="btn btn-primary waves-effect waves-light"> 
+                                                Add Sub Category
+                                            </a>
+                                             
+
+                                        <p class="card-title-desc"> 
+                                        </p>
+                                    </div>
+                                    <div class="card-body">
+
+
+                                        <center>
+                                        <div style="width : 60% ; ">    
+                                            <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                                                <thead>
+                                                <tr style="font-size : 16px">
+                                                    <th>ID</th>
+                                                    <th>Name</th> 
+                                                    <th>Edit</th>
+
+                                                </tr>
+                                                </thead>
+            
+            
+                                                <tbody>
+    
+
+                                                
+                                                {% for souscategorie in souscategories %}
+                                                <tr style="font-weight:bold ; color : black ">
+                                                    
+                                                    <td >{{ souscategorie.id }}</td>
+                                                    <td>{{ souscategorie.nomSousCateg }}</td> 
+                                                    <td>
+                                                         
+
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="bx bx-dots-horizontal-rounded"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                                <li><a class="dropdown-item" href="{{path('modifSousCateg',{'id':souscategorie.id})}}">Modify</a></li>
+                                                                <li><a class="dropdown-item" href="{{path('delete_souscateg',{'id':souscategorie.id})}}"> Delete</a></li>
+                                                                
+                                                            </ul>
+                                                        </div>
+
+
+
+                                                    </td>
+
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                            </center>
+
+
+                                    </div>
+                                </div>
+                                <!-- end cardaa -->
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+
+
+                        {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+
+ 
+
+
+<!-- ===================== CATEGORIES ============================-->
+{% if categories is defined and sous_categories is defined %}
+    {% set categ_table = [] %}
+    {% for categorie in categories %}
+        {% set categ_table = categ_table|merge([categorie.nomCategorie]) %}
+        
+    {% endfor %}
+    
+
+    {% set categ_count = [] %}
+    {% for s in categories %}
+        {% set number = 0 %}
+        {% for produit in produits %}
+
+            
+            {% if produit.categorie_prod  == s %}
+                {% set number = number + 1 %}        
+            {% endif %}
+            
+
+        {% endfor %}
+        {% set categ_count = categ_count|merge([number]) %}
+    {% endfor %}
+
+    {% set categ_count = categ_count|merge([0]) %}
+
+
+    <div style="display:none" id="tab_test" > 
+        {{ categ_table|json_encode() }}
+    </div>
+
+    <div style="display:none" id="tab_count">
+
+        {{ categ_count|json_encode() }}
+    </div>
+
+
+    <!-- ===================== CATEGORIES ============================-->
+
+    {% set sub_table = [] %}
+    {% for sous_categorie in sous_categories %} 
+        {% set sub_table = sub_table|merge([sous_categorie.nomSousCateg]) %} 
+    {% endfor %}
+
+
+    {% set sub_count = [] %}
+    {% for s in sous_categories %}
+        {% set number = 0 %}
+        {% for produit in produits %}
+
+
+            {% if produit.sousCategProd  == s %}
+                {% set number = number + 1 %}
+            {% endif %}
+
+
+        {% endfor %}
+        {% set sub_count = sub_count|merge([number]) %}
+    {% endfor %}
+
+    {% set sub_count = sub_count|merge([0]) %}
+
+
+
+    <div style="display:none" id="sub_table">
+        {{ sub_table|json_encode() }}
+    </div>
+
+    <div style="display:none" id="sub_count">
+
+        {{ sub_count|json_encode() }}
+    </div>
+
+{% endif %}
+
+<!-- ============================ END CHARTS ============================= -->
+
+
+    
+ 
+
+<div style="margin-bottom : 100px ; "></div>
+
+
+
+
+
+<script>
+  
+obj = JSON.parse(document.getElementById("tab_test").innerHTML) ; 
+y = JSON.parse(document.getElementById("tab_count").innerHTML) ;
+
+obj_sub = JSON.parse(document.getElementById("sub_table").innerHTML) ; 
+y_sub = JSON.parse(document.getElementById("sub_count").innerHTML) ;
+
+var xValues =  obj ; 
+var yValues = y;
+
+var xValues_sub =  obj_sub ; 
+var yValues_sub = y_sub ;
+
+var size = obj_sub.length ; 
+
+if (obj.length > obj_sub.length ) {
+    size = obj.length ; 
+}
+ 
+var rgb = []; 
+for(var i = 0; i < xValues_sub.length ; i++) {
+    rgb.push('#'+ Math.floor(Math.random() * 19777215).toString(16));   
+}
+var barColors =  rgb  ;
+
+
+
+new Chart("myChart", {
+                        type: "pie",
+                        data: {
+                            labels: xValues,
+                            datasets: [
+                                {
+                                backgroundColor: barColors,
+                                data: yValues
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: {
+                            display: false
+                            },
+                        title: {
+                            display: true,
+                            text: "Products per Category"
+                            }
+                        }
+                        });
+
+
+new Chart("myChartSub", {
+                        type: "bar",
+                        data: {
+                            labels: xValues_sub,
+                            datasets: [
+                                {
+                                backgroundColor: barColors,
+                                data: yValues_sub
+                                }
+                            ]
+                        },
+                        options: {
+                            legend: {
+                            display: false
+                            },
+                        title: {
+                            display: true,
+                            text: "Products per Brand"
+                            }
+                        }
+                        });
+</script>
+
+
+
+
+
+
+
+
+        
+ {% endblock %}
