@@ -178,21 +178,11 @@ class User implements UserInterface
      */
     private $gender;
 
-    // /**
-    //  * @ORM\Column(type="bigint")
-    //   * @Assert\Positive(message="Your phone number cannot be negative")
-    //     * @Assert\Length(
-    //  *      min = 8,
-    //  *      max=10,
-    //  *      minMessage = "The Phone Number should have exactly {{limit}}",
-    //  *      maxMessage = "The Event Title cannot be longer than {{ limit }} characters"
-    //  * )
-     
-
-    
-
-    //  */
-    // private $phoneNumber;
+     /**
+      * @ORM\Column(type="bigint")
+   
+      */
+     private $phoneNumber;
 
 
     
@@ -201,14 +191,14 @@ class User implements UserInterface
      */
     private $publications;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur")
-     */
+    // /**
+    //  * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur")
+    //  */
 
-    /*public function __construct()
-    {
-        $this->avis = new ArrayCollection();
-    }*/
+    // /*public function __construct()
+    // {
+    //     $this->avis = new ArrayCollection();
+    // }*/
 
     public function getId(): ?int
     {
@@ -343,11 +333,16 @@ class User implements UserInterface
         return $this;
     }
 
-    // public function setPhoneNumber(string $phoneNumber): self
-    // {
-    //     $this->phoneNumber = $phoneNumber;
-    //     return $this;
-    
+     public function setPhoneNumber(string $phoneNumber): self
+     {
+         $this->phoneNumber = $phoneNumber;
+         return $this;
+     }
+     public function getPhoneNumber(): ?int
+     {
+         return $this->phoneNumber;
+     }
+ 
 
     public function getCalendar(): ?Calendar
     {
@@ -417,6 +412,8 @@ public function removeParticipant(Participants $participant): self
     public function setActivationToken(?string $activation_token): self
     {
         $this->activation_token = $activation_token;
+
+        return $this;
     }
     
     /**
@@ -428,7 +425,7 @@ public function removeParticipant(Participants $participant): self
     }
 
    
-    public function getCaptchaCode($captchaCode)
+    public function getCaptchaCode()
 
     {
       return $this->captchaCode;

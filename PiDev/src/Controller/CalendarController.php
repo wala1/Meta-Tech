@@ -311,7 +311,7 @@ public function RefuseEvent(Calendar $calendar)
            return $this->redirectToRoute('event_front');
         }
 
-        return $this->render('calendar/newEvent.html.twig', [
+        return $this->render('calendar/newEventClient.html.twig', [
             'calendar' => $calendar,
             'formEvent' => $form->createView(),
         ]);

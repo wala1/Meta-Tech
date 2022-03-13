@@ -51,7 +51,7 @@
         Skip to the beginning of the images gallery    </span>
 </a>
 </div><a id="gallery-next-area" tabindex="-1"></a>
-</div><div class="product-info-main"><div class="breadcrumbs"></div>
+</div><div class="product-info-main" style="margin-right : 200px ;"><div class="breadcrumbs"></div>
 <script type="text/x-magento-init">
     {
         ".breadcrumbs": {
@@ -62,8 +62,7 @@
 
 
 
-
-<div class="page-title-wrapper&#x20;product">
+<div class="page-title-wrapper&#x20;product" style="margin-right : 250px ;">
 
     <h1 class="page-title">
         <span class="base" data-ui-id="page-title-wrapper" itemprop="name">
@@ -122,7 +121,7 @@
 
             </div>
             </div>            
-                <div class="stock available" title="Start Time">
+                <div class="stock available"  title="Start Time">
                     <span>{{ cal.start  ? cal.start|date('Y-m-d H:i:s') : ''}}</span>
                 </div>
                 
@@ -142,7 +141,7 @@
 
 
 <div class="product-add-form">
-    <form data-product-sku="CP03" action="https://blueskytechmage.com/ohey/en11/checkout/cart/add/uenc/aHR0cHM6Ly9ibHVlc2t5dGVjaG1hZ2UuY29tL29oZXkvZW4xMS9hbnpvLWxlZC1oZWFkbGlnaHRzLWdhdWdlLWtpdC5odG1s/product/92/" method="post" id="product_addtocart_form">
+    <form data-product-sku="CP03" >
         <input type="hidden" name="product" value="92"/>
         <input type="hidden" name="selected_configurable_option" value=""/>
         <input type="hidden" name="related_product" id="related-products-field" value=""/>
@@ -158,11 +157,12 @@
 					<a class="qty-down-fixed-onclick qty-down" href="#"><span class="icon-chevron-down"></span></a> 
 				</div> #}
 			</div>
-                <div class="actions">
-            <button type="submit" title="Add&#x20;to&#x20;Cart" class="action primary tocart" id="product-addtocart-button">
+                <div style="margin-right : 200px ;">
+                <a href="{{path('participate', {id:cal.id})}}">
+            <button >
                 <span>Participate</span>
             </button>
-            
+            <a>
 <div id="instant-purchase" data-bind="scope:'instant-purchase'">
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
@@ -203,7 +203,7 @@
 
 </div>
 <div class="product-share-links">
-	<div class="share-links"><a href="#" class="share-links-click">share</a></div>
+
 	<div class="share-dialog" style="display:none;">
 		<a href="#" onclick=" window.open( 'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-facebook-f"><span class="text">Facebook</span></span></a>
 		<a href="#" onclick=" window.open( 'http://twitter.com/home/?status='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-twitter"><span class="text">Twitter</span></span></a>
@@ -211,7 +211,7 @@
 		<a href="#" onclick=" window.open( 'https://plus.google.com/share?url='+encodeURIComponent(location.href), 'twitter-share-dialog', 'width=436,height=436'); return false;"><span class="icon fab fa-google"><span class="text">Google</span></span></a>
 	</div>
 </div>
-</div><div class="product-category"><label>Categories: </label><a href="#">event</a></div>	<div class="product-page-brand-common-view">
+</div><div class="product-page-brand-common-view">
 	{# <span class="brand-label">Brands:  </span>	<ul class="product-brands">			<li class="brand-item">
 												<a href="brand/brand-3.html" title="Brand-3">Brand-3</a>
 							</li>
@@ -261,7 +261,7 @@
 {% endfor %}
 </table> 
  #}
-	<center style="margin-top : 80px ; ">
+	<center style="margin-right : 100px ;">
 				<H3>Participants</H3>
 				<H5>- {{cal.title}} -</H5>
 				<div class="limiter" style="width : 84% ; margin-top : 50px ; padding : 20px ; background-color : #F6F4E8; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; ">
@@ -300,19 +300,12 @@
 				</div>
 
 
-				
-
-
-
-				</center>
-
-
-</div>
+		
 </div>
                 </div>
                                                     
 {% endfor %}
-
+			</center>
 
 <script type="text/x-magento-init">
 {
