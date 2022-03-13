@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "e33489584bcd73390bab298520ec29fa",
-=======
     "content-hash": "750d7acba277d68fc9c75d67c821bbd2",
->>>>>>> oumaima
     "packages": [
         {
             "name": "captcha-com/captcha",
