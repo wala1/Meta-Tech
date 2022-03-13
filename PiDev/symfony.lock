@@ -4,6 +4,7 @@
     },
     "captcha-com/symfony-captcha-bundle": {
         "version": "4.0.0"
+        "version": "4.2.12"
     },
     "clue/stream-filter": {
         "version": "v1.6.0"
@@ -116,7 +117,11 @@
             "branch": "master",
             "version": "0.6",
             "ref": "18ce21f16066cccfa0803c9e846a2e4f4bec92ab"
-        }
+        },
+        "files": [
+            "./config/packages/hwi_oauth.yaml",
+            "./config/routes/hwi_oauth_routing.yaml"
+        ]
     },
     "jms/metadata": {
         "version": "2.6.1"
