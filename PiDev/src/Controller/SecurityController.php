@@ -3,7 +3,8 @@
 namespace App\Controller;
 use  vendor\autoload;
 use Twilio\Rest\Client;
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ use App\Form\RegistrationType;
 
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\PubBack;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Security\UsersAuthenticator;
@@ -247,7 +248,138 @@ class SecurityController extends AbstractController
 
 }
         
-        
+###################################### JSON ###################################################"""
+
+/**
+ *@Route("/signup", name="security_registration_json")
+  */
+public function signup(Request $request,UserPasswordEncoderInterface $encoder) {
+ $email = $request->query->get( "email");
+ $username = $request->query->get("username");
+ $password = $request->query->get( "password");
+//  $phoneNumber = $request->query->get( "phoneNumber");
+
+//  $roles= $request->query->get( "roles");
+ //controt al email Lazam @
+  if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    return new Response( "email invalid.");
+  }
+ $user= new User();
+ $user->setUsername($username) ;
+ $user->setEmail($email);
+//  $user->setPhoneNumber($phoneNumber);
+
+//  $hash=$encoder->encodePassword($user,$user->getPassword());
+
+//  $user->setPassword($hash);
+  $user->setPassword($password);
+
+ $user->setEtat(0);
+ $user->setRoles(["ROLE_CLIENT"]);
+ try {
+     $em = $this->getDoctrine()->getManager();
+     $em->persist($user);
+     $em->flush();
+    return new JsonResponse("Account is created",200);//200 ya3ni http result te3 server OK
+ }
+catch (\Exception $ex) {
+    return new Response("exeception ". $ex->getMessage());
+}
+}
+
+/**
+ * @Route("/signin", name="security_login_json")
+ */
+ 
+public function signin(Request $request) {
+$email =$request->query->get("email");
+$password = $request->query->get("password");
+$em= $this->getDoctrine()->getManager ();
+$user =$em->getRepository(User::class)->findoneBy(['email'=>$email]);
+
+if($user){
+     if ($password== $user->getPassword()){
+     $serializer = new Serializer([new ObjectNormalizer ()]);
+      $formatted = $serializer->normalize($user);
+     return new JsonResponse ($formatted);
+     }
+      else {
+       return new Response ("password not found");
+        }
+//  if (password_verify($password, $user->getPassword())) {
+//  $serializer = new Serializer([new ObjectNormalizer ()]);
+//  $formatted = $serializer->normalize($user);
+//  return new JsonResponse ($formatted);
+//  }
+//  else {
+//      return new Response ("password not found");
+//  }
+}
+else {
+return new Response( "user not found");
+}
+}
+
+
+
+/** 
+
+*@Route("/editAccountUser", name="security_edit_profile")
+*/
+public function editAccountUser(Request $request) {
+ $id = $request->get( "id");//kina query->get mala get directement c la meme chose
+ $username = $request->query->get("username");
+ $password = $request->query->get( "password");
+ $email = $request->query->get("email");
+ //$phoneNumber = $request->query->get("phoneNumber");
+
+ $em=$this->getDoctrine()->getManager();
+ $user = $em->getRepository(User::class)->find($id);
+ //bon 1 modification bch naselouha bel inage yalni kif tbadl profile tašik tzid image
+//  if($request->files>get("photo")!= null) {
+//     $file = $request->files->get("photo");//njib inage fi url
+//     $fileName=$file->getClientoriginalName ();//nom te3ha
+//     //tow nasouha w n7otaho fi dossier uptond ely tet7t fih les inages en principe te7t public folder
+//     $file->move(
+//       $fileNane
+//     );
+//     $user->setPhoto($fileName);
+// }
+    $user->setUsername($username);
+    $user->setPassword($password);
+$user->setEmail($email);
+//$user->setPhoneNumber($phoneNumber);
+$user->setEtat(0);
+ $user->setRoles(["ROLE_CLIENT"]);
+
+try {
+    $em = $this->getDoctrine()->getManager ();
+    $em->persist($user);
+    $em->flush();
+    return new JsonResponse("profile was updates successfully",200);//290 ya3ni http result tas server OK
+}catch (\Exception $ex) {
+    return new Response("failed ".$ex->getMessage());
+}
+}
+
+/** 
+ *@Route("/getPasswordByEmail", name="app_password_email")
+
+*/
+public function getPassswordByEmail(Request $request) {
+ $email = $request->get('email');
+ $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findOneBy(['email'=>$email]);
+ if($user) {
+     $password = $user->getPassword();
+     $serializer = new Serializer([new ObjectNormalizer()]);
+     $formatted = $serializer->normalize($password);
+     return new JsonResponse($formatted);
+ return new Response("user not found");
+
+
+
+ }
+}
 
 
   

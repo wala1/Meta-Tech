@@ -38,19 +38,19 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->panier = new ArrayCollection();
+        // $this->panier = new ArrayCollection();
         $this->participants = new ArrayCollection();
         $this->publications = new ArrayCollection();
         $this->commande = new ArrayCollection();
     }
 
-    /**
-     * @return Collection|Panier[]
-     */
-    public function getPanier(): Collection
-    {
-        return $this->panier;
-    }
+    // /**
+    //  * @return Collection|Panier[]
+    //  */
+    // public function getPanier(): Collection
+    // {
+    //     return $this->panier;
+    // }
 
     /**
      * @return Collection|Commande[]
@@ -60,26 +60,26 @@ class User implements UserInterface
         return $this->commande;
     }
 
-    public function addPanier(Panier $panier): self
-    {
-        if (!$this->panier->contains($panier)) {
-            $this->panier[] = $panier;
-            $panier->setUserPanier($this);
-        }
+    // public function addPanier(Panier $panier): self
+    // {
+    //     if (!$this->panier->contains($panier)) {
+    //         $this->panier[] = $panier;
+    //         $panier->setUserPanier($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removePanier(Panier $panier): self
-    {
-        if ($this->panier->removeElement($panier)) {
-            if ($panier->getUserPanier() === $this) {
-                $panier->setUserPanier(null);
-            }
-        }
+    // public function removePanier(Panier $panier): self
+    // {
+    //     if ($this->panier->removeElement($panier)) {
+    //         if ($panier->getUserPanier() === $this) {
+    //             $panier->setUserPanier(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
     /**
@@ -173,13 +173,11 @@ class User implements UserInterface
   
   
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $gender;
-
+   
      /**
-      * @ORM\Column(type="bigint")
+      * @ORM\Column(type="bigint",nullable=true)
+           * @Groups("post:read")
+
    
       */
      private $phoneNumber;
@@ -259,17 +257,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(string $gender): self
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
 
     public function eraseCredentials(){}
     public function getSalt(){}
@@ -416,13 +403,13 @@ public function removeParticipant(Participants $participant): self
         return $this;
     }
     
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
+    // /**
+    //  * @return Collection<int, Commentaire>
+    //  */
+    // public function getCommentaires(): Collection
+    // {
+    //     return $this->commentaires;
+    // }
 
    
     public function getCaptchaCode()
@@ -490,27 +477,28 @@ public function removeParticipant(Participants $participant): self
 
 
 
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setUtilisateur($this);
-        }
+    // public function addCommentaire(Commentaire $commentaire): self
+    // {
+    //     if (!$this->commentaires->contains($commentaire)) {
+    //         $this->commentaires[] = $commentaire;
+    //         $commentaire->setUtilisateur($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getUtilisateur() === $this) {
-                $commentaire->setUtilisateur(null);
-            }
-        }
+    // public function removeCommentaire(Commentaire $commentaire): self
+    // {
+    //     if ($this->commentaires->removeElement($commentaire)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($commentaire->getUtilisateur() === $this) {
+    //             $commentaire->setUtilisateur(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
+
 
 
 }
