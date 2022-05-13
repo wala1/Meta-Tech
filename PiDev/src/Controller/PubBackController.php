@@ -263,7 +263,7 @@ class PubBackController extends AbstractController
         $pubBack->setNomPub($request->get('nomPub'));
         $pubBack->setDescPub($request->get('descPub'));
         $pubBack->setPrixPub($request->get('prixPub'));
-        $pubBack->setImagePub($request->get('imagePub'));
+        $pubBack->setImageName($request->get('imageName'));
 
         $pubBack->setPromoPub($request->get('promoPub'));
  
@@ -287,7 +287,7 @@ class PubBackController extends AbstractController
          $pubBack->setNomPub($request->get('nomPub'));
          $pubBack->setDescPub($request->get('descPub'));
          $pubBack->setPrixPub($request->get('prixPub'));
-         $pubBack->setImagePub($request->get('imagePub'));
+         $pubBack->setImageName($request->get('imageName'));
          $pubBack->setPromoPub($request->get('promoPub'));  
         $em->flush();
          $jsonContent=$Normalizer->normalize($pubBack,'json',['groups' => 'post:read']);

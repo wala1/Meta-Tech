@@ -45,19 +45,21 @@ class Calendar
     private $title;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
     * @Assert\NotBlank(message="Event start time is required")
     *@Groups("post:read")
+   
     
 
     */
     private $start;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
     * @Assert\NotBlank(message="Event end time is required")
+   * @Groups("post:read")
 
-*@Groups("post:read")
+
 
      */
     private $end;
@@ -76,34 +78,40 @@ class Calendar
     private $description;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Groups("post:read")
+     * @ORM\Column(type="boolean",nullable=true)
+   
      */
     private $allDay;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=7, nullable=true)
      */
     private $backgroundColor;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=7 ,nullable=true)
      */
     private $borderColor;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=7 ,nullable=true)
      */
     private $textColor;
 
     /**
-     * @ORM\Column(type="string", length=400)
+     * @ORM\Column(type="string", length=400,nullable=true)
      * @Assert\NotBlank(message="Event image is required")
+     * @Groups("post:read")
      */
     private $imageEvent;
     //Each event have many users / each user have one event
 
+    /**
+     * @ORM\Column(type="integer" ,nullable=true)
+          * @Groups("post:read")
 
+     */
+    private $etat;
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="calendar")
      */
@@ -114,15 +122,9 @@ class Calendar
      */
     private $participants;
 
-    /**
-     * @ORM\Column(type="string", length=6)
-     */
-    private $origine;
+  
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $etat;
+
 
   
 
@@ -339,17 +341,17 @@ class Calendar
         return $this;
     }
 
-    public function getOrigine(): ?string
-    {
-        return $this->origine;
-    }
+    // public function getOrigine(): ?string
+    // {
+    //     return $this->origine;
+    // }
 
-    public function setOrigine(string $origine): self
-    {
-        $this->origine = $origine;
+    // public function setOrigine(string $origine): self
+    // {
+    //     $this->origine = $origine;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getEtat(): ?int
     {

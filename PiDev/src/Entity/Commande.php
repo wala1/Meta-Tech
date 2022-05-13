@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -19,6 +20,7 @@ class Commande
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -56,23 +58,27 @@ class Commande
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $lastName;
     
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $street_Adress;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("post:read")
      */
     public $city;
 
@@ -80,18 +86,21 @@ class Commande
      * @ORM\Column(type="integer", length=255)
      * @Assert\Length(min="4",minMessage="Your zip/post code must be at least 4 characters")
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $zip_PostalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $country;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $company;
 
@@ -99,6 +108,7 @@ class Commande
      * @ORM\Column(type="integer", length=8)
      * @Assert\Length(min="8",minMessage="Your phone number must be at least 8 characters")
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $phone_Number;
     
@@ -111,11 +121,13 @@ class Commande
     /**
      * @ORM\Column(type="date", length=255)
      * @Assert\NotNull(message="This field is required")
+     * @Groups("post:read")
      */
     public $date;
     
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups("post:read")
      */
     public $delivery_comment;
 
@@ -126,28 +138,33 @@ class Commande
     
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Groups("post:read")
      */
     public $order_comment;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      * @ORM\OneToOne(targetEntity=Coupon::class, inversedBy="commande")
+     * @Groups("post:read")
      */
     public $codeCoup;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Groups("post:read")
     */
     public $etat;
 
     /**
      * @ORM\Column(type="float", length=20)
+     * @Groups("post:read")
     */
     public $subtotal;
 
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commande")
+     * @Groups("post:read")
      */
     protected $user_commande;
 
@@ -252,6 +269,13 @@ class Commande
         return $this;
     }
 
+    public function setDateT(String $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
     public function getPhoneNumber(): ?int
     {
         return $this->phone_Number;
@@ -278,7 +302,18 @@ class Commande
     {
         return $this->subtotal;
     }
-
+    
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+    
     public function setStreetAdress(string $street_Adress): self
     {
         $this->street_Adress = $street_Adress;

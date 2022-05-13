@@ -67,6 +67,7 @@ class PubBack
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Groups("post:read")
      * @var string
     */
     private $imageName;

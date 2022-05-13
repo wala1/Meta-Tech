@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert ; 
+use Symfony\Component\Serializer\Annotation\Groups; 
 /**
  * @ORM\Entity(repositoryClass=PublicationRepository::class)
  */
@@ -15,40 +16,47 @@ class Publication
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups("post:read")
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("post:read")
      * @Assert\Length(min=6, max=255, minMessage="Votre titre est court")
      */
     private $titre_publ;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("post:read")
      * @Assert\Length(min=10)
      */
     private $description_publ;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("post:read")
      *  @Assert\Url()
      */
     private $image_publ;
 
     /**
      * @ORM\Column(type="datetime")
+     *  @Groups("post:read")
      */
     private $temps_publ;
 
     /**
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="id_Publ", orphanRemoval=true)
+     *@Groups("post:read")
      */
     private $commentaires;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="publications")
+     *@Groups("post:read")
      */
     private $utilisateur;
 

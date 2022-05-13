@@ -153,7 +153,8 @@ class User implements UserInterface
     private $participants;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
+     *   @Groups("post:read")
      */
     private $etat;
 
@@ -188,6 +189,17 @@ class User implements UserInterface
       * @ORM\OneToMany(targetEntity=Publication::class, mappedBy="utilisateur")
      */
     private $publications;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $roleMobile;
+
+    /**
+     * @ORM\Column(type="string", length=400, nullable=true)
+     *   @Groups("post:read")
+     */
+    private $imageUser;
 
     // /**
     //  * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="utilisateur")
@@ -498,6 +510,30 @@ public function removeParticipant(Participants $participant): self
 
     //     return $this;
     // }
+
+    public function getRoleMobile(): ?string
+    {
+        return $this->roleMobile;
+    }
+
+    public function setRoleMobile(?string $roleMobile): self
+    {
+        $this->roleMobile = $roleMobile;
+
+        return $this;
+    }
+
+    public function getImageUser(): ?string
+    {
+        return $this->imageUser;
+    }
+
+    public function setImageUser(?string $imageUser): self
+    {
+        $this->imageUser = $imageUser;
+
+        return $this;
+    }
 
 
 

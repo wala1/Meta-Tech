@@ -257,21 +257,14 @@ public function signup(Request $request,UserPasswordEncoderInterface $encoder) {
  $email = $request->query->get( "email");
  $username = $request->query->get("username");
  $password = $request->query->get( "password");
-//  $phoneNumber = $request->query->get( "phoneNumber");
-
-//  $roles= $request->query->get( "roles");
- //controt al email Lazam @
+ $imageUser=$request->query->get( "imageUser");
   if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     return new Response( "email invalid.");
   }
  $user= new User();
  $user->setUsername($username) ;
  $user->setEmail($email);
-//  $user->setPhoneNumber($phoneNumber);
-
-//  $hash=$encoder->encodePassword($user,$user->getPassword());
-
-//  $user->setPassword($hash);
+ $user->setImageUser($imageUser);
   $user->setPassword($password);
 
  $user->setEtat(0);
@@ -298,22 +291,22 @@ $em= $this->getDoctrine()->getManager ();
 $user =$em->getRepository(User::class)->findoneBy(['email'=>$email]);
 
 if($user){
-     if ($password== $user->getPassword()){
+     if ($password== $user->getPassword() ){
+         if($user->getEtat()==0){
+
+         
      $serializer = new Serializer([new ObjectNormalizer ()]);
       $formatted = $serializer->normalize($user);
      return new JsonResponse ($formatted);
-     }
+     }else {
+        return new Response ("You are blocked");
+         }
+    }
       else {
-       return new Response ("password not found");
+       return new Response ("password not found ");
         }
-//  if (password_verify($password, $user->getPassword())) {
-//  $serializer = new Serializer([new ObjectNormalizer ()]);
-//  $formatted = $serializer->normalize($user);
-//  return new JsonResponse ($formatted);
-//  }
-//  else {
-//      return new Response ("password not found");
-//  }
+    
+
 }
 else {
 return new Response( "user not found");

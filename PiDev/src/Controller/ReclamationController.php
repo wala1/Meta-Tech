@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType ;
 use App\Repository\ReclamationRepository ; 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ReclamationController extends AbstractController
 {
@@ -212,6 +212,30 @@ class ReclamationController extends AbstractController
 
 
     
-     
+    // ========================== JSON MOBILE ================================
+    
+    /**
+     * @Route("/AddReport", name="AddReport")
+     */
+    public function AddReportJSON(Request $request, NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ; 
+        $reclamation = new Reclamation() ; 
+ 
+
+        $reclamation->setNameReclamation($request->get('nameReclamation')) ; 
+        $reclamation->setEmailReclamation($request->get('emailReclamation')) ;
+        $reclamation->setDescReclamation($request->get('descReclamation')) ;
+        $reclamation->setTraiteReclamation(0) ; 
+
+        $em->persist($reclamation) ; 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/AddReport?nameReclamation=Test&emailReclamation=aaa@ff.com&descReclamation=good!
+        $jsonContent = $Normalizer->normalize($reclamation, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
 
 }

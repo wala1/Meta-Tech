@@ -33,6 +33,11 @@ class RegistrationType extends AbstractType
             // ))  
             ->add('password',PasswordType::class)
             ->add('confirm_password', PasswordType::class)
+            ->add('imageUser', TextType::class,[
+                'attr' => [
+                    'class'=>'form-control'
+                ]
+            ])
             
              ->add('phoneNumber', NumberType::class,[
                 'attr' => [

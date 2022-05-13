@@ -10,15 +10,18 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ParticipantsRepository;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use App\Repository\PubBackRepository;
-
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use App\Form\CalendarType ;
 use App\Entity\Calendar;
 use App\Entity\User;
 use App\Entity\Coupon;
 use App\Entity\PubBack;
-
+use Symfony\Component\Validator\Constraints\Json;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use App\Repository\CouponRepository;
-
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 use App\Entity\Participants;
 
@@ -323,14 +326,7 @@ public function RefuseEvent(Calendar $calendar)
     public function participate(Request $request , $id,Calendar $calendar)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        // $c = new Coupon ;
-        // $c->setCodeCoup($user->getUsername());
-        // $c->setNum($id);
-        // $em = $this->getDoctrine()->getManager();
-        // $em = $this->getDoctrine()->getManager() ; 
-        // $em->persist($c);
-        // $em->flush() ; 
-        // return $this->redirectToRoute('event_front');
+      
         $p=new  Participants;
         $p->setEvent($calendar);
         $p->setUser($user);
@@ -347,7 +343,7 @@ public function RefuseEvent(Calendar $calendar)
 
 
   /**
-     * @Route("eventsJson", name="liste_events_json")
+     * @Route("EventsList", name="liste_events_json")
      */ 
     public function  listEventsJson(NormalizerInterface $Normalizer) {
         $repo=$this->getDoctrine()->getRepository(Calendar::class);
@@ -362,31 +358,90 @@ public function RefuseEvent(Calendar $calendar)
          } 
      /**
       
-     * @Route("addEventJson/new", name="add_event_json" ,methods = {"GET", "POST"})
+     * @Route("addEvent", name="add_event_json" ,methods = {"GET", "POST"})
      */
     
 
     public function  addEventJson(Request $request,NormalizerInterface $Normalizer) {
 
-        $em=$this->getDoctrine()->getManager();
+ 
         $calendar=new Calendar();
-        $calendar->setTitle($request->get('title'));
-        $calendar->setStart($request->get('start'));
-        $calendar->setEnd($request->get('end'));
-        $calendar->setDescription($request->get('description'));
-        $calendar->setAllDay($request->get('allDay'));
+        $title = $request->query->get("title");
+        $description = $request->query->get("description");
+        $start = $request->query->get("start");
+        $end = $request->query->get("end");
+       $imageEvent = $request->query->get("imageEvent");
+  $em = $this->getDoctrine()->getManager();
+         //$date = new \DateTime('now');
+         $calendar->setTitle($title);
+
+         $calendar->setDescription($description);
+         $calendar->setStart(new \DateTime($start));
+         $calendar->setEnd(new \DateTime($end));
+         $calendar->setImageEvent($imageEvent);
+  
+
+         $calendar->setEtat(1);
+
+         $em->persist($calendar);
+         $em->flush();
+ 
+         $jsonContent=$Normalizer->normalize($calendar,'json',['groups' => 'post:read']);
+         return new Response(json_encode($jsonContent));
 
 
- 
-        $em->persist($calendar);
-        $em->flush();
-        $jsonContent=$Normalizer->normalize($calendar,'json',['groups' => 'post:read']);
-        return new Response(json_encode($jsonContent));
- 
+
+
           } 
+           /**
+      
+     * @Route("addEventUser", name="add_event_user_json" ,methods = {"GET", "POST"})
+     */
+    
 
+    public function  addEventUserJson(Request $request,NormalizerInterface $Normalizer) {
+
+ 
+        $calendar=new Calendar();
+        $title = $request->query->get("title");
+        $description = $request->query->get("description");
+        $start = $request->query->get("start");
+        $end = $request->query->get("end");
+       $imageEvent = $request->query->get("imageEvent");
+       $em = $this->getDoctrine()->getManager();
+         //$date = new \DateTime('now');
+         $calendar->setTitle($title);
+
+         $calendar->setDescription($description);
+         $calendar->setStart(new \DateTime($start));
+         $calendar->setEnd(new \DateTime($end));
+         $calendar->setImageEvent($imageEvent);
+  
+
+         $calendar->setEtat(0);
+
+         $em->persist($calendar);
+         $em->flush();
+ 
+         $jsonContent=$Normalizer->normalize($calendar,'json',['groups' => 'post:read']);
+         return new Response(json_encode($jsonContent));
+
+
+
+
+          } 
+ /**
+    * @Route("EventView/{id}", name="eventViewJson" ,methods = {"GET", "POST"})
+    */
+
+          public function eventId(Request $request,$id, NormalizerInterface $Normalizer){
+   $em = $this->getDoctrine()->getManager ();
+   $event = $em->getRepository(Calendar::class)->find($id);
+    $jsonContent= $Normalizer->normalize($event, 'json',['groups'=> 'post:read']); 
+    return new Response(json_encode($jsonContent));
+        }
           /**
-    * @Route("deleteEventJson/{id}", name="deleteEventJson" ,methods = {"GET", "POST"})
+    * @Route("/deleteEvent1/{id}", name="deleteEventJson" ,methods = {"GET", "POST"})
     */
    
 
@@ -402,7 +457,83 @@ public function RefuseEvent(Calendar $calendar)
    }
 
 
+  /**
+     * @Route("/updateEvent", name="update_event")
+     * @Method("PUT")
+     */
+    public function modifierEvent(Request $request,NormalizerInterface $Normalizer) {
+        $em = $this->getDoctrine()->getManager();
+        $calendar = $this->getDoctrine()->getManager()
+                        ->getRepository(Calendar::class)
+                        ->find($request->get("id"));
+     //$start = $request->query->get("start");
 
+        $calendar->setDescription($request->get("description"));
+        $calendar->setTitle($request->get("title"));
+        $calendar->setImageEvent($request->get("imageEvent"));
+
+        $calendar->setStart(new \DateTime($request->query->get("start")));
+        $calendar->setEnd(new \DateTime($request->query->get("end")));
+
+        $em->persist($calendar);
+        $em->flush();
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($calendar);
+        return new JsonResponse("Event was modified successfully!");
+        // $jsonContent=$Normalizer->normalize($calendar,'json',['groups' => 'post:read']);
+        //  return new Response(json_encode($jsonContent));
+
+    }
+    
+     /**
+      * @Route("/detailEvent", name="detail_Event")
+      * @Method("GET")
+      */
+
+     public function detailEvent(Request $request)
+     {
+         $id = $request->get("id");
+
+         $em = $this->getDoctrine()->getManager();
+         $calendar = $this->getDoctrine()->getManager()->getRepository(Calendar::class)->find($id);
+         $encoder = new JsonEncoder();
+         $normalizer = new ObjectNormalizer();
+         $normalizer->setCircularReferenceHandler(function ($object) {
+             return $object->getDescription();
+         });
+         $serializer = new Serializer([$normalizer], [$encoder]);
+         $formatted = $serializer->normalize($calendar);
+         return new JsonResponse($formatted);
+     }
+
+ /**
+    * @Route("acceptRequest1/{id}", name="AcceptRequestJson" ,methods = {"GET", "POST"})
+    */
+    public function acceptRequestJson(Request $request,NormalizerInterface $Normalizer,$id) {
+
+        $em=$this->getDoctrine()->getManager();
+        $cal=$em->getRepository(Calendar::class)->find($id);
+        $cal->setEtat(1);
+        $em->persist($cal);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($cal,'json',['groups' => 'post:read']);
+        return new Response("Request Accepted".json_encode($jsonContent));
+    
+       }
+       /**
+    * @Route("refuseRequest1/{id}", name="refuseRequestUserJson" ,methods = {"GET", "POST"})
+    */
+    public function refuseUserJson(Request $request,NormalizerInterface $Normalizer,$id) {
+
+        $em=$this->getDoctrine()->getManager();
+        $cal=$em->getRepository(Calendar::class)->find($id);
+        $cal->setEtat(-1);
+        $em->persist($cal);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($cal,'json',['groups' => 'post:read']);
+        return new Response("Request is Refused".json_encode($jsonContent));
+    
+       }
 
 
 

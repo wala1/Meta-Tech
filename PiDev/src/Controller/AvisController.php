@@ -14,6 +14,7 @@ use App\Entity\Avis ;
 use App\Entity\Produit ; 
 use App\Entity\User ; 
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class AvisController extends AbstractController
 {
@@ -281,6 +282,158 @@ class AvisController extends AbstractController
               
              
     } 
+
+
+
+
+    // ======================== JSON MOBILE ============================================
+    
+    /**
+     * @Route("/AddReview", name="AddReview")
+     */
+    public function AddReview(Request $request, NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ; 
+        $avis = new Avis() ; 
+
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $produit = $repo->findOneBy(['id'=>$request->get('id_prod')]) ; 
+
+        $repo = $this->getDoctrine()->getRepository(User::class) ; 
+        $user = $repo->findOneBy(['username'=>$request->get('id_user')]) ;
+        $desc = $request->get('desc') ; 
+        // ======================== API INAPPROPRIATE WORDS =================================
+                $curl = curl_init(); 
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character=#",
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: text/plain",
+                    "apikey: L7P4JUb9Kv8d3VaIWJO85xKWMcPNXaQy"
+                ),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS =>  $desc
+                ));
+
+                $response = curl_exec($curl);
+
+                // important
+                $json = json_decode($response, true);
+
+                curl_close($curl); 
+
+                // ========================== END API ===============================
+
+            
+        $avis->setDescAvis($json["censored_content"]) ;   
+ 
+        $avis->setRatingAvis($request->get('rating')) ; 
+        $avis->setIdProd($produit) ;
+        $avis->setIdUser($user) ; 
+        $avis->setTimeAvis(new \DateTime()) ; 
+
+
+
+        $em->persist($avis) ; 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/AddReview?id_prod=29&id_user=88&desc=niceProdGreat&rating=1 
+        $jsonContent = $Normalizer->normalize($avis, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+    /**
+     * @Route("/EditReview/{id}", name="EditReview")
+     */
+    public function EditReview(Request $request, $id , NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ; 
+        $avis = $em->getRepository(Avis::class)->find($id) ; 
+
+        $desc = $request->get('desc') ; 
+        // ======================== API INAPPROPRIATE WORDS =================================
+                $curl = curl_init(); 
+                curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.apilayer.com/bad_words?censor_character=#",
+                CURLOPT_HTTPHEADER => array(
+                    "Content-Type: text/plain",
+                    "apikey: L7P4JUb9Kv8d3VaIWJO85xKWMcPNXaQy"
+                ),
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS =>  $desc
+                ));
+
+                $response = curl_exec($curl);
+
+                // important
+                $json = json_decode($response, true);
+
+                curl_close($curl); 
+
+                // ========================== END API ===============================
+
+            
+        $avis->setDescAvis($json["censored_content"]) ;  
+         
+        $avis->setRatingAvis($request->get('rating')) ; 
+        $avis->setTimeAvis(new \DateTime()) ; 
+
+        $em->persist($avis) ; 
+        $em->flush() ; 
+ 
+       // http://127.0.0.1:8000/EditReview/53?desc=gooooood&rating=1 
+        $jsonContent = $Normalizer->normalize($avis, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+    /**
+     * @Route("/AllAvis/{id}", name="AllAvis")
+     */
+    public function AllAvis(NormalizerInterface $Normalizer, $id): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Avis::class) ; 
+        $avis = $repo->findBy(['idProd' => $id ]) ;  
+        $jsonContent = $Normalizer->normalize($avis, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
      
+ 
+    /**
+     * @Route("/DeleteAvis/{id}", name="DeleteAvis")
+     */
+    public function DeleteAvisJSON(Request $request , $id , NormalizerInterface $Normalizer): Response
+    {   
+        $em = $this->getDoctrine()->getManager() ;
+        $avis = $em->getRepository(Avis::class)->find($id) ; 
+        $em->remove($avis) ; 
+        $em->flush() ;
+
+        // http://127.0.0.1:8000/DeleteProduct/25 
+        $jsonContent = $Normalizer->normalize($avis, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
 
 }

@@ -5,7 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Avis ;
 use App\Entity\User ; 
-use App\Entity\PubBack ; 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit ;
@@ -16,8 +15,6 @@ use App\Form\AvisFormType ;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType ; 
 use App\Repository\ProduitRepository ; 
-use App\Repository\PubBackRepository ; 
-
 use App\Repository\AvisRepository ; 
 use Symfony\Component\Validator\Constraints\DateTime ; 
 use Symfony\Component\Security\Core\Security;
@@ -47,9 +44,6 @@ class ProduitController extends AbstractController
      */
     public function index(): Response
     {
-        $pubBack = $this->getDoctrine()->getRepository(PubBack::class) ; 
-        $pubBack = $pubBack->findAll() ;
-
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
         $produits = $repo->findAll() ; 
 
@@ -63,7 +57,6 @@ class ProduitController extends AbstractController
         $sous_categories = $repo->findAll() ;
 
         return $this->render('produit/all-categories.html.twig', [
-            'pubBack'=>$pubBack,
             'produits' => $produits,
             'produits_all' => $produits,
             'avis' => $avis,
@@ -190,15 +183,11 @@ class ProduitController extends AbstractController
 
         $avis3 = $this->getDoctrine()->getRepository(Avis::class) ; 
         $avis3 = $avis3->findAll() ;
-        
-        $pubBack = $this->getDoctrine()->getRepository(PubBack::class) ; 
-        $pubBack = $pubBack->findAll() ;
 
          
                   
 
         return $this->render('produit/product.html.twig', [
-            'pubBack'=>$pubBack,
             'produits' => $produits,
             'produits_all' => $produits2,
             'avis' => $avis,
@@ -615,7 +604,63 @@ class ProduitController extends AbstractController
     public function AllProducts(NormalizerInterface $Normalizer): Response
     {   
         $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
-        $produits = $repo->findAll() ; 
+        $produits = $repo->findAll() ;  
+        $jsonContent = $Normalizer->normalize($produits, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/ProductById/{id}", name="prodByid")
+     */
+    public function ProdByIdjson(NormalizerInterface $Normalizer,$id): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $produits = $repo->findById($id) ; 
+
+        $repo = $this->getDoctrine()->getRepository(Avis::class) ; 
+        $avis = $repo->findByIdProd($id) ; 
+
+        $sum = 0 ;
+        $count = 0 ; 
+        foreach ($avis as $avi) {
+            $sum = $sum + $avi->getRatingAvis() ; 
+            $count = $count + 1 ; 
+        }
+
+        $last = [] ;
+        if ($count != 0) {
+            $final = $sum/$count ;
+            $test = $produits["0"]    ;
+            $test->setRatingProd(round($final)) ; 
+            array_push($last,$test) ; 
+        } else {
+            $test = $produits["0"]    ;
+            $test->setRatingProd(5) ; 
+            array_push($last,$test) ; 
+        }
+        
+         
+        $jsonContent = $Normalizer->normalize($last, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/SearchProduct/{id}", name="SearchProduct")
+     */
+    public function AllProSearchProductducts(NormalizerInterface $Normalizer, $id): Response
+    {   
+         
+
+        $em = $this->getDoctrine()->getManager() ;
+        $produits = $em->createQuery('SELECT p FROM App\Entity\Produit p WHERE p.nom_prod LIKE :nom') 
+                        ->setParameter('nom', '%'.$id.'%')  
+                        ->getResult() ;
 
         $jsonContent = $Normalizer->normalize($produits, 'json', ['groups' => 'post:read']) ; 
 
@@ -623,6 +668,95 @@ class ProduitController extends AbstractController
  
     }
 
+ 
+            
+
+
+    /**
+     * @Route("/ProductAvis/{id}", name="prodAvis")
+     */
+    public function ProdAvisjson(NormalizerInterface $Normalizer,$id): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Avis::class) ; 
+        $avis = $repo->findByIdProd($id) ; 
+
+        $sum = 0 ;
+        $count = 0 ; 
+        foreach ($avis as $avi) {
+            $sum = $sum + $avi->getRatingAvis() ; 
+            $count = $count + 1 ; 
+        }
+
+        $final = $sum/$count ; 
+        $array = [ "rate" => round($final) ] ; 
+
+       
+        $jsonContent = $Normalizer->normalize( $array , 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/AllProducts/{nomCateg}", name="AllProdsCategs")
+     */
+    public function AllProductsBYCategs(NormalizerInterface $Normalizer, $nomCateg): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(Categorie::class) ; 
+        $categ = $repo->findBy(array('nom_categorie'=>$nomCateg)) ;
+
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $produits = $repo->findBy(array('categorie_prod' => $categ)) ; 
+
+        $jsonContent = $Normalizer->normalize($produits, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/AllProductsSub/{subCateg}", name="AllProdsSubCategs")
+     */
+    public function AllProductsBYSubCategs(NormalizerInterface $Normalizer, $subCateg): Response
+    {   
+        $repo = $this->getDoctrine()->getRepository(SousCategorie::class) ; 
+        $categ = $repo->findBy(array('nomSousCateg'=>$subCateg)) ;
+
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $produits = $repo->findBy(array('sousCategProd' => $categ)) ; 
+
+        $jsonContent = $Normalizer->normalize($produits, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+     /**
+     * @Route("/AllProductsSubandCat", name="AllProdsSubandCat")
+     */
+    public function AllProductsBYboth(NormalizerInterface $Normalizer,Request $request): Response
+    {   
+        $categ = $request->get('categorie') ; 
+        $subCateg = $request->get('sous_categorie') ; 
+
+        $repo = $this->getDoctrine()->getRepository(SousCategorie::class) ; 
+        $SOUS = $repo->findBy(array('nomSousCateg'=>$subCateg)) ;
+
+        $repo = $this->getDoctrine()->getRepository(Categorie::class) ; 
+        $CAT = $repo->findBy(array('nom_categorie'=>$categ)) ;
+
+        $repo = $this->getDoctrine()->getRepository(Produit::class) ; 
+        $produits = $repo->findBy(array('sousCategProd' => $SOUS , 'categorie_prod' => $CAT)) ; 
+
+        $jsonContent = $Normalizer->normalize($produits, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
 
     /**
      * @Route("/AddProduct", name="AddProduct")
@@ -633,10 +767,10 @@ class ProduitController extends AbstractController
         $product = new produit() ; 
 
         $repo = $this->getDoctrine()->getRepository(Categorie::class) ; 
-        $categorie = $repo->findOneBy(['id'=>$request->get('categorie')]) ; 
+        $categorie = $repo->findOneBy(['nom_categorie'=>$request->get('categorie')]) ; 
 
         $repo = $this->getDoctrine()->getRepository(SousCategorie::class) ; 
-        $souscategorie = $repo->findOneBy(['id'=>$request->get('souscategorie')]) ;
+        $souscategorie = $repo->findOneBy(['nomSousCateg'=>$request->get('souscategorie')]) ;
 
         $product->setNomProd($request->get('nom')) ; 
         $product->setDescProd($request->get('desc')) ;
@@ -668,13 +802,13 @@ class ProduitController extends AbstractController
 
         if (($request->get('categorie')!=null)) {
             $repo = $this->getDoctrine()->getRepository(Categorie::class) ; 
-            $categorie = $repo->findOneBy(['id'=>$request->get('categorie')]) ; 
+            $categorie = $repo->findOneBy(['nom_categorie'=>$request->get('categorie')]) ; 
             $product->setCategorieProd($categorie) ;
         }
 
         if (($request->get('souscategorie'))!=null) {
             $repo = $this->getDoctrine()->getRepository(SousCategorie::class) ; 
-            $souscategorie = $repo->findOneBy(['id'=>$request->get('souscategorie')]) ;
+            $souscategorie = $repo->findOneBy(['nomSousCateg'=>$request->get('souscategorie')]) ;
             $product->setSousCategProd($souscategorie) ;
         }
 
@@ -729,5 +863,138 @@ class ProduitController extends AbstractController
  
     }
 
+
+    /**
+     * @Route("/ConvertRate/{id}", name="convert")
+     */
+    public function ConvertRate(Request $request, $id   , NormalizerInterface $Normalizer): Response
+    {   
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://exchangerate-api.p.rapidapi.com/rapid/latest/TND",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: exchangerate-api.p.rapidapi.com",
+                "X-RapidAPI-Key: 0df9a64d4dmshef637b6555ab817p197c06jsn23b1172de7c8"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        $tab=[] ; 
+        curl_close($curl);
+
+        $json = json_decode($response, true);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $tab =  $json["rates"][$id]    ;  
+        }
+
+        // http://127.0.0.1:8000/DeleteProduct/25 
+        $jsonContent = $Normalizer->normalize($tab, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+    /**
+     * @Route("/ConvertCrypto", name="convertCrypto")
+     */
+    public function ConvertBitcoin(Request $request,  NormalizerInterface $Normalizer): Response
+    {   
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://crypto-price-feed.p.rapidapi.com/api/crypto-feed",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "X-RapidAPI-Host: crypto-price-feed.p.rapidapi.com",
+                "X-RapidAPI-Key: 0df9a64d4dmshef637b6555ab817p197c06jsn23b1172de7c8"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        $tab=[] ; 
+
+        $json = json_decode($response, true);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $tab =  $json["result"][1]["price"]    ;  
+        }
+
+        // http://127.0.0.1:8000/DeleteProduct/25 
+        $jsonContent = $Normalizer->normalize($tab, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
+
+
+
+
+    /**
+     * @Route("/AllAmazon", name="AllAmazon")
+     */
+    public function AllAmazon(Request $request,  NormalizerInterface $Normalizer): Response
+    {   
+          
+        $curl = curl_init();
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "https://amazon23.p.rapidapi.com/product-search?query=PC%20Gamer&country=US",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => [
+                    "x-rapidapi-host: amazon23.p.rapidapi.com",
+                    "x-rapidapi-key: ffccef661fmsh65d228e6a669cf1p1aba63jsne6686937e077"
+                ],
+            ]);
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+            // important
+            $json = json_decode($response, true);
+            $tab = [] ; 
+            if ($err) {
+                echo "cURL Error #:" . $err;
+            } else {
+                $tab =  $json["result"]    ;  
+            }
+
+
+
+
+        // http://127.0.0.1:8000/DeleteProduct/25 
+        $jsonContent = $Normalizer->normalize($tab, 'json', ['groups' => 'post:read']) ; 
+
+        return new Response(json_encode($jsonContent)) ; 
+ 
+    }
      
 }

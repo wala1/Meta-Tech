@@ -123,7 +123,7 @@ class CategorieController extends AbstractController
         return new Response(json_encode($jsonContent)) ; 
  
     }
-
+ 
 
     /**
      * @Route("/AddCategory", name="AddCategory")

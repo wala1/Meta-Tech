@@ -162,7 +162,7 @@ public function activerUser(User $user)
 
 
   /**
-     * @Route("utilisateursJson", name="liste_utilisateurs1")
+     * @Route("UserList", name="liste_utilisateurs1")
      */ 
     public function  usersList1(NormalizerInterface $Normalizer) {
         $repo=$this->getDoctrine()->getRepository(User::class);
@@ -215,23 +215,50 @@ public function activerUser(User $user)
 
 
     }
-
-  /**
-    * @Route("deleteUserJson/{id}", name="deleteUserJson" ,methods = {"GET", "POST"})
+     /**
+    * @Route("deleteUser1/{id}", name="deleteUserJson" ,methods = {"GET", "POST"})
     */
    
 
-   public function deleteUserJson(Request $request,NormalizerInterface $Normalizer,$id) {
+    public function deleteUserJson(Request $request,NormalizerInterface $Normalizer,$id) {
 
-    $em=$this->getDoctrine()->getManager();
-    $user=$em->getRepository(User::class)->find($id);
-    $em->remove($user);
-    $em->flush();
-    $jsonContent=$Normalizer->normalize($user,'json',['groups' => 'post:read']);
-    return new Response("Custumor Deleted successfuly".json_encode($jsonContent));
+        $em=$this->getDoctrine()->getManager();
+        $user=$em->getRepository(User::class)->find($id);
+      
+        $em->remove($user);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($user,'json',['groups' => 'post:read']);
+        return new Response("User Deleted successfuly".json_encode($jsonContent));
+    
+       }
+     /**
+    * @Route("blockUser1/{id}", name="ActivateUserJson" ,methods = {"GET", "POST"})
+    */
+       public function activateUserJson(Request $request,NormalizerInterface $Normalizer,$id) {
 
-   }
+        $em=$this->getDoctrine()->getManager();
+        $user=$em->getRepository(User::class)->find($id);
+        $user->setEtat(1);
+        $em->persist($user);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($user,'json',['groups' => 'post:read']);
+        return new Response("User is Blocked".json_encode($jsonContent));
+    
+       }
+       /**
+    * @Route("UnblockUser1/{id}", name="desActivateUserJson" ,methods = {"GET", "POST"})
+    */
+    public function desactivateUserJson(Request $request,NormalizerInterface $Normalizer,$id) {
 
+        $em=$this->getDoctrine()->getManager();
+        $user=$em->getRepository(User::class)->find($id);
+        $user->setEtat(0);
+        $em->persist($user);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($user,'json',['groups' => 'post:read']);
+        return new Response("User is unblcked".json_encode($jsonContent));
+    
+       }
 
 
                       /*************   STATISTIQUE GENDER ***********/

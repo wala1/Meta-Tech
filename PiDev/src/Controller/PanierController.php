@@ -18,10 +18,12 @@ use App\Controller\EntityManager;
 use App\Repository\PanierRepository;
 use App\Form\CommandeFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class PanierController extends AbstractController
 {
@@ -668,4 +670,327 @@ class PanierController extends AbstractController
 
 
 
+        /***************  Ajout JSON UNE PANIER ***************/
+
+    
+/**
+    * @Route("addPanierJson/{id}/{idUser}", name="addPanierJson" ,methods = {"GET", "POST"})
+    */
+    
+    /* pour tester http://127.0.0.1:8000/addPanierJson/200/104?quantite=1 */
+    public function addPanierJson($id, $idUser, Request $request,NormalizerInterface $Normalizer) {
+
+        $em=$this->getDoctrine()->getManager();
+        $produit = $this->getDoctrine()->getRepository(Produit::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($idUser);
+
+        $panier=new Panier();
+        $panier->setQuantite($request->get('quantite'));
+        $panier->setUserPanier($user);
+        $panier->setProduitPanier($produit);
+ 
+        $em->persist($panier);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($panier,'json',['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+    }
+ 
+
+    /**
+     * @Route("deletePanierJson/{id}", name="deletePanierJson" ,methods = {"GET", "POST"})
+     */
+    
+    /* pour tester http://127.0.0.1:8000/deletePanierJson/528*/
+
+    public function deletePanierJson(Request $request,NormalizerInterface $Normalizer,$id) {
+ 
+        $em=$this->getDoctrine()->getManager();
+        $panier=$em->getRepository(Panier::class)->find($id);
+        $em->remove($panier);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($panier,'json',['groups' => 'post:read']);
+        return new Response("Custumor Deleted successfuly".json_encode($jsonContent));
+    
+    }
+
+
+
+    /**
+     * @Route("PanierJson/{id}", name="PanierJson")
+     */ 
+ 
+     /*pour tester http://127.0.0.1:8000/PanierJson/104 */
+    public function PanierJson($id, NormalizerInterface $Normalizer) {
+
+        $repo=$this->getDoctrine()->getRepository(Panier::class);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $panier=$repo->findBy(
+            [ "user_panier" => $user ]
+        );
+        $jsonContent=$Normalizer->normalize($panier,'json',['groups'=>'post:read']);
+         return new Response (json_encode($jsonContent));
+    }
+
+    /**
+       
+      * @Route("updatePanierJson/{id}", name="updatePanierJson" ,methods = {"GET", "POST"})
+      */
+     
+        /*pour tester http://127.0.0.1:8000/updatePanierJson/308?quantite=1&user_panier_id=104&produit_panier_id=200*/
+      public function  updatePanierJson(Request $request,NormalizerInterface $Normalizer,$id) {
+        $em=$this->getDoctrine()->getManager();
+        $panier=$em->getRepository(Panier::class)->find($id);
+        $panier->setQuantite($request->get('quantite'));
+        /*$panier->getUserPanier()->getId($request->get('user_panier_id'));
+        $panier->getProduitPanier()->getId($request->get('produit_panier_id')); */
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($panier,'json',['groups' => 'post:read']);
+        return new Response("Information updated successfuly".json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("clearPanierJson/{id}", name="clearPanierJson" ,methods = {"GET", "POST"})
+     */
+    
+    /* pour tester http://127.0.0.1:8000/clearPanierJson/104*/
+
+    public function clearPanierJson(Request $request,NormalizerInterface $Normalizer,$id) {
+ 
+        $em=$this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $panier=$em->getRepository(Panier::class)->findBy(
+            [ "user_panier" => $user ]
+        );
+        
+        foreach($panier as $cart){
+           
+            
+            $em->remove($cart) ; 
+        }
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($panier,'json',['groups' => 'post:read']);
+        return new Response("Custumor Deleted successfuly".json_encode($jsonContent));
+    
+    }
+
+
+
+                            /* Command JSON */
+
+
+
+
+    /**
+    * @Route("addCommandJson/{id}", name="addCommandJson" ,methods = {"GET", "POST"})
+    */
+    
+    /* pour tester http://127.0.0.1:8000/addCommandJson/104?firstName=Oumaima&lastName=Ayachi&street_Adress="street dar salem"&city=kairouan&zip_PostalCode=3100&country=tunes&company=tunes&phone_Number=54029564&payement_method=bank&date=2022-05-09&delivery_comment=hii&order_comment=hello&codeCoup=1452&subtotal=500*/
+    public function  addCommandJson($id, Request $request,NormalizerInterface $Normalizer) {
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $em=$this->getDoctrine()->getManager();
+
+        $commande=new Commande();
+        $commande->setFirstName($request->get('firstName'));
+        $commande->setLastName($request->get('lastName'));
+        $commande->setStreetAdress($request->get('street_Adress'));
+        $commande->setCity($request->get('city'));
+        $commande->setZip_PostalCode($request->get('zip_PostalCode'));
+        $commande->setCountry($request->get('country'));
+        $commande->setCompany($request->get('company'));
+        $commande->setPhoneNumber($request->get('phone_Number'));
+        $commande->setPayementMethod($request->get('payement_method'));
+        $commande->setNewsletter("1");
+        $date = new \DateTime('@'.strtotime('now'));
+        $commande->setDate($date);
+        $commande->setDelivery_comment($request->get('delivery_comment'));
+        $commande->setOrder_comment($request->get('order_comment'));
+        $commande->setEtat("en cours");
+        $commande->setCodeCoupon($request->get('codeCoup'));
+        $commande->setSubtotal($request->get('subtotal'));
+        $commande->setUserCommande($user);
+ 
+        $em->persist($commande);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($commande,'json',['groups' => 'post:read']);
+        return new Response(json_encode($jsonContent));
+ 
+    }
+
+    /**
+     * @Route("CommandeJson", name="CommandeJson")
+     */
+ 
+     /*pour tester http://127.0.0.1:8000/CommandeJson */
+     public function  CommandeJson(NormalizerInterface $Normalizer) {
+
+        $repo=$this->getDoctrine()->getRepository(Commande::class);
+        $commande=$repo->findAll();
+        $jsonContent=$Normalizer->normalize($commande,'json',['groups'=>'post:read']);
+         return new Response (json_encode($jsonContent));
+    }
+
+    /**
+     * @Route("clearCommandeJson", name="clearCommandeJson" ,methods = {"GET", "POST"})
+     */
+    
+    /* pour tester http://127.0.0.1:8000/clearCommandeJson*/
+
+    public function clearCommandeJson(Request $request,NormalizerInterface $Normalizer) {
+ 
+        $em=$this->getDoctrine()->getManager();
+        $commande=$em->getRepository(Commande::class)->findAll();
+        
+        foreach($commande as $cmd){
+            $em->remove($cmd) ; 
+        }
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($commande,'json',['groups' => 'post:read']);
+        return new Response("Custumor Deleted successfuly".json_encode($jsonContent));
+    
+    }
+
+
+    /**
+     * @Route("removeCommandeJson/{id}", name="removeCommandeJson" ,methods = {"GET", "POST"})
+     */
+    
+    /* pour tester http://127.0.0.1:8000/removeCommandeJson/528*/
+
+    public function removeCommandeJson(Request $request,NormalizerInterface $Normalizer,$id) {
+ 
+        $em=$this->getDoctrine()->getManager();
+        $commande=$em->getRepository(Commande::class)->find($id);
+        $em->remove($commande);
+        $em->flush();
+        $jsonContent=$Normalizer->normalize($commande,'json',['groups' => 'post:read']);
+        return new Response("Custumor Deleted successfuly".json_encode($jsonContent));
+    }
+
+
+    /**
+     * @Route("/commandeExecelJson", name="commandeExecelJson" ,methods = {"GET", "POST"})
+     */
+    
+    /* pour tester http://127.0.0.1:8000/commandeExecelJson*/
+
+    public function commandeExecelJson(Request $request,NormalizerInterface $Normalizer)
+    {
+        
+        $commandes = $this->getDoctrine()->getRepository(Commande::class)->findAll();
+
+        
+        /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
+        
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle("All Command");
+        $sheet->setCellValue('A1', 'All Command')->mergeCells('A1:M3');
+        $columnNames = [
+            'First Name',
+            'Last Name',
+            'Number',
+            'Payment',
+            'Company',
+            'Country',
+            'City',
+            'street Adress',
+            'zip/PostalCode',
+            'Code',
+            'Date',
+            'Etat',
+            'Subtotal',
+        ];
+        $columnLetter = 'A';
+        foreach ($columnNames as $columnName) {
+            $sheet->setCellValue($columnLetter.'4', $columnName);
+            $columnLetter++;
+        }
+        $columnValues = [];
+        foreach ($commandes as $commande) {
+            $tab = [ 
+                $commande->getFirstName(),
+                $commande->getLastName(),
+                $commande->getPhoneNumber(),
+                $commande->getPayementMethod(),
+                $commande->getCompany(),
+                $commande->getCountry(),
+                $commande->getCity(),
+                $commande->getStreetAdress(),
+                $commande->getZip_PostalCode(),
+                $commande->getCodeCoupon(),
+                $commande->getDate(),
+                $commande->getEtat(),
+                $commande->getSubtotal(),
+            ];
+            
+            array_push($columnValues,$tab);
+        }
+        $i = 5; // Beginning row for active sheet
+        $total = 0;
+        foreach ($columnValues as $columnValue) {
+            $columnLetter = 'A';
+            foreach ($columnValue as $value) {
+                $sheet->setCellValue($columnLetter.$i, $value);
+                $columnLetter++;
+            }
+            $i++;
+            $total = ((float)$total + (float)$value);
+        }
+        
+
+
+
+        $sheet->setCellValue('A'.$i,'Subtotal')->mergeCells('A'.$i.':L'.$i);
+        $sheet->setCellValue('M'.$i,$total);
+        $sheet->getStyle('A'.$i)->getFont()->setBold(true);
+        $sheet->getStyle('M'.$i)->getFont()->setBold(true);
+        $j = $i +1 ;
+        $k = $j + 20;
+        $sheet->setCellValue('A'.$k,'')->mergeCells('A'.$j.':M'.$k);
+    
+
+        $columnLetter = 'A';
+        foreach ($columnNames as $columnName) {
+            // Center text
+            $sheet->getStyle($columnLetter.'4')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle($columnLetter.'1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle($columnLetter.'2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle($columnLetter.'1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+            $sheet->getStyle($columnLetter.'2')->getAlignment()->setVertical(Alignment::HORIZONTAL_CENTER);
+            // Text in bold
+            $sheet->getStyle($columnLetter.'4')->getFont()->setBold(true);
+            $sheet->getStyle($columnLetter.'1')->getFont()->setBold(true);
+            $sheet->getStyle($columnLetter.'2')->getFont()->setBold(true);
+            // Autosize column
+            $sheet->getColumnDimension($columnLetter)->setAutoSize(true);
+            $columnLetter++;
+        }
+        
+
+        // Create your Office 2007 Excel (XLSX Format)
+        $writer = new Xlsx($spreadsheet);
+        
+        // Create a Temporary file in the system
+        $fileName = 'my_first_excel_symfony4.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+        
+        // Create the excel file in the tmp directory of the system
+        $writer->save($temp_file);
+        
+        // Return the excel file as an attachment
+
+        
+        $jsonContent=$Normalizer->normalize($temp_file,'json',['groups' => 'post:read']);
+        return new Response("Custumor Deleted successfuly".json_encode($jsonContent));
+
+        //return  $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
+
 }
+
+
+
+
+

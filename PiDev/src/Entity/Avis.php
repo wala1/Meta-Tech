@@ -23,7 +23,7 @@ class Avis
 
     /**
      * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="avis")
-     * @ORM\JoinColumn(nullable=false) 
+     * @ORM\JoinColumn(nullable=false)  
      */
     private $idProd;
 
@@ -90,7 +90,7 @@ class Avis
         return $this;
     }
 
-    public function getRatingAvis(): ?int
+    public function getRatingAvis(): ?int 
     {
         return $this->ratingAvis;
     }
