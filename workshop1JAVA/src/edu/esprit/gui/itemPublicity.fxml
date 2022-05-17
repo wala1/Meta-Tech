@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="227.0" prefWidth="326.0" styleClass="shadow" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ItemPublicityController">
+   <children>
+      <VBox layoutY="-1.0" prefHeight="222.0" prefWidth="78.0" />
+      <HBox fx:id="pricelb" layoutX="37.0" layoutY="165.0" prefHeight="42.0" prefWidth="275.0">
+         <children>
+            <Label fx:id="nameLabel" prefHeight="42.0" prefWidth="226.0" text="IPhone">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+         </children>
+      </HBox>
+      <ImageView fx:id="img" fitHeight="156.0" fitWidth="262.0" layoutX="38.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/boutique-ecommerce-removebg-preview.png" />
+         </image></ImageView>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

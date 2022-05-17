@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.FormCommandController">
+   <children>
+      <Pane prefHeight="700.0" prefWidth="1200.0">
+         <children>
+            <TextField fx:id="firstName" layoutX="49.0" layoutY="256.0" prefHeight="25.0" prefWidth="272.0" />
+            <TextField fx:id="company" layoutX="49.0" layoutY="582.0" prefHeight="25.0" prefWidth="272.0" />
+            <TextField fx:id="zip" layoutX="48.0" layoutY="482.0" prefHeight="25.0" prefWidth="272.0" />
+            <TextField fx:id="lastName" layoutX="49.0" layoutY="311.0" prefHeight="25.0" prefWidth="272.0" />
+            <TextField fx:id="streetAdress" layoutX="49.0" layoutY="368.0" prefHeight="25.0" prefWidth="272.0" />
+            <TextField fx:id="city" layoutX="49.0" layoutY="428.0" prefHeight="25.0" prefWidth="272.0" />
+            <Label layoutX="46.0" layoutY="234.0" text="First Name" />
+            <Label layoutX="46.0" layoutY="288.0" text="Last Name" />
+            <Label layoutX="46.0" layoutY="343.0" text="Street Adress" />
+            <Label layoutX="46.0" layoutY="404.0" text="City" />
+            <Label layoutX="46.0" layoutY="460.0" text="Zip PostalCode" />
+            <Text layoutX="46.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipping Address">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="389.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payement Method">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="386.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipping Methods">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="deliveryComment" layoutX="382.0" layoutY="456.0" prefHeight="85.0" prefWidth="366.0" style="-fx-background-color: #eac45a;" />
+            <DatePicker fx:id="date" layoutX="383.0" layoutY="397.0" onAction="#onDate" prefHeight="25.0" prefWidth="365.0" style="-fx-background-color: #eac45a;" />
+            <RadioButton fx:id="check" layoutX="393.0" layoutY="250.0" mnemonicParsing="false" onAction="#onSelectPayment" prefHeight="17.0" prefWidth="168.0" text="Check/Money order">
+               <toggleGroup>
+                  <ToggleGroup fx:id="paymentGB" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="bank" layoutX="393.0" layoutY="281.0" mnemonicParsing="false" onAction="#onSelectPayment" prefHeight="17.0" prefWidth="180.0" text="Bank transfer Payment" toggleGroup="$paymentGB" />
+            <RadioButton fx:id="cash" layoutX="393.0" layoutY="309.0" mnemonicParsing="false" onAction="#onSelectPayment" prefHeight="17.0" prefWidth="148.0" selected="true" text="Cash On Delivery" toggleGroup="$paymentGB" />
+            <Label layoutX="107.0" layoutY="234.0" text="*" textFill="RED" />
+            <ComboBox fx:id="country" layoutX="48.0" layoutY="518.0" onAction="#onSelectCountry" prefHeight="25.0" prefWidth="272.0" promptText="Country" />
+            <Label layoutX="46.0" layoutY="554.0" text="Company" />
+            <Label layoutX="48.0" layoutY="617.0" text="Phone Number" />
+            <TextField fx:id="phoneNumber" layoutX="48.0" layoutY="641.0" prefHeight="25.0" prefWidth="272.0" />
+            <Label layoutX="383.0" layoutY="435.0" prefHeight="17.0" prefWidth="196.0" text="Shipping Delivery Comment" />
+            <Label layoutX="383.0" layoutY="370.0" prefHeight="17.0" prefWidth="127.0" text="Shipping Delivery Date" />
+            <Text layoutX="797.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Summary">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="814.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items In Cart">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Text>
+            <Text fx:id="sizeCart" layoutX="801.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5" wrappingWidth="12.208969712257385">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Text>
+            <Text layoutX="812.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipping">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Text>
+            <Text fill="#727272" layoutX="812.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flat Rate - Fixed">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font></Text>
+            <ComboBox fx:id="devise" layoutX="799.0" layoutY="576.0" onAction="#onSelectDevise" prefHeight="25.0" prefWidth="355.0" promptText="Conversion Devise">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <CheckBox fx:id="newsletter" layoutX="798.0" layoutY="604.0" mnemonicParsing="false" onAction="#onNews" prefHeight="17.0" prefWidth="5.0" />
+            <Text layoutX="380.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipping Order Comment" />
+            <TextArea fx:id="orderComment" layoutX="378.0" layoutY="578.0" prefHeight="85.0" prefWidth="369.0" style="-fx-background-color: #eac45a;" />
+            <TextField fx:id="codeCoup" layoutX="799.0" layoutY="636.0" prefHeight="25.0" prefWidth="180.0" promptText="Code Coupon" />
+            <Button defaultButton="true" layoutX="982.0" layoutY="635.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="25.0" prefWidth="168.0" style="-fx-background-color: #fdb819;" text="Place Order">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Label layoutX="104.0" layoutY="288.0" prefWidth="5.0" text="*" textFill="RED" />
+            <Label layoutX="117.0" layoutY="343.0" text="*" textFill="RED" />
+            <Label layoutX="69.0" layoutY="403.0" text="*" textFill="RED" />
+            <Label layoutX="128.0" layoutY="460.0" text="*" textFill="RED" />
+            <Label layoutX="100.0" layoutY="556.0" text="*" textFill="RED" />
+            <Label layoutX="131.0" layoutY="616.0" text="*" textFill="RED" />
+            <Label layoutX="507.0" layoutY="370.0" text="*" textFill="RED" />
+            <Text fx:id="cartSubTotal" layoutX="1101.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="label" />
+            <Text layoutX="1110.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5.00 DT" />
+            <Text fx:id="orderTotal" layoutX="1100.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" text="label" />
+            <Label fx:id="labelCountry" layoutX="110.0" layoutY="476.0" scaleX="0.0" scaleY="0.0" scaleZ="0.0" text="Label" />
+            <Label fx:id="labelPayment" layoutX="358.0" layoutY="269.0" scaleX="0.0" scaleY="0.0" scaleZ="0.0" text="cash" />
+            <Label fx:id="labelNews" layoutX="892.0" layoutY="484.0" scaleX="0.0" scaleY="0.0" scaleZ="0.0" text="Label" />
+            <Label fx:id="labelDate" layoutX="518.0" layoutY="371.0" text="Label" />
+            <Label layoutX="820.0" layoutY="604.0" prefHeight="17.0" prefWidth="211.0" text="Check To Subscribe Order Newsletter" />
+            <Label fx:id="id" layoutX="193.0" layoutY="45.0" scaleX="0.0" scaleY="0.0" scaleZ="0.0" text="Label" />
+            <ListView fx:id="item" layoutX="797.0" layoutY="269.0" prefHeight="207.0" prefWidth="105.0" style="-fx-background-color: #eac45a;" />
+            <ListView fx:id="name" layoutX="902.0" layoutY="269.0" prefHeight="207.0" prefWidth="114.0" style="-fx-border-color: #eac45a;" />
+            <ListView fx:id="price" layoutX="1075.0" layoutY="269.0" prefHeight="207.0" prefWidth="76.0" style="-fx-border-color: #eac45a;" />
+            <ListView fx:id="quantite" layoutX="1016.0" layoutY="268.0" prefHeight="208.0" prefWidth="60.0" style="-fx-background-color: #eac45a;" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="37.0" layoutX="797.0" layoutY="233.0" stroke="#eac45a" strokeType="INSIDE" width="105.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="37.0" layoutX="902.0" layoutY="233.0" stroke="#eac45a" strokeType="INSIDE" width="114.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="37.0" layoutX="1075.0" layoutY="233.0" stroke="#eac45a" strokeType="INSIDE" width="76.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="36.0" layoutX="1016.0" layoutY="233.0" stroke="#eac45a" strokeType="INSIDE" width="60.0" />
+            <Text layoutX="835.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="945.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="1098.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="1037.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="813.0" layoutY="562.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Total">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="813.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cart Subtotal">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <ToolBar layoutY="4.0" prefHeight="161.0" prefWidth="1200.0" style="-fx-background-color: #FAA708;">
+         <items>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagesCart/metatech.png" />
+               </image>
+            </ImageView>
+            <ToolBar prefHeight="56.0" prefWidth="1207.0" style="-fx-background-color: #ffffff;" />
+         </items>
+      </ToolBar>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="47.0" layoutX="-1.0" layoutY="-1.0" stroke="#cdcdcd" strokeType="INSIDE" width="1200.0" />
+      <Text fill="WHITE" layoutX="27.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-20% For Code coupon : MFG7">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="493.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 H : 45 M : 23 S">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="1075.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <ImageView fitHeight="23.0" fitWidth="24.0" layoutX="1047.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagesCart/278478187_359827799411330_7755412142157476303_n.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="47.0" layoutY="124.0" stroke="#cccccc" strokeType="INSIDE" width="1200.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Rectangle>
+      <Button layoutX="52.0" layoutY="134.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="151.0" layoutY="135.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="116.0" style="-fx-background-color: #ffffff;" text="Products" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="269.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #ffffff;" text="Events" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="368.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" style="-fx-background-color: #ffffff;" text="Blog" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="469.0" layoutY="127.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="85.0" style="-fx-background-color: #ffffff;" text="Cart" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="556.0" layoutY="128.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: #ffffff;" text="Contact Us" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1117.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagesCart/icons8-sortie-50.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1039.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagesCart/user.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="1076.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagesCart/icons8-panier-préféré-50.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>

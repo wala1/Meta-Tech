@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.guis.MetatechFrontController">
+   <children>
+      <ToolBar layoutY="53.0" prefHeight="141.0" prefWidth="1200.0" style="-fx-background-color: #FAA708;">
+         <items>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../gui/images/logo1.png" />
+               </image>
+            </ImageView>
+            <ToolBar prefHeight="56.0" prefWidth="1207.0" style="-fx-background-color: #ffffff;" />
+         </items>
+      </ToolBar>
+      <Button layoutX="378.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Event">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffe277" />
+         </effect>
+      </Button>
+      <Button layoutX="236.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Product">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffe277" />
+         </effect>
+      </Button>
+      <Button layoutX="684.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Cart">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffe277" />
+         </effect>
+      </Button>
+      <Button layoutX="527.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Blog">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffe277" />
+         </effect>
+      </Button>
+      <Button layoutX="89.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#0d0d0d">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffe277" />
+         </effect>
+      </Button>
+      <Button layoutX="813.0" layoutY="202.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="107.0" style="-fx-background-color: #ffffff;" text="Contact Us">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#ffe277" />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <SplitMenuButton alignment="CENTER" layoutX="14.0" layoutY="270.0" lineSpacing="10.0" mnemonicParsing="false" popupSide="LEFT" prefHeight="31.0" prefWidth="215.0" style="-fx-background-color: #ffffff;" text="Categories" textAlignment="CENTER">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Accessories" />
+          <MenuItem mnemonicParsing="false" text="Phones" />
+          <MenuItem mnemonicParsing="false" text="Pc Gamer" />
+        </items>
+         <font>
+            <Font name="Arial Nova Cond" size="19.0" />
+         </font>
+      </SplitMenuButton>
+      <ToolBar fx:id="PCS" layoutX="29.0" layoutY="595.0" prefHeight="184.0" prefWidth="1141.0" />
+      <ImageView fitHeight="290.0" fitWidth="808.0" layoutX="333.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/3D.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="479.0" layoutY="557.0" prefHeight="38.0" prefWidth="242.0" text="Product Coming Soon">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="14.0" prefHeight="24.0" prefWidth="252.0" text="-20% For Code coupon : MFG7">
+         <font>
+            <Font name="Arial Nova Cond" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="552.0" layoutY="14.0" prefHeight="24.0" prefWidth="116.0" text="3 H : 45 M : 23 S">
+         <font>
+            <Font name="Arial Nova Cond Bold" size="16.0" />
+         </font>
+      </Label>
+      <ScrollBar layoutX="1177.0" layoutY="194.0" orientation="VERTICAL" prefHeight="605.0" prefWidth="18.0" />
+      <Label layoutX="1056.0" layoutY="14.0" prefHeight="24.0" prefWidth="43.0" text="Store">
+         <font>
+            <Font name="Arial Nova Cond" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="1122.0" layoutY="13.0" mnemonicParsing="false" onAction="#ajouterPublicity" style="-fx-background-color: #ffffff;" text="Admin" textFill="#3838386c">
+         <effect>
+            <DropShadow color="#ff9c40bd" />
+         </effect>
+         <font>
+            <Font name="Arial Narrow" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

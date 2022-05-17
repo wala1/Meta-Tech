@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="metatech.gui.back.PublicationFXMLController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1100.0">
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" />
+            <AnchorPane id="AnchorPane" layoutX="-40.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #FDFFFF;">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="234.0" layoutY="-13.0" stroke="#dde1e8" strokeType="INSIDE" width="1044.0">
+                     <effect>
+                        <DropShadow color="#00000091" />
+                     </effect>
+                  </Rectangle>
+                  <TextField fx:id="t_search" layoutX="335.0" layoutY="-2.0" onKeyTyped="#onSearchKeyPressed" prefHeight="33.0" prefWidth="245.0" style="-fx-background-color: #dde1e8;" stylesheets="@../front/resources/style1.css" />
+                  <Button layoutX="550.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" style="-fx-background-color: #9999d0;" styleClass="shadow" stylesheets="@../front/resources/style1.css">
+                     <effect>
+                        <DropShadow color="#1515a16f" />
+                     </effect>
+                  </Button>
+                  <ComboBox layoutX="1106.0" layoutY="-4.0" prefHeight="42.0" prefWidth="150.0" promptText="ADMIN" style="-fx-background-color: dde1e8;" />
+                  <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="553.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../front/resources/ic2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1059.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../front/resources/icons/icons8-categorize-30.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1025.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../front/resources/icons/icons8-logout-24.png" />
+                     </image>
+                  </ImageView>
+                  <ListView fx:id="tbPublication" layoutX="367.0" layoutY="205.0" onMouseClicked="#onMouseClicked" prefHeight="540.0" prefWidth="814.0" />
+                  <Text layoutX="362.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publications List">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="btnDelete" layoutX="1091.0" layoutY="726.0" mnemonicParsing="false" onAction="#onClickDelete" text="Delete" />
+                  <HBox layoutX="364.0" layoutY="136.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onClickOrderById" text="Order By Id" />
+                        <Button mnemonicParsing="false" onAction="#onClickOrderByTitle" text="Order by Title" />
+                        <Button mnemonicParsing="false" onAction="#onClickOrderByDate" text="Order By Creation Date" />
+                        <Button mnemonicParsing="false" onAction="#onClickOrderByDescription" text="Order By Description" />
+                     </children>
+                  </HBox>
+                  <VBox layoutX="28.0" layoutY="-10.0" prefHeight="811.0" prefWidth="269.0" style="-fx-background-color: #DCE7F5;">
+                     <children>
+                        <ImageView fx:id="logo" fitHeight="39.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../edu/esprit/gui/metatech_logo.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="25.0" top="30.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showDashboard" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Dashboard">
+                           <VBox.margin>
+                              <Insets left="20.0" top="60.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-dashboard-32.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showUser" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="User">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-user-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showPublicity" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Publicity">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-publicity-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showProduct" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Product">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-product-24.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToCategories" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Categories">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-categorize-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToSubCategories" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Sub Categories">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-categorize-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showBlog" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Blog">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-blog-24.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showCart" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Cart">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-shopping-cart-promotion-30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showEvents" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Events">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-publicity-30_1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                              <Insets left="20.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Logout">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../edu/esprit/gui/icons/icons8-logout-24.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="10.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" top="150.0" />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

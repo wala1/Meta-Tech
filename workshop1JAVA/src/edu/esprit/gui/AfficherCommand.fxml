@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.AfficherCommandController">
+   
+    <children>
+      <Pane prefHeight="700.0" prefWidth="1200.0">
+         <children>
+            <TableView fx:id="table" layoutX="279.0" layoutY="181.0" prefHeight="393.0" prefWidth="654.0">
+              <columns>
+                <TableColumn fx:id="firstName" prefWidth="72.0" style="-fx-background-color: 00000;" text="First Name" />
+                  <TableColumn fx:id="street" prefWidth="108.0" style="-fx-background-color: #9999d0;" text="Street" />
+                  <TableColumn fx:id="zip" prefWidth="45.0" text="Zip" />
+                  <TableColumn fx:id="phone" prefWidth="72.0" style="-fx-background-color: #9999d0;" text="Phone" />
+                  <TableColumn fx:id="payment" prefWidth="62.0" text="Payment" />
+                  <TableColumn fx:id="date" prefWidth="81.0" style="-fx-background-color: #9999d0;" text="Date Achat" />
+                  <TableColumn fx:id="etat" prefWidth="76.0" text="Etat" />
+                  <TableColumn fx:id="subtotal" prefWidth="76.0" style="-fx-background-color: #9999d0;" text="SubTotal" />
+              </columns>
+            </TableView>
+            <Button layoutX="807.0" layoutY="124.0" mnemonicParsing="false" onAction="#deleteCommand" style="-fx-background-color: #9999d0;" text="Delete" />
+            <Button layoutX="872.0" layoutY="124.0" mnemonicParsing="false" onAction="#updateCommand" style="-fx-background-color: #9999d0;" text="Update" />
+            <Text layoutX="279.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order List">
+               <font>
+                  <Font name="Arial" size="34.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

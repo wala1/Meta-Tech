@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="785.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.SignUpController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutY="35.0" prefHeight="746.0" prefWidth="1088.0">
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="756.0" prefWidth="1088.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f2f2" height="816.0" layoutY="-35.0" stroke="#a13939" strokeType="INSIDE" strokeWidth="0.0" width="1088.0" />
+                  <AnchorPane id="AnchorPane" layoutX="27.0" layoutY="53.0" prefHeight="570.0" prefWidth="958.0" />
+                  <HBox alignment="BOTTOM_CENTER" layoutX="274.0" layoutY="708.0" prefHeight="30.0" prefWidth="354.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="165.0" text="You already have an account?" />
+                        <Hyperlink onAction="#OnSignin1" prefHeight="26.0" prefWidth="79.0" text="Sign In" textFill="#9e9a9a" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="AnchorPane" prefHeight="804.0" prefWidth="1201.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="-32.0" prefHeight="800.0" prefWidth="1200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f2f2" height="740.0" layoutY="71.0" stroke="#a13939" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
+                  <AnchorPane id="AnchorPane" layoutX="1.0" prefHeight="800.0" prefWidth="1200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eff2f5" height="452.0" layoutX="106.0" layoutY="156.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="925.0">
+                           <stroke>
+                              <RadialGradient centerX="0.7388888888888889" centerY="0.7761904761904762" focusAngle="20.56" focusDistance="1.0" radius="0.2089013632718525">
+                                 <stops>
+                                    <Stop color="#f8fafc" />
+                                    <Stop color="#24232364" offset="0.42955326460481097" />
+                                    <Stop color="#b2adad" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </stroke>
+                           <effect>
+                              <DropShadow color="#080808" height="50.65" radius="18.895" spread="0.13" width="26.93" />
+                           </effect>
+                        </Rectangle>
+                        <VBox alignment="CENTER_LEFT" layoutX="600.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="388.0" styleClass="blue-panel" stylesheets="@workshop1JAVA/src/edu/esprit/gui/styles.css">
+                           <children>
+                              <Label prefHeight="44.0" prefWidth="130.0" text="Sign Up" textFill="DIMGRAY">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="388.0" styleClass="tf_box">
+                                 <children>
+                                    <TextField fx:id="textFieldusername" prefHeight="38.0" prefWidth="383.0" promptText="Username" stylesheets="@style1.css" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="34.0" prefWidth="437.0">
+                                 <children>
+                                    <TextField fx:id="textFieldemail" prefHeight="34.0" prefWidth="382.0" promptText="Email" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="53.0" prefWidth="388.0">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <PasswordField fx:id="textFieldpwd" prefHeight="38.0" prefWidth="196.0" promptText="Confirm password" />
+                                    <PasswordField fx:id="textFieldconfirmpwd" prefHeight="37.0" prefWidth="185.0" promptText="Confirm password" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="50.0" prefWidth="395.0">
+                                 <children>
+                                    <TextField fx:id="textFieldnum" prefHeight="33.0" prefWidth="383.0" promptText="Phone Number" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="38.0" prefWidth="388.0">
+                                 <children>
+                                    <TextField fx:id="textFieldimage" prefHeight="34.0" prefWidth="384.0" promptText="image" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <Button layoutX="716.0" layoutY="509.0" mnemonicParsing="false" onAction="#OnSignUp1" opacity="0.65" prefHeight="37.0" prefWidth="141.0" style="-fx-background-color: fdb819;" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css" text="Sign Up" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdb819" height="800.0" opacity="0.57" stroke="#ffd421" strokeType="INSIDE" width="561.0" />
+                  <ImageView fitHeight="227.0" fitWidth="200.0" layoutX="221.0" layoutY="275.0" opacity="0.73" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/logoFinal.png" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="172.0" layoutY="406.0" prefHeight="30.0" prefWidth="354.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="166.0" text="You already have an account?" />
+                        <Hyperlink onAction="#OnSignin1" prefHeight="26.0" prefWidth="79.0" text="Sign In" textFill="#9e9a9a" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

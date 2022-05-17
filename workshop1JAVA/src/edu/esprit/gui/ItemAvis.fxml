@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="140.0" prefWidth="982.0" stylesheets="@icons/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ItemAvisController">
+   <children>
+      <VBox layoutX="13.0" layoutY="14.0" prefHeight="126.0" prefWidth="871.0">
+         <children>
+            <HBox prefHeight="56.0" prefWidth="774.0">
+               <children>
+                  <Label fx:id="nomAvis" prefHeight="42.0" prefWidth="342.0" text="Name">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fx:id="star1" fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/star.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star2" fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/star.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star3" fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/star.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star4" fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/star.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="star5" fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/star.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="dateAvis" alignment="TOP_RIGHT" prefHeight="42.0" prefWidth="354.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label fx:id="descAvis" alignment="TOP_LEFT" prefHeight="57.0" prefWidth="859.0" text="Description" wrapText="true">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <ImageView fx:id="deleteAvis" fitHeight="35.0" fitWidth="26.0" layoutX="884.0" layoutY="14.0" onMouseClicked="#onClickDeleteAvis" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons8-delete-30.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="editAvis" fitHeight="35.0" fitWidth="26.0" layoutX="921.0" layoutY="14.0" onMouseClicked="#goToEditReview" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons8-update-24.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+   <styleClass>
+      <String fx:value="fruit-item" />
+      <String fx:value="shadow" />
+   </styleClass>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

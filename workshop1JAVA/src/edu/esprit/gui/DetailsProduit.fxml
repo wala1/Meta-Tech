@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.DetailsProduitController">
+   <children>
+      <ScrollPane layoutX="10.0" layoutY="167.0" prefHeight="628.0" prefWidth="1188.0" vvalue="0.61">
+         <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1892.0" prefWidth="1200.0">
+               <children>
+                  <AnchorPane layoutX="21.0" layoutY="29.0" prefHeight="470.0" prefWidth="1121.0" style="-fx-background-color: #DEDEDE;" stylesheets="@icons/style.css">
+                     <children>
+                        <HBox layoutX="150.0" layoutY="79.0" prefHeight="357.0" prefWidth="838.0">
+                           <children>
+                              <ImageView fx:id="imgProduit" fitHeight="358.0" fitWidth="324.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image0.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                              <HBox prefHeight="357.0" prefWidth="198.0" />
+                              <VBox prefHeight="358.0" prefWidth="513.0">
+                                 <children>
+                                    <Label fx:id="titleProduit" text="Label">
+                                       <font>
+                                          <Font name="Cambria" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="descProduit" alignment="TOP_LEFT" prefHeight="157.0" prefWidth="413.0" text="Description" wrapText="true">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="30.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ComboBox fx:id="comboRate" onAction="#convertPrice" prefWidth="150.0" promptText="DT" styleClass="search-box" stylesheets="@icons/style.css">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </ComboBox>
+                                          <Label fx:id="conversionRate">
+                                             <font>
+                                                <Font size="23.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <Label fx:id="priceConverted" prefHeight="27.0" prefWidth="174.0" text="Label">
+                                             <font>
+                                                <Font name="Cambria Bold" size="23.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="39.0" prefWidth="414.0">
+                                       <children>
+                                          <Label text="Price : " textFill="#fc1a1a">
+                                             <font>
+                                                <Font name="Cambria" size="23.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="priceProduit" text="100">
+                                             <font>
+                                                <Font name="Cambria" size="23.0" />
+                                             </font>
+                                             <effect>
+                                                <Blend />
+                                             </effect>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="39.0" prefWidth="414.0">
+                                       <children>
+                                          <Label text="Discount : " textFill="#4fab35">
+                                             <font>
+                                                <Font name="Cambria" size="23.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="promoProduit" text="100">
+                                             <font>
+                                                <Font name="Cambria" size="23.0" />
+                                             </font>
+                                             <effect>
+                                                <Blend />
+                                             </effect>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0">
+                                       <children>
+                                          <Label prefHeight="53.0" prefWidth="167.0" text="Quantity">
+                                             <font>
+                                                <Font name="Cambria" size="19.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets top="20.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <HBox alignment="CENTER" prefHeight="38.0" prefWidth="122.0" style="-fx-background-color: #F6EACE;" stylesheets="@icons/style.css">
+                                             <children>
+                                                <TextField prefHeight="34.0" prefWidth="124.0" promptText="Quantity" stylesheets="@icons/style.css">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="Cambria" size="18.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="shadow" />
+                                                      <String fx:value="search-box" />
+                                                   </styleClass>
+                                                </TextField>
+                                             </children>
+                                             <styleClass>
+                                                <String fx:value="search-box" />
+                                                <String fx:value="shadow" />
+                                             </styleClass>
+                                             <HBox.margin>
+                                                <Insets top="20.0" />
+                                             </HBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="408.0">
+                                       <children>
+                                          <Button alignment="CENTER" mnemonicParsing="false" prefHeight="45.0" prefWidth="272.0" style="-fx-background-color: #fdb819;" styleClass="add-btn" stylesheets="@icons/style.css" text="ADD TO CART" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <HBox.margin>
+                                                <Insets left="70.0" top="20.0" />
+                                             </HBox.margin>
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Button alignment="CENTER" layoutX="35.0" layoutY="14.0" mnemonicParsing="false" onAction="#showProducts" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #fdb819;" styleClass="add-btn" stylesheets="@icons/style.css" text="BACK" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <HBox layoutX="569.0" layoutY="25.0" prefHeight="40.0" prefWidth="317.0">
+                           <children>
+                              <ImageView fx:id="pstar1" fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="pstar2" fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="pstar3" fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="pstar4" fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="pstar5" fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                     </children>
+                     <styleClass>
+                        <String fx:value="fruit-item" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </AnchorPane>
+                  <VBox layoutX="308.0" layoutY="568.0" prefHeight="195.0" prefWidth="584.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="584.0" text="Add Review" textAlignment="CENTER">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="40.0" prefWidth="520.0">
+                           <children>
+                              <HBox prefHeight="30.0" prefWidth="214.0" />
+                              <ImageView fx:id="rstar1" fitHeight="32.0" fitWidth="30.0" onMouseClicked="#clickStar1" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="rstar2" fitHeight="32.0" fitWidth="30.0" onMouseClicked="#clickStar2" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="rstar3" fitHeight="32.0" fitWidth="30.0" onMouseClicked="#clickStar3" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="rstar4" fitHeight="32.0" fitWidth="30.0" onMouseClicked="#clickStar4" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                              <ImageView fx:id="rstar5" fitHeight="32.0" fitWidth="30.0" onMouseClicked="#clickStar5" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/star.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="146.0" prefWidth="584.0" />
+                        <HBox prefHeight="91.0" prefWidth="584.0">
+                           <children>
+                              <Label text="Description">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="tfDescAvis" prefHeight="94.0" prefWidth="442.0" promptText="Type your review..." stylesheets="@icons/style.css">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </TextArea>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Button layoutX="545.0" layoutY="795.0" mnemonicParsing="false" onAction="#addReview" prefHeight="39.0" prefWidth="111.0" style="-fx-background-color: fdb819;" styleClass="search-button" stylesheets="@icons/style.css" text="Add">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <HBox layoutX="85.0" layoutY="1010.0" prefHeight="356.0" prefWidth="1045.0">
+                     <children>
+                        <ScrollPane fx:id="scroll" prefHeight="370.0" prefWidth="1045.0">
+                           <content>
+                              <GridPane fx:id="grid">
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+                  <Label layoutX="510.0" layoutY="912.0" text="Testimonials">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutX="99.0" layoutY="1488.0" prefHeight="304.0" prefWidth="1043.0">
+                     <children>
+                        <ScrollPane fx:id="scroll1" prefHeight="294.0" prefWidth="1042.0">
+                           <content>
+                              <GridPane fx:id="grid1">
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </HBox>
+                  <Label layoutX="497.0" layoutY="1405.0" text="Recommendations">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="535.0" layoutY="1441.0" text="You may also like">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <AnchorPane id="AnchorPane" prefHeight="161.0" prefWidth="1200.0">
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="167.0" prefWidth="1200.0">
+               <children>
+                  <AnchorPane id="AnchorPane" prefHeight="145.0" prefWidth="1200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#212122" height="39.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+                        <AnchorPane id="AnchorPane" prefHeight="144.0" prefWidth="1200.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdb819" height="68.0" layoutY="37.0" stroke="#fdb819" strokeType="INSIDE" width="1200.0" />
+                              <Label layoutX="14.0" layoutY="14.0" prefHeight="24.0" prefWidth="252.0" text="-20% For Code coupon : MFG7" textFill="#fffdfd">
+                                 <font>
+                                    <Font name="Arial Nova Cond" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="554.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" text="3 H : 45 M : 23 S" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="1062.0" layoutY="11.0" prefHeight="24.0" prefWidth="43.0" text="Store" textFill="#fff9f9">
+                                 <font>
+                                    <Font name="Arial Nova Cond" size="16.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-2.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@metatech_logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-1.0" layoutY="105.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="1200.0">
+                                 <stroke>
+                                    <RadialGradient centerX="0.7388888888888889" centerY="0.7761904761904762" focusAngle="20.56" focusDistance="1.0" radius="0.2089013632718525">
+                                       <stops>
+                                          <Stop color="#f8fafc" />
+                                          <Stop color="#24232364" offset="0.42955326460481097" />
+                                          <Stop color="#ffffff00" offset="1.0" />
+                                       </stops>
+                                    </RadialGradient>
+                                 </stroke>
+                                 <effect>
+                                    <DropShadow color="#00000051" height="28.42" radius="13.3375" spread="0.13" width="26.93" />
+                                 </effect>
+                              </Rectangle>
+                              <Button layoutX="307.0" layoutY="115.0" mnemonicParsing="false" onAction="#showEvent" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Event">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button layoutX="437.0" layoutY="115.0" mnemonicParsing="false" onAction="#showBlog" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Blog">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button layoutX="567.0" layoutY="115.0" mnemonicParsing="false" onAction="#showCart" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Cart">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button layoutX="707.0" layoutY="115.0" mnemonicParsing="false" onAction="#showContact" prefHeight="40.0" prefWidth="111.0" style="-fx-background-color: #ffffff;" text="Contact Us">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button layoutX="172.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Product">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button layoutX="51.0" layoutY="115.0" mnemonicParsing="false" onAction="#showHome" prefHeight="18.0" prefWidth="76.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#0d0d0d">
+                                 <font>
+                                    <Font name="Arial Nova Cond Bold" size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1113.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8-shopping-cart-promotion-30.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1161.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8-logout-24.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1058.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/icons8-user-30.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="19.0" fitWidth="25.0" layoutX="1033.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/278478187_359827799411330_7755412142157476303_n.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField layoutX="356.0" layoutY="55.0" prefHeight="33.0" prefWidth="474.0" stylesheets="@style1.css">
+                                 <styleClass>
+                                    <String fx:value="search-box" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                              </TextField>
+                              <Button layoutX="787.0" layoutY="55.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="43.0" style="-fx-background-color: #000000;" stylesheets="@style1.css">
+                                 <styleClass>
+                                    <String fx:value="search-button" />
+                                    <String fx:value="shadow" />
+                                 </styleClass>
+                              </Button>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="796.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/278659814_981860989363086_1225984539443116806_n.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

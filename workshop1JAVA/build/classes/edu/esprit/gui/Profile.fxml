@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ProfileController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#212122" height="47.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+      <AnchorPane id="AnchorPane" layoutY="-14.0" prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdb819" height="68.0" layoutY="37.0" stroke="#fdb819" strokeType="INSIDE" width="1200.0" />
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="24.0" prefWidth="252.0" text="-20% For Code coupon : MFG7" textFill="#fffdfd">
+               <font>
+                  <Font name="Arial Nova Cond" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="554.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" text="3 H : 45 M : 23 S" textFill="WHITE">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="16.0" />
+               </font>
+            </Label>
+            <ScrollBar layoutX="1178.0" layoutY="159.0" orientation="VERTICAL" prefHeight="605.0" prefWidth="18.0" />
+            <Label layoutX="1062.0" layoutY="11.0" prefHeight="24.0" prefWidth="43.0" text="Store" textFill="#fff9f9">
+               <font>
+                  <Font name="Arial Nova Cond" size="16.0" />
+               </font>
+            </Label>
+            <SplitPane id="search-box" dividerPositions="0.5" layoutX="163.0" layoutY="215.0" prefHeight="494.0" prefWidth="808.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="403.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="200.0" layoutX="84.0" layoutY="61.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0" />
+                        <Label fx:id="labelGetUsername" alignment="CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="278.0" prefHeight="33.0" prefWidth="124.0" textAlignment="CENTER" textFill="DIMGRAY">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelGetEmail" alignment="CENTER" layoutX="61.0" layoutY="311.0" prefHeight="33.0" prefWidth="252.0" textAlignment="CENTER" textFill="DIMGRAY">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <Label layoutX="41.0" layoutY="14.0" prefHeight="76.0" prefWidth="208.0" text="Profile Settings" textFill="DIMGRAY">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfEditUsername" layoutX="41.0" layoutY="129.0" prefHeight="40.0" prefWidth="282.0" promptText="Username" stylesheets="@style1.css">
+                           <styleClass>
+                              <String fx:value="search-box" />
+                              <String fx:value="shadow" />
+                           </styleClass></TextField>
+                        <TextField fx:id="tfEditEmail" layoutX="41.0" layoutY="193.0" prefHeight="40.0" prefWidth="282.0" promptText="Email" style="-fx-background-color: #ffffff;" styleClass="search-box" stylesheets="@style1.css" />
+                        <TextField fx:id="tfEditPhoneNumber" layoutX="41.0" layoutY="310.0" prefHeight="40.0" prefWidth="282.0" promptText="Phone Number" styleClass="search-box" stylesheets="@style1.css" />
+                        <PasswordField fx:id="tfEditPassword" layoutX="41.0" layoutY="246.0" prefHeight="40.0" prefWidth="138.0" promptText="Password" styleClass="search-box" stylesheets="@style1.css" />
+                        <PasswordField fx:id="tfEditConfirmPassword" layoutX="186.0" layoutY="246.0" prefHeight="40.0" prefWidth="138.0" promptText="Password" styleClass="search-box" stylesheets="@style1.css" />
+                        <Button layoutX="138.0" layoutY="434.0" mnemonicParsing="false" onAction="#OnUpdate" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: fdb819;" text="Save Changes" />
+                        <TextField fx:id="tfEditImage" layoutX="41.0" layoutY="369.0" prefHeight="40.0" prefWidth="282.0" promptText="Image" styleClass="search-box" stylesheets="@style1.css" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/logoFinal.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-1.0" layoutY="105.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="1200.0">
+               <stroke>
+                  <RadialGradient centerX="0.7388888888888889" centerY="0.7761904761904762" focusAngle="20.56" focusDistance="1.0" radius="0.2089013632718525">
+                     <stops>
+                        <Stop color="#f8fafc" />
+                        <Stop color="#24232364" offset="0.42955326460481097" />
+                        <Stop color="#ffffff00" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </stroke>
+               <effect>
+                  <DropShadow color="#00000051" height="28.42" radius="13.3375" spread="0.13" width="26.93" />
+               </effect>
+            </Rectangle>
+            <Button layoutX="307.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnEvent" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Event">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="437.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnBlog" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Blog">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="567.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnCart" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Cart">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="707.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="111.0" style="-fx-background-color: #ffffff;" text="Contact Us">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="172.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnProduct" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Product">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="51.0" layoutY="115.0" mnemonicParsing="false" onAction="#OnHome" prefHeight="18.0" prefWidth="76.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#0d0d0d">
+               <font>
+                  <Font name="Arial Nova Cond Bold" size="18.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1113.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/icons8-shopping-cart-promotion-30.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="logout" fitHeight="25.0" fitWidth="28.0" layoutX="1161.0" layoutY="59.0" onMouseClicked="#OnLogout" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/icons8-logout-24.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1058.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/icons8-user-30.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="19.0" fitWidth="25.0" layoutX="1033.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/icons8-marqueur-24.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="356.0" layoutY="55.0" prefHeight="33.0" prefWidth="474.0" stylesheets="@style1.css">
+               <styleClass>
+                  <String fx:value="search-box" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </TextField>
+            <Button layoutX="787.0" layoutY="55.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="43.0" style="-fx-background-color: #000000;" stylesheets="@style1.css">
+               <styleClass>
+                  <String fx:value="search-button" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </Button>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="796.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/icons8-chercher-24.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

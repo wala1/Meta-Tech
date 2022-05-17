@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#Print" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.AjouterPublicityController">
+   <children>
+       <Label layoutX="283.0" layoutY="199.0" text="Name         : " textAlignment="CENTER">
+         <font>
+            <Font name="Arial Narrow" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="278.0" layoutY="273.0" text="Description  :" textFill="#030303">
+         <font>
+            <Font name="Arial Narrow" size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNom" layoutX="424.0" layoutY="197.0" prefHeight="31.0" prefWidth="443.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+      <TextField fx:id="tfPrice" layoutX="424.0" layoutY="524.0" prefHeight="31.0" prefWidth="443.0">
+         <effect>
+            <DropShadow />
+         </effect></TextField>
+
+      <TextField fx:id="tfDesc" layoutX="424.0" layoutY="271.0" prefHeight="149.0" prefWidth="443.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="tfDisc" layoutX="424.0" layoutY="455.0" prefHeight="31.0" prefWidth="443.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <TextField fx:id="tfImage" layoutX="424.0" layoutY="588.0" prefHeight="31.0" prefWidth="443.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </TextField>
+      <Label layoutX="278.0" layoutY="469.0" text="Discount     :">
+         <font>
+            <Font name="Arial Narrow" size="23.0" />
+         </font></Label>
+      <Label layoutX="283.0" layoutY="529.0" text="Price            :">
+         <font>
+            <Font name="Arial Narrow" size="21.0" />
+         </font></Label>
+      <Label layoutX="278.0" layoutY="593.0" text="Image          :">
+         <font>
+            <Font name="Arial Narrow" size="23.0" />
+         </font></Label>
+      <Button layoutX="867.0" layoutY="674.0" mnemonicParsing="false" onAction="#ajouterPublicity" prefHeight="57.0" prefWidth="102.0" style="-fx-background-color: #388FFA;" text="Ajouter" textFill="WHITE">
+         <font>
+            <Font name="Arial Narrow Bold" size="21.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="165.0" layoutY="10.0" stroke="#dde1e8" strokeType="INSIDE" width="1044.0">
+         <effect>
+            <DropShadow color="#00000091" />
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dde1e8" height="810.0" stroke="#dde1e8" strokeType="INSIDE" width="168.0">
+         <effect>
+            <DropShadow color="#00000091" />
+         </effect>
+      </Rectangle>
+      <ImageView fitHeight="33.0" fitWidth="213.0" layoutX="3.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/logo1.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="218.0" layoutY="21.0" prefHeight="33.0" prefWidth="245.0" style="-fx-background-color: #dde1e8;" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css" />
+      <Button layoutX="433.0" layoutY="24.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" style="-fx-background-color: #9999d0;" styleClass="shadow" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css">
+         <effect>
+            <DropShadow color="#1515a16f" />
+         </effect>
+      </Button>
+      <ComboBox layoutX="1045.0" layoutY="16.0" prefHeight="42.0" prefWidth="150.0" promptText="ADMIN" style="-fx-background-color: dde1e8;" />
+      <ImageView fitHeight="33.0" fitWidth="38.0" layoutX="7.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278590425_2443167425826442_2874838461925882499_n.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_LEFT" layoutX="45.0" layoutY="236.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Dashboard">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="42.0" layoutY="287.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #dde1e8;" text="User">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="42.0" layoutY="328.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="83.0" style="-fx-background-color: #dde1e8;" text="Publicity">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="17.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-publicity-30.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_LEFT" layoutX="45.0" layoutY="388.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Product">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="45.0" layoutY="446.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Categories">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="28.0" layoutY="504.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="134.0" style="-fx-background-color: #dde1e8;" text="Sub Categories">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="53.0" layoutY="610.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Blog">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="38.0" layoutY="551.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="90.0" style="-fx-background-color: #dde1e8;" text="Cart">
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="7.0" layoutY="752.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="156.0" style="-fx-background-color: #dde1e8;" text="Logout">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../gui/images/icons8-logout-24.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="436.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278659814_981860989363086_1225984539443116806_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="17.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-user-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="17.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-product-24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="17.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-categorize-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="11.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-categorize-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="17.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-shopping-cart-promotion-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="17.0" layoutY="622.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-blog-24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1000.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278761676_527397795663514_5735482651362982034_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="961.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278535617_533467014806040_4241921456515389626_n%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="55.0" fitWidth="90.0" layoutX="1124.0" layoutY="75.0" onMouseClicked="#Print" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/pdf.png" />
+         </image>
+      </ImageView>
+   </children>
+
+</AnchorPane>

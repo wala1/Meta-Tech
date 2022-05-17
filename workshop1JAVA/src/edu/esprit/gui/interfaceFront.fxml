@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.InterfaceFrontController">
+   <children>
+      <TableView fx:id="TviewPub" layoutX="333.0" layoutY="205.0" prefHeight="479.0" prefWidth="789.0">
+        <columns>
+            <TableColumn fx:id="TVid" minWidth="0.0" prefWidth="0.0" text="ID" />
+          <TableColumn fx:id="TVName" prefWidth="230.0" text="Name" />
+            <TableColumn fx:id="TVDisc" prefWidth="159.0" text="Discount" />
+            <TableColumn fx:id="TVPrice" prefWidth="89.0" text="Price" />
+            <TableColumn fx:id="TVImage" prefWidth="179.0" text="Image" />
+        </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="50.0" />
+         </padding>
+      </TableView>
+      <Button layoutX="1075.0" layoutY="157.0" mnemonicParsing="false" onAction="#ajouterPublicity" prefHeight="27.0" prefWidth="121.0" style="-fx-background-color: #2A8CFA;" text="Add New " textFill="#eeeeee">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="176.0" layoutY="20.0" stroke="#dde1e8" strokeType="INSIDE" width="1044.0">
+         <effect>
+            <DropShadow color="#00000091" />
+         </effect>
+      </Rectangle>
+      <ComboBox layoutX="1056.0" layoutY="26.0" prefHeight="42.0" prefWidth="150.0" promptText="ADMIN" style="-fx-background-color: dde1e8;" />
+      <Button alignment="BASELINE_LEFT" layoutX="18.0" layoutY="762.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="156.0" style="-fx-background-color: #dde1e8;" text="Logout">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../gui/images/icons8-logout-24.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1011.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278761676_527397795663514_5735482651362982034_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="972.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278535617_533467014806040_4241921456515389626_n%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="21.0" layoutX="930.0" layoutY="37.0" onMouseClicked="#mail" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/gmail.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="881.0" layoutY="34.0" onMouseClicked="#loadStat" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/stats.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dde1e8" height="822.0" stroke="#dde1e8" strokeType="INSIDE" width="194.0">
+         <effect>
+            <DropShadow color="#00000091" />
+         </effect>
+      </Rectangle>
+      <ImageView fitHeight="33.0" fitWidth="213.0" layoutX="23.0" layoutY="40.0" onMouseClicked="#front" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/logo1.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="254.0" layoutY="31.0" prefHeight="33.0" prefWidth="245.0" promptText="search.." style="-fx-background-color: #dde1e8;" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css" />
+      <Button layoutX="469.0" layoutY="32.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" style="-fx-background-color: #9999d0;" styleClass="shadow" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css">
+         <effect>
+            <DropShadow color="#1515a16f" />
+         </effect>
+      </Button>
+      <ImageView fitHeight="33.0" fitWidth="38.0" layoutX="17.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278590425_2443167425826442_2874838461925882499_n.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_LEFT" layoutX="53.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#loadStat" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Dashboard">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="65.0" layoutY="215.0" mnemonicParsing="false" onAction="#showUser" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #dde1e8;" text="User">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="54.0" layoutY="256.0" mnemonicParsing="false" onAction="#publicityy" prefHeight="44.0" prefWidth="83.0" style="-fx-background-color: #dde1e8;" text="Publicity">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="22.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-publicity-30.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_LEFT" layoutX="57.0" layoutY="316.0" mnemonicParsing="false" onAction="#showProduct" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Product">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="53.0" layoutY="375.0" mnemonicParsing="false" onAction="#goToCategories" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Categories">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="57.0" layoutY="429.0" mnemonicParsing="false" onAction="#goToSubCategories" prefHeight="33.0" prefWidth="135.0" style="-fx-background-color: #dde1e8;" text="Sub Categories">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="536.0" mnemonicParsing="false" onAction="#showBlog" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: #dde1e8;" text="Blog">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="476.0" mnemonicParsing="false" onAction="#showCart" prefHeight="44.0" prefWidth="90.0" style="-fx-background-color: #dde1e8;" text="Cart">
+         <padding>
+            <Insets left="10.0" top="5.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="472.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/278659814_981860989363086_1225984539443116806_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="22.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-user-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="22.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-product-24.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="27.0" layoutX="22.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-categorize-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="23.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-categorize-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="22.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-shopping-cart-promotion-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="22.0" layoutY="547.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/icons8-blog-24.png" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_LEFT" layoutX="62.0" layoutY="589.0" mnemonicParsing="false" onAction="#coupon" prefHeight="44.0" prefWidth="83.0" style="-fx-background-color: #dde1e8;" text="Coupon">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="22.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/calculatrice.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

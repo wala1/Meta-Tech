@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="824.0" spacing="20.0" stylesheets="@../style1.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="metatech.gui.front.CellPublicationFXMLController">
+   <children>
+      <VBox alignment="TOP_CENTER">
+         <children>
+            <ImageView fx:id="iv_image" fitHeight="188.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="t_text" strokeType="OUTSIDE" strokeWidth="0.0" text="Created By : User in 20/01/2022" />
+         </children>
+      </VBox>
+      <VBox spacing="5.0">
+         <children>
+            <Text fx:id="t_description" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="381.33673095703125" />
+            <TextField fx:id="t_comment" prefHeight="80.0" prefWidth="386.0" />
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+               <children>
+                  <Button fx:id="btnShare" mnemonicParsing="false" onAction="#onClickShare" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #fdb819;" styleClass="shopping-online-card" text="Share">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button mnemonicParsing="false" onAction="#Comment" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #fdb819;" styleClass="shopping-online-card" text="Comment">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <ListView fx:id="listComment" prefHeight="82.0" prefWidth="323.0" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="btn_happiness" mnemonicParsing="false" onAction="#onClickHappiness" prefHeight="28.0" prefWidth="122.0" style="-fx-background-color: #fdb819;" styleClass="chosen-fruit-card" text="Happines">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Text fx:id="t_scroe" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="122.13666152954102">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" />
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.MetatechFrontController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#212122" height="47.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+                  <AnchorPane id="AnchorPane" layoutY="7.0" prefHeight="800.0" prefWidth="1200.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdb819" height="68.0" layoutX="-1.0" layoutY="38.0" stroke="#fdb819" strokeType="INSIDE" width="1202.0" />
+                        <Label fx:id="codeCoupon" layoutX="14.0" layoutY="2.0" prefHeight="24.0" prefWidth="252.0" text="-20% For Code coupon : MFG7" textFill="#fffdfd">
+                           <font>
+                              <Font name="Arial Nova Cond" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="554.0" layoutY="2.0" prefHeight="25.0" prefWidth="124.0" text="3 H : 45 M : 23 S" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1059.0" layoutY="3.0" onMouseClicked="#store" prefHeight="24.0" prefWidth="43.0" text="Store" textFill="#fff9f9">
+                           <font>
+                              <Font name="Arial Nova Cond" size="16.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-1.0" layoutY="105.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="1200.0">
+                           <stroke>
+                              <RadialGradient centerX="0.7388888888888889" centerY="0.7761904761904762" focusAngle="20.56" focusDistance="1.0" radius="0.2089013632718525">
+                                 <stops>
+                                    <Stop color="#f8fafc" />
+                                    <Stop color="#24232364" offset="0.42955326460481097" />
+                                    <Stop color="#ffffff00" offset="1.0" />
+                                 </stops>
+                              </RadialGradient>
+                           </stroke>
+                           <effect>
+                              <DropShadow color="#00000051" height="28.42" radius="13.3375" spread="0.13" width="26.93" />
+                           </effect>
+                        </Rectangle>
+                        <Button layoutX="307.0" layoutY="115.0" mnemonicParsing="false" onAction="#showEvent" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Event">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="437.0" layoutY="115.0" mnemonicParsing="false" onAction="#showBlog" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Blog">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="581.0" layoutY="115.0" mnemonicParsing="false" onAction="#showCart" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Cart">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="172.0" layoutY="115.0" mnemonicParsing="false" onAction="#showProduct" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Product">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="51.0" layoutY="115.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="76.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#0d0d0d">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <ImageView fitHeight="68.0" fitWidth="266.0" layoutX="7.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/logo1.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="keywordTextField" layoutX="356.0" layoutY="55.0" prefHeight="33.0" prefWidth="474.0" stylesheets="@style1.css">
+                           <styleClass>
+                              <String fx:value="search-box" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </TextField>
+                        <Button layoutX="787.0" layoutY="55.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="43.0" style="-fx-background-color: #000000;" stylesheets="@style1.css">
+                           <styleClass>
+                              <String fx:value="search-button" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </Button>
+                        <ImageView fitHeight="25.0" fitWidth="20.0" layoutX="799.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/278659814_981860989363086_1225984539443116806_n.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="1035.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/278478187_359827799411330_7755412142157476303_n.png" />
+                           </image>
+                        </ImageView>
+                        <HBox fx:id="productComingSoon" alignment="CENTER" layoutX="557.0" layoutY="227.0" prefHeight="549.0" prefWidth="619.0" styleClass="transparent" stylesheets="@style.css">
+                           <children>
+                              <ScrollPane fx:id="sp" prefHeight="529.0" prefWidth="620.0">
+                                 <content>
+                                    <GridPane fx:id="gp" alignment="BOTTOM_LEFT" prefHeight="0.0" prefWidth="18.0">
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </content>
+                                 <effect>
+                                    <InnerShadow />
+                                 </effect>
+                              </ScrollPane>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="25.0" fitWidth="20.0" layoutX="1048.0" layoutY="61.0" onMouseClicked="#OnProfile" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/icons8-user-30.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="20.0" layoutX="1095.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/icons8-shopping-cart-promotion-30.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="25.0" fitWidth="20.0" layoutX="1136.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/icons8-logout-24.png" />
+                           </image>
+                        </ImageView>
+                        <ComboBox layoutX="76.0" layoutY="200.0" prefHeight="31.0" prefWidth="252.0" promptText="Categories" />
+                        <Label layoutX="754.0" layoutY="182.0" prefHeight="36.0" prefWidth="273.0" text="Best Deals Of The Week">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnnews" layoutX="699.0" layoutY="114.0" mnemonicParsing="false" onMouseClicked="#news" prefHeight="40.0" prefWidth="111.0" style="-fx-background-color: #ffffff;" text="News">
+                           <font>
+                              <Font name="Arial Nova Cond Bold" size="18.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <ImageView fitHeight="483.0" fitWidth="474.0" layoutX="29.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/EZPl.gif" />
+                           </image>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </ImageView>
+                        <Label layoutX="153.0" layoutY="714.0" prefHeight="36.0" prefWidth="197.0" text="Souris Gamer HAVIT ">
+                           <font>
+                              <Font name="Arial Nova Cond Light Italic" size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="140.0" layoutY="252.0" prefHeight="36.0" prefWidth="273.0" text="Product Coming Soon">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="1134.0" layoutY="2.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../gui/images/cadenas.gif" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

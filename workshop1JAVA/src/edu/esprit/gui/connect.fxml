@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="804.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.ConnectController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="-32.0" prefHeight="800.0" prefWidth="1200.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f2f2" height="740.0" layoutY="71.0" stroke="#a13939" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
+            <AnchorPane id="AnchorPane" layoutX="1.0" prefHeight="800.0" prefWidth="1200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eff2f5" height="452.0" layoutX="106.0" layoutY="156.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="925.0">
+                     <stroke>
+                        <RadialGradient centerX="0.7388888888888889" centerY="0.7761904761904762" focusAngle="20.56" focusDistance="1.0" radius="0.2089013632718525">
+                           <stops>
+                              <Stop color="#f8fafc" />
+                              <Stop color="#24232364" offset="0.42955326460481097" />
+                              <Stop color="#b2adad" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </stroke>
+                     <effect>
+                        <DropShadow color="#080808" height="50.65" radius="18.895" spread="0.13" width="26.93" />
+                     </effect>
+                  </Rectangle>
+                  <VBox alignment="CENTER_LEFT" layoutX="596.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="396.0" prefWidth="410.0" styleClass="blue-panel" stylesheets="@workshop1JAVA/src/edu/esprit/gui/styles.css">
+                     <children>
+                        <Label text="LOG IN" textFill="DIMGRAY">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="380.0" styleClass="tf_box">
+                           <children>
+                              <TextField fx:id="textFieldemailUser" prefHeight="47.0" prefWidth="380.0" promptText="Email" styleClass="shadow" HBox.hgrow="ALWAYS">
+                                 <stylesheets>
+                                    <URL value="@workshop1JAVA/src/edu/esprit/gui/style1.css" />
+                                    <URL value="@style1.css" />
+                                    <URL value="@style1.css" />
+                                 </stylesheets></TextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="410.0" styleClass="tf_box">
+                           <children>
+                              <PasswordField fx:id="textFieldpassUser" prefHeight="39.0" prefWidth="380.0" promptText="Password" styleClass="search-box">
+                                 <HBox.margin>
+                                    <Insets left="15.0" right="15.0" top="15.0" />
+                                 </HBox.margin>
+                              </PasswordField>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="44.0" prefWidth="480.0">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="36.0" prefWidth="343.0">
+                           <VBox.margin>
+                              <Insets top="-20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Hyperlink alignment="TOP_LEFT" contentDisplay="CENTER" onAction="#onForgot" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: " text="Forgot Password?" textFill="DIMGRAY" />
+                              <Button fx:id="BtnLogin" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnLogin" opacity="0.65" prefHeight="44.0" prefWidth="189.0" style="-fx-background-color: fdb819;" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css" text="Sign In" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdb819" height="800.0" opacity="0.57" stroke="#ffd421" strokeType="INSIDE" width="561.0" />
+            <ImageView fitHeight="227.0" fitWidth="200.0" layoutX="221.0" layoutY="275.0" opacity="0.73" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/logoFinal.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="BOTTOM_CENTER" layoutX="172.0" layoutY="406.0" prefHeight="30.0" prefWidth="354.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="153.0" text="Don't Have An Account? " />
+                  <Hyperlink onAction="#OnSignup" prefHeight="26.0" prefWidth="79.0" text="Sign Up" textFill="#9e9a9a" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

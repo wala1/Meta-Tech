@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.guis.DashbordBackController">
+   <children>
+      <ToolBar layoutX="77.0" prefHeight="801.0" prefWidth="200.0" style="-fx-background-color: #388FFA;">
+         <padding>
+            <Insets bottom="600.0" right="150.0" />
+         </padding>
+      </ToolBar>
+      <Button alignment="CENTER" layoutX="93.0" layoutY="158.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="165.0" style="-fx-background-color: #388FFA;" text="Dashbord" textFill="WHITE">
+         <opaqueInsets>
+            <Insets top="10.0" />
+         </opaqueInsets>
+         <font>
+            <Font name="Rockwell Nova Extra Bold Italic" size="16.0" />
+         </font>
+         <padding>
+            <Insets bottom="20.0" left="30.0" />
+         </padding>
+      </Button>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="91.0" layoutY="311.0" mnemonicParsing="false" onAction="#ajouterPublicity" prefHeight="39.0" prefWidth="154.0" style="-fx-background-color: #388FFA;" text="Publicity" textFill="WHITE" textOverrun="CLIP">
+         <padding>
+            <Insets bottom="20.0" left="40.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <font>
+            <Font name="Rockwell Nova Extra Bold Italic" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="93.0" layoutY="233.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="123.0" style="-fx-background-color: #388FFA;" text="User" textFill="WHITE">
+         <padding>
+            <Insets bottom="20.0" left="65.0" />
+         </padding>
+         <font>
+            <Font name="Rockwell Nova Extra Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="93.0" layoutY="385.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="139.0" style="-fx-background-color: #388FFA;" text="Product" textFill="WHITE">
+         <padding>
+            <Insets bottom="20.0" left="40.0" />
+         </padding>
+         <font>
+            <Font name="Rockwell Nova Extra Bold Italic" size="14.0" />
+         </font>
+      </Button>
+      <Button contentDisplay="CENTER" layoutX="90.0" layoutY="533.0" minWidth="-Infinity" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #388FFA;" text="Panier" textFill="WHITE">
+         <opaqueInsets>
+            <Insets left="20.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="50.0" />
+         </padding>
+         <font>
+            <Font name="Rockwell Nova Extra Bold Italic" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="93.0" layoutY="452.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="111.0" style="-fx-background-color: #388FFA;" text="Blog" textFill="WHITE">
+         <padding>
+            <Insets bottom="20.0" left="60.0" />
+         </padding>
+         <font>
+            <Font name="Rockwell Nova Extra Bold Italic" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="61.0" fitWidth="326.0" layoutX="541.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/logo1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="689.0" fitWidth="922.0" layoutX="277.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../gui/images/boutique-ecommerce-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

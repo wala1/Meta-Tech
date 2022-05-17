@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1100.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#212122" height="47.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+            <AnchorPane id="AnchorPane" layoutY="-14.0" prefHeight="800.0" prefWidth="1200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdb819" height="68.0" layoutY="37.0" stroke="#fdb819" strokeType="INSIDE" width="1200.0" />
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="24.0" prefWidth="252.0" text="-20% For Code coupon : MFG7" textFill="#fffdfd">
+                     <font>
+                        <Font name="Arial Nova Cond" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="554.0" layoutY="14.0" prefHeight="25.0" prefWidth="124.0" text="3 H : 45 M : 23 S" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <ScrollBar layoutX="1178.0" layoutY="159.0" orientation="VERTICAL" prefHeight="605.0" prefWidth="18.0" />
+                  <Label layoutX="1062.0" layoutY="11.0" prefHeight="24.0" prefWidth="43.0" text="Store" textFill="#fff9f9">
+                     <font>
+                        <Font name="Arial Nova Cond" size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-1.0" layoutY="105.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="1200.0">
+                     <stroke>
+                        <RadialGradient centerX="0.7388888888888889" centerY="0.7761904761904762" focusAngle="20.56" focusDistance="1.0" radius="0.2089013632718525">
+                           <stops>
+                              <Stop color="#f8fafc" />
+                              <Stop color="#24232364" offset="0.42955326460481097" />
+                              <Stop color="#ffffff00" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </stroke>
+                     <effect>
+                        <DropShadow color="#00000051" height="28.42" radius="13.3375" spread="0.13" width="26.93" />
+                     </effect>
+                  </Rectangle>
+                  <Button layoutX="307.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Event">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="437.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Blog">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="567.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Cart">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="707.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="111.0" style="-fx-background-color: #ffffff;" text="Contact Us">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button layoutX="172.0" layoutY="115.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="97.0" style="-fx-background-color: #ffffff;" text="Product">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="51.0" layoutY="115.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="76.0" style="-fx-background-color: #ffffff;" text="Home" textFill="#0d0d0d">
+                     <font>
+                        <Font name="Arial Nova Cond Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1113.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@front/resources/icons/icons8-shopping-cart-promotion-30.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1161.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@front/resources/icons/icons8-logout-24.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="1058.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@front/resources/icons/icons8-user-30.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="19.0" fitWidth="25.0" layoutX="1033.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@front/resources/icons/icons8-product-24.png" />
+                     </image>
+                  </ImageView>
+                  <TextField layoutX="356.0" layoutY="55.0" prefHeight="33.0" prefWidth="474.0" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css">
+                     <styleClass>
+                        <String fx:value="search-box" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </TextField>
+                  <Button layoutX="787.0" layoutY="55.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="43.0" style="-fx-background-color: #000000;" stylesheets="@workshop1JAVA/src/edu/esprit/gui/style1.css">
+                     <styleClass>
+                        <String fx:value="search-button" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </Button>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="796.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@front/resources/ic2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

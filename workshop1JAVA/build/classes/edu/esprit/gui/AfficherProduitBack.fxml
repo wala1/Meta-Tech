@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #FDFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.gui.AfficherProduitBackController">
+   <children>
+      <ListView fx:id="listName" fixedCellSize="100.0" layoutX="829.0" layoutY="193.0" prefHeight="333.0" prefWidth="144.0" />
+      <ListView fx:id="listPrice" fixedCellSize="100.0" layoutX="973.0" layoutY="193.0" prefHeight="333.0" prefWidth="114.0" />
+      <ListView fx:id="listDiscount" fixedCellSize="100.0" layoutX="1087.0" layoutY="193.0" prefHeight="333.0" prefWidth="102.0" />
+      <ListView fx:id="listImage" layoutX="676.0" layoutY="193.0" prefHeight="333.0" prefWidth="153.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="55.0" layoutX="171.0" stroke="#dde1e8" strokeType="INSIDE" width="1044.0">
+         <effect>
+            <DropShadow color="#00000091" />
+         </effect>
+      </Rectangle>
+      <TextField layoutX="289.0" layoutY="13.0" prefHeight="33.0" prefWidth="245.0" style="-fx-background-color: #dde1e8;" stylesheets="@style1.css" />
+      <Button layoutX="507.0" layoutY="13.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" style="-fx-background-color: #9999d0;" styleClass="shadow">
+         <effect>
+            <DropShadow color="#1515a16f" />
+         </effect>
+      </Button>
+      <ComboBox layoutX="1058.0" layoutY="7.0" prefHeight="42.0" prefWidth="150.0" promptText="ADMIN" style="-fx-background-color: dde1e8;" />
+      <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="510.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/278659814_981860989363086_1225984539443116806_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="972.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/icons8-shopping-cart-promotion-30.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="1011.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/icons8-user-30.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="productsTable" layoutX="674.0" layoutY="175.0" onMouseClicked="#handleMouseAction" prefHeight="409.0" prefWidth="524.0">
+        <columns>
+          <TableColumn fx:id="imageCol" prefWidth="119.0" text="Image" />
+          <TableColumn fx:id="nameCol" prefWidth="175.0" text="Name" />
+            <TableColumn fx:id="priceCol" prefWidth="81.0" text="Price" />
+            <TableColumn fx:id="discountCol" prefWidth="83.0" text="Discount" />
+        </columns>
+      </TableView>
+      <Label layoutX="685.0" layoutY="120.0" text="Products List" textFill="#ff8000" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="Caladea" size="27.0" />
+         </font>
+      </Label>
+      <Button layoutX="362.0" layoutY="549.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #46DA46;" text="Add">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-add-30.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect></Button>
+      <Label layoutX="360.0" layoutY="122.0" text="Edit" textFill="#ff8000">
+         <font>
+            <Font name="Caladea" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="360.0" layoutY="182.0" text="Name">
+         <font>
+            <Font name="Caladea Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="357.0" layoutY="231.0" text="Description">
+         <font>
+            <Font name="Caladea Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="361.0" layoutY="308.0" text="Image">
+         <font>
+            <Font name="Caladea Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="362.0" layoutY="351.0" text="Price">
+         <font>
+            <Font name="Caladea Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="360.0" layoutY="401.0" text="Discount">
+         <font>
+            <Font name="Caladea Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="361.0" layoutY="445.0" text="Stock">
+         <font>
+            <Font name="Caladea Bold" size="18.0" />
+         </font></Label>
+      <Button layoutX="465.0" layoutY="549.0" mnemonicParsing="false" onAction="#editProduct" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #fdb819;" text="Edit">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-update-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect></Button>
+      <Button layoutX="565.0" layoutY="549.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="25.0" prefWidth="83.0" style="-fx-background-color: #E47E7E;" text="Delete">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-delete-30.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect></Button>
+      <TextField fx:id="tfName" layoutX="450.0" layoutY="177.0" prefHeight="25.0" prefWidth="190.0" promptText="Name" />
+      <TextField fx:id="tfImage" layoutX="453.0" layoutY="303.0" prefHeight="25.0" prefWidth="190.0" promptText="Image" />
+      <TextField fx:id="tfPrice" layoutX="453.0" layoutY="350.0" prefHeight="25.0" prefWidth="190.0" promptText="Price" />
+      <TextField fx:id="tfDiscount" layoutX="453.0" layoutY="396.0" prefHeight="25.0" prefWidth="190.0" promptText="Discount" />
+      <TextField fx:id="tfStock" layoutX="453.0" layoutY="440.0" prefHeight="25.0" prefWidth="190.0" promptText="Stock" />
+      <TextField fx:id="tfId" editable="false" layoutX="869.0" layoutY="633.0" opacity="0.0" prefHeight="25.0" prefWidth="190.0" promptText="Name">
+         <effect>
+            <Bloom threshold="0.62" />
+         </effect>
+      </TextField>
+      <ComboBox fx:id="tfComboBox" layoutX="362.0" layoutY="501.0" prefHeight="25.0" prefWidth="124.0" promptText="Category">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <ComboBox fx:id="tfComboBox1" layoutX="527.0" layoutY="501.0" prefHeight="25.0" prefWidth="124.0" promptText="Sub Category">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="260.0">
+         <children>
+            <VBox prefHeight="802.0" prefWidth="269.0" style="-fx-background-color: #DCE7F5;">
+               <children>
+                  <ImageView fx:id="logo" fitHeight="39.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@metatech_logo.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="25.0" top="30.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showDashboard" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Dashboard">
+                     <VBox.margin>
+                        <Insets left="20.0" top="60.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-dashboard-32.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showUser" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="User">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-user-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showPublicity" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Publicity">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-publicity-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showProduct" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Product">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-product-24.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToCategories" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Categories">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-categorize-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#goToSubCategories" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Sub Categories">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-categorize-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showBlog" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Blog">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-blog-24.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showCart" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Cart">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-shopping-cart-promotion-30.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showEvents" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Events">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-publicity-30_1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <VBox.margin>
+                        <Insets left="20.0" top="5.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="254.0" style="-fx-background-color: #DCE7F5;" text="Logout">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8-logout-24.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="150.0" />
+                     </VBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="tfDesc" layoutX="452.0" layoutY="219.0" prefHeight="70.0" prefWidth="190.0" promptText="Description" wrapText="true" />
+      <Button layoutX="864.0" layoutY="618.0" mnemonicParsing="false" onAction="#downloadPDF" prefHeight="31.0" prefWidth="144.0" style="-fx-background-color: #fdb819;" text="Download PDF">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/icons8-pdf-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <TextField fx:id="searchInput" layoutX="941.0" layoutY="122.0" onKeyPressed="#searchMethod" prefHeight="31.0" prefWidth="204.0" promptText="Search Product" />
+   </children>
+</AnchorPane>
